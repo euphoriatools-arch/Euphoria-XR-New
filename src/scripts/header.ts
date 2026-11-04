@@ -134,7 +134,7 @@ function syncOverlay() {
 function syncScroll() {
 	const header = headerEl();
 	if (!header) return;
-	header.classList.toggle('is-scrolled', window.scrollY > 20);
+	header.classList.toggle('is-scrolled', window.scrollY > 40);
 }
 
 function onKeydown(event: KeyboardEvent) {

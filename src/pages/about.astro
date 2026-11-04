@@ -1,9 +1,13 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
-import Button from '../components/ui/Button.astro';
-import PortfolioImage from '../components/portfolio/PortfolioImage.astro';
-import { photos } from '../data/images';
+import SectionHeader from '../components/studio/SectionHeader.astro';
+import ContactBand from '../components/studio/ContactBand.astro';
+import { photos, photoFor } from '../data/images';
+import { servicePages } from '../data/services';
+import { homeProcess } from '../data/home';
+import { studioGroups, platformSlugs } from '../data/studio-links';
 import { breadcrumbSchema } from '../lib/schema';
 
 const title = 'About EuphoriaXR | Creative Technology Studio Team';
@@ -13,149 +17,197 @@ const crumbs = [
 	{ name: 'Home', href: '/' },
 	{ name: 'About', href: '/about/' },
 ];
+
+const platforms = platformSlugs.map((slug) => {
+	const page = servicePages.find((item) => item.slug === slug);
+	const label = studioGroups.flatMap((group) => group.links).find((link) => link.href === `/${slug}/`)?.label;
+	if (!page || !label) throw new Error(`Missing platform page: ${slug}`);
+	return { page, label };
+});
+
+const values = [
+	{ title: 'Creativity', body: 'Fresh ideas that solve real problems.' },
+	{ title: 'Technical Excellence', body: 'Reliable, high-performance experiences.' },
+	{ title: 'Collaboration', body: 'A partner mindset from idea to delivery.' },
+	{ title: 'Real Impact', body: 'Experiences that create meaningful value.' },
+];
 ---
 
-<BaseLayout title={title} description={description} jsonLd={[breadcrumbSchema(crumbs)]}>
-	<div class="about-page">
-		<section class="about-hero" aria-labelledby="about-title">
-			<div class="about-hero-art">
-				<PortfolioImage
-					src={photos.vr}
-					alt="Person wearing a VR headset and holding two controllers"
-					width={1400}
-					height={1407}
+<BaseLayout title={title} description={description} overlayHeader jsonLd={[breadcrumbSchema(crumbs)]}>
+	<div class="studio">
+		<section class="studio-hero" aria-labelledby="about-title">
+			<div class="studio-hero-media">
+				<Image
+					src={photos.city}
+					alt=""
+					widths={[800, 1200, 1800]}
+					sizes="100vw"
 					loading="eager"
 					fetchpriority="high"
-					sizes="(min-width: 700px) 60vw, 100vw"
-					widths={[700, 1000, 1400]}
 				/>
 			</div>
-			<div class="about-wrap about-hero-content">
+			<div class="studio-wrap">
 				<Breadcrumbs items={crumbs} />
-				<p class="eyebrow">About us</p>
+				<p class="studio-eyebrow">About us</p>
 				<h1 id="about-title">A creative technology studio for <span class="accent">immersive experiences.</span></h1>
-				<p>We design, build and deliver AR, VR, mixed reality and interactive experiences that connect people, brands and ideas in the real world.</p>
-				<div class="about-hero-links">
-					<a class="circle-link" href="#story"><span class="circle" aria-hidden="true">→</span>Our story</a>
-					<a class="circle-link" href="/portfolio/"><span class="circle" aria-hidden="true">→</span>Case studies</a>
+				<p class="lede">We design, build and deliver AR, VR, mixed reality and interactive experiences that connect people, brands and ideas in the real world.</p>
+				<div class="studio-actions">
+					<a class="btn-ghost" href="#story">Our story</a>
+					<a class="btn-ghost" href="/portfolio/">Case studies</a>
 				</div>
 			</div>
 		</section>
 
-		<section class="about-stats" aria-label="Studio at a glance">
-			<div class="about-wrap about-stats-inner">
-				<div class="metric"><strong>100+</strong><span>Projects delivered</span></div>
-				<div class="metric"><strong>30+</strong><span>Global clients</span></div>
-				<div class="metric"><strong>5+</strong><span>Years of experience</span></div>
-				<div class="metric"><strong>50+</strong><span>XR specialists</span></div>
-			</div>
-			<p class="about-wrap about-stats-note">Placeholder figures. Confirm these numbers before publication.</p>
-		</section>
-
-		<section class="about-section" id="story">
-			<div class="about-wrap about-story">
-				<PortfolioImage
-					src={photos.lab}
-					alt="Engineer working on a laptop inside a technical assembly bay"
-					width={1400}
-					height={933}
-					sizes="(min-width: 900px) 52vw, 100vw"
-					widths={[640, 960, 1400]}
-					class="about-story-image"
-				/>
+		<section class="studio-section studio-light" id="story" aria-labelledby="story-title">
+			<div class="studio-wrap studio-story">
+				<div class="studio-story-media">
+					<Image
+						src={photos.lab}
+						alt="Engineer working on a laptop inside a technical assembly bay"
+						widths={[640, 960, 1400]}
+						sizes="(min-width: 900px) 48vw, 100vw"
+						loading="lazy"
+					/>
+				</div>
 				<div>
-					<p class="eyebrow">Our story</p>
-					<h2>Turning emerging technology into real-world impact.</h2>
+					<p class="studio-eyebrow">Our story</p>
+					<h2 id="story-title">Turning emerging technology into real-world impact.</h2>
 					<p>EuphoriaXR brings together immersive design, engineering and storytelling to transform ideas into interactive experiences. We believe technology is most powerful when it helps people learn, explore and connect.</p>
 					<p>From the first creative concept through development and deployment, our multidisciplinary approach blends imagination with technical craft.</p>
-					<div class="about-actions">
-						<Button href="#team">Our team</Button>
-						<Button href="/portfolio/">View case studies</Button>
-					</div>
 				</div>
 			</div>
 		</section>
 
-		<section class="about-section" id="values">
-			<div class="about-wrap about-values">
-				<div class="about-values-title">
-					<p class="eyebrow">Our values</p>
-					<h2>The principles behind our work.</h2>
-				</div>
-				<article>
-					<svg class="value-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 23h8m-7 4h6M11 20c0-4-5-5-5-11a10 10 0 0 1 20 0c0 6-5 7-5 11v3H11zM16 1v3M4 5l3 3M28 5l-3 3"/></svg>
-					<h3>Creativity</h3>
-					<p>Fresh ideas that solve real problems.</p>
-				</article>
-				<article>
-					<svg class="value-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m16 2 13 7-13 7L3 9l13-7Zm-13 13 13 7 13-7M3 21l13 7 13-7"/></svg>
-					<h3>Technical Excellence</h3>
-					<p>Reliable, high-performance experiences.</p>
-				</article>
-				<article>
-					<svg class="value-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="16" cy="8" r="4"/><circle cx="6" cy="12" r="3"/><circle cx="26" cy="12" r="3"/><path d="M8 27v-8a8 8 0 0 1 16 0v8M1 25v-6a5 5 0 0 1 5-5M31 25v-6a5 5 0 0 0-5-5"/></svg>
-					<h3>Collaboration</h3>
-					<p>A partner mindset from idea to delivery.</p>
-				</article>
-				<article>
-					<svg class="value-icon" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="16" cy="16" r="13"/><circle cx="16" cy="16" r="8"/><circle cx="16" cy="16" r="3"/><path d="m16 16 12-12"/></svg>
-					<h3>Real Impact</h3>
-					<p>Experiences that create meaningful value.</p>
-				</article>
+		<section class="studio-section" aria-labelledby="values-title">
+			<div class="studio-wrap">
+				<SectionHeader eyebrow="Our values" title="The principles behind our work." id="values-title" />
+				<ul class="studio-values">
+					{
+						values.map((value) => (
+							<li>
+								<h3>{value.title}</h3>
+								<p>{value.body}</p>
+							</li>
+						))
+					}
+				</ul>
 			</div>
 		</section>
 
-		<section class="about-mission" aria-labelledby="mission-title">
-			<div class="about-mission-art">
-				<PortfolioImage
-					src={photos.ridge}
-					alt=""
-					width={1800}
-					height={1200}
-					sizes="100vw"
-					widths={[800, 1200, 1800]}
-				/>
-			</div>
-			<div class="about-wrap">
-				<p class="eyebrow">Our mission</p>
-				<h2 id="mission-title">To make <span class="accent">immersive technology</span> more useful, accessible and impactful for people and businesses.</h2>
-			</div>
-		</section>
-
-		<section class="about-section" id="team">
-			<div class="about-wrap about-team">
+		<section class="studio-section studio-light" aria-labelledby="method-title">
+			<div class="studio-wrap studio-team">
 				<div>
-					<p class="eyebrow">Our team</p>
-					<h2>A team of creators, builders and problem solvers.</h2>
+					<p class="studio-eyebrow">How we work</p>
+					<h2 id="method-title">From the first prototype through launch day.</h2>
+					<ol class="studio-steps">
+						{
+							homeProcess.map((step, index) => (
+								<li>
+									<span>{String(index + 1).padStart(2, '0')}</span>
+									<div>
+										<h3>{step.title}</h3>
+										<p>{step.body}</p>
+									</div>
+								</li>
+							))
+						}
+					</ol>
+				</div>
+				<div class="studio-team-media">
+					<Image
+						src={photos.abstract}
+						alt=""
+						widths={[640, 960, 1400]}
+						sizes="(min-width: 900px) 48vw, 100vw"
+						loading="lazy"
+					/>
+				</div>
+			</div>
+		</section>
+
+		<section class="studio-section" aria-labelledby="approach-title">
+			<div class="studio-wrap studio-approach">
+				<p class="studio-eyebrow">Our mission</p>
+				<h2 id="approach-title">To make <span class="accent">immersive technology</span> more useful, accessible and impactful for people and businesses.</h2>
+				<p>When an experience has to answer, adapt, or score. A training sim can record a procedure. A WebAR scene can explain a product from approved sources. We do not add a model unless it has a job.</p>
+				<p><a class="studio-text-link" href="/ai-development-company/">AI development company <span aria-hidden="true">→</span></a></p>
+			</div>
+		</section>
+
+		<section class="studio-section studio-light" aria-labelledby="platforms-title">
+			<div class="studio-wrap">
+				<SectionHeader eyebrow="What we build" title="Experiences people can use." id="platforms-title" />
+				<ul class="studio-platforms">
+					{
+						platforms.map(({ page, label }) => (
+							<li>
+								<a class="studio-platform" href={`/${page.slug}/`}>
+									<div class="studio-platform-media">
+										<Image
+											src={photoFor(page.image)}
+											alt=""
+											widths={[480, 800]}
+											sizes="(min-width: 1024px) 22vw, 80vw"
+											loading="lazy"
+										/>
+									</div>
+									<div>
+										<h3>{label}</h3>
+										<p>{page.summary}</p>
+										<span class="arrow" aria-hidden="true">→</span>
+									</div>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</section>
+
+		<section class="studio-section" aria-labelledby="services-title">
+			<div class="studio-wrap">
+				<SectionHeader eyebrow="Services" title="The work we take on." id="services-title" />
+				<div class="studio-groups">
+					{
+						studioGroups.map((group, index) => (
+							<section aria-labelledby={`service-group-${index}`}>
+								<h3 id={`service-group-${index}`}>{group.title}</h3>
+								<ul>
+									{group.links.map((link) => (
+										<li>
+											<a href={link.href}>{link.label}</a>
+										</li>
+									))}
+								</ul>
+							</section>
+						))
+					}
+				</div>
+			</div>
+		</section>
+
+		<section class="studio-section studio-light" id="team" aria-labelledby="team-title">
+			<div class="studio-wrap studio-team">
+				<div>
+					<p class="studio-eyebrow">Our team</p>
+					<h2 id="team-title">A team of creators, builders and problem solvers.</h2>
 					<p>A multidisciplinary team bringing together design, development, 3D art and storytelling to create meaningful XR experiences.</p>
-					<div class="about-actions">
-						<Button href="/contact/">Connect with us</Button>
-						<Button href="/portfolio/">See the work</Button>
+					<div class="studio-actions">
+						<a class="btn-primary" href="/contact/">Connect with us</a>
+						<a class="btn-ghost" href="/portfolio/">See the work</a>
 					</div>
 				</div>
-				<PortfolioImage
-					src={photos.lab}
-					alt="A specialist at a workstation surrounded by technical equipment"
-					width={1400}
-					height={933}
-					sizes="(min-width: 900px) 48vw, 100vw"
-					widths={[640, 960, 1400]}
-					class="about-team-photo"
-				/>
-			</div>
-		</section>
-
-		<section class="about-contact" id="contact">
-			<div class="about-wrap about-contact-inner">
-				<div>
-					<p class="eyebrow">Let's build together</p>
-					<h2>Let's create something <span class="accent">extraordinary.</span></h2>
-				</div>
-				<div>
-					<p>Have a vision for an AR, VR, AI or interactive experience? Our team would love to hear about it.</p>
-					<Button href="/contact/">Get in touch</Button>
+				<div class="studio-team-media">
+					<Image
+						src={photos.lab}
+						alt="A specialist at a workstation surrounded by technical equipment"
+						widths={[640, 960, 1400]}
+						sizes="(min-width: 900px) 48vw, 100vw"
+						loading="lazy"
+					/>
 				</div>
 			</div>
 		</section>
 	</div>
+	<ContactBand id="about-contact-title" />
 </BaseLayout>

@@ -1,52 +1,123 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Hero from '../components/sections/Hero.astro';
-import FeaturedWork from '../components/sections/FeaturedWork.astro';
-import ServiceGrid from '../components/sections/ServiceGrid.astro';
-import IndustryGrid from '../components/sections/IndustryGrid.astro';
-import Process from '../components/sections/Process.astro';
-import Testimonials from '../components/sections/Testimonials.astro';
-import FAQ from '../components/sections/FAQ.astro';
-import CTA from '../components/sections/CTA.astro';
-import Button from '../components/ui/Button.astro';
-import Reveal from '../components/ui/Reveal.astro';
+import SectionHeader from '../components/studio/SectionHeader.astro';
+import ConceptCarousel from '../components/studio/ConceptCarousel.astro';
+import ContactBand from '../components/studio/ContactBand.astro';
+import { heroSlides } from '../data/home';
 import { photos } from '../data/images';
-import { homeFaqs } from '../data/home';
-import { faqSchema } from '../lib/schema';
+import { industryPages } from '../data/industries';
+import { servicePages } from '../data/services';
+import { studioGroups, type StudioLink } from '../data/studio-links';
+
+const hero = heroSlides[0];
+const catalog = [...servicePages, ...industryPages];
+
+function blurb(link: StudioLink) {
+	return catalog.find((page) => `/${page.slug}/` === link.href)?.summary ?? '';
+}
 ---
 
-<BaseLayout overlayHeader jsonLd={[faqSchema(homeFaqs)]}>
-	<Hero />
-	<FeaturedWork />
-	<ServiceGrid />
-	<section class="about-band" id="about">
-		<div class="about-photo">
-			<Image
-				src={photos.lab}
-				alt="Engineer assembling equipment in a technology workshop"
-				loading="lazy"
-				widths={[700, 1200, 1600]}
-				sizes="(min-width: 1024px) 46vw, 100vw"
-			/>
-		</div>
-		<div class="about-content on-dark">
-			<div class="about-copy">
-				<p class="eyebrow">Why EuphoriaXR</p>
-				<h2>Creativity.<br />Technology.<br />Real results.</h2>
-				<p>We bring artists, designers, developers, and strategists together to build digital experiences that make a difference.</p>
-				<Button href="/about/">More about us</Button>
+<BaseLayout overlayHeader>
+	<div class="studio">
+		<section class="studio-hero" aria-labelledby="home-title">
+			<div class="studio-hero-media">
+				<Image
+					src={photos.vr}
+					alt=""
+					widths={[800, 1200, 1800]}
+					sizes="100vw"
+					loading="eager"
+					fetchpriority="high"
+				/>
 			</div>
-			<Reveal class="stats">
-				<div class="stat"><strong>AR / VR</strong><span>Immersive solutions</span></div>
-				<div class="stat"><strong>AI + 3D</strong><span>Emerging technology</span></div>
-				<div class="stat"><strong>End-to-end</strong><span>From concept to delivery</span></div>
-			</Reveal>
-		</div>
-	</section>
-	<IndustryGrid />
-	<Process />
-	<Testimonials />
-	<FAQ />
-	<CTA />
+			<div class="studio-wrap">
+				<p class="studio-eyebrow">{hero.eyebrow}</p>
+				<h1 id="home-title">
+					We turn<br />
+					ideas into<br />
+					<span class="accent">immersive</span><br />
+					<span class="accent">experiences.</span>
+				</h1>
+				<p class="lede">{hero.body}</p>
+				<div class="studio-actions">
+					<a class="btn-primary" href="/contact/">Start a project</a>
+					<a class="btn-ghost" href="/portfolio/">View our work</a>
+				</div>
+			</div>
+			<a class="scroll-hint" href="#statement">Scroll to explore <span aria-hidden="true">↓</span></a>
+		</section>
+
+		<section class="studio-statement" id="statement" aria-labelledby="statement-title">
+			<div class="studio-wrap">
+				<p class="studio-eyebrow">The studio</p>
+				<h2 id="statement-title">We bring artists, designers, developers, and strategists together to build digital experiences that make a <span class="accent">difference.</span></h2>
+				<p class="lede">EuphoriaXR is a creative technology studio, building immersive experiences that blur the line between the physical and digital worlds.</p>
+				<a class="btn-primary" href="/services/augmented-reality-development-company/">Explore our solutions</a>
+			</div>
+		</section>
+
+		<section class="studio-section" aria-labelledby="work-title">
+			<div class="studio-wrap">
+				<SectionHeader
+					eyebrow="Selected concepts"
+					title="Featured work"
+					id="work-title"
+					href="/portfolio/"
+					linkLabel="View all"
+				/>
+				<ConceptCarousel />
+			</div>
+		</section>
+
+		<section class="studio-section studio-light" id="solutions" aria-labelledby="solutions-title">
+			<div class="studio-wrap">
+				<SectionHeader eyebrow="Capabilities" title="Solutions and capabilities" id="solutions-title" />
+				<div class="studio-split">
+					<div class="studio-split-media">
+						<Image
+							src={photos.lab}
+							alt="Engineer assembling equipment in a technology workshop"
+							widths={[640, 960, 1400]}
+							sizes="(min-width: 1024px) 36vw, 100vw"
+							loading="lazy"
+						/>
+					</div>
+					<div>
+						{
+							studioGroups.map((group) => (
+								<div class="studio-group">
+									<h3>{group.title}</h3>
+									<ul class="studio-services">
+										{group.links.map((link) => (
+											<li>
+												<a class="studio-service" href={link.href}>
+													<strong>{link.label}</strong>
+													<span class="arrow" aria-hidden="true">→</span>
+													<p>{blurb(link)}</p>
+												</a>
+											</li>
+										))}
+									</ul>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="studio-section" aria-labelledby="proof-title">
+			<div class="studio-wrap">
+				<p class="studio-eyebrow">Why EuphoriaXR</p>
+				<h2 id="proof-title">Creativity. Technology. Real results.</h2>
+				<ul class="studio-proof">
+					<li><strong>AR / VR</strong><span>Immersive solutions</span></li>
+					<li><strong>AI + 3D</strong><span>Emerging technology</span></li>
+					<li><strong>End-to-end</strong><span>From concept to delivery</span></li>
+				</ul>
+			</div>
+		</section>
+	</div>
+	<ContactBand />
 </BaseLayout>

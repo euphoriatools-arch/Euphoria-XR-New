@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import '../styles/studio.css';
 import roboto400 from '@fontsource/roboto/files/roboto-latin-400-normal.woff2';
 import { ClientRouter as ViewTransitions } from 'astro:transitions';
 import SEO from '../components/seo/SEO.astro';
@@ -33,6 +34,7 @@ const { title, description, image, type, noindex = false, overlayHeader = false,
 		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
+		<slot name="head" />
 		<SEO title={title} description={description} image={image} type={type} noindex={noindex} />
 		<JsonLd data={[organizationSchema(), websiteSchema(), ...jsonLd]} />
 		<meta name="generator" content={Astro.generator} />

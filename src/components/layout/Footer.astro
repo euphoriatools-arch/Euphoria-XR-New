@@ -7,7 +7,6 @@ const year = new Date().getFullYear();
 const company = [
 	{ href: '/about/', label: 'About EuphoriaXR' },
 	{ href: '/portfolio/', label: 'Case studies' },
-	{ href: '/contact/', label: 'Contact the studio' },
 	{ href: '/blog/', label: 'Blog' },
 	{ href: '/privacy-policy/', label: 'Privacy policy' },
 	{ href: '/terms/', label: 'Terms of use' },
@@ -15,16 +14,20 @@ const company = [
 ---
 
 <footer class="site-footer">
-	<div class="footer-grid">
-		<div>
+	<div class="fx-grid">
+		<div class="fx-brand">
 			<a class="logo" href="/">
 				<img src="/brand/logo-dark.svg" alt="EuphoriaXR logo" width="168" height="28" />
 			</a>
-			<p class="footer-blurb">
+			<p class="fx-blurb">
 				{site.siteName} builds immersive AR, VR, AI, and 3D experiences for teams who need the work shipped.
 			</p>
+			<div class="socials">
+				<a href={site.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
+				<a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (opens in a new tab)</span></a>
+			</div>
 		</div>
-		<div>
+		<nav aria-label="Services">
 			<h2>Services</h2>
 			<ul>
 				{
@@ -35,8 +38,8 @@ const company = [
 					))
 				}
 			</ul>
-		</div>
-		<div>
+		</nav>
+		<nav aria-label="Industries">
 			<h2>Industries</h2>
 			<ul>
 				{
@@ -47,8 +50,8 @@ const company = [
 					))
 				}
 			</ul>
-		</div>
-		<div>
+		</nav>
+		<nav aria-label="Company">
 			<h2>Company</h2>
 			<ul>
 				{
@@ -59,16 +62,15 @@ const company = [
 					))
 				}
 			</ul>
-			<div class="socials">
-				<a href={site.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
-				<a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (opens in a new tab)</span></a>
-			</div>
-		</div>
+			<h3>Contact</h3>
+			<ul>
+				<li><a href="/contact/">Contact the studio</a></li>
+				<li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+			</ul>
+		</nav>
 	</div>
-	<div class="footer-band">
-		<div class="footer-mark" aria-hidden="true">
-			<p class="footer-wordmark">{site.siteName.toUpperCase()}</p>
-		</div>
-		<p class="footer-legal">Copyright © {site.copyrightStartYear} – {year} {site.legalName}</p>
+	<div class="fx-bar">
+		<a class="back-to-top" href="#top">Back to top</a>
 	</div>
+	<p class="footer-legal">Copyright © {site.copyrightStartYear} – {year} {site.legalName}</p>
 </footer>

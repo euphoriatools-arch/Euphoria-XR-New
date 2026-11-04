@@ -1,0 +1,27 @@
+:root {
+	/* Brand */
+	--red-500: #ff253d;
+	--red-400: #ff5166;
+	--red-300: #ff8090;
+	--red-600: #e01b32;
+	--red-700: #b3142a;
+	--red-900: #4d0914;
+	--red-glow: rgba(255, 37, 61, 0.35);
+
+	/* Neutrals */
+	--black: #000000;
+	--ink-950: #07070a;
+	--ink-900: #0d0d11;
+	--ink-800: #15151b;
+	--ink-700: #1f1f27;
+	--ink-500: #5b5b68;
+	--ink-300: #a1a1ad;
+	--ink-100: #e8e8ee;
+	--white: #ffffff;
+	--paper: #f6f6f8;
+
+	--studio-max: 1360px;
+	--studio-pad: clamp(4rem, 10vw, 9rem);
+	--font-display: "Space Grotesk", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--font-body: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
