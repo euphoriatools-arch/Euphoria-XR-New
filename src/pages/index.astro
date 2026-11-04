@@ -1,123 +1,367 @@
 ---
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import SectionHeader from '../components/studio/SectionHeader.astro';
-import ConceptCarousel from '../components/studio/ConceptCarousel.astro';
 import ContactBand from '../components/studio/ContactBand.astro';
+import PortfolioImage from '../components/portfolio/PortfolioImage.astro';
+import { categories, categoryBySlug } from '../content/categories';
 import { heroSlides } from '../data/home';
 import { photos } from '../data/images';
-import { industryPages } from '../data/industries';
-import { servicePages } from '../data/services';
 import { studioGroups, type StudioLink } from '../data/studio-links';
+import { loadProjects, projectPath } from '../lib/portfolio';
 
 const hero = heroSlides[0];
-const catalog = [...servicePages, ...industryPages];
+const projects = await loadProjects();
+const featured = projects.filter((project) => project.data.featured).slice(0, 15);
+const latest = projects.filter((project) => !project.data.featured).slice(0, 11);
 
-function blurb(link: StudioLink) {
-	return catalog.find((page) => `/${page.slug}/` === link.href)?.summary ?? '';
-}
+const statements = [
+	{
+		lines: heroSlides[2].lines,
+		href: '/ai-development-company/',
+		cta: 'AI development company',
+		tone: 'base',
+	},
+	{
+		lines: heroSlides[1].lines,
+		href: '#capabilities',
+		cta: heroSlides[1].cta,
+		tone: 'alt',
+	},
+	{
+		lines: [[{ text: "Have a project? We'd love to help." }]],
+		href: '#contact',
+		cta: 'Get in touch',
+		tone: 'tint',
+	},
+];
+
+const solutionRows: StudioLink[] = [
+	{ href: '/services/augmented-reality-development-company/', label: 'Augmented reality development company' },
+	{ href: '/services/virtual-reality-development-company/', label: 'Virtual reality development company' },
+	{ href: '/ai-chatbot-development-services/', label: 'AI chatbot development services' },
+	{ href: '/webar-development/', label: 'WebAR development' },
+	{ href: '/product-configurator/', label: '3D product configurator' },
+	{ href: '/ar-vr-training-education/', label: 'VR for education / AR & VR training' },
+	{ href: '/services/branded-ar-filters/', label: 'Branded AR filters' },
+];
+const solutionHrefs = new Set(solutionRows.map((row) => row.href));
+
+const filters = categories.filter((category) => latest.some((project) => project.data.category === category.slug));
 ---
 
 <BaseLayout overlayHeader>
-	<div class="studio">
-		<section class="studio-hero" aria-labelledby="home-title">
-			<div class="studio-hero-media">
-				<Image
-					src={photos.vr}
-					alt=""
-					widths={[800, 1200, 1800]}
-					sizes="100vw"
-					loading="eager"
-					fetchpriority="high"
-				/>
-			</div>
-			<div class="studio-wrap">
-				<p class="studio-eyebrow">{hero.eyebrow}</p>
-				<h1 id="home-title">
-					We turn<br />
-					ideas into<br />
-					<span class="accent">immersive</span><br />
-					<span class="accent">experiences.</span>
-				</h1>
-				<p class="lede">{hero.body}</p>
-				<div class="studio-actions">
-					<a class="btn-primary" href="/contact/">Start a project</a>
-					<a class="btn-ghost" href="/portfolio/">View our work</a>
+	<div class="studio gj-home">
+		<section class="gj-hero" aria-labelledby="home-title">
+			<div class="gj-slide active">
+				<div class="gj-slide-media">
+					<Image
+						src={photos.vr}
+						alt=""
+						widths={[800, 1200, 1800]}
+						sizes="100vw"
+						loading="eager"
+						fetchpriority="high"
+					/>
+				</div>
+				<div class="studio-wrap gj-slide-copy">
+					<h1 id="home-title" class="gj-title">
+						{
+							hero.lines.map((line) => (
+								<span class="line">
+									{line.map((part) => (
+										<span class:list={[{ accent: part.accent }]}>{part.text}</span>
+									))}
+								</span>
+							))
+						}
+					</h1>
+					<p class="gj-hero-lede">{hero.body}</p>
+					<a class="btn-primary" href={hero.href}>{hero.cta}</a>
 				</div>
 			</div>
-			<a class="scroll-hint" href="#statement">Scroll to explore <span aria-hidden="true">↓</span></a>
 		</section>
 
-		<section class="studio-statement" id="statement" aria-labelledby="statement-title">
-			<div class="studio-wrap">
-				<p class="studio-eyebrow">The studio</p>
-				<h2 id="statement-title">We bring artists, designers, developers, and strategists together to build digital experiences that make a <span class="accent">difference.</span></h2>
-				<p class="lede">EuphoriaXR is a creative technology studio, building immersive experiences that blur the line between the physical and digital worlds.</p>
-				<a class="btn-primary" href="/services/augmented-reality-development-company/">Explore our solutions</a>
-			</div>
-		</section>
-
-		<section class="studio-section" aria-labelledby="work-title">
-			<div class="studio-wrap">
-				<SectionHeader
-					eyebrow="Selected concepts"
-					title="Featured work"
-					id="work-title"
-					href="/portfolio/"
-					linkLabel="View all"
-				/>
-				<ConceptCarousel />
-			</div>
-		</section>
-
-		<section class="studio-section studio-light" id="solutions" aria-labelledby="solutions-title">
-			<div class="studio-wrap">
-				<SectionHeader eyebrow="Capabilities" title="Solutions and capabilities" id="solutions-title" />
-				<div class="studio-split">
-					<div class="studio-split-media">
-						<Image
-							src={photos.lab}
-							alt="Engineer assembling equipment in a technology workshop"
-							widths={[640, 960, 1400]}
-							sizes="(min-width: 1024px) 36vw, 100vw"
-							loading="lazy"
-						/>
+		{
+			statements.map((statement, index) => (
+				<section class:list={['gj-statement', statement.tone]} data-reveal aria-labelledby={`statement-${index}`}>
+					<div class="studio-wrap">
+						<h2 id={`statement-${index}`} class="gj-title">
+							{statement.lines.map((line) => (
+								<span class="line">
+									{line.map((part) => (
+										<span class:list={[{ accent: part.accent }]}>{part.text}</span>
+									))}
+								</span>
+							))}
+						</h2>
+						<a class="btn-primary" href={statement.href}>{statement.cta}</a>
 					</div>
-					<div>
+				</section>
+			))
+		}
+
+		<section class="gj-block" id="work" data-reveal aria-labelledby="work-title">
+			<div class="studio-wrap">
+				<div class="gj-feature" data-carousel>
+					<div class="gj-head">
+						<h2 id="work-title">Featured case studies</h2>
+						<div class="gj-chevrons">
+							<button type="button" data-carousel-prev aria-label="Previous featured work" disabled>‹</button>
+							<button type="button" data-carousel-next aria-label="Next featured work">›</button>
+						</div>
+					</div>
+					<div class="studio-scroller gj-feature-scroller" tabindex="0" aria-label="Featured case studies">
 						{
-							studioGroups.map((group) => (
-								<div class="studio-group">
-									<h3>{group.title}</h3>
-									<ul class="studio-services">
-										{group.links.map((link) => (
-											<li>
-												<a class="studio-service" href={link.href}>
-													<strong>{link.label}</strong>
-													<span class="arrow" aria-hidden="true">→</span>
-													<p>{blurb(link)}</p>
-												</a>
-											</li>
-										))}
-									</ul>
-								</div>
-							))
+							featured.map((project) => {
+								const category = categoryBySlug(project.data.category);
+								return (
+									<a class="gj-feature-card" data-slide-card href={projectPath(project.data.category, project.data.slug)}>
+										<PortfolioImage
+											src={project.data.heroImage.image}
+											alt={project.data.heroImage.alt}
+											width={project.data.heroImage.image.width}
+											height={project.data.heroImage.image.height}
+											widths={[640, 1100, 1600]}
+											sizes="(min-width: 1024px) 70vw, 88vw"
+										/>
+										<div class="gj-feature-copy">
+											<h3>{project.data.title}</h3>
+											<p>{project.data.year} · {category?.name}</p>
+										</div>
+									</a>
+								);
+							})
 						}
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<section class="studio-section" aria-labelledby="proof-title">
+		<section class="gj-block" data-reveal aria-labelledby="latest-title">
 			<div class="studio-wrap">
-				<p class="studio-eyebrow">Why EuphoriaXR</p>
-				<h2 id="proof-title">Creativity. Technology. Real results.</h2>
-				<ul class="studio-proof">
-					<li><strong>AR / VR</strong><span>Immersive solutions</span></li>
-					<li><strong>AI + 3D</strong><span>Emerging technology</span></li>
-					<li><strong>End-to-end</strong><span>From concept to delivery</span></li>
-				</ul>
+				<div class="gj-head gj-latest-head">
+					<h2 id="latest-title">Latest work</h2>
+					<div class="gj-latest-tools">
+						<label class="gj-search">
+							<span class="sr-only">Search work</span>
+							<input type="search" placeholder="Search" data-work-search autocomplete="off" />
+						</label>
+						<a class="btn-light" href="/portfolio/">View all</a>
+					</div>
+				</div>
+				<div class="gj-filters" role="toolbar" aria-label="Filter work">
+					<button type="button" data-work-filter="all" aria-pressed="true">All</button>
+					{
+						filters.map((category) => (
+							<button type="button" data-work-filter={category.slug} aria-pressed="false">{category.tab}</button>
+						))
+					}
+				</div>
+				<div class="gj-work-grid">
+					{
+						latest.map((project) => {
+							const category = categoryBySlug(project.data.category);
+							return (
+								<a
+									class="gj-work-card"
+									href={projectPath(project.data.category, project.data.slug)}
+									data-category={project.data.category}
+									data-text={`${project.data.title} ${category?.name ?? ''}`.toLowerCase()}
+								>
+									<div class="gj-work-media">
+										<PortfolioImage
+											src={project.data.heroImage.image}
+											alt={project.data.heroImage.alt}
+											width={project.data.heroImage.image.width}
+											height={project.data.heroImage.image.height}
+											widths={[480, 800, 1200]}
+											sizes="(min-width: 1024px) 30vw, 86vw"
+										/>
+									</div>
+									<h3>{project.data.title}</h3>
+									<p>{project.data.year} · {category?.name}</p>
+								</a>
+							);
+						})
+					}
+				</div>
+				<p class="gj-empty" data-work-empty hidden>Nothing matches that filter.</p>
+			</div>
+		</section>
+
+		<section class="gj-solutions" id="capabilities" data-reveal aria-labelledby="solutions-title">
+			<div class="studio-wrap">
+				<h2 id="solutions-title">Solutions and capabilities</h2>
+				<div class="gj-stage">
+					<Image
+						src={photos.vr}
+						alt=""
+						widths={[800, 1200, 1800]}
+						sizes="(min-width: 1024px) 70vw, 100vw"
+						loading="lazy"
+					/>
+					<p>We develop across the latest platforms.</p>
+				</div>
+				<div data-carousel>
+					<div class="gj-head">
+						<p class="gj-caption">Each of these is a service we already ship, from the first prototype through launch.</p>
+						<div class="gj-chevrons">
+							<button type="button" data-carousel-prev aria-label="Previous solution" disabled>‹</button>
+							<button type="button" data-carousel-next aria-label="Next solution">›</button>
+						</div>
+					</div>
+					<div class="studio-scroller gj-solution-scroller" tabindex="0" aria-label="Solutions">
+						{
+							solutionRows.map((row) => (
+								<a class="gj-solution-card" data-slide-card href={row.href}>
+									<strong>{row.label}</strong>
+									<span aria-hidden="true">→</span>
+								</a>
+							))
+						}
+					</div>
+				</div>
+				<div class="gj-catalog">
+					{
+						studioGroups.map((group) => {
+							const links = group.links.filter((link) => !solutionHrefs.has(link.href));
+							if (links.length === 0) return null;
+							return (
+								<div>
+									<h3>{group.title}</h3>
+									<ul>
+										{links.map((link) => (
+											<li>
+												<a href={link.href}>{link.label}</a>
+											</li>
+										))}
+									</ul>
+								</div>
+							);
+						})
+					}
+				</div>
 			</div>
 		</section>
 	</div>
 	<ContactBand />
 </BaseLayout>
+
+<script>
+	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+	function bindCarousel(root: HTMLElement) {
+		if (root.dataset.bound === 'true') return;
+		const scroller = root.querySelector<HTMLElement>('.studio-scroller');
+		const prev = root.querySelector<HTMLButtonElement>('[data-carousel-prev]');
+		const next = root.querySelector<HTMLButtonElement>('[data-carousel-next]');
+		if (!scroller || !prev || !next) return;
+		root.dataset.bound = 'true';
+
+		const amount = () => {
+			const card = scroller.querySelector<HTMLElement>('[data-slide-card]');
+			return (card?.getBoundingClientRect().width ?? 320) + 20;
+		};
+		const update = () => {
+			const max = scroller.scrollWidth - scroller.clientWidth - 2;
+			prev.disabled = scroller.scrollLeft <= 2;
+			next.disabled = scroller.scrollLeft >= max;
+		};
+		const move = (direction: number) => {
+			scroller.scrollBy({
+				left: direction * amount(),
+				behavior: reduceMotion.matches ? 'auto' : 'smooth',
+			});
+		};
+
+		prev.addEventListener('click', () => move(-1));
+		next.addEventListener('click', () => move(1));
+		scroller.addEventListener('scroll', update, { passive: true });
+		scroller.addEventListener('keydown', (event) => {
+			if (event.key === 'ArrowRight') {
+				event.preventDefault();
+				move(1);
+			} else if (event.key === 'ArrowLeft') {
+				event.preventDefault();
+				move(-1);
+			}
+		});
+
+		let dragging = false;
+		let origin = 0;
+		scroller.addEventListener('pointerdown', (event) => {
+			if (event.button !== 0) return;
+			dragging = true;
+			origin = event.clientX;
+			scroller.dataset.dragged = 'false';
+			scroller.setPointerCapture(event.pointerId);
+		});
+		scroller.addEventListener('pointermove', (event) => {
+			if (!dragging) return;
+			if (Math.abs(event.clientX - origin) > 8) scroller.dataset.dragged = 'true';
+			if (scroller.dataset.dragged === 'true') scroller.scrollLeft -= event.movementX;
+		});
+		const endDrag = () => {
+			dragging = false;
+		};
+		scroller.addEventListener('pointerup', endDrag);
+		scroller.addEventListener('pointercancel', endDrag);
+		scroller.addEventListener(
+			'click',
+			(event) => {
+				if (scroller.dataset.dragged !== 'true') return;
+				event.preventDefault();
+				event.stopPropagation();
+				scroller.dataset.dragged = 'false';
+			},
+			true,
+		);
+		update();
+	}
+
+	function initCarousels() {
+		document.querySelectorAll<HTMLElement>('[data-carousel]').forEach(bindCarousel);
+	}
+
+	function initWorkFilters() {
+		const root = document.querySelector<HTMLElement>('.gj-home');
+		if (!root || root.dataset.workBound === 'true') return;
+		const cards = [...root.querySelectorAll<HTMLElement>('.gj-work-card')];
+		const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-work-filter]')];
+		const search = root.querySelector<HTMLInputElement>('[data-work-search]');
+		const empty = root.querySelector<HTMLElement>('[data-work-empty]');
+		if (!cards.length || !buttons.length) return;
+		root.dataset.workBound = 'true';
+		let active = 'all';
+
+		const apply = () => {
+			const query = (search?.value ?? '').trim().toLowerCase();
+			let shown = 0;
+			cards.forEach((card) => {
+				const categoryMatch = active === 'all' || card.dataset.category === active;
+				const textMatch = !query || (card.dataset.text ?? '').includes(query);
+				const visible = categoryMatch && textMatch;
+				card.hidden = !visible;
+				if (visible) shown += 1;
+			});
+			if (empty) empty.hidden = shown > 0;
+		};
+
+		buttons.forEach((button) => {
+			button.addEventListener('click', () => {
+				active = button.dataset.workFilter ?? 'all';
+				buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+				apply();
+			});
+		});
+		search?.addEventListener('input', apply);
+	}
+
+	function initHome() {
+		initCarousels();
+		initWorkFilters();
+	}
+
+	initHome();
+	document.addEventListener('astro:page-load', initHome);
+</script>
