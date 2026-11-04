@@ -70,7 +70,7 @@ export const categories: Category[] = [
 			{ title: 'A debrief with a moment', body: 'The replay points at a step. It does not dump a dashboard on the room.' },
 		],
 		hero: 'vr',
-		heroAlt: 'Person wearing a virtual reality headset and holding a controller',
+		heroAlt: 'Person wearing a virtual reality headset with both arms raised',
 		seo: {
 			title: 'Virtual Reality Portfolio and Case Studies | EuphoriaXR',
 			description:

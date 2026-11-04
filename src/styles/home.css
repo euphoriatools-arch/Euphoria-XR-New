@@ -7,12 +7,14 @@
 @import "swiper/css/navigation";
 
 .hx-home,
+.hx-about,
 .contact-band,
 .site-footer {
 	font-family: Archivo, Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .hx-home {
+	display: flow-root;
 	background: var(--ink-950);
 	color: var(--white);
 	padding-bottom: 48px;
@@ -91,8 +93,29 @@
 	background: var(--black);
 }
 
+.hx-hero-video {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.hx-hero-frame.is-playing .hx-hero-video {
+	opacity: 1;
+}
+
+.hx-hero-frame.is-playing .swiper-slide-active picture,
+.hx-hero-frame.is-playing .swiper-slide-active img {
+	opacity: 0;
+}
+
 .hx-hero-frame .swiper,
 .hx-hero-frame .swiper-slide {
+	position: relative;
+	z-index: 1;
 	height: 100%;
 }
 
@@ -465,6 +488,352 @@ html.js .hx-search.is-open input {
 	letter-spacing: -0.04em;
 }
 
+.hx-contact-kicker {
+	margin: 0 0 16px;
+	color: var(--white);
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 1.2;
+	letter-spacing: -0.04em;
+}
+
+@media (min-width: 640px) {
+	.hx-contact-kicker { font-size: 24px; }
+}
+
+@media (min-width: 768px) {
+	.hx-contact-kicker { font-size: 30px; }
+}
+
+@media (min-width: 1024px) {
+	.hx-contact-kicker { font-size: 36px; }
+}
+
+.contact-band.is-compact h2:not(.hx-contact-kicker) {
+	font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+.hx-about {
+	background: var(--ink-950);
+	color: var(--white);
+}
+
+.hx-about-crumbs {
+	width: min(1024px, calc(100% - 48px));
+	margin: 16px auto 0;
+}
+
+.hx-about .breadcrumbs,
+.hx-about .breadcrumbs a,
+.hx-about .breadcrumbs span {
+	color: var(--ink-300);
+	font-size: 14px;
+}
+
+.hx-about-frame {
+	position: relative;
+	height: 700px;
+	margin: 24px 24px 96px;
+	overflow: hidden;
+	border-radius: 24px;
+	background: var(--black);
+}
+
+.hx-about-frame picture,
+.hx-about-frame img {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.hx-about-frame::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+}
+
+.hx-about-top {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 1;
+	height: 160px;
+	background: linear-gradient(var(--ink-950), transparent);
+}
+
+.hx-about-copy {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-end;
+	height: 100%;
+	padding: 16px 16px 48px;
+	text-align: center;
+}
+
+.hx-about h1 {
+	max-width: 16ch;
+	margin: 0 0 24px;
+	background: linear-gradient(92deg, var(--white) -0.22%, var(--red-300) 45%, var(--red-500) 101.74%);
+	background-clip: text;
+	color: transparent;
+	font-size: 32px;
+	font-weight: 700;
+	line-height: 1.2;
+	-webkit-background-clip: text;
+}
+
+.hx-about-lede {
+	max-width: 800px;
+	margin: 0;
+	color: var(--white);
+	font-size: 18px;
+	line-height: 1.4;
+}
+
+.hx-about-col {
+	width: min(1024px, calc(100% - 48px));
+	margin: 0 auto;
+	text-align: center;
+}
+
+.hx-about-col > h2,
+.hx-about-services > h3 {
+	margin: 0 0 64px;
+	padding-inline: 32px;
+	color: var(--red-500);
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.hx-about-col > p,
+.hx-about-services > p {
+	margin: 0 0 64px;
+	color: var(--white);
+	font-size: 18px;
+	line-height: 1.45;
+}
+
+.hx-about-more a {
+	color: var(--red-500);
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+
+.hx-about-sub {
+	color: var(--ink-300);
+}
+
+.hx-about-shot {
+	display: flex;
+	width: 100%;
+	aspect-ratio: 1;
+	margin: 0 0 64px;
+	background: var(--ink-950);
+}
+
+.hx-about-shot img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+}
+
+.hx-about-col > h2.is-sub {
+	margin-bottom: 64px;
+	font-size: 30px;
+	line-height: 1.2;
+}
+
+.hx-about-cards {
+	display: flex;
+	flex-direction: column;
+	gap: 48px;
+	max-width: 1024px;
+	margin: 0 0 64px;
+	padding: 0;
+	list-style: none;
+	text-align: left;
+}
+
+.hx-about-cards a {
+	display: block;
+	color: var(--white);
+	text-decoration: none;
+}
+
+.hx-about-cards img {
+	width: 100%;
+	height: 220px;
+	margin-bottom: 16px;
+	border-radius: 24px;
+	object-fit: cover;
+}
+
+.hx-about-cards p {
+	margin: 0 0 8px;
+	font-size: 18px;
+	font-weight: 400;
+}
+
+.hx-about-cards h3 {
+	margin: 0 0 12px;
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 1.2;
+}
+
+.hx-about-cards span {
+	display: block;
+	font-size: 18px;
+	line-height: 28px;
+}
+
+.hx-about-services {
+	margin-bottom: 64px;
+	text-align: left;
+}
+
+.hx-about-services > h3 {
+	margin-bottom: 24px;
+	padding-inline: 0;
+	color: var(--ink-300);
+	font-size: 18px;
+	font-weight: 700;
+	text-align: left;
+}
+
+.hx-about-services > p {
+	margin-bottom: 24px;
+	color: var(--ink-300);
+	font-size: 20px;
+	line-height: 28px;
+	text-align: left;
+}
+
+.hx-about-groups {
+	display: flex;
+	flex-direction: column;
+	gap: 48px;
+}
+
+.hx-about-groups h4 {
+	margin: 24px 0 8px;
+	font-size: 16px;
+	font-weight: 600;
+}
+
+.hx-about-groups h4 a {
+	color: var(--ink-300);
+	text-decoration: none;
+}
+
+.hx-about-groups h4 a:hover,
+.hx-about-groups h4 a:focus-visible,
+.hx-about-groups li a:hover,
+.hx-about-groups li a:focus-visible {
+	color: var(--red-400);
+}
+
+.hx-about-groups ul {
+	margin: 0;
+	padding-left: 16px;
+	color: var(--ink-300);
+	font-size: 20px;
+	line-height: 28px;
+	list-style: disc;
+}
+
+.hx-about-groups li + li {
+	margin-top: 8px;
+}
+
+.hx-about-groups li a {
+	color: inherit;
+	text-decoration: none;
+}
+
+@media (min-width: 640px) {
+	.hx-about-crumbs,
+	.hx-about-col {
+		width: min(1024px, calc(100% - 96px));
+	}
+
+	.hx-about-frame {
+		height: 900px;
+		margin-inline: 48px;
+	}
+
+	.hx-about-copy {
+		justify-content: center;
+		padding: 48px;
+	}
+
+	.hx-about h1 {
+		font-size: 64px;
+	}
+
+	.hx-about-lede {
+		font-size: 24px;
+	}
+
+	.hx-about-col > h2 {
+		font-size: 36px;
+		line-height: 40px;
+	}
+
+	.hx-about-col > p {
+		font-size: 30px;
+		line-height: 36px;
+	}
+
+	.hx-about-cards {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.hx-about-cards h3 {
+		font-size: 30px;
+	}
+
+	.hx-about-services > h3,
+	.hx-about-services > p,
+	.hx-about-groups,
+	.hx-about-groups h4 a,
+	.hx-about-groups ul {
+		color: var(--white);
+	}
+
+	.hx-about-services > h3 {
+		font-size: 24px;
+	}
+
+	.hx-about-groups h4 {
+		font-size: 20px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.hx-about h1 {
+		font-size: 80px;
+	}
+
+	.hx-about-lede {
+		font-size: 30px;
+		line-height: 36px;
+	}
+
+	.hx-about-cards a {
+		min-height: 450px;
+	}
+}
+
 .contact-band p,
 .contact-band label,
 .contact-band .note,
@@ -614,6 +983,10 @@ html.js .hx-search.is-open input {
 }
 
 @media (prefers-reduced-motion: reduce) {
+	.hx-hero-video {
+		display: none;
+	}
+
 	.swiper-initialized .hx-slide-copy,
 	.swiper-initialized .swiper-slide-active .hx-slide-copy {
 		opacity: 1;

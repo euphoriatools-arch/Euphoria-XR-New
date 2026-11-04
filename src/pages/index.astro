@@ -15,6 +15,7 @@ const latest = projects.filter((project) => !project.data.featured).slice(0, 12)
 const filters = categories.filter((category) => latest.some((project) => project.data.category === category.slug));
 
 const heroFrames = [photos.vr, photos.city, photos.abstract, photos.cosmos];
+const heroVideo = 'https://euphoriaxr.com/wp-content/uploads/2026/03/Euphoria-XR-Landing-Page-Video-Euphoria-XR.mp4';
 const slides = [
 	{
 		lines: heroSlides[0].lines,
@@ -61,6 +62,17 @@ const solutionHrefs = new Set(solutionRows.map((row) => row.href));
 <BaseLayout overlayHeader>
 	<div class="hx-home">
 		<section class="hx-hero-frame" aria-roledescription="carousel" aria-label="Studio">
+			<video
+				class="hx-hero-video"
+				data-hero-video
+				data-src={heroVideo}
+				poster={photos.vr.src}
+				muted
+				playsinline
+				loop
+				preload="none"
+				aria-hidden="true"
+			></video>
 			<div class="swiper" data-hero-swiper>
 				<div class="swiper-wrapper">
 					{
@@ -241,14 +253,48 @@ const solutionHrefs = new Set(solutionRows.map((row) => row.href));
 			},
 			keyboard: { enabled: true, onlyInViewport: true },
 			on: {
-				init() {
+				init(swiper) {
 					const titles = root.querySelectorAll('#home-title');
 					titles.forEach((title, index) => {
 						if (index > 0) title.removeAttribute('id');
 					});
+					bindHeroVideo(swiper);
+				},
+				slideChange(swiper) {
+					syncHeroVideo(swiper.realIndex);
 				},
 			},
 		});
+	}
+
+	function syncHeroVideo(index: number) {
+		const frame = document.querySelector<HTMLElement>('.hx-hero-frame');
+		const video = frame?.querySelector<HTMLVideoElement>('[data-hero-video]');
+		if (!frame || !video) return;
+		const allow = !(motion.matches || saveData);
+		const onFirst = index === 0 && allow;
+		if (!allow) {
+			frame.classList.remove('is-playing');
+			video.removeAttribute('src');
+			video.pause();
+			return;
+		}
+		if (!video.getAttribute('src') && video.dataset.src) {
+			video.preload = 'auto';
+			video.src = video.dataset.src;
+		}
+		const live = onFirst && !video.paused && video.currentTime > 0;
+		frame.classList.toggle('is-playing', live);
+		if (onFirst) video.play()?.catch(() => {});
+		else video.pause();
+	}
+
+	function bindHeroVideo(swiper: Swiper) {
+		const video = document.querySelector<HTMLVideoElement>('[data-hero-video]');
+		const show = () => syncHeroVideo(swiper.realIndex);
+		video?.addEventListener('playing', show);
+		video?.addEventListener('timeupdate', show);
+		show();
 	}
 
 	function mountFeatured() {

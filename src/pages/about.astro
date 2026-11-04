@@ -2,11 +2,9 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
-import SectionHeader from '../components/studio/SectionHeader.astro';
 import ContactBand from '../components/studio/ContactBand.astro';
 import { photos, photoFor } from '../data/images';
 import { servicePages } from '../data/services';
-import { homeProcess } from '../data/home';
 import { studioGroups, platformSlugs } from '../data/studio-links';
 import { breadcrumbSchema } from '../lib/schema';
 
@@ -25,153 +23,95 @@ const platforms = platformSlugs.map((slug) => {
 	return { page, label };
 });
 
-const values = [
-	{ title: 'Creativity', body: 'Fresh ideas that solve real problems.' },
-	{ title: 'Technical Excellence', body: 'Reliable, high-performance experiences.' },
-	{ title: 'Collaboration', body: 'A partner mindset from idea to delivery.' },
-	{ title: 'Real Impact', body: 'Experiences that create meaningful value.' },
+const shots = [
+	{ src: photos.lab, alt: 'Engineer working on a laptop inside a technical assembly bay' },
+	{ src: photos.vr, alt: 'Person wearing a virtual reality headset with both arms raised' },
+	{ src: photos.abstract, alt: '' },
+	{ src: photos.city, alt: 'A city street at night' },
 ];
 ---
 
 <BaseLayout title={title} description={description} overlayHeader jsonLd={[breadcrumbSchema(crumbs)]}>
-	<div class="studio">
-		<section class="studio-hero" aria-labelledby="about-title">
-			<div class="studio-hero-media">
+	<div class="hx-about">
+		<div class="hx-about-crumbs">
+			<Breadcrumbs items={crumbs} />
+		</div>
+
+		<section class="hx-about-hero" aria-labelledby="about-title">
+			<div class="hx-about-frame">
 				<Image
-					src={photos.city}
+					src={photos.vr}
 					alt=""
-					widths={[800, 1200, 1800]}
+					widths={[800, 1280, 1800]}
 					sizes="100vw"
 					loading="eager"
 					fetchpriority="high"
 				/>
-			</div>
-			<div class="studio-wrap">
-				<Breadcrumbs items={crumbs} />
-				<p class="studio-eyebrow">About us</p>
-				<h1 id="about-title">A creative technology studio for <span class="accent">immersive experiences.</span></h1>
-				<p class="lede">We design, build and deliver AR, VR, mixed reality and interactive experiences that connect people, brands and ideas in the real world.</p>
-				<div class="studio-actions">
-					<a class="btn-ghost" href="#story">Our story</a>
-					<a class="btn-ghost" href="/portfolio/">Case studies</a>
+				<div class="hx-about-top" aria-hidden="true"></div>
+				<div class="hx-about-copy">
+					<h1 id="about-title">A creative technology studio for immersive experiences.</h1>
+					<p class="hx-about-lede">We design, build and deliver AR, VR, mixed reality and interactive experiences that connect people, brands and ideas in the real world.</p>
 				</div>
 			</div>
 		</section>
 
-		<section class="studio-section studio-light" id="story" aria-labelledby="story-title">
-			<div class="studio-wrap studio-story">
-				<div class="studio-story-media">
-					<Image
-						src={photos.lab}
-						alt="Engineer working on a laptop inside a technical assembly bay"
-						widths={[640, 960, 1400]}
-						sizes="(min-width: 900px) 48vw, 100vw"
-						loading="lazy"
-					/>
-				</div>
-				<div>
-					<p class="studio-eyebrow">Our story</p>
-					<h2 id="story-title">Turning emerging technology into real-world impact.</h2>
-					<p>EuphoriaXR brings together immersive design, engineering and storytelling to transform ideas into interactive experiences. We believe technology is most powerful when it helps people learn, explore and connect.</p>
-					<p>From the first creative concept through development and deployment, our multidisciplinary approach blends imagination with technical craft.</p>
-				</div>
-			</div>
-		</section>
+		<div class="hx-about-col">
+			<h2 data-reveal>We are a creative technology studio.</h2>
+			<p data-reveal>EuphoriaXR brings together immersive design, engineering and storytelling to transform ideas into interactive experiences. We believe technology is most powerful when it helps people learn, explore and connect.</p>
+			<figure class="hx-about-shot" data-reveal>
+				<Image src={shots[0].src} alt={shots[0].alt} widths={[640, 1024]} sizes="(min-width: 1024px) 1024px, 100vw" loading="lazy" />
+			</figure>
+			<p data-reveal>From the first creative concept through development and deployment, our multidisciplinary approach blends imagination with technical craft.</p>
+			<figure class="hx-about-shot" data-reveal>
+				<Image src={shots[1].src} alt={shots[1].alt} widths={[640, 1024]} sizes="(min-width: 1024px) 1024px, 100vw" loading="lazy" />
+			</figure>
+			<p data-reveal>AR, VR, AI, WebXR, and 3D experiences. Typical work includes training simulations, campaign WebAR, product configurators, chatbots, and agents that sit inside a product you already run.</p>
+			<figure class="hx-about-shot" data-reveal>
+				<Image src={shots[2].src} alt={shots[2].alt} widths={[640, 1024]} sizes="(min-width: 1024px) 1024px, 100vw" loading="lazy" />
+			</figure>
 
-		<section class="studio-section" aria-labelledby="values-title">
-			<div class="studio-wrap">
-				<SectionHeader eyebrow="Our values" title="The principles behind our work." id="values-title" />
-				<ul class="studio-values">
-					{
-						values.map((value) => (
-							<li>
-								<h3>{value.title}</h3>
-								<p>{value.body}</p>
-							</li>
-						))
-					}
-				</ul>
-			</div>
-		</section>
+			<h2 id="approach-title" data-reveal>Why we prototype before we produce.</h2>
+			<p data-reveal>We write the user, the job, and the constraint before we pick a tool. A prototype you can hold, wear, or click is reviewed against the real context.</p>
+			<p data-reveal>When an experience has to answer, adapt, or score. A training sim can record a procedure. A WebAR scene can explain a product from approved sources. We do not add a model unless it has a job.</p>
+			<p class="hx-about-more" data-reveal>Learn more about <a href="/ai-development-company/">AI development company</a></p>
+			<p class="hx-about-sub" data-reveal>A prototype scoped to answer one question, then a production release.</p>
+			<figure class="hx-about-shot" data-reveal>
+				<Image src={shots[3].src} alt={shots[3].alt} widths={[640, 1024]} sizes="(min-width: 1024px) 1024px, 100vw" loading="lazy" />
+			</figure>
 
-		<section class="studio-section studio-light" aria-labelledby="method-title">
-			<div class="studio-wrap studio-team">
-				<div>
-					<p class="studio-eyebrow">How we work</p>
-					<h2 id="method-title">From the first prototype through launch day.</h2>
-					<ol class="studio-steps">
-						{
-							homeProcess.map((step, index) => (
-								<li>
-									<span>{String(index + 1).padStart(2, '0')}</span>
-									<div>
-										<h3>{step.title}</h3>
-										<p>{step.body}</p>
-									</div>
-								</li>
-							))
-						}
-					</ol>
-				</div>
-				<div class="studio-team-media">
-					<Image
-						src={photos.abstract}
-						alt=""
-						widths={[640, 960, 1400]}
-						sizes="(min-width: 900px) 48vw, 100vw"
-						loading="lazy"
-					/>
-				</div>
-			</div>
-		</section>
+			<p data-reveal>Experiences people can use, from a phone scan to a headset rehearsal.</p>
+			<h2 class="is-sub" id="platforms-title" data-reveal>Platforms we already ship.</h2>
+			<ul class="hx-about-cards">
+				{
+					platforms.map(({ page, label }) => (
+						<li data-reveal>
+							<a href={`/${page.slug}/`}>
+								<Image
+									src={photoFor(page.image)}
+									alt=""
+									widths={[480, 800]}
+									sizes="(min-width: 1024px) 488px, 100vw"
+									loading="lazy"
+								/>
+								<p>{page.serviceType}</p>
+								<h3>{label}</h3>
+								<span>{page.summary}</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
 
-		<section class="studio-section" aria-labelledby="approach-title">
-			<div class="studio-wrap studio-approach">
-				<p class="studio-eyebrow">Our mission</p>
-				<h2 id="approach-title">To make <span class="accent">immersive technology</span> more useful, accessible and impactful for people and businesses.</h2>
-				<p>When an experience has to answer, adapt, or score. A training sim can record a procedure. A WebAR scene can explain a product from approved sources. We do not add a model unless it has a job.</p>
-				<p><a class="studio-text-link" href="/ai-development-company/">AI development company <span aria-hidden="true">→</span></a></p>
-			</div>
-		</section>
-
-		<section class="studio-section studio-light" aria-labelledby="platforms-title">
-			<div class="studio-wrap">
-				<SectionHeader eyebrow="What we build" title="Experiences people can use." id="platforms-title" />
-				<ul class="studio-platforms">
-					{
-						platforms.map(({ page, label }) => (
-							<li>
-								<a class="studio-platform" href={`/${page.slug}/`}>
-									<div class="studio-platform-media">
-										<Image
-											src={photoFor(page.image)}
-											alt=""
-											widths={[480, 800]}
-											sizes="(min-width: 1024px) 22vw, 80vw"
-											loading="lazy"
-										/>
-									</div>
-									<div>
-										<h3>{label}</h3>
-										<p>{page.summary}</p>
-										<span class="arrow" aria-hidden="true">→</span>
-									</div>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</div>
-		</section>
-
-		<section class="studio-section" aria-labelledby="services-title">
-			<div class="studio-wrap">
-				<SectionHeader eyebrow="Services" title="The work we take on." id="services-title" />
-				<div class="studio-groups">
+			<section class="hx-about-services" aria-labelledby="services-title">
+				<h3 id="services-title" data-reveal>Our Services</h3>
+				<p data-reveal>The work we take on spans conversation, spatial computing, training, and the campaigns that have to open on a phone.</p>
+				<div class="hx-about-groups">
 					{
 						studioGroups.map((group, index) => (
-							<section aria-labelledby={`service-group-${index}`}>
-								<h3 id={`service-group-${index}`}>{group.title}</h3>
+							<section data-reveal aria-labelledby={`service-group-${index}`}>
+								<h4 id={`service-group-${index}`}>
+									<a href={group.links[0].href}>{group.title}</a>
+								</h4>
 								<ul>
 									{group.links.map((link) => (
 										<li>
@@ -183,31 +123,8 @@ const values = [
 						))
 					}
 				</div>
-			</div>
-		</section>
-
-		<section class="studio-section studio-light" id="team" aria-labelledby="team-title">
-			<div class="studio-wrap studio-team">
-				<div>
-					<p class="studio-eyebrow">Our team</p>
-					<h2 id="team-title">A team of creators, builders and problem solvers.</h2>
-					<p>A multidisciplinary team bringing together design, development, 3D art and storytelling to create meaningful XR experiences.</p>
-					<div class="studio-actions">
-						<a class="btn-primary" href="/contact/">Connect with us</a>
-						<a class="btn-ghost" href="/portfolio/">See the work</a>
-					</div>
-				</div>
-				<div class="studio-team-media">
-					<Image
-						src={photos.lab}
-						alt="A specialist at a workstation surrounded by technical equipment"
-						widths={[640, 960, 1400]}
-						sizes="(min-width: 900px) 48vw, 100vw"
-						loading="lazy"
-					/>
-				</div>
-			</div>
-		</section>
+			</section>
+		</div>
 	</div>
-	<ContactBand id="about-contact-title" />
+	<ContactBand id="about-contact-title" compact />
 </BaseLayout>

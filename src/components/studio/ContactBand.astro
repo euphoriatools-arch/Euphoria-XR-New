@@ -3,15 +3,16 @@ import ContactForm from '../forms/ContactForm.astro';
 
 interface Props {
 	id?: string;
+	compact?: boolean;
 }
 
-const { id = 'contact-band-title' } = Astro.props;
+const { id = 'contact-band-title', compact = false } = Astro.props;
 ---
 
-<section class="contact-band" id="contact" aria-labelledby={id}>
+<section class:list={['contact-band', { 'is-compact': compact }]} id="contact" aria-labelledby={id}>
 	<div class="studio-wrap contact-band-grid">
 		<div>
-			<p class="studio-eyebrow">Contact us</p>
+			<h2 class="hx-contact-kicker">Contact us</h2>
 			<h2 id={id}>Have a project? We'd love to help.</h2>
 			<p>Have a vision for an AR, VR, AI or interactive experience? Our team would love to hear about it.</p>
 		</div>
