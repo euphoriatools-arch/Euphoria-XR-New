@@ -1,0 +1,38 @@
+---
+import PortfolioImage from '../portfolio/PortfolioImage.astro';
+import { categoryBySlug } from '../../content/categories';
+import { projectPath, type ProjectEntry } from '../../lib/portfolio';
+
+interface Props {
+	project: ProjectEntry;
+	slide?: boolean;
+}
+
+const { project, slide = false } = Astro.props;
+const category = categoryBySlug(project.data.category);
+---
+
+<a
+	class:list={['hx-card', { 'swiper-slide': slide }]}
+	href={projectPath(project.data.category, project.data.slug)}
+	data-category={project.data.category}
+	data-text={project.data.title.toLowerCase()}
+>
+	<PortfolioImage
+		src={project.data.heroImage.image}
+		alt={project.data.heroImage.alt}
+		width={project.data.heroImage.image.width}
+		height={project.data.heroImage.image.height}
+		widths={[400, 800, 1200]}
+		sizes={slide ? '(min-width: 1024px) 28vw, 80vw' : '(min-width: 1024px) 30vw, 100vw'}
+	/>
+	<span class="hx-card-shade" aria-hidden="true"></span>
+	<span class="hx-card-hover" aria-hidden="true"></span>
+	<span class="hx-card-copy">
+		<h3>{project.data.title}</h3>
+		<span class="hx-card-meta">
+			<span>{project.data.year}{category ? ` · ${category.name}` : ''}</span>
+			<span aria-hidden="true">→</span>
+		</span>
+	</span>
+</a>

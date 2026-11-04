@@ -2,36 +2,47 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactBand from '../components/studio/ContactBand.astro';
-import PortfolioImage from '../components/portfolio/PortfolioImage.astro';
-import { categories, categoryBySlug } from '../content/categories';
+import WorkCard from '../components/studio/WorkCard.astro';
+import { categories } from '../content/categories';
 import { heroSlides } from '../data/home';
 import { photos } from '../data/images';
 import { studioGroups, type StudioLink } from '../data/studio-links';
-import { loadProjects, projectPath } from '../lib/portfolio';
+import { loadProjects } from '../lib/portfolio';
 
-const hero = heroSlides[0];
 const projects = await loadProjects();
-const featured = projects.filter((project) => project.data.featured).slice(0, 15);
-const latest = projects.filter((project) => !project.data.featured).slice(0, 11);
+const featured = projects.slice(0, 16);
+const latest = projects.filter((project) => !project.data.featured).slice(0, 12);
+const filters = categories.filter((category) => latest.some((project) => project.data.category === category.slug));
 
-const statements = [
+const heroFrames = [photos.vr, photos.city, photos.abstract, photos.cosmos];
+const slides = [
+	{
+		lines: heroSlides[0].lines,
+		href: '#work',
+		cta: heroSlides[0].cta,
+		image: heroFrames[0],
+		heading: true,
+	},
 	{
 		lines: heroSlides[2].lines,
 		href: '/ai-development-company/',
 		cta: 'AI development company',
-		tone: 'base',
+		image: heroFrames[1],
+		heading: false,
 	},
 	{
 		lines: heroSlides[1].lines,
 		href: '#capabilities',
 		cta: heroSlides[1].cta,
-		tone: 'alt',
+		image: heroFrames[2],
+		heading: false,
 	},
 	{
 		lines: [[{ text: "Have a project? We'd love to help." }]],
 		href: '#contact',
 		cta: 'Get in touch',
-		tone: 'tint',
+		image: heroFrames[3],
+		heading: false,
 	},
 ];
 
@@ -45,111 +56,86 @@ const solutionRows: StudioLink[] = [
 	{ href: '/services/branded-ar-filters/', label: 'Branded AR filters' },
 ];
 const solutionHrefs = new Set(solutionRows.map((row) => row.href));
-
-const filters = categories.filter((category) => latest.some((project) => project.data.category === category.slug));
 ---
 
 <BaseLayout overlayHeader>
-	<div class="studio gj-home">
-		<section class="gj-hero" aria-labelledby="home-title">
-			<div class="gj-slide active">
-				<div class="gj-slide-media">
-					<Image
-						src={photos.vr}
-						alt=""
-						widths={[800, 1200, 1800]}
-						sizes="100vw"
-						loading="eager"
-						fetchpriority="high"
-					/>
+	<div class="hx-home">
+		<section class="hx-hero-frame" aria-roledescription="carousel" aria-label="Studio">
+			<div class="swiper" data-hero-swiper>
+				<div class="swiper-wrapper">
+					{
+						slides.map((slide, index) => (
+							<article class="swiper-slide hx-slide">
+								<Image
+									src={slide.image}
+									alt=""
+									widths={[800, 1280, 1800]}
+									sizes="100vw"
+									loading={index === 0 ? 'eager' : 'lazy'}
+									fetchpriority={index === 0 ? 'high' : 'low'}
+								/>
+								<div class="hx-slide-copy">
+									{slide.heading ? (
+										<h1 id="home-title" class="hx-display">
+											{slide.lines.map((line) => (
+												<span class="line">
+													{line.map((part) => (
+														<span class:list={[{ accent: part.accent }]}>{part.text}</span>
+													))}
+												</span>
+											))}
+										</h1>
+									) : (
+										<p class="hx-display">
+											{slide.lines.map((line) => (
+												<span class="line">
+													{line.map((part) => (
+														<span class:list={[{ accent: part.accent }]}>{part.text}</span>
+													))}
+												</span>
+											))}
+										</p>
+									)}
+									<a class="btn-primary" href={slide.href}>{slide.cta}</a>
+								</div>
+							</article>
+						))
+					}
 				</div>
-				<div class="studio-wrap gj-slide-copy">
-					<h1 id="home-title" class="gj-title">
-						{
-							hero.lines.map((line) => (
-								<span class="line">
-									{line.map((part) => (
-										<span class:list={[{ accent: part.accent }]}>{part.text}</span>
-									))}
-								</span>
-							))
-						}
-					</h1>
-					<p class="gj-hero-lede">{hero.body}</p>
-					<a class="btn-primary" href={hero.href}>{hero.cta}</a>
-				</div>
+				<div class="swiper-pagination" data-hero-pagination></div>
 			</div>
 		</section>
 
-		{
-			statements.map((statement, index) => (
-				<section class:list={['gj-statement', statement.tone]} data-reveal aria-labelledby={`statement-${index}`}>
-					<div class="studio-wrap">
-						<h2 id={`statement-${index}`} class="gj-title">
-							{statement.lines.map((line) => (
-								<span class="line">
-									{line.map((part) => (
-										<span class:list={[{ accent: part.accent }]}>{part.text}</span>
-									))}
-								</span>
-							))}
-						</h2>
-						<a class="btn-primary" href={statement.href}>{statement.cta}</a>
-					</div>
-				</section>
-			))
-		}
-
-		<section class="gj-block" id="work" data-reveal aria-labelledby="work-title">
-			<div class="studio-wrap">
-				<div class="gj-feature" data-carousel>
-					<div class="gj-head">
+		<section class="hx-section hx-featured" id="work" aria-labelledby="work-title">
+			<div class="hx-wrap">
+				<div class="hx-head">
+					<div class="hx-title-row">
 						<h2 id="work-title">Featured case studies</h2>
-						<div class="gj-chevrons">
-							<button type="button" data-carousel-prev aria-label="Previous featured work" disabled>‹</button>
-							<button type="button" data-carousel-next aria-label="Next featured work">›</button>
-						</div>
+						<button class="hx-icon-btn" type="button" data-featured-next aria-label="Next featured case study">›</button>
 					</div>
-					<div class="studio-scroller gj-feature-scroller" tabindex="0" aria-label="Featured case studies">
-						{
-							featured.map((project) => {
-								const category = categoryBySlug(project.data.category);
-								return (
-									<a class="gj-feature-card" data-slide-card href={projectPath(project.data.category, project.data.slug)}>
-										<PortfolioImage
-											src={project.data.heroImage.image}
-											alt={project.data.heroImage.alt}
-											width={project.data.heroImage.image.width}
-											height={project.data.heroImage.image.height}
-											widths={[640, 1100, 1600]}
-											sizes="(min-width: 1024px) 70vw, 88vw"
-										/>
-										<div class="gj-feature-copy">
-											<h3>{project.data.title}</h3>
-											<p>{project.data.year} · {category?.name}</p>
-										</div>
-									</a>
-								);
-							})
-						}
+				</div>
+				<div class="swiper" data-featured-swiper>
+					<div class="swiper-wrapper">
+						{featured.map((project) => <WorkCard project={project} slide />)}
 					</div>
 				</div>
 			</div>
 		</section>
 
-		<section class="gj-block" data-reveal aria-labelledby="latest-title">
-			<div class="studio-wrap">
-				<div class="gj-head gj-latest-head">
+		<section class="hx-section" aria-labelledby="latest-title">
+			<div class="hx-wrap">
+				<div class="hx-head">
 					<h2 id="latest-title">Latest work</h2>
-					<div class="gj-latest-tools">
-						<label class="gj-search">
+					<div class="hx-tools">
+						<label class:list={['hx-search']}>
+							<button class="hx-icon-btn" type="button" data-search-toggle aria-expanded="false" aria-controls="work-search">Search</button>
 							<span class="sr-only">Search work</span>
-							<input type="search" placeholder="Search" data-work-search autocomplete="off" />
+							<input id="work-search" type="search" placeholder="Search" data-work-search autocomplete="off" />
 						</label>
-						<a class="btn-light" href="/portfolio/">View all</a>
+						<a class="hx-text-link" href="/portfolio/">View all</a>
 					</div>
 				</div>
-				<div class="gj-filters" role="toolbar" aria-label="Filter work">
+				<div class="hx-filters" role="toolbar" aria-label="Filter work">
 					<button type="button" data-work-filter="all" aria-pressed="true">All</button>
 					{
 						filters.map((category) => (
@@ -157,71 +143,43 @@ const filters = categories.filter((category) => latest.some((project) => project
 						))
 					}
 				</div>
-				<div class="gj-work-grid">
-					{
-						latest.map((project) => {
-							const category = categoryBySlug(project.data.category);
-							return (
-								<a
-									class="gj-work-card"
-									href={projectPath(project.data.category, project.data.slug)}
-									data-category={project.data.category}
-									data-text={`${project.data.title} ${category?.name ?? ''}`.toLowerCase()}
-								>
-									<div class="gj-work-media">
-										<PortfolioImage
-											src={project.data.heroImage.image}
-											alt={project.data.heroImage.alt}
-											width={project.data.heroImage.image.width}
-											height={project.data.heroImage.image.height}
-											widths={[480, 800, 1200]}
-											sizes="(min-width: 1024px) 30vw, 86vw"
-										/>
-									</div>
-									<h3>{project.data.title}</h3>
-									<p>{project.data.year} · {category?.name}</p>
-								</a>
-							);
-						})
-					}
+				<div class="hx-grid">
+					{latest.map((project) => <WorkCard project={project} />)}
 				</div>
-				<p class="gj-empty" data-work-empty hidden>Nothing matches that filter.</p>
+				<p class="hx-empty" data-work-empty hidden>Nothing matches that filter.</p>
 			</div>
 		</section>
 
-		<section class="gj-solutions" id="capabilities" data-reveal aria-labelledby="solutions-title">
-			<div class="studio-wrap">
+		<section class="hx-section hx-solutions" id="capabilities" aria-labelledby="solutions-title">
+			<div class="hx-wrap">
 				<h2 id="solutions-title">Solutions and capabilities</h2>
-				<div class="gj-stage">
+				<div class="hx-stage">
 					<Image
 						src={photos.vr}
 						alt=""
-						widths={[800, 1200, 1800]}
-						sizes="(min-width: 1024px) 70vw, 100vw"
+						widths={[800, 1280, 1800]}
+						sizes="100vw"
 						loading="lazy"
 					/>
 					<p>We develop across the latest platforms.</p>
 				</div>
-				<div data-carousel>
-					<div class="gj-head">
-						<p class="gj-caption">Each of these is a service we already ship, from the first prototype through launch.</p>
-						<div class="gj-chevrons">
-							<button type="button" data-carousel-prev aria-label="Previous solution" disabled>‹</button>
-							<button type="button" data-carousel-next aria-label="Next solution">›</button>
-						</div>
-					</div>
-					<div class="studio-scroller gj-solution-scroller" tabindex="0" aria-label="Solutions">
+				<div class="swiper" data-solution-swiper>
+					<div class="swiper-wrapper">
 						{
 							solutionRows.map((row) => (
-								<a class="gj-solution-card" data-slide-card href={row.href}>
-									<strong>{row.label}</strong>
-									<span aria-hidden="true">→</span>
-								</a>
+								<a class="swiper-slide hx-solution" href={row.href}>{row.label}</a>
 							))
 						}
 					</div>
 				</div>
-				<div class="gj-catalog">
+				<div class="hx-solution-nav">
+					<p class="hx-caption">Each of these is a service we already ship, from the first prototype through launch.</p>
+					<div>
+						<button class="hx-icon-btn" type="button" data-solution-prev aria-label="Previous solution">‹</button>
+						<button class="hx-icon-btn" type="button" data-solution-next aria-label="Next solution">›</button>
+					</div>
+				</div>
+				<div class="hx-catalog">
 					{
 						studioGroups.map((group) => {
 							const links = group.links.filter((link) => !solutionHrefs.has(link.href));
@@ -248,89 +206,103 @@ const filters = categories.filter((category) => latest.some((project) => project
 </BaseLayout>
 
 <script>
-	const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+	import Swiper from 'swiper';
+	import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
-	function bindCarousel(root: HTMLElement) {
-		if (root.dataset.bound === 'true') return;
-		const scroller = root.querySelector<HTMLElement>('.studio-scroller');
-		const prev = root.querySelector<HTMLButtonElement>('[data-carousel-prev]');
-		const next = root.querySelector<HTMLButtonElement>('[data-carousel-next]');
-		if (!scroller || !prev || !next) return;
-		root.dataset.bound = 'true';
+	const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+	const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+	const autoplay = motion.matches || saveData;
 
-		const amount = () => {
-			const card = scroller.querySelector<HTMLElement>('[data-slide-card]');
-			return (card?.getBoundingClientRect().width ?? 320) + 20;
-		};
-		const update = () => {
-			const max = scroller.scrollWidth - scroller.clientWidth - 2;
-			prev.disabled = scroller.scrollLeft <= 2;
-			next.disabled = scroller.scrollLeft >= max;
-		};
-		const move = (direction: number) => {
-			scroller.scrollBy({
-				left: direction * amount(),
-				behavior: reduceMotion.matches ? 'auto' : 'smooth',
-			});
-		};
+	let hero: Swiper | undefined;
+	let featuredSwiper: Swiper | undefined;
+	let solutionSwiper: Swiper | undefined;
 
-		prev.addEventListener('click', () => move(-1));
-		next.addEventListener('click', () => move(1));
-		scroller.addEventListener('scroll', update, { passive: true });
-		scroller.addEventListener('keydown', (event) => {
-			if (event.key === 'ArrowRight') {
-				event.preventDefault();
-				move(1);
-			} else if (event.key === 'ArrowLeft') {
-				event.preventDefault();
-				move(-1);
-			}
-		});
+	function destroySwipers() {
+		hero?.destroy(true, true);
+		featuredSwiper?.destroy(true, true);
+		solutionSwiper?.destroy(true, true);
+		hero = undefined;
+		featuredSwiper = undefined;
+		solutionSwiper = undefined;
+	}
 
-		let dragging = false;
-		let origin = 0;
-		scroller.addEventListener('pointerdown', (event) => {
-			if (event.button !== 0) return;
-			dragging = true;
-			origin = event.clientX;
-			scroller.dataset.dragged = 'false';
-			scroller.setPointerCapture(event.pointerId);
-		});
-		scroller.addEventListener('pointermove', (event) => {
-			if (!dragging) return;
-			if (Math.abs(event.clientX - origin) > 8) scroller.dataset.dragged = 'true';
-			if (scroller.dataset.dragged === 'true') scroller.scrollLeft -= event.movementX;
-		});
-		const endDrag = () => {
-			dragging = false;
-		};
-		scroller.addEventListener('pointerup', endDrag);
-		scroller.addEventListener('pointercancel', endDrag);
-		scroller.addEventListener(
-			'click',
-			(event) => {
-				if (scroller.dataset.dragged !== 'true') return;
-				event.preventDefault();
-				event.stopPropagation();
-				scroller.dataset.dragged = 'false';
+	function mountHero() {
+		const root = document.querySelector<HTMLElement>('[data-hero-swiper]');
+		if (!root || root.classList.contains('swiper-initialized')) return;
+		hero = new Swiper(root, {
+			modules: [Autoplay, Pagination],
+			slidesPerView: 1,
+			loop: true,
+			speed: motion.matches ? 0 : 300,
+			autoplay: autoplay ? false : { delay: 6000, disableOnInteraction: false },
+			pagination: {
+				el: '[data-hero-pagination]',
+				clickable: true,
 			},
-			true,
-		);
-		update();
+			keyboard: { enabled: true, onlyInViewport: true },
+			on: {
+				init() {
+					const titles = root.querySelectorAll('#home-title');
+					titles.forEach((title, index) => {
+						if (index > 0) title.removeAttribute('id');
+					});
+				},
+			},
+		});
 	}
 
-	function initCarousels() {
-		document.querySelectorAll<HTMLElement>('[data-carousel]').forEach(bindCarousel);
+	function mountFeatured() {
+		const root = document.querySelector<HTMLElement>('[data-featured-swiper]');
+		if (!root || root.classList.contains('swiper-initialized')) return;
+		featuredSwiper = new Swiper(root, {
+			modules: [Autoplay],
+			slidesPerView: 1.2,
+			spaceBetween: 30,
+			loop: true,
+			speed: motion.matches ? 0 : 300,
+			autoplay: autoplay ? false : { delay: 4000, disableOnInteraction: false },
+			keyboard: { enabled: true, onlyInViewport: true },
+			breakpoints: {
+				640: { slidesPerView: 2 },
+				1024: { slidesPerView: 2.5 },
+			},
+		});
+		document.querySelector('[data-featured-next]')?.addEventListener('click', () => featuredSwiper?.slideNext());
 	}
 
-	function initWorkFilters() {
-		const root = document.querySelector<HTMLElement>('.gj-home');
+	function mountSolutions() {
+		const root = document.querySelector<HTMLElement>('[data-solution-swiper]');
+		if (!root || root.classList.contains('swiper-initialized')) return;
+		solutionSwiper = new Swiper(root, {
+			modules: [Autoplay, Navigation],
+			slidesPerView: 1.15,
+			spaceBetween: 30,
+			centeredSlides: true,
+			loop: true,
+			speed: motion.matches ? 0 : 300,
+			autoplay: autoplay ? false : { delay: 2000, disableOnInteraction: false },
+			navigation: {
+				prevEl: '[data-solution-prev]',
+				nextEl: '[data-solution-next]',
+			},
+			keyboard: { enabled: true, onlyInViewport: true },
+			breakpoints: {
+				768: { slidesPerView: 2 },
+				1024: { slidesPerView: 3 },
+			},
+		});
+	}
+
+	function mountFilters() {
+		const root = document.querySelector<HTMLElement>('.hx-home');
 		if (!root || root.dataset.workBound === 'true') return;
-		const cards = [...root.querySelectorAll<HTMLElement>('.gj-work-card')];
+		const cards = [...root.querySelectorAll<HTMLElement>('.hx-grid .hx-card')];
 		const buttons = [...root.querySelectorAll<HTMLButtonElement>('[data-work-filter]')];
 		const search = root.querySelector<HTMLInputElement>('[data-work-search]');
 		const empty = root.querySelector<HTMLElement>('[data-work-empty]');
-		if (!cards.length || !buttons.length) return;
+		const toggle = root.querySelector<HTMLButtonElement>('[data-search-toggle]');
+		const searchWrap = root.querySelector<HTMLElement>('.hx-search');
+		if (!cards.length) return;
 		root.dataset.workBound = 'true';
 		let active = 'all';
 
@@ -349,19 +321,35 @@ const filters = categories.filter((category) => latest.some((project) => project
 
 		buttons.forEach((button) => {
 			button.addEventListener('click', () => {
-				active = button.dataset.workFilter ?? 'all';
-				buttons.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+				const next = button.dataset.workFilter ?? 'all';
+				active = button.getAttribute('aria-pressed') === 'true' && next !== 'all' ? 'all' : next;
+				buttons.forEach((item) => {
+					const pressed = active === 'all' ? item.dataset.workFilter === 'all' : item === button && active !== 'all';
+					item.setAttribute('aria-pressed', String(pressed));
+				});
 				apply();
 			});
 		});
 		search?.addEventListener('input', apply);
+		toggle?.addEventListener('click', () => {
+			const open = searchWrap?.classList.toggle('is-open') ?? false;
+			toggle.setAttribute('aria-expanded', String(open));
+			if (open) search?.focus();
+		});
 	}
 
-	function initHome() {
-		initCarousels();
-		initWorkFilters();
+	function mountHome() {
+		mountHero();
+		mountFeatured();
+		mountSolutions();
+		mountFilters();
 	}
 
-	initHome();
-	document.addEventListener('astro:page-load', initHome);
+	mountHome();
+	document.addEventListener('astro:page-load', mountHome);
+	document.addEventListener('astro:before-swap', () => {
+		destroySwipers();
+		const root = document.querySelector<HTMLElement>('.hx-home');
+		if (root) delete root.dataset.workBound;
+	});
 </script>
