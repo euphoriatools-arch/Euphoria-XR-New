@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import Button from '../../components/ui/Button.astro';
+import PortfolioImage from '../../components/portfolio/PortfolioImage.astro';
+import { categories, categoryBySlug } from '../../content/categories';
+import { loadProjects, projectPath } from '../../lib/portfolio';
+import { assertMeta } from '../../lib/seo';
+import { breadcrumbSchema } from '../../lib/schema';
+
+const title = 'Portfolio of Immersive AR, VR, and AI Work | EuphoriaXR';
+const description =
+	'Browse sample EuphoriaXR projects in augmented reality, virtual reality, 360 video, blockchain, and artificial intelligence. Filter by category.';
+assertMeta('Portfolio index', title, description);
+
+const projects = await loadProjects();
+const industries = [...new Set(projects.map((project) => project.data.client.industry))].sort();
+const years = [...new Set(projects.map((project) => project.data.year))].sort((a, b) => b - a);
+const crumbs = [
+	{ name: 'Home', href: '/' },
+	{ name: 'Case studies', href: '/portfolio/' },
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={[breadcrumbSchema(crumbs)]}>
+	<div class="case-page" data-case-studies>
+		<section class="case-intro">
+			<div class="case-wrap">
+				<Breadcrumbs items={crumbs} />
+				<p class="eyebrow">Selected work / Immersive experiences</p>
+				<h1>Case <em>Studies.</em></h1>
+				<p class="case-lead">Ideas made immersive. Explore how creativity and technology can shape meaningful experiences across industries and realities.</p>
+				<p class="case-links"><a href="/about/">About the studio</a></p>
+				<div class="case-filters" role="group" aria-label="Filter case studies">
+					<div class="case-filter">
+						<label for="case-service">Services</label>
+						<select id="case-service" data-case-filter="service">
+							<option value="all">All services</option>
+							{categories.map((category) => <option value={category.slug}>{category.name}</option>)}
+						</select>
+					</div>
+					<div class="case-filter">
+						<label for="case-industry">Industry</label>
+						<select id="case-industry" data-case-filter="industry">
+							<option value="all">All industries</option>
+							{industries.map((industry) => <option value={industry}>{industry}</option>)}
+						</select>
+					</div>
+					<div class="case-filter">
+						<label for="case-year">Year</label>
+						<select id="case-year" data-case-filter="year">
+							<option value="all">All years</option>
+							{years.map((year) => <option value={String(year)}>{year}</option>)}
+						</select>
+					</div>
+				</div>
+				<nav class="case-filter-links" aria-label="Case study categories">
+					<a href="/portfolio/">All</a>
+					{categories.map((category) => <a href={`/portfolio/${category.slug}/`}>{category.name}</a>)}
+				</nav>
+				<div class="case-results">
+					<span data-case-count aria-live="polite">Showing {projects.length} of {projects.length} case studies</span>
+					<button type="button" class="case-clear" data-case-clear>Clear filters</button>
+				</div>
+			</div>
+		</section>
+
+		<section class="case-wrap">
+			<div class="case-grid">
+				{
+					projects.map((project) => {
+						const category = categoryBySlug(project.data.category);
+						const href = projectPath(project.data.category, project.data.slug);
+						return (
+							<article
+								class="case-card"
+								data-case-card
+								data-service={project.data.category}
+								data-industry={project.data.client.industry}
+								data-year={String(project.data.year)}
+							>
+								<a class="case-cover" href={href}>
+									<PortfolioImage
+										src={project.data.heroImage.image}
+										alt={project.data.heroImage.alt}
+										width={project.data.heroImage.image.width}
+										height={project.data.heroImage.image.height}
+										widths={[480, 800, 1200]}
+										sizes="(min-width: 700px) 46vw, 100vw"
+									/>
+									<span class="case-corner" aria-hidden="true">↗</span>
+								</a>
+								<div class="case-details">
+									<div class="case-tags">
+										<span>{category?.name}</span>
+										<span>{project.data.client.industry}</span>
+									</div>
+									<h2><a href={href}>{project.data.title}</a></h2>
+									<p>{project.data.summary}</p>
+									<a class="case-more" href={href}>Explore case study <span aria-hidden="true">→</span></a>
+								</div>
+							</article>
+						);
+					})
+				}
+			</div>
+			<div class="case-empty" data-case-empty hidden>
+				<h2>No matching case studies.</h2>
+				<p>Try another service, industry, or year.</p>
+			</div>
+		</section>
+
+		<section class="case-cta">
+			<div class="case-wrap case-cta-inner">
+				<div>
+					<p class="eyebrow">Let's build together</p>
+					<h2>Have a big idea? Let's make it <span class="accent">immersive.</span></h2>
+				</div>
+				<Button href="/contact/" class="case-cta-btn">Start a conversation</Button>
+			</div>
+		</section>
+	</div>
+	<script>
+		import { initCaseStudies } from '../../scripts/case-studies';
+
+		initCaseStudies();
+		document.addEventListener('astro:page-load', () => initCaseStudies());
+	</script>
+</BaseLayout>

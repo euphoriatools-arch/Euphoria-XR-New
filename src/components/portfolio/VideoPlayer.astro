@@ -1,0 +1,58 @@
+---
+import { getImage } from 'astro:assets';
+import PortfolioImage from './PortfolioImage.astro';
+import type { ProjectEntry } from '../../lib/portfolio';
+
+interface Props {
+	video: ProjectEntry['data']['video'];
+	spherical?: boolean;
+}
+
+const { video, spherical = false } = Astro.props;
+const poster = await getImage({ src: video.poster, width: 1400, format: 'webp' });
+const facade = spherical || video.provider !== 'file';
+const videoId = video.provider === 'file' ? '' : video.id;
+const videoSrc = video.provider === 'file' ? video.src : '';
+---
+
+<div
+	class="video-root"
+	data-video-root
+	data-provider={video.provider}
+	data-id={videoId}
+	data-src={videoSrc}
+	data-title={video.title}
+	data-poster={poster.src}
+	data-captions={video.captions ?? ''}
+	data-viewer={spherical ? 'aframe' : ''}
+>
+	{
+		facade ? (
+			<button type="button" class="video-play" data-video-play aria-label={`Play video: ${video.title}`}>
+				<PortfolioImage
+					src={video.poster}
+					alt={video.posterAlt}
+					width={video.poster.width}
+					height={video.poster.height}
+					widths={[640, 960, 1400]}
+					sizes="(min-width: 1024px) 70vw, 100vw"
+					class="video-poster"
+				/>
+				<span class="video-play-mark" aria-hidden="true">Play</span>
+			</button>
+		) : (
+			<video controls preload="none" playsinline poster={poster.src} width={video.poster.width} height={video.poster.height}>
+				<source src={videoSrc} type="video/mp4" />
+				{video.captions && <track kind="captions" src={video.captions} srclang="en" label="English" default />}
+			</video>
+		)
+	}
+	<p class="video-caption">{video.title}</p>
+</div>
+
+<script>
+	import { initPortfolioVideo } from '../../scripts/portfolio-video';
+
+	initPortfolioVideo();
+	document.addEventListener('astro:page-load', () => initPortfolioVideo());
+</script>

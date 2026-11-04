@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../components/ui/Breadcrumbs.astro';
+import { servicePages } from '../../data/services';
+import { breadcrumbSchema } from '../../lib/schema';
+
+const title = 'EuphoriaXR Blog | Notes on AR, VR, and AI Projects';
+const description =
+	'Notes from EuphoriaXR on AR, VR, AI, and 3D production. Essays are on the way. Until then, start with the services and industries we already publish.';
+const crumbs = [
+	{ name: 'Home', href: '/' },
+	{ name: 'Blog', href: '/blog/' },
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={[breadcrumbSchema(crumbs)]}>
+	<section class="section">
+		<div class="section-inner">
+			<Breadcrumbs items={crumbs} />
+			<p class="section-label">Insights</p>
+			<h1>Notes from the studio</h1>
+			<div class="empty-state">
+				<p>Essays are coming soon. The first pieces will cover training design, WebAR campaigns, and how we decide when a model belongs in a product.</p>
+				<!-- TODO: Replace this empty state with published articles and Article JSON-LD. -->
+			</div>
+			<h2>Read a service while you wait</h2>
+			<ul class="link-list">
+				{
+					servicePages.slice(0, 6).map((page) => (
+						<li>
+							<a href={`/${page.slug}/`}>{page.navLabel}</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+</BaseLayout>

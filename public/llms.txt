@@ -1,0 +1,70 @@
+# EuphoriaXR
+
+> EuphoriaXR is a creative technology studio that designs and builds AR, VR, AI, WebXR, and 3D experiences for training, brands, products, and public teams.
+
+## Services
+
+- [AI chatbot development](https://euphoriaxr.com/ai-chatbot-development-services/): Chatbots grounded in your content, with a clear handoff to a person.
+- [AI software development](https://euphoriaxr.com/ai-software-development/): Custom AI software your team can own, from the first workflow to release.
+- [AI integration services](https://euphoriaxr.com/ai-integration-services/): Connect models to the product and data you already run.
+- [AI agent development](https://euphoriaxr.com/ai-agent-development-company/): Agents that finish multi-step work inside limits you set.
+- [Machine learning development](https://euphoriaxr.com/artificial-intelligence-company-and-consulting-services/): Machine learning consulting, pipelines, and a model your team can run.
+- [AI development company](https://euphoriaxr.com/ai-development-company/): Applied AI, AR, and VR delivered as one studio practice.
+- [AR QR code and WebAR](https://euphoriaxr.com/webar-development/): WebAR scenes that open from a printed QR code in the phone browser.
+- [AR business cards](https://euphoriaxr.com/webar-business-card/): A printed card that opens a spatial introduction in the browser.
+- [3D product configurators](https://euphoriaxr.com/product-configurator/): A browser 3D configurator with real options and accurate materials.
+- [VR training simulation](https://euphoriaxr.com/virtual-reality-training/): Headset practice for procedures people must get right the first time.
+- [VR welding simulator](https://euphoriaxr.com/vr-simulators/): A welding simulator that scores torch work instructors can review.
+- [Augmented reality development](https://euphoriaxr.com/services/augmented-reality-development-company/): AR apps, WebAR, and filters from prototype to release.
+- [Virtual reality development](https://euphoriaxr.com/services/virtual-reality-development-company/): VR for training, simulation, and branded worlds on headset and web.
+- [NFT and metaverse development](https://euphoriaxr.com/services/nft-makers-metaverse-development-company/): Marketplace, mint, and membership experiences tied to a real product.
+- [Branded AR filters](https://euphoriaxr.com/services/branded-ar-filters/): Face, world, and product filters for social and your own link.
+
+## Industries
+
+- [VR for education](https://euphoriaxr.com/ar-vr-training-education/): Lessons students can walk through, with the teacher still in charge.
+- [VR medical training](https://euphoriaxr.com/ar-vr-medical-healthcare/): Clinical rehearsal for procedures, devices, and hard conversations.
+- [AR in advertising](https://euphoriaxr.com/ar-vr-media-and-marketing/): Campaign AR for print, packaging, and out-of-home that you can measure.
+- [Virtual try-on for retail](https://euphoriaxr.com/ar-vr-fashion-retail/): Try jewelry on for scale and metal before the purchase.
+- [VR military training](https://euphoriaxr.com/ar-vr-development-solutions-for-government-agencies/): Scored rehearsals for procedures, equipment, and team communication.
+- [Immersive agency partnerships](https://euphoriaxr.com/ar-vr-development-solutions-for-creative-agencies/): The build partner creative agencies use for AR, VR, and WebAR.
+
+## Portfolio
+
+- [Portfolio](https://euphoriaxr.com/portfolio/): Sample immersive projects across AR, VR, 360 video, blockchain, and AI.
+- [Augmented reality](https://euphoriaxr.com/portfolio/augmented-reality/): Phone-based scenes for packaging, places, and campaigns. The scan has to pay off in a few seconds, and the offer still has to land if the camera cannot run it.
+- [Virtual reality](https://euphoriaxr.com/portfolio/virtual-reality/): Headset rehearsals for training floors, clinics, and crews. The score has to match the brief an instructor already uses, not a game rubric.
+- [360 videography](https://euphoriaxr.com/portfolio/360-videography/): Spherical video for rooms, sites, and events. Drag to look around. A standard player with captions stays available if the viewer cannot start.
+- [Blockchain](https://euphoriaxr.com/portfolio/blockchain/): Records for provenance, membership, and archives. The chain is only in the work when a person still needs to explain the record later.
+- [Artificial intelligence](https://euphoriaxr.com/portfolio/artificial-intelligence/): Guides, coaches, and clerks that answer from sources you approve. The system stops, with the transcript, when the question is new.
+- [Aisle Marker](https://euphoriaxr.com/portfolio/augmented-reality/aisle-marker/): Sample Retail AR project for a retail team. Figures on this page are placeholders.
+- [Archive Key](https://euphoriaxr.com/portfolio/blockchain/archive-key/): Sample Archive project for a culture team. Figures on this page are placeholders.
+- [Atrium Tour](https://euphoriaxr.com/portfolio/360-videography/atrium-tour/): Sample 360 Venue project for a hospitality team. Figures on this page are placeholders.
+- [Cabin Drill](https://euphoriaxr.com/portfolio/virtual-reality/cabin-drill/): Sample Crew VR project for a aviation team. Figures on this page are placeholders.
+- [Desk Guide](https://euphoriaxr.com/portfolio/artificial-intelligence/desk-guide/): Sample AI Guide project for a software team. Figures on this page are placeholders.
+- [Floor Coach](https://euphoriaxr.com/portfolio/artificial-intelligence/floor-coach/): Sample AI Coach project for a retail team. Figures on this page are placeholders.
+- [Gallery Hour](https://euphoriaxr.com/portfolio/360-videography/gallery-hour/): Sample 360 Room project for a museums team. Figures on this page are placeholders.
+- [Harbor Lens](https://euphoriaxr.com/portfolio/augmented-reality/harbor-lens/): Sample AR Packaging project for a retail team. Figures on this page are placeholders.
+- [Kiln Floor](https://euphoriaxr.com/portfolio/360-videography/kiln-floor/): Sample 360 Plant project for a manufacturing team. Figures on this page are placeholders.
+- [Membership Pass](https://euphoriaxr.com/portfolio/blockchain/membership-pass/): Sample Membership project for a media team. Figures on this page are placeholders.
+- [Mural Walk](https://euphoriaxr.com/portfolio/augmented-reality/mural-walk/): Sample Culture AR project for a culture team. Figures on this page are placeholders.
+- [Night Shift](https://euphoriaxr.com/portfolio/virtual-reality/night-shift/): Sample Plant VR project for a energy team. Figures on this page are placeholders.
+- [Pier Night](https://euphoriaxr.com/portfolio/360-videography/pier-night/): Sample 360 Site project for a tourism team. Figures on this page are placeholders.
+- [Provenance Wall](https://euphoriaxr.com/portfolio/blockchain/provenance-wall/): Sample Provenance project for a retail team. Figures on this page are placeholders.
+- [Quote Clerk](https://euphoriaxr.com/portfolio/artificial-intelligence/quote-clerk/): Sample AI Clerk project for a insurance team. Figures on this page are placeholders.
+- [Shift Notes](https://euphoriaxr.com/portfolio/artificial-intelligence/shift-notes/): Sample AI Notes project for a healthcare team. Figures on this page are placeholders.
+- [Showroom Spark](https://euphoriaxr.com/portfolio/augmented-reality/showroom-spark/): Sample Showroom AR project for a automotive team. Figures on this page are placeholders.
+- [Token Room](https://euphoriaxr.com/portfolio/blockchain/token-room/): Sample Event Record project for a events team. Figures on this page are placeholders.
+- [Ward Round](https://euphoriaxr.com/portfolio/virtual-reality/ward-round/): Sample Clinical VR project for a healthcare team. Figures on this page are placeholders.
+- [Weld Rehearsal](https://euphoriaxr.com/portfolio/virtual-reality/weld-rehearsal/): Sample VR Training project for a manufacturing team. Figures on this page are placeholders.
+
+## Company
+
+- [About](https://euphoriaxr.com/about/): Who the studio is and how an engagement runs.
+- [Contact](https://euphoriaxr.com/contact/): Start a project conversation.
+- [Blog](https://euphoriaxr.com/blog/): Studio notes. Essays are not published yet.
+
+## Optional
+
+- [Privacy policy](https://euphoriaxr.com/privacy-policy/): How contact details and project files are handled.
+- [Terms of use](https://euphoriaxr.com/terms/): Terms for using the website. Paid work uses a separate contract.

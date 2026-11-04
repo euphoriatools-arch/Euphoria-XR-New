@@ -1,0 +1,248 @@
+---
+import { getImage } from 'astro:assets';
+import { render } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/ui/Breadcrumbs.astro';
+import Gallery from '../../../components/portfolio/Gallery.astro';
+import PortfolioImage from '../../../components/portfolio/PortfolioImage.astro';
+import ProjectGrid from '../../../components/portfolio/ProjectGrid.astro';
+import VideoPlayer from '../../../components/portfolio/VideoPlayer.astro';
+import { categoryBySlug } from '../../../content/categories';
+import { clientLabel, loadProjects, projectNeighbors, projectPath, relatedProjects } from '../../../lib/portfolio';
+import { absoluteUrl } from '../../../lib/urls';
+import { breadcrumbSchema, creativeWorkSchema } from '../../../lib/schema';
+
+export async function getStaticPaths() {
+	const projects = await loadProjects();
+	return projects.map((project) => ({
+		params: { category: project.data.category, slug: project.data.slug },
+		props: { id: project.id },
+	}));
+}
+
+interface Props {
+	id: string;
+}
+
+const { id } = Astro.props;
+const projects = await loadProjects();
+const project = projects.find((entry) => entry.id === id);
+if (!project) throw new Error(`Missing project ${id}`);
+if (project.data.category !== Astro.params.category || project.data.slug !== Astro.params.slug) {
+	throw new Error(`Project route does not match ${id}`);
+}
+
+const category = categoryBySlug(project.data.category);
+if (!category) throw new Error(`Missing category ${project.data.category}`);
+
+const { Content } = await render(project);
+const hero = await getImage({ src: project.data.heroImage.image, width: 1400, format: 'webp' });
+const path = projectPath(project.data.category, project.data.slug);
+const crumbs = [
+	{ name: 'Home', href: '/' },
+	{ name: 'Case studies', href: '/portfolio/' },
+	{ name: category.name, href: `/portfolio/${category.slug}/` },
+	{ name: project.data.title, href: path },
+];
+const related = relatedProjects(projects, project);
+const { previous, next } = projectNeighbors(projects, project);
+const client = clientLabel(project.data.client);
+const facts = [
+	{ label: 'Client', value: client },
+	{ label: 'Industry', value: project.data.client.industry },
+	{ label: 'Duration', value: project.data.duration },
+	{ label: 'Year', value: String(project.data.year) },
+	...(project.data.teamSize ? [{ label: 'Team size', value: project.data.teamSize }] : []),
+];
+---
+
+<BaseLayout
+	title={project.data.seo.title}
+	description={project.data.seo.description}
+	image={hero.src}
+	jsonLd={[
+		breadcrumbSchema(crumbs),
+		creativeWorkSchema({
+			name: project.data.title,
+			description: project.data.seo.description,
+			url: absoluteUrl(path),
+			image: absoluteUrl(hero.src),
+			dateCreated: String(project.data.year),
+			about: category.name,
+		}),
+	]}
+>
+	<article class="portfolio-project" style={`--accent: ${category.accent}`}>
+		<header class="portfolio-hero">
+			<PortfolioImage
+				src={project.data.heroImage.image}
+				alt={project.data.heroImage.alt}
+				width={project.data.heroImage.image.width}
+				height={project.data.heroImage.image.height}
+				loading="eager"
+				fetchpriority="high"
+				widths={[800, 1200, 1400]}
+				sizes="100vw"
+				class="hero-media"
+			/>
+			<div class="section-inner">
+				<Breadcrumbs items={crumbs} />
+				<p class="project-tag hero-tag">{category.name}</p>
+				<h1>{project.data.title}</h1>
+				<p class="lede">
+					{client}
+					{project.data.client.permissionGranted && project.data.client.logo && project.data.client.logoAlt && (
+						<PortfolioImage
+							src={project.data.client.logo}
+							alt={project.data.client.logoAlt}
+							width={project.data.client.logo.width}
+							height={project.data.client.logo.height}
+							class="client-logo"
+						/>
+					)}
+					<span class="hero-year">{project.data.year}</span>
+				</p>
+			</div>
+		</header>
+
+		<section class="section" aria-label="Quick facts">
+			<div class="section-inner">
+				<dl class="fact-bar">
+					{
+						facts.map((fact) => (
+							<div>
+								<dt>{fact.label}</dt>
+								<dd>{fact.value}</dd>
+							</div>
+						))
+					}
+				</dl>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-inner prose">
+				<h2>The project</h2>
+				<Content />
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-inner">
+				<h2>Outcome</h2>
+				<ul class="metric-grid">
+					{
+						project.data.outcome.metrics.map((item) => (
+							<li class="metric-card" data-reveal>
+								<p class="metric-value">{item.value}</p>
+								<p>{item.metric}</p>
+							</li>
+						))
+					}
+				</ul>
+				<p class="metric-copy">{project.data.outcome.paragraph}</p>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-inner">
+				<h2>Watch</h2>
+				<VideoPlayer video={project.data.video} spherical={project.data.category === '360-videography'} />
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-inner">
+				<h2>Gallery</h2>
+				<Gallery images={project.data.gallery} label={project.data.title} />
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-inner">
+				<h2>How it was made</h2>
+				<ol class="method-list">
+					{
+						project.data.methodology.map((step) => (
+							<li>
+								<span>{String(step.step).padStart(2, '0')}</span>
+								<div>
+									<h3>{step.title}</h3>
+									<p>{step.description}</p>
+								</div>
+							</li>
+						))
+					}
+				</ol>
+			</div>
+		</section>
+
+		{
+			project.data.testimonial && (
+				<section class="section">
+					<div class="section-inner">
+						<h2>Client note</h2>
+						<figure class="quote-block">
+							<blockquote>
+								<p>{project.data.testimonial.quote}</p>
+							</blockquote>
+							<figcaption>
+								{project.data.testimonial.photo && project.data.testimonial.photoAlt && (
+									<PortfolioImage
+										src={project.data.testimonial.photo}
+										alt={project.data.testimonial.photoAlt}
+										width={project.data.testimonial.photo.width}
+										height={project.data.testimonial.photo.height}
+										widths={[96]}
+										sizes="48px"
+										class="quote-photo"
+									/>
+								)}
+								<span>
+									<strong>{project.data.testimonial.name}</strong>
+									{project.data.testimonial.role}, {project.data.testimonial.company}
+								</span>
+							</figcaption>
+						</figure>
+					</div>
+				</section>
+			)
+		}
+
+		{
+			related.length > 0 && (
+				<section class="section">
+					<div class="section-inner">
+						<h2>Related projects</h2>
+						<ProjectGrid projects={related} />
+					</div>
+				</section>
+			)
+		}
+
+		<section class="section portfolio-end">
+			<div class="section-inner">
+				<h2>A project like this</h2>
+				<p>Tell us the audience, the constraint, and the date. We will reply with the lightest credible way to begin.</p>
+				<a class="outline-btn portfolio-cta" href="/contact/">Book a similar project <span class="arrow" aria-hidden="true">↗</span></a>
+			</div>
+		</section>
+
+		<nav class="section project-pager" aria-label="More projects">
+			<div class="section-inner">
+				{previous && (
+					<a href={projectPath(previous.data.category, previous.data.slug)}>
+						<span>Previous project</span>
+						<strong>{previous.data.title}</strong>
+					</a>
+				)}
+				{next && (
+					<a class="pager-next" href={projectPath(next.data.category, next.data.slug)}>
+						<span>Next project</span>
+						<strong>{next.data.title}</strong>
+					</a>
+				)}
+			</div>
+		</nav>
+	</article>
+</BaseLayout>

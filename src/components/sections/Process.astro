@@ -1,0 +1,18 @@
+---
+import Section from '../ui/Section.astro';
+import { homeProcess } from '../../data/home';
+---
+
+<Section id="process" label="Process" title="How an engagement actually runs.">
+	<div class="process-list">
+		{
+			homeProcess.map((step, index) => (
+				<article>
+					<span>0{index + 1}</span>
+					<h3>{step.title}</h3>
+					<p>{step.body}</p>
+				</article>
+			))
+		}
+	</div>
+</Section>

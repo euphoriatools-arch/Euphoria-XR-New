@@ -1,0 +1,22 @@
+---
+import Section from '../ui/Section.astro';
+import { testimonials } from '../../data/home';
+---
+
+<Section
+	id="stories"
+	label="Scenarios"
+	title="The kind of problem teams bring us."
+	intro="These are illustrative scenarios, not client quotes. Verified testimonials will replace them."
+>
+	<div class="card-grid">
+		{
+			testimonials.map((item) => (
+				<article class="stat-card">
+					<h3>{item.title}</h3>
+					<p>{item.body}</p>
+				</article>
+			))
+		}
+	</div>
+</Section>

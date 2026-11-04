@@ -1,0 +1,103 @@
+---
+import { site } from '../../config/site';
+import { serviceInterestOptions } from '../../lib/contact';
+---
+
+<form id="contact-form" class="form-grid" action={site.form.endpoint} method="post" novalidate data-astro-reload>
+	<div class="field">
+		<label for="name">Name</label>
+		<input id="name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="80" />
+		<p class="error" data-error-for="name" hidden></p>
+	</div>
+	<div class="field">
+		<label for="email">Email</label>
+		<input id="email" name="email" type="email" autocomplete="email" required maxlength="120" />
+		<p class="error" data-error-for="email" hidden></p>
+	</div>
+	<div class="field">
+		<label for="company">Company</label>
+		<input id="company" name="company" type="text" autocomplete="organization" maxlength="120" />
+		<p class="error" data-error-for="company" hidden></p>
+	</div>
+	<div class="field">
+		<label for="service">Service interest</label>
+		<select id="service" name="service" required>
+			<option value="">Select a service</option>
+			{serviceInterestOptions.map((option) => <option value={option.value}>{option.label}</option>)}
+		</select>
+		<p class="error" data-error-for="service" hidden></p>
+	</div>
+	<div class="field">
+		<label for="message">Message</label>
+		<textarea id="message" name="message" required minlength="20" maxlength="5000"></textarea>
+		<p class="error" data-error-for="message" hidden></p>
+	</div>
+	<div class="hp" aria-hidden="true">
+		<label for="company_website">Website</label>
+		<input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
+	</div>
+	<button class="outline-btn" type="submit">Send message <span class="arrow" aria-hidden="true">↗</span></button>
+	<p class="form-status" role="status" aria-live="polite"></p>
+	<p class="note">
+		Prefer email? Write to <a href={`mailto:${site.email}`}>{site.email}</a>.
+	</p>
+</form>
+
+<script>
+	import { isHoneypotTripped, readContactPayload, validateContact } from '../../lib/contact';
+
+	function initContactForm() {
+		const form = document.querySelector<HTMLFormElement>('#contact-form');
+		if (!form || form.dataset.bound === 'true') return;
+		form.dataset.bound = 'true';
+		const status = form.querySelector<HTMLElement>('.form-status');
+		const fields = ['name', 'email', 'company', 'service', 'message'] as const;
+
+		const showErrors = (errors: Partial<Record<(typeof fields)[number], string>>) => {
+			for (const field of fields) {
+				const slot = form.querySelector<HTMLElement>(`[data-error-for="${field}"]`);
+				const input = form.elements.namedItem(field);
+				if (!slot || !(input instanceof HTMLElement)) continue;
+				const message = errors[field];
+				slot.hidden = !message;
+				slot.textContent = message ?? '';
+				if (message) input.setAttribute('aria-invalid', 'true');
+				else input.removeAttribute('aria-invalid');
+			}
+		};
+
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault();
+			const data = new FormData(form);
+			const payload = readContactPayload(Object.fromEntries(data.entries()));
+			if (isHoneypotTripped(payload)) {
+				if (status) status.textContent = 'Thanks. We have your note.';
+				form.reset();
+				return;
+			}
+			const errors = validateContact(payload);
+			showErrors(errors);
+			if (Object.keys(errors).length > 0) {
+				if (status) status.textContent = 'Check the highlighted fields and try again.';
+				return;
+			}
+			if (status) status.textContent = 'Sending…';
+			try {
+				const response = await fetch(form.action, {
+					method: 'POST',
+					headers: { 'content-type': 'application/json', accept: 'application/json' },
+					body: JSON.stringify(payload),
+				});
+				const body = (await response.json()) as { ok?: boolean; message?: string; errors?: typeof errors };
+				if (body.errors) showErrors(body.errors);
+				if (status) status.textContent = body.message || (response.ok ? 'Thanks. We have your note.' : 'Something went wrong. Please email us.');
+				if (body.ok) form.reset();
+			} catch {
+				if (status) status.textContent = 'The form could not be sent. Please email the studio directly.';
+			}
+		});
+	}
+
+	document.addEventListener('astro:page-load', initContactForm);
+	initContactForm();
+</script>

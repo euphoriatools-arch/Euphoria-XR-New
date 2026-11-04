@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { industryPages } from '../data/industries';
+import { servicePages } from '../data/services';
+
+const title = 'Page Not Found | Find Your Way Around EuphoriaXR Site';
+const description =
+	'This EuphoriaXR page does not exist. Return home or open services, industries, the studio, and the contact form to keep going.';
+---
+
+<BaseLayout title={title} description={description} noindex>
+	<section class="section">
+		<div class="section-inner">
+			<p class="section-label">404</p>
+			<h1>That page is not on this site.</h1>
+			<p class="lede">The link may be old, or the address may have a typo. These sections are the live ones.</p>
+			<div class="link-list">
+				<a href="/">EuphoriaXR home</a>
+				<a href="/about/">About the studio</a>
+				<a href="/contact/">Contact EuphoriaXR</a>
+				<a href="/blog/">Blog</a>
+			</div>
+			<h2>Services</h2>
+			<ul class="link-list">
+				{servicePages.map((page) => (
+					<li><a href={`/${page.slug}/`}>{page.navLabel}</a></li>
+				))}
+			</ul>
+			<h2>Industries</h2>
+			<ul class="link-list">
+				{industryPages.map((page) => (
+					<li><a href={`/${page.slug}/`}>{page.navLabel}</a></li>
+				))}
+			</ul>
+		</div>
+	</section>
+</BaseLayout>

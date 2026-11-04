@@ -1,0 +1,114 @@
+---
+import { Image } from 'astro:assets';
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import Button from '../ui/Button.astro';
+import Card from '../ui/Card.astro';
+import FAQ from '../ui/FAQ.astro';
+import Section from '../ui/Section.astro';
+import CTA from '../ui/CTA.astro';
+import { photoFor } from '../../data/images';
+import { relatedLinks } from '../../data/pages';
+import type { MarketingPage } from '../../data/types';
+
+interface Props {
+	page: MarketingPage;
+}
+
+const { page } = Astro.props;
+const crumbs = [
+	{ name: 'Home', href: '/' },
+	{ name: page.navLabel, href: `/${page.slug}/` },
+];
+const related = relatedLinks(page);
+---
+
+<section class="page-hero on-dark">
+	<Image
+		src={photoFor(page.image)}
+		alt=""
+		class="hero-media"
+		loading="eager"
+		fetchpriority="high"
+		widths={[800, 1400, 1800]}
+		sizes="100vw"
+	/>
+	<div class="section-inner">
+		<Breadcrumbs items={crumbs} />
+		<p class="eyebrow">{page.eyebrow}</p>
+		<h1>{page.h1}</h1>
+		<p class="lede">{page.intro[0]}</p>
+		<Button href="/contact/">Talk with EuphoriaXR</Button>
+	</div>
+</section>
+
+<Section label="Overview">
+	<div class="prose">
+		{page.intro.slice(1).map((paragraph) => <p>{paragraph}</p>)}
+		<p class="inline-links">
+			Related work includes{' '}
+			{related.map((link, index) => (
+				<>
+					<a href={link.href}>{link.label}</a>
+					{index < related.length - 1 ? ', ' : ''}
+				</>
+			))}
+			. You can also <a href="/">return to the EuphoriaXR home page</a> or <a href="/contact/">contact the studio</a>.
+		</p>
+	</div>
+</Section>
+
+<Section label="Benefits" title={`Why teams choose this ${page.kind === 'industry' ? 'practice' : 'service'}`}>
+	<div class="card-grid">
+		{page.benefits.map((item) => <Card title={item.title} body={item.body} />)}
+	</div>
+</Section>
+
+<Section label="Process" title="How the work runs">
+	<div class="process-list">
+		{
+			page.process.map((step, index) => (
+				<article>
+					<span>0{index + 1}</span>
+					<h3>{step.title}</h3>
+					<p>{step.body}</p>
+				</article>
+			))
+		}
+	</div>
+</Section>
+
+<Section label="Use cases" title="Where it earns its place">
+	<div class="card-grid">
+		{page.useCases.map((item) => <Card title={item.title} body={item.body} />)}
+	</div>
+</Section>
+
+<Section label="Deliverables" title="What you leave with">
+	<div class="card-grid">
+		{page.deliverables.map((item) => <Card title={item.title} body={item.body} />)}
+	</div>
+</Section>
+
+<Section label="FAQ" title="Questions before a first call">
+	<FAQ items={page.faqs} />
+</Section>
+
+<Section label="Related" title="Continue with a related page">
+	<div class="related-grid">
+		{
+			related.map((link) => (
+				<a class="related-card" href={link.href}>
+					<h3>{link.label}</h3>
+					<p>{link.description}</p>
+				</a>
+			))
+		}
+	</div>
+</Section>
+
+<CTA
+	title="Tell us what the experience has to do."
+	body="Share the audience, the constraint, and the date you have in mind. We will reply with the lightest credible way to start."
+	href="/contact/"
+	label="Contact EuphoriaXR"
+/>

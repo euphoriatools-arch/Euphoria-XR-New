@@ -1,0 +1,22 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import type { ProjectEntry } from '../../lib/portfolio';
+
+interface Props {
+	projects: ProjectEntry[];
+}
+
+const { projects } = Astro.props;
+---
+
+{
+	projects.length > 0 ? (
+		<div class="project-grid">
+			{projects.map((project) => (
+				<ProjectCard project={project} />
+			))}
+		</div>
+	) : (
+		<p>No projects in this category yet.</p>
+	)
+}

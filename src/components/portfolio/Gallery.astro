@@ -1,0 +1,67 @@
+---
+import PortfolioImage from './PortfolioImage.astro';
+import type { ProjectEntry } from '../../lib/portfolio';
+
+interface Props {
+	images: ProjectEntry['data']['gallery'];
+	label: string;
+}
+
+const { images, label } = Astro.props;
+---
+
+<div class="gallery-root" data-gallery>
+	<ul class="gallery-grid">
+		{
+			images.map((item, index) => (
+				<li>
+					<button type="button" class="gallery-open" data-gallery-open={index} aria-haspopup="dialog" aria-controls="project-lightbox">
+						<PortfolioImage
+							src={item.image}
+							alt={item.alt}
+							width={item.image.width}
+							height={item.image.height}
+							widths={[480, 800, 1200]}
+							sizes="(min-width: 1024px) 30vw, (min-width: 768px) 46vw, 100vw"
+						/>
+						<span class="sr-only">Open image {index + 1} of {images.length}: {item.caption}</span>
+					</button>
+				</li>
+			))
+		}
+	</ul>
+	<dialog class="lightbox" id="project-lightbox" aria-label={`${label} gallery`}>
+		<div class="lightbox-bar">
+			<p class="lightbox-count" data-gallery-count></p>
+			<button type="button" class="lightbox-close" data-gallery-close>Close</button>
+		</div>
+		<div class="lightbox-stage">
+			<button type="button" class="lightbox-nav" data-gallery-prev>Previous image</button>
+			<div class="lightbox-frame">
+				{
+					images.map((item, index) => (
+						<figure data-gallery-slide={index} hidden={index !== 0}>
+							<PortfolioImage
+								src={item.image}
+								alt={item.alt}
+								width={item.image.width}
+								height={item.image.height}
+								widths={[800, 1200, 1400]}
+								sizes="90vw"
+							/>
+							<figcaption>{item.caption}</figcaption>
+						</figure>
+					))
+				}
+			</div>
+			<button type="button" class="lightbox-nav" data-gallery-next>Next image</button>
+		</div>
+	</dialog>
+</div>
+
+<script>
+	import { initPortfolioGallery } from '../../scripts/portfolio-gallery';
+
+	initPortfolioGallery();
+	document.addEventListener('astro:page-load', () => initPortfolioGallery());
+</script>

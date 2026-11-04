@@ -1,0 +1,61 @@
+---
+import '../styles/global.css';
+import roboto400 from '@fontsource/roboto/files/roboto-latin-400-normal.woff2';
+import { ClientRouter as ViewTransitions } from 'astro:transitions';
+import SEO from '../components/seo/SEO.astro';
+import JsonLd from '../components/seo/JsonLd.astro';
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import { site } from '../config/site';
+import { organizationSchema, websiteSchema } from '../lib/schema';
+
+interface Props {
+	title?: string;
+	description?: string;
+	image?: string;
+	type?: 'website' | 'article';
+	noindex?: boolean;
+	overlayHeader?: boolean;
+	jsonLd?: Array<Record<string, unknown> | undefined>;
+}
+
+const { title, description, image, type, noindex = false, overlayHeader = false, jsonLd = [] } = Astro.props;
+---
+
+<!doctype html>
+<html lang={site.language}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content={site.themeColor} />
+		<link rel="preload" href={roboto400} as="font" type="font/woff2" crossorigin />
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<SEO title={title} description={description} image={image} type={type} noindex={noindex} />
+		<JsonLd data={[organizationSchema(), websiteSchema(), ...jsonLd]} />
+		<meta name="generator" content={Astro.generator} />
+		<ViewTransitions />
+		<script is:inline>
+			document.documentElement.classList.add('js');
+			if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+				document.documentElement.classList.add('hero-animate');
+			}
+		</script>
+	</head>
+	<body>
+		<a class="skip-link" href="#main">Skip to content</a>
+		<Header overlay={overlayHeader} />
+		<main id="main" data-header={overlayHeader ? 'overlay' : 'solid'}>
+			<slot />
+		</main>
+		<Footer />
+		<script>
+			import { initReveal } from '../scripts/reveal';
+
+			initReveal();
+			document.addEventListener('astro:page-load', () => initReveal());
+		</script>
+	</body>
+</html>

@@ -1,0 +1,165 @@
+---
+import { Image } from 'astro:assets';
+import { heroSlides } from '../../data/home';
+import { photos } from '../../data/images';
+
+const slideImages = [photos.vr, photos.abstract, photos.city];
+---
+
+<section class="hero" aria-roledescription="carousel" aria-label="Featured experiences">
+	<div class="slides">
+		{
+			heroSlides.map((slide, index) => (
+				<article class:list={['slide', { active: index === 0 }]} data-slide aria-hidden={index === 0 ? 'false' : 'true'}>
+					<Image
+						src={slideImages[index]}
+						alt=""
+						class="slide-bg"
+						loading={index === 0 ? 'eager' : 'lazy'}
+						fetchpriority={index === 0 ? 'high' : 'low'}
+						widths={[800, 1200, 1800]}
+						sizes="100vw"
+					/>
+					<div class="hero-inner">
+						<div class="hero-copy">
+							<p class="eyebrow">{slide.eyebrow}</p>
+							{index === 0 ? (
+								<h1>
+									{slide.lines.map((line, lineIndex) => (
+										<span>
+											{lineIndex > 0 && <br />}
+											{line.map((part) => (
+												<span class={part.accent ? 'accent' : undefined}>{part.text}</span>
+											))}
+										</span>
+									))}
+								</h1>
+							) : (
+								<p class="hero-title">
+									{slide.lines.map((line, lineIndex) => (
+										<span>
+											{lineIndex > 0 && <br />}
+											{line.map((part) => (
+												<span class={part.accent ? 'accent' : undefined}>{part.text}</span>
+											))}
+										</span>
+									))}
+								</p>
+							)}
+							<p>{slide.body}</p>
+							<a class="hero-cta" href={slide.href}>
+								<span class="round-arrow" aria-hidden="true">→</span>
+								{slide.cta}
+							</a>
+						</div>
+					</div>
+				</article>
+			))
+		}
+	</div>
+	<div class="hero-side">
+		<span>Reality<br />reimagined</span>
+		<div class="side-line"></div>
+		<span id="side-count">01 / 03</span>
+	</div>
+	<div class="hero-bottom">
+		<div class="slide-count"><strong id="current-slide">01</strong> <span aria-hidden="true">/</span> 03</div>
+		<div class="slider-controls">
+			<button type="button" id="prev-slide" aria-label="Previous slide">←</button>
+			<div class="dots" id="slide-dots">
+				<button type="button" class="active" aria-label="Go to slide 1"></button>
+				<button type="button" aria-label="Go to slide 2"></button>
+				<button type="button" aria-label="Go to slide 3"></button>
+			</div>
+			<button type="button" id="next-slide" aria-label="Next slide">→</button>
+			<button type="button" id="pause-slide" aria-pressed="false">Pause</button>
+		</div>
+		<a class="scroll-hint" href="#work">Scroll to explore <span aria-hidden="true">↓</span></a>
+	</div>
+</section>
+
+<script>
+	let stopHero = () => {};
+
+	function initHero() {
+		stopHero();
+		const hero = document.querySelector<HTMLElement>('.hero');
+		if (!hero || hero.dataset.bound === 'true') return;
+		hero.dataset.bound = 'true';
+		const slides = [...hero.querySelectorAll<HTMLElement>('[data-slide]')];
+		const dots = [...hero.querySelectorAll<HTMLButtonElement>('#slide-dots button')];
+		const current = hero.querySelector<HTMLElement>('#current-slide');
+		const sideCount = hero.querySelector<HTMLElement>('#side-count');
+		const pause = hero.querySelector<HTMLButtonElement>('#pause-slide');
+		const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+		let index = 0;
+		let timer = 0;
+		let paused = reduce;
+
+		const render = () => {
+			slides.forEach((slide, slideIndex) => {
+				const active = slideIndex === index;
+				slide.classList.toggle('active', active);
+				slide.setAttribute('aria-hidden', active ? 'false' : 'true');
+			});
+			dots.forEach((dot, dotIndex) => {
+				const active = dotIndex === index;
+				dot.classList.toggle('active', active);
+				if (active) dot.setAttribute('aria-current', 'true');
+				else dot.removeAttribute('aria-current');
+			});
+			const label = String(index + 1).padStart(2, '0');
+			if (current) current.textContent = label;
+			if (sideCount) sideCount.textContent = `${label} / ${String(slides.length).padStart(2, '0')}`;
+		};
+
+		const stop = () => window.clearInterval(timer);
+		const start = () => {
+			stop();
+			if (paused) return;
+			timer = window.setInterval(() => show(index + 1), 6500);
+		};
+		const show = (next: number) => {
+			index = (next + slides.length) % slides.length;
+			render();
+			start();
+		};
+
+		if (pause) {
+			pause.textContent = paused ? 'Play' : 'Pause';
+			pause.setAttribute('aria-pressed', String(paused));
+			pause.addEventListener('click', () => {
+				paused = !paused;
+				pause.textContent = paused ? 'Play' : 'Pause';
+				pause.setAttribute('aria-pressed', String(paused));
+				if (paused) stop();
+				else start();
+			});
+		}
+
+		hero.querySelector('#prev-slide')?.addEventListener('click', () => show(index - 1));
+		hero.querySelector('#next-slide')?.addEventListener('click', () => show(index + 1));
+		dots.forEach((dot, dotIndex) => dot.addEventListener('click', () => show(dotIndex)));
+		hero.addEventListener('mouseenter', stop);
+		hero.addEventListener('mouseleave', start);
+		let touchStart = 0;
+		hero.addEventListener('touchstart', (event) => {
+			touchStart = event.changedTouches[0]?.screenX ?? 0;
+		}, { passive: true });
+		hero.addEventListener('touchend', (event) => {
+			const delta = (event.changedTouches[0]?.screenX ?? 0) - touchStart;
+			if (Math.abs(delta) > 55) show(index + (delta < 0 ? 1 : -1));
+		}, { passive: true });
+		hero.addEventListener('keydown', (event) => {
+			if (event.key === 'ArrowRight') show(index + 1);
+			if (event.key === 'ArrowLeft') show(index - 1);
+		});
+		stopHero = stop;
+		render();
+		start();
+	}
+
+	document.addEventListener('astro:before-swap', () => stopHero());
+	document.addEventListener('astro:page-load', initHero);
+	initHero();
+</script>

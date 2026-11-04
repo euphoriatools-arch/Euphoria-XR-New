@@ -1,0 +1,70 @@
+---
+import { industryPages } from '../../data/industries';
+import { servicePages } from '../../data/services';
+
+interface Props {
+	pathname: string;
+	id?: string;
+}
+
+const { pathname, id = 'site-nav' } = Astro.props;
+
+const links = [
+	{ href: '/', label: 'Home' },
+	{ href: '/about/', label: 'About' },
+	{ href: '/blog/', label: 'Blog' },
+];
+
+function current(href: string) {
+	return pathname === href;
+}
+---
+
+<nav class="nav" id={id} aria-label="Primary">
+	{
+		links.slice(0, 1).map((link) => (
+			<a href={link.href} aria-current={current(link.href) ? 'page' : undefined}>
+				{link.label}
+			</a>
+		))
+	}
+	<details class="nav-details">
+		<summary>Services</summary>
+		<div class="menu">
+			{
+				servicePages.map((page) => {
+					const href = `/${page.slug}/`;
+					return (
+						<a href={href} aria-current={current(href) ? 'page' : undefined}>
+							{page.navLabel}
+							<small>{page.summary}</small>
+						</a>
+					);
+				})
+			}
+		</div>
+	</details>
+	<details class="nav-details">
+		<summary>Industries</summary>
+		<div class="menu">
+			{
+				industryPages.map((page) => {
+					const href = `/${page.slug}/`;
+					return (
+						<a href={href} aria-current={current(href) ? 'page' : undefined}>
+							{page.navLabel}
+							<small>{page.summary}</small>
+						</a>
+					);
+				})
+			}
+		</div>
+	</details>
+	{
+		links.slice(1).map((link) => (
+			<a href={link.href} aria-current={current(link.href) ? 'page' : undefined}>
+				{link.label}
+			</a>
+		))
+	}
+</nav>

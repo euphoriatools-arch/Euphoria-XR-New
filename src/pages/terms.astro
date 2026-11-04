@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import { site } from '../config/site';
+import { breadcrumbSchema } from '../lib/schema';
+
+const title = 'Terms of Use | Projects and Services at EuphoriaXR';
+const description =
+	'Terms for using the EuphoriaXR website and for starting a project conversation. A signed statement of work governs paid work, not this page alone.';
+const crumbs = [
+	{ name: 'Home', href: '/' },
+	{ name: 'Terms', href: '/terms/' },
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={[breadcrumbSchema(crumbs)]}>
+	<section class="section">
+		<div class="section-inner legal">
+			<Breadcrumbs items={crumbs} />
+			<h1>Terms of use</h1>
+			<p>These terms cover your use of the {site.siteName} website. Paid project work is governed by a statement of work or other contract, and that contract wins if it disagrees with this page.</p>
+			<!-- TODO: Have counsel review these terms before launch. -->
+			<h2>The site</h2>
+			<p>Content is provided for general information about our services. Case-study names marked as placeholders are illustrative and not claims about a named client. We can change or remove pages without notice.</p>
+			<h2>Inquiries</h2>
+			<p>Sending a form or an email does not create a client relationship. We reply when we can take the work. Do not include confidential or regulated material in a first message.</p>
+			<h2>Intellectual property</h2>
+			<p>The site design, copy, and brand are owned by {site.siteName} or its licensors. You may not copy the site for your own commercial use. Project deliverables are owned as the project contract says.</p>
+			<h2>Liability</h2>
+			<p>The site is provided as available. We are not liable for decisions you make solely from these pages. Nothing here excludes liability that the law does not allow us to exclude.</p>
+			<h2>Contact</h2>
+			<p>Questions about these terms go to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+		</div>
+	</section>
+</BaseLayout>

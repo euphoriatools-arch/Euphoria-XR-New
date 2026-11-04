@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
+import ContactForm from '../components/forms/ContactForm.astro';
+import { site } from '../config/site';
+import { breadcrumbSchema } from '../lib/schema';
+
+const title = 'Contact EuphoriaXR | Start an Immersive Project Today';
+const description =
+	'Contact EuphoriaXR to start an AR, VR, AI, or 3D project. Tell us the audience, the constraint, and the date, and we will reply with a way to begin.';
+const crumbs = [
+	{ name: 'Home', href: '/' },
+	{ name: 'Contact', href: '/contact/' },
+];
+---
+
+<BaseLayout title={title} description={description} jsonLd={[breadcrumbSchema(crumbs)]}>
+	<section class="section">
+		<div class="section-inner form-panel">
+			<div>
+				<Breadcrumbs items={crumbs} />
+				<p class="section-label">Contact</p>
+				<h1>Start a conversation with EuphoriaXR.</h1>
+				<p class="lede">
+					Tell us what the experience has to do. If you already know the service, pick it. If you do not, choose “Not sure yet.”
+				</p>
+				<p class="lede">Email <a href={`mailto:${site.email}`}>{site.email}</a>{site.phone ? ` or call ${site.phone}` : ''}.</p>
+			</div>
+			<ContactForm />
+		</div>
+	</section>
+</BaseLayout>

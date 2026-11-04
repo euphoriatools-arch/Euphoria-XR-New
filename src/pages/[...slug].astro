@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DetailPage from '../components/templates/DetailPage.astro';
+import { marketingPages } from '../data/pages';
+import { absoluteUrl } from '../lib/urls';
+import { breadcrumbSchema, faqSchema, serviceSchema } from '../lib/schema';
+import type { MarketingPage } from '../data/types';
+
+export function getStaticPaths() {
+	return marketingPages.map((page) => ({
+		params: { slug: page.slug },
+		props: { page },
+	}));
+}
+
+interface Props {
+	page: MarketingPage;
+}
+
+const { page } = Astro.props;
+const crumbs = [
+	{ name: 'Home', href: '/' },
+	{ name: page.navLabel, href: `/${page.slug}/` },
+];
+---
+
+<BaseLayout
+	title={page.title}
+	description={page.description}
+	jsonLd={[
+		breadcrumbSchema(crumbs),
+		serviceSchema({
+			name: page.h1,
+			description: page.description,
+			serviceType: page.serviceType,
+			url: absoluteUrl(`/${page.slug}/`),
+		}),
+		faqSchema(page.faqs),
+	]}
+>
+	<DetailPage page={page} />
+</BaseLayout>

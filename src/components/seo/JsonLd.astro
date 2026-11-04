@@ -1,0 +1,32 @@
+---
+interface Props {
+	data: Array<Record<string, unknown> | undefined>;
+}
+
+function clean(value: unknown): unknown {
+	if (Array.isArray(value)) {
+		const next = value.map(clean).filter((item) => item !== undefined);
+		return next.length > 0 ? next : undefined;
+	}
+	if (value && typeof value === 'object') {
+		const out: Record<string, unknown> = {};
+		for (const [key, item] of Object.entries(value)) {
+			const cleaned = clean(item);
+			if (cleaned !== undefined && cleaned !== '') out[key] = cleaned;
+		}
+		return Object.keys(out).length > 0 ? out : undefined;
+	}
+	if (value === undefined || value === null || value === '') return undefined;
+	return value;
+}
+
+const blocks = Astro.props.data
+	.map((entry) => clean(entry))
+	.filter((entry): entry is Record<string, unknown> => Boolean(entry));
+---
+
+{
+	blocks.map((block) => (
+		<script is:inline type="application/ld+json" set:html={JSON.stringify(block).replace(/</g, '\\u003c')} />
+	))
+}

@@ -1,0 +1,44 @@
+---
+import Button from '../ui/Button.astro';
+import { capabilities } from '../../data/home';
+import { servicePages } from '../../data/services';
+
+const listed = new Set(capabilities.map((item) => item.href));
+const more = servicePages.filter((page) => !listed.has(`/${page.slug}/`));
+---
+
+<section class="section capabilities" id="capabilities">
+	<div class="section-inner cap-grid">
+		<div class="cap-intro">
+			<p class="section-label">Our capabilities</p>
+			<h2>End-to-end immersive technology for real-world impact.</h2>
+			<p>
+				From concept to deployment, we combine creativity, technology, and strategy to build experiences that engage, educate, and inspire.
+			</p>
+			<Button href="/contact/">Start a project</Button>
+		</div>
+		<div class="cap-list">
+			{
+				capabilities.map((item) => (
+					<a class="cap-item" href={item.href}>
+						<span class="cap-icon" aria-hidden="true">{item.icon}</span>
+						<h3>{item.title}</h3>
+						<p>{item.body}</p>
+					</a>
+				))
+			}
+		</div>
+	</div>
+	<div class="section-inner" style="margin-top: 36px;">
+		<h3 style="font-size: 16px; letter-spacing: 0.08em; text-transform: uppercase;">More services</h3>
+		<ul class="link-list">
+			{
+				more.map((page) => (
+					<li>
+						<a href={`/${page.slug}/`}>{page.navLabel}</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</section>

@@ -1,0 +1,115 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Breadcrumbs from '../../../components/ui/Breadcrumbs.astro';
+import PortfolioImage from '../../../components/portfolio/PortfolioImage.astro';
+import ProjectGrid from '../../../components/portfolio/ProjectGrid.astro';
+import { categories, categoryBySlug } from '../../../content/categories';
+import { photoFor } from '../../../data/images';
+import { loadProjects, projectsInCategory } from '../../../lib/portfolio';
+import { breadcrumbSchema } from '../../../lib/schema';
+
+export function getStaticPaths() {
+	return categories.map((category) => ({
+		params: { category: category.slug },
+	}));
+}
+
+const category = categoryBySlug(Astro.params.category ?? '');
+if (!category) throw new Error(`Unknown portfolio category: ${Astro.params.category}`);
+const hero = photoFor(category.hero);
+const projects = projectsInCategory(await loadProjects(), category.slug);
+const crumbs = [
+	{ name: 'Home', href: '/' },
+	{ name: 'Case studies', href: '/portfolio/' },
+	{ name: category.name, href: `/portfolio/${category.slug}/` },
+];
+---
+
+<BaseLayout title={category.seo.title} description={category.seo.description} jsonLd={[breadcrumbSchema(crumbs)]}>
+	<article class="portfolio-category" style={`--accent: ${category.accent}`}>
+		<header class="portfolio-hero">
+			<PortfolioImage
+				src={hero}
+				alt={category.heroAlt}
+				width={hero.width}
+				height={hero.height}
+				loading="eager"
+				fetchpriority="high"
+				widths={[800, 1200, 1400]}
+				sizes="100vw"
+				class="hero-media"
+			/>
+			<div class="section-inner">
+				<Breadcrumbs items={crumbs} />
+				<p class="eyebrow">Portfolio</p>
+				<h1>{category.name}</h1>
+				<p class="lede">{category.intro}</p>
+			</div>
+		</header>
+
+		<section class="section">
+			<div class="section-inner">
+				<h2>Why teams ask for this</h2>
+				<ul class="benefit-grid">
+					{
+						category.benefits.map((benefit) => (
+							<li>
+								<h3>{benefit.title}</h3>
+								<p>{benefit.body}</p>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-inner">
+				<h2>Projects</h2>
+				<ProjectGrid projects={projects} />
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-inner quote-award">
+				<div>
+					<h2>Client note</h2>
+					<figure class="quote-block">
+						<blockquote>
+							<p>{category.testimonial.quote}</p>
+						</blockquote>
+						<figcaption>
+							<strong>{category.testimonial.name}</strong>
+							{category.testimonial.role}, {category.testimonial.company}
+						</figcaption>
+					</figure>
+				</div>
+				<div>
+					<h2>Awards</h2>
+					<ul class="award-list">
+						{
+							category.awards.map((award) => (
+								<li>
+									<p>
+										<strong>{award.name}</strong> <span>{award.year}</span>
+									</p>
+									<p>{award.detail}</p>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+		</section>
+
+		<section class="section portfolio-end">
+			<div class="section-inner">
+				<h2>Start a project in {category.name}</h2>
+				<p>Tell us the audience, the constraint, and the date. We will reply with the lightest credible way to begin.</p>
+				<a class="outline-btn portfolio-cta" href="/contact/">
+					Start a project in {category.name} <span class="arrow" aria-hidden="true">↗</span>
+				</a>
+			</div>
+		</section>
+	</article>
+</BaseLayout>

@@ -1,0 +1,65 @@
+---
+import { Image } from 'astro:assets';
+import Button from './Button.astro';
+import { site } from '../../config/site';
+import { photos } from '../../data/images';
+
+interface Props {
+	eyebrow?: string;
+	title?: string;
+	body?: string;
+	href?: string;
+	label?: string;
+	class?: string;
+}
+
+const {
+	eyebrow = "Let's build together",
+	title = 'Your next immersive experience starts here.',
+	body = 'Have a bold idea, a complex challenge, or a new world to build? Let’s turn it into something people can experience.',
+	href = '/contact/',
+	label = 'Start a conversation',
+	class: className,
+} = Astro.props;
+---
+
+<section class:list={['section', 'contact', className]} id="contact">
+	<Image
+		src={photos.ridge}
+		alt=""
+		class="contact-bg"
+		loading="lazy"
+		widths={[800, 1400, 1800]}
+		sizes="100vw"
+	/>
+	<div class="section-inner">
+		<div>
+			<p class="eyebrow">{eyebrow}</p>
+			<h2>{title}</h2>
+		</div>
+		<div class="contact-copy">
+			<p>{body}</p>
+			<Button href={href}>{label}</Button>
+		</div>
+		<div class="contact-links">
+			<a href={`mailto:${site.email}`}>
+				<b aria-hidden="true">✉</b>
+				<span>Email<br /><small>{site.email}</small></span>
+			</a>
+			<a href={site.social.linkedin} target="_blank" rel="noopener noreferrer">
+				<b aria-hidden="true">in</b>
+				<span>LinkedIn<br /><small>Connect with us<span class="sr-only"> (opens in a new tab)</span></small></span>
+			</a>
+			<a href={site.social.instagram} target="_blank" rel="noopener noreferrer">
+				<b aria-hidden="true">◎</b>
+				<span>Instagram<br /><small>Follow our work<span class="sr-only"> (opens in a new tab)</span></small></span>
+			</a>
+			{site.phone && (
+				<a href={`tel:${site.phone.replace(/\s/g, '')}`}>
+					<b aria-hidden="true">☎</b>
+					<span>Phone<br /><small>{site.phone}</small></span>
+				</a>
+			)}
+		</div>
+	</div>
+</section>

@@ -1,0 +1,31 @@
+---
+import PortfolioImage from './PortfolioImage.astro';
+import { categoryBySlug } from '../../content/categories';
+import { projectPath, type ProjectEntry } from '../../lib/portfolio';
+
+interface Props {
+	project: ProjectEntry;
+}
+
+const { project } = Astro.props;
+const category = categoryBySlug(project.data.category);
+const href = projectPath(project.data.category, project.data.slug);
+---
+
+<article class="project-card" style={`--accent: ${category?.accent ?? '#c4122c'}`} data-project-category={project.data.category} data-reveal>
+	<a href={href}>
+		<div class="project-card-media">
+			<PortfolioImage
+				src={project.data.heroImage.image}
+				alt={project.data.heroImage.alt}
+				width={project.data.heroImage.image.width}
+				height={project.data.heroImage.image.height}
+				widths={[480, 800, 1200]}
+				sizes="(min-width: 1024px) 30vw, (min-width: 768px) 46vw, 100vw"
+			/>
+		</div>
+		<p class="project-tag">{category?.name}</p>
+		<h3>{project.data.title}</h3>
+		<p>{project.data.summary}</p>
+	</a>
+</article>

@@ -1,0 +1,9 @@
+---
+import FAQ from '../ui/FAQ.astro';
+import Section from '../ui/Section.astro';
+import { homeFaqs } from '../../data/home';
+---
+
+<Section id="faq" label="Questions" title="Questions teams ask before we start.">
+	<FAQ items={homeFaqs} />
+</Section>

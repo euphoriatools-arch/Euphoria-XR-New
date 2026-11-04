@@ -1,0 +1,17 @@
+---
+import Section from '../ui/Section.astro';
+import { industryPages } from '../../data/industries';
+---
+
+<Section id="industries" label="Industries" title="Built for the rooms you work in." intro="Training floors, clinics, campaigns, retail, public teams, and the agencies that serve them.">
+	<div class="industry-grid">
+		{
+			industryPages.map((page) => (
+				<a class="industry-card" href={`/${page.slug}/`}>
+					<h3>{page.navLabel}</h3>
+					<p>{page.summary}</p>
+				</a>
+			))
+		}
+	</div>
+</Section>

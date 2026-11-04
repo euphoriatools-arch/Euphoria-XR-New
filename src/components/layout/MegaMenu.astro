@@ -1,0 +1,64 @@
+---
+import { Image } from 'astro:assets';
+import { navigation, type NavGroup } from '../../config/navigation';
+import { photoFor } from '../../data/images';
+
+interface Props {
+	id: string;
+	labelId: string;
+	groups: NavGroup[];
+	columns: number;
+	pathname: string;
+}
+
+const { id, labelId, groups, columns, pathname } = Astro.props;
+const feature = navigation.feature;
+---
+
+<div
+	class="mega-panel"
+	id={id}
+	aria-labelledby={labelId}
+	style={`--mega-cols: ${columns}`}
+>
+	<div class="mega-layout">
+		<div class="mega-columns">
+			{
+				groups.map((group) => (
+					<div class="mega-col">
+						<p class="mega-label">{group.title}</p>
+						<ul>
+							{group.links.map((link) => (
+								<li>
+									<a href={link.href} aria-current={pathname === link.href ? 'page' : undefined}>
+										<span>{link.label}</span>
+										<small>{link.description}</small>
+									</a>
+								</li>
+							))}
+						</ul>
+					</div>
+				))
+			}
+		</div>
+		<a class="mega-feature" href={feature.href}>
+			<span class="mega-feature-media">
+				<Image
+					src={photoFor(feature.image)}
+					alt={feature.imageAlt}
+					width={720}
+					height={480}
+					widths={[360, 720]}
+					sizes="260px"
+					loading="lazy"
+				/>
+			</span>
+			<span class="mega-feature-copy">
+				<span class="mega-label">{feature.kicker}</span>
+				<strong>{feature.title}</strong>
+				<small>{feature.description}</small>
+				<span class="mega-feature-cta">{feature.cta} <span aria-hidden="true">↗</span></span>
+			</span>
+		</a>
+	</div>
+</div>

@@ -1,0 +1,108 @@
+---
+import MegaMenu from './MegaMenu.astro';
+import MobileDrawer from './MobileDrawer.astro';
+import { navigation } from '../../config/navigation';
+
+interface Props {
+	overlay?: boolean;
+}
+
+const { overlay = false } = Astro.props;
+const pathname = Astro.url.pathname;
+
+const menus = [
+	{
+		name: 'services',
+		label: 'Services',
+		groups: navigation.services,
+		columns: 4,
+	},
+	{
+		name: 'industries',
+		label: 'Industries',
+		groups: navigation.industries,
+		columns: 3,
+	},
+];
+---
+
+<header class:list={['topbar', { overlay }]} data-header transition:persist="site-header">
+	<a class="logo" href="/">
+		<img src="/brand/logo-dark.svg" alt="EuphoriaXR logo" width="168" height="28" />
+	</a>
+	<nav class="nav" aria-label="Main">
+		<div class="nav-desktop">
+			{
+				menus.map((menu) => {
+					const triggerId = `${menu.name}-trigger`;
+					const panelId = `menu-${menu.name}`;
+					const current = menu.groups.some((group) => group.links.some((link) => link.href === pathname));
+					return (
+						<div class:list={['nav-item', { 'is-current': current }]} data-menu={menu.name}>
+							<button
+								class="nav-trigger"
+								id={triggerId}
+								type="button"
+								aria-expanded="false"
+								aria-controls={panelId}
+								aria-haspopup="true"
+							>
+								{menu.label}
+							</button>
+							<MegaMenu
+								id={panelId}
+								labelId={triggerId}
+								groups={menu.groups}
+								columns={menu.columns}
+								pathname={pathname}
+							/>
+						</div>
+					);
+				})
+			}
+			<div class:list={['nav-item', { 'is-current': navigation.company.some((link) => link.href === pathname) }]} data-menu="company">
+				<button
+					class="nav-trigger"
+					id="company-trigger"
+					type="button"
+					aria-expanded="false"
+					aria-controls="menu-company"
+					aria-haspopup="true"
+				>
+					Company
+				</button>
+				<div class="menu-pop" id="menu-company" aria-labelledby="company-trigger">
+					<ul>
+						{
+							navigation.company.map((link) => (
+								<li>
+									<a href={link.href} aria-current={link.href === '/portfolio/' ? (pathname.startsWith('/portfolio/') ? 'page' : undefined) : pathname === link.href ? 'page' : undefined}>
+										<span>{link.label}</span>
+										<small>{link.description}</small>
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
+			</div>
+			<a class="nav-link" href={navigation.blog.href} aria-current={pathname === navigation.blog.href ? 'page' : undefined}>
+				{navigation.blog.label}
+			</a>
+		</div>
+		<MobileDrawer pathname={pathname} />
+	</nav>
+	<a class="outline-btn header-cta" href={navigation.cta.href}>
+		{navigation.cta.label} <span class="arrow" aria-hidden="true">↗</span>
+	</a>
+	<button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-drawer" aria-label="Open menu">
+		<span class="menu-bars" aria-hidden="true"></span>
+	</button>
+</header>
+
+<script>
+	import { initHeader } from '../../scripts/header';
+
+	initHeader();
+	document.addEventListener('astro:page-load', () => initHeader());
+</script>
