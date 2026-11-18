@@ -114,7 +114,7 @@ export const vrPageExtras = {
 			{
 				title: 'Inner Voyage VR: Medical Training',
 				body: 'Inner Voyage VR uses an interactive Meta Quest 3 heart simulation to help medical learners explore cardiac anatomy and physiological changes. Guided learning scenarios make complex concepts easier to examine in an immersive environment designed for medical education and visualization.',
-				href: '/vr-medical-training-and-heart-simulations/',
+				href: 'https://euphoriaxr.com/vr-medical-training-and-heart-simulations/',
 				meta: 'Medical training · VR',
 				image: 'cosmos',
 				imageAlt: 'Immersive medical VR training visualization',
@@ -138,7 +138,7 @@ export const vrPageExtras = {
 			{
 				title: 'KSU Stanford: VR Learning Experience',
 				body: 'The KSU Stanford VR learning experience combines immersive 360° educational videos with multilingual subtitles and interactive navigation. Learners can explore filmed sessions, move through content, and engage with professional development material in a more accessible, self-directed immersive virtual learning environment.',
-				href: '/360-vr-training-experience-stanford-ksu/',
+				href: 'https://euphoriaxr.com/360-vr-training-experience-stanford-ksu/',
 				meta: 'Learning experience · 360° VR',
 				image: 'lab',
 				imageAlt: '360 degree VR educational learning experience',

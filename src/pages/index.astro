@@ -28,8 +28,9 @@ const heroVideo = 'https://euphoriaxr.com/wp-content/uploads/2026/03/Euphoria-XR
 const slides = [
 	{
 		lines: heroSlides[0].lines,
-		href: '#work',
+		href: heroSlides[0].href,
 		cta: heroSlides[0].cta,
+		body: heroSlides[0].body,
 		image: heroFrames[0],
 		heading: true,
 	},
@@ -67,7 +68,11 @@ const solutions = [
 ];
 ---
 
-<BaseLayout overlayHeader>
+<BaseLayout
+	title="AR, VR & AI Development Studio | EuphoriaXR"
+	description="EuphoriaXR is an AR and VR development company creating immersive applications, interactive 3D experiences, and AI-powered solutions for businesses."
+	overlayHeader
+>
 	<div class="hx-home">
 		<section class="hx-hero-frame" aria-roledescription="carousel" aria-label="Studio">
 			<video
@@ -116,6 +121,7 @@ const solutions = [
 											))}
 										</p>
 									)}
+									{slide.body ? <p class="hx-hero-lede">{slide.body}</p> : null}
 									<a class="btn-primary" href={slide.href}>{slide.cta}</a>
 								</div>
 							</article>
@@ -129,7 +135,7 @@ const solutions = [
 		<section class="hx-section hx-featured" id="work" aria-labelledby="work-title">
 			<div class="hx-wrap">
 				<div class="hx-head">
-					<h2 id="work-title">Featured Case Studies</h2>
+					<h2 id="work-title">Case Studies</h2>
 					<button class="hx-featured-next" type="button" data-featured-next aria-label="Next featured case study">
 						<span aria-hidden="true">›</span>
 					</button>
@@ -145,7 +151,7 @@ const solutions = [
 		<section class="hx-section" aria-labelledby="latest-title">
 			<div class="hx-wrap">
 				<div class="hx-head">
-					<h2 id="latest-title">Latest Work</h2>
+					<h2 id="latest-title">Latest Projects</h2>
 					<div class="hx-tools">
 						<label class="hx-search" for="work-search">
 							<span class="sr-only">Search work</span>
@@ -179,7 +185,7 @@ const solutions = [
 
 		<section class="hx-section hx-solutions" id="capabilities" aria-labelledby="solutions-title">
 			<div class="hx-wrap">
-				<h2 id="solutions-title">Solutions &amp; Capabilities</h2>
+				<h2 id="solutions-title">Solutions and Capabilities</h2>
 				<div class="hx-solutions-banner">
 					<Image
 						src={photos.abstract}
@@ -188,7 +194,7 @@ const solutions = [
 						sizes="100vw"
 						loading="lazy"
 					/>
-					<p>We turn ideas into immersive experiences.</p>
+					<p>EuphoriaXR combines creative design, 3D production, and advanced technology to build custom AR, VR, and AI experiences for global brands and enterprises.</p>
 				</div>
 				<div class="swiper" data-solution-swiper>
 					<div class="swiper-wrapper">
@@ -216,14 +222,19 @@ const solutions = [
 
 		<ProcessScroll />
 
-		<FixedStage />
+		<FixedStage
+			titleLead="Why Choose"
+			titleBrand="Euphoria"
+			titleTail="for AR & VR Development?"
+			body="We pair bold creative thinking with proven AR and VR engineering to build experiences that work beyond the demo. From immersive training to interactive product visualization, we deliver practical solutions for ambitious brands and enterprises."
+		/>
 
 		{
 			sandboxPosts.length > 0 && (
 				<section class="hx-section hx-feed" id="sandbox" aria-labelledby="sandbox-title">
 					<div class="hx-wrap">
 						<div class="hx-head">
-							<h2 id="sandbox-title">Sandbox: Tech &amp; Trends</h2>
+							<h2 id="sandbox-title">Insights and Technology Trends</h2>
 							<a class="hx-view-all" href="/exr-blogs/">View All</a>
 						</div>
 						<div class="swiper" data-sandbox-swiper>
@@ -241,7 +252,7 @@ const solutions = [
 				<section class="hx-section hx-feed" id="news" aria-labelledby="news-title">
 					<div class="hx-wrap">
 						<div class="hx-head">
-							<h2 id="news-title">Latest News &amp; Awards</h2>
+							<h2 id="news-title">EuphoriaXR News, Awards &amp; Recognition</h2>
 							<a class="hx-view-all" href="/exr-blogs/">View All</a>
 						</div>
 						<div class="swiper" data-news-swiper>

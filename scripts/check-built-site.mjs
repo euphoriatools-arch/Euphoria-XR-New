@@ -59,6 +59,7 @@ const htmlFiles = walk(dist).filter((file) => !file.includes(`${join(dist, 'api'
 
 for (const file of htmlFiles) {
 	const html = readFileSync(file, 'utf8');
+	if (html.includes('http-equiv="refresh"')) continue;
 	const route = routeFromFile(file).endsWith('/') || routeFromFile(file) === '/' ? routeFromFile(file) : `${routeFromFile(file)}/`;
 	const title = html.match(/<title>(.*?)<\/title>/s)?.[1]?.trim() ?? '';
 	const description = html.match(/<meta name="description" content="(.*?)"/s)?.[1]?.trim() ?? '';

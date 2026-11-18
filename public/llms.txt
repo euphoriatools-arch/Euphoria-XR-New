@@ -16,7 +16,7 @@
 - [VR training simulation](https://euphoriaxr.com/virtual-reality-training/): Headset practice for procedures people must get right the first time.
 - [VR welding simulator](https://euphoriaxr.com/vr-simulators/): A welding simulator that scores torch work instructors can review.
 - [Augmented reality development](https://euphoriaxr.com/services/augmented-reality-development-company/): AR apps, WebAR, and filters from prototype to release.
-- [Virtual reality development](https://euphoriaxr.com/services/virtual-reality-development-company/): VR for training, simulation, and branded worlds on headset and web.
+- [Virtual reality development](https://euphoriaxr.com/services/virtual-reality-development-company/): Building world-class VR applications for startups, enterprises, government organizations, and creative agencies.
 - [NFT and metaverse development](https://euphoriaxr.com/services/nft-makers-metaverse-development-company/): Marketplace, mint, and membership experiences tied to a real product.
 - [Branded AR filters](https://euphoriaxr.com/services/branded-ar-filters/): Face, world, and product filters for social and your own link.
 

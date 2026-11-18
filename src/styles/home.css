@@ -208,6 +208,15 @@
 	color: var(--red-500);
 }
 
+.hx-hero-lede {
+	max-width: 46ch;
+	margin: -8px 0 24px;
+	color: rgba(255, 255, 255, 0.88);
+	font-size: clamp(15px, 1.4vw, 18px);
+	font-weight: 400;
+	line-height: 1.5;
+}
+
 .hx-slide-copy {
 	opacity: 1;
 	transform: none;

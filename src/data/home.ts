@@ -4,16 +4,14 @@ export const heroSlides = [
 	{
 		eyebrow: 'AR / VR / AI / WebXR / 3D',
 		lines: [
-			[{ text: 'We turn ideas into' }],
-			[
-				{ text: 'immersive', accent: true },
-				{ text: ' ' },
-				{ text: 'experiences.', accent: true },
-			],
+			[{ text: 'Where Creative,' }],
+			[{ text: 'Innovative Ideas' }],
+			[{ text: 'Inspire Real and' }],
+			[{ text: 'Virtual Worlds' }],
 		],
-		body: 'EuphoriaXR is a creative technology studio, building immersive experiences that blur the line between the physical and digital worlds.',
-		cta: 'Explore our work',
-		href: '#work',
+		body: 'EuphoriaXR combines creative design, 3D production, and advanced technology to build custom AR, VR, and AI experiences for global brands and enterprises.',
+		cta: 'Talk to an XR Expert',
+		href: '/contact/',
 	},
 	{
 		eyebrow: 'Virtual reality / Training / Simulation',
@@ -101,14 +99,14 @@ export const testimonials = [
 ];
 
 export const clientReviewsIntro =
-	'We collaborate with industry leaders across the world and provide immersive AR VR solutions that are fueling innovation, engagement, and quantifiable business impact.';
+	'See how businesses use our AR and VR development expertise to improve training, explain complex products, and create engaging experiences.';
 
 export const clientReviews = [
 	{
 		quote:
-			'We had a hard time with conventional forms of training that could not appeal to our workforce. They followed this up with a call to EuphoriaXR, in which they developed a tailored VR education program that changed the model of our team learning. The immersive approach enabled better retention levels, fewer errors, and lessened the logistical growth of training among varied sites with quantifiable results.',
+			"Our traditional training methods weren't connecting with our workforce, especially across different locations. EuphoriaXR developed a VR training experience that made learning more engaging and practical for our teams. It helped improve knowledge retention, reduce mistakes, and simplify the challenge of delivering consistent training across sites. Their approach gave us a more effective way to help employees learn and perform with confidence across our organization.",
 		name: 'Anthony Phills',
-		role: 'CEO of Unbreakable',
+		role: 'CEO, Unbreakable',
 		photo: '/reviews/anthony-phills.webp',
 		photoAlt: 'Anthony Phills',
 		logo: '/reviews/unbreakable.webp',
@@ -116,7 +114,7 @@ export const clientReviews = [
 	},
 	{
 		quote:
-			'It was not very easy to describe our product using static images, and our customers used to be disoriented. We collaborated with EuphoriaXR to develop an interactive AR experience, as it enabled people to learn about the features in real time, which greatly enhanced engagement and conversions, and positively influenced product demonstrations.',
+			'Static images made it difficult for customers to understand our product and its features. EuphoriaXR helped us replace that confusion with an interactive augmented reality experience. Customers could explore the product in real time and see how everything worked. The result was clearer product demonstrations, stronger engagement, and better conversions. Their team made a complex product much easier to explain and experience for our customers.',
 		name: 'Don Reyke',
 		role: 'Founder & CEO, Dexio Protocol',
 		photo: '/reviews/don-reyke.webp',
@@ -126,7 +124,7 @@ export const clientReviews = [
 	},
 	{
 		quote:
-			'We had to have a safer method of educating employees to work in multifaceted operational systems, without jeopardizing the real world errors. EuphoriaXR created a simulation platform that was very immersive and enabled our teams to train in a simulated environment, thereby enhancing confidence, cutting down on the costs of training, and guaranteeing superior performance results across units and geographical locations around the world.',
+			'We needed a safer way to train employees on complex operational systems without exposing them to real-world risks. EuphoriaXR built an immersive simulation that allowed our teams to practice in a controlled environment. It helped build confidence, reduce training costs, and support more consistent performance across different locations. The experience gave our employees practical preparation before stepping into real operational situations with greater confidence.',
 		name: 'Sierra Cook',
 		role: 'Marketing Director, Harbinger',
 		photo: '/reviews/sierra-cook.webp',
@@ -136,9 +134,9 @@ export const clientReviews = [
 	},
 	{
 		quote:
-			'Before we collaborated with EuphoriaXR, digital experiences were disengaging and uninnovative. Their team showed us the immersive XR solutions, which enhanced our interactions with customers. The overall solution was thoughtful, scaled, and effective, and it enabled us to provide an experience that was memorable, as well as build our brand presence in competitive markets.',
+			"Our digital experiences weren't creating the kind of customer engagement we wanted. Working with EuphoriaXR changed that. Their team developed an immersive XR solution that made our interactions more engaging and memorable. They understood what we wanted to communicate and translated it into an experience that felt polished, practical, and scalable. It helped us strengthen our brand presence in a competitive market. That mattered enormously.",
 		name: 'Trevor Simms',
-		role: 'Poke CEO',
+		role: 'CEO, Poke',
 		photo: '/reviews/trevor-simms.webp',
 		photoAlt: 'Trevor Simms',
 		logo: '/reviews/poke-logo.webp',
@@ -148,43 +146,53 @@ export const clientReviews = [
 
 export const homeFaqs: Faq[] = [
 	{
-		question: 'What does EuphoriaXR build?',
-		answer: 'AR, VR, AI, WebXR, and 3D experiences. Typical work includes training simulations, campaign WebAR, product configurators, chatbots, and agents that sit inside a product you already run.',
+		question: 'What AR, VR, and AI development services does EuphoriaXR offer?',
+		answer:
+			'EuphoriaXR develops custom augmented reality, virtual reality, AI, WebAR, and spatial computing solutions. Our capabilities include immersive training, interactive product visualization, 3D configurators, virtual simulations, and branded experiences for businesses across industries.',
 	},
 	{
-		question: 'Do you work with agencies or only direct clients?',
-		answer: 'Both. Creative teams hire us as an immersive agency partner when they need a build studio. Product and training teams hire us directly.',
+		question: 'Why choose EuphoriaXR as your AR & VR development company?',
+		answer:
+			'Founded in 2016, EuphoriaXR combines creative design, 3D production, and software engineering to deliver custom immersive experiences. We work with enterprises, agencies, and brands, supporting projects from initial concept through development, deployment, and ongoing maintenance.',
 	},
 	{
-		question: 'Can a project start with a prototype?',
-		answer: 'Yes. We would rather put a phone or a headset in the room than extend a slide. The prototype is scoped to answer one question, then we plan the production release.',
+		question: 'How much does AR and VR application development cost?',
+		answer:
+			'AR and VR development costs depend on project complexity, custom 3D content, target devices, integrations, and interactive features. A browser-based AR campaign and an enterprise VR training simulation have different requirements. We provide tailored estimates after reviewing your project scope.',
 	},
 	{
-		question: 'Where do AI and immersive work meet?',
-		answer: 'When an experience has to answer, adapt, or score. A training sim can record a procedure. A WebAR scene can explain a product from approved sources. We do not add a model unless it has a job.',
+		question: 'How long does it take to develop an AR or VR application?',
+		answer:
+			'A focused AR or VR prototype may take several weeks, while complex enterprise applications can require several months. Timelines depend on design requirements, content production, integrations, and testing. We establish project milestones based on the agreed scope.',
 	},
 	{
-		question: 'How do we start?',
-		answer: 'Use the contact form and name the service you have in mind. If you are unsure, say so. We will reply with the lightest credible way to begin.',
+		question: 'Can we start with an AR or VR prototype before full development?',
+		answer:
+			'Yes. We can develop a proof of concept or interactive XR prototype to test key features, validate technical feasibility, and gather stakeholder feedback. This helps identify potential challenges and refine the experience before investing in full-scale development.',
 	},
 	{
-		question: 'What does a typical engagement look like?',
-		answer: 'Discover, design, build, then launch. We write the user, the job, and the constraint first, ship a prototype you can hold or click, then take the production path through the devices and channels you will actually use.',
+		question: 'Which devices and platforms do your AR and VR applications support?',
+		answer:
+			'We develop experiences for Meta Quest, Apple Vision Pro, HTC Vive, Pico, mobile devices, and compatible web browsers. Our WebAR development services also enable selected AR experiences without a dedicated app download. Platform recommendations depend on your users and technical requirements.',
 	},
 	{
-		question: 'Which devices and platforms do you ship on?',
-		answer: 'Phones, browsers, headsets, and the channels your audience already opens. WebAR and WebXR when a link is enough. Native headset builds when the job needs a rehearsed space or a score an instructor can trust.',
+		question: 'Can you integrate AR, VR, and AI solutions with existing enterprise systems?',
+		answer:
+			'Yes. Custom immersive applications can integrate with learning management systems, CRM platforms, databases, analytics tools, and enterprise APIs. We assess integration requirements during project planning to ensure the solution works with your existing technology infrastructure.',
 	},
 	{
-		question: 'Do you keep working after launch?',
-		answer: 'Yes. Launch includes measurement, a handover, and the first revision while the work is live. Maintenance and support keep the experience stable as devices and content change.',
+		question: 'Who owns the source code and 3D assets after development?',
+		answer:
+			'Ownership of custom source code, 3D assets, designs, and project deliverables is established in the development agreement. We clarify licensing, intellectual property rights, and handover requirements before production, including any limitations involving third-party technologies.',
 	},
 	{
-		question: 'Can our team own the work after you leave?',
-		answer: 'That is the goal. We hand over the build, the sources, and a clear path for your team to run the next revision. Access and IP follow the contract you sign.',
+		question: 'Does EuphoriaXR provide AR and VR maintenance after launch?',
+		answer:
+			'Yes. Our post-launch support can include software updates, troubleshooting, performance optimization, device compatibility testing, and feature improvements. Maintenance requirements are defined according to the application, deployment environment, and ongoing business needs.',
 	},
 	{
-		question: 'Where are you based?',
-		answer: 'We work from studios in the US, Saudi Arabia, and the UK. Projects run remotely or on-site when the brief needs people in the room.',
+		question: 'How do we start an AR or VR development project with EuphoriaXR?',
+		answer:
+			'Book a project consultation to discuss your idea, business objectives, target audience, and technical requirements. Our team will review your needs, explore suitable technologies, and outline possible development approaches and next steps.',
 	},
 ];
