@@ -1,80 +1,148 @@
 ---
-import { site } from '../../config/site';
-import { industryPages } from '../../data/industries';
-import { servicePages } from '../../data/services';
+import { formatAddress, site } from '../../config/site';
 
 const year = new Date().getFullYear();
+const address = formatAddress();
+const phoneHref = `tel:${site.phone.replace(/\s/g, '')}`;
+const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
+
+const services = [
+	{ href: '/services/augmented-reality-development-company/', label: 'AR Development' },
+	{ href: '/services/virtual-reality-development-company/', label: 'VR Development' },
+	{ href: '/ai-development-company/', label: 'AI Development' },
+	{ href: '/webar-development/', label: 'WebVR & WebAR' },
+	{ href: '/services/blockchain-development-company/', label: 'Blockchain Development' },
+	{ href: '/services/nft-makers-metaverse-development-company/', label: 'NFT Makers & Metaverse' },
+	{ href: '/ar-vr-rental-services-and-solutions-for-events/', label: 'AR VR Rental Solutions' },
+];
+
 const company = [
-	{ href: '/about/', label: 'About EuphoriaXR' },
-	{ href: '/portfolio/', label: 'Case studies' },
-	{ href: '/blog/', label: 'Blog' },
-	{ href: '/privacy-policy/', label: 'Privacy policy' },
-	{ href: '/terms/', label: 'Terms of use' },
+	{ href: '/about/', label: 'About Us' },
+	{ href: '/portfolio/', label: 'Our Work' },
+	{ href: '/contact/', label: 'Career' },
+	{ href: '/ar-vr-training-education/', label: 'Industries' },
+	{ href: '/exr-blogs/', label: 'EXR Blogs' },
+	{ href: '/privacy-policy/', label: 'Privacy Policy' },
+];
+
+const social = [
+	{
+		href: site.social.facebook,
+		label: 'Facebook',
+		path: 'M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.6l.4-3H13v-2c0-.6.4-1 1-1Z',
+	},
+	{
+		href: site.social.linkedin,
+		label: 'LinkedIn',
+		path: 'M4.7 3.3A1.8 1.8 0 1 0 4.7 7a1.8 1.8 0 0 0 0-3.7ZM3.2 8.6h3V21h-3V8.6Zm5.1 0h2.9v1.7h.1c.4-.8 1.4-1.6 2.9-1.6 3.1 0 3.7 2 3.7 4.7V21h-3v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-3V8.6Z',
+	},
+	{
+		href: site.social.instagram,
+		label: 'Instagram',
+		path: 'M7.5 3h9A4.5 4.5 0 0 1 21 7.5v9A4.5 4.5 0 0 1 16.5 21h-9A4.5 4.5 0 0 1 3 16.5v-9A4.5 4.5 0 0 1 7.5 3Zm0 1.7A2.8 2.8 0 0 0 4.7 7.5v9A2.8 2.8 0 0 0 7.5 19.3h9a2.8 2.8 0 0 0 2.8-2.8v-9a2.8 2.8 0 0 0-2.8-2.8h-9Zm9.2 1.4a1.05 1.05 0 1 1 0 2.1 1.05 1.05 0 0 1 0-2.1ZM12 7.4A4.6 4.6 0 1 1 7.4 12 4.6 4.6 0 0 1 12 7.4Zm0 1.7A2.9 2.9 0 1 0 14.9 12 2.9 2.9 0 0 0 12 9.1Z',
+	},
+	{
+		href: site.social.x,
+		label: 'X',
+		path: 'M14.7 10.3 22 2h-2.2l-6.1 7-4.9-7H2.2l7.7 11.1L2 22h2.2l6.7-7.7 5.3 7.7h6.6l-8.1-11.7Zm-2.4 2.7-.8-1.1L5.2 3.6h2.7l5 7.1.8 1.1 6.5 9.2h-2.7l-5.2-7z',
+	},
+	{
+		href: site.social.youtube,
+		label: 'YouTube',
+		path: 'M21.6 7.2a2.7 2.7 0 0 0-1.9-1.9C17.9 5 12 5 12 5s-5.9 0-7.7.3A2.7 2.7 0 0 0 2.4 7.2 28.6 28.6 0 0 0 2 12a28.6 28.6 0 0 0 .4 4.8 2.7 2.7 0 0 0 1.9 1.9C6.1 19 12 19 12 19s5.9 0 7.7-.3a2.7 2.7 0 0 0 1.9-1.9A28.6 28.6 0 0 0 22 12a28.6 28.6 0 0 0-.4-4.8ZM10 15.2V8.8L15.5 12 10 15.2Z',
+	},
 ];
 ---
 
 <footer class="site-footer">
-	<div class="fx-drift" aria-hidden="true">
-		<span></span><span></span><span></span><span></span>
-		<span></span><span></span><span></span><span></span>
-	</div>
-	<div class="fx-grid">
-		<div class="fx-brand">
-			<a class="logo" href="/">
-				<img src="/brand/logo-dark.svg" alt="EuphoriaXR logo" width="168" height="28" />
-			</a>
-			<p class="fx-blurb">
-				{site.siteName} builds immersive AR, VR, AI, and 3D experiences for teams who need the work shipped.
-			</p>
-			<div class="socials">
-				<a href={site.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn<span class="sr-only"> (opens in a new tab)</span></a>
-				<a href={site.social.instagram} target="_blank" rel="noopener noreferrer">Instagram<span class="sr-only"> (opens in a new tab)</span></a>
+	<div class="footer-inner">
+		<div class="footer-grid">
+			<div class="footer-brand">
+				<a class="footer-logo" href="/" aria-label="EuphoriaXR home">
+					<span>EUPHORIA</span><span class="footer-logo-xr"> XR</span>
+				</a>
+				<p class="footer-blurb">
+					EuphoriaXR builds immersive VR, AR, AI, and 3D experiences for teams who need real work shipped.
+				</p>
+				<p class="footer-follow">Follow Us</p>
+				<div class="socials">
+					{
+						social.map((link) => (
+							<a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
+								<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" width="18" height="18">
+									<path d={link.path} />
+								</svg>
+								<span class="sr-only">{link.label} (opens in a new tab)</span>
+							</a>
+						))
+					}
+				</div>
 			</div>
+
+			<nav aria-label="Company">
+				<h2>Company</h2>
+				<ul>
+					{
+						company.map((link) => (
+							<li>
+								<a href={link.href}>{link.label}</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+
+			<nav aria-label="Services">
+				<h2>Services</h2>
+				<ul>
+					{
+						services.map((link) => (
+							<li>
+								<a href={link.href}>{link.label}</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+
+			<section class="footer-contact" aria-label="Contact Us">
+				<h2>Contact Us</h2>
+				<ul>
+					<li>
+						<a href={phoneHref}>
+							<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+								<path d="M6.6 3.8h2.3l1.2 4.1-1.5 1.5a13 13 0 0 0 5.5 5.5l1.5-1.5 4.1 1.2v2.3A2.1 2.1 0 0 1 17.6 19 14.8 14.8 0 0 1 5 6.4a2.1 2.1 0 0 1 1.6-2.6Z" stroke-linecap="round" stroke-linejoin="round"></path>
+							</svg>
+							<span>{site.phone}</span>
+						</a>
+					</li>
+					<li>
+						<a href={`mailto:${site.email}`}>
+							<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+								<path d="M4 6.5h16v11H4z" stroke-linejoin="round"></path>
+								<path d="m4.5 7 7.5 6 7.5-6" stroke-linecap="round" stroke-linejoin="round"></path>
+							</svg>
+							<span>{site.email}</span>
+						</a>
+					</li>
+					<li>
+						<a href={mapHref} target="_blank" rel="noopener noreferrer">
+							<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+								<path d="M12 21s6-5.2 6-10a6 6 0 1 0-12 0c0 4.8 6 10 6 10Z" stroke-linejoin="round"></path>
+								<circle cx="12" cy="11" r="2.2"></circle>
+							</svg>
+							<span>{address}</span>
+							<span class="sr-only"> (opens in a new tab)</span>
+						</a>
+					</li>
+				</ul>
+				<a class="footer-cta" href="/contact/">Get In Touch</a>
+			</section>
 		</div>
-		<nav aria-label="Services">
-			<h2>Services</h2>
-			<ul>
-				{
-					servicePages.map((page) => (
-						<li>
-							<a href={`/${page.slug}/`}>{page.navLabel}</a>
-						</li>
-					))
-				}
-			</ul>
-		</nav>
-		<nav aria-label="Industries">
-			<h2>Industries</h2>
-			<ul>
-				{
-					industryPages.map((page) => (
-						<li>
-							<a href={`/${page.slug}/`}>{page.navLabel}</a>
-						</li>
-					))
-				}
-			</ul>
-		</nav>
-		<nav aria-label="Company">
-			<h2>Company</h2>
-			<ul>
-				{
-					company.map((link) => (
-						<li>
-							<a href={link.href}>{link.label}</a>
-						</li>
-					))
-				}
-			</ul>
-			<h3>Contact</h3>
-			<ul>
-				<li><a href="/contact/">Contact the studio</a></li>
-				<li><a href={`mailto:${site.email}`}>{site.email}</a></li>
-			</ul>
-		</nav>
 	</div>
-	<div class="fx-bar">
-		<a class="back-to-top" href="#top">Back to top</a>
+
+	<div class="footer-band">
+		<p class="footer-wordmark" aria-hidden="true">EUPHORIA XR</p>
+		<p class="footer-legal">Copyright © {site.copyrightStartYear} – {year} Euphoria XR LLC</p>
 	</div>
-	<p class="footer-legal">Copyright © {site.copyrightStartYear} – {year} {site.legalName}</p>
 </footer>

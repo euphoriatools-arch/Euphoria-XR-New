@@ -62,7 +62,7 @@
 
 - [About](https://euphoriaxr.com/about/): Who the studio is and how an engagement runs.
 - [Contact](https://euphoriaxr.com/contact/): Start a project conversation.
-- [Blog](https://euphoriaxr.com/blog/): Studio notes. Essays are not published yet.
+- [EXR Blogs](https://euphoriaxr.com/exr-blogs/): AR, VR, and AI articles from EuphoriaXR.
 
 ## Optional
 

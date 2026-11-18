@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
-import { site } from '../config/site';
+import { formatAddress, site } from '../config/site';
 import { breadcrumbSchema } from '../lib/schema';
 
 const title = 'Privacy Policy | How EuphoriaXR Handles Personal Data';
@@ -11,6 +11,7 @@ const crumbs = [
 	{ name: 'Home', href: '/' },
 	{ name: 'Privacy policy', href: '/privacy-policy/' },
 ];
+const address = formatAddress();
 ---
 
 <BaseLayout title={title} description={description} jsonLd={[breadcrumbSchema(crumbs)]}>
@@ -19,7 +20,7 @@ const crumbs = [
 			<Breadcrumbs items={crumbs} />
 			<h1>Privacy policy</h1>
 			<p>This policy describes how {site.siteName} handles personal information on this website and in project conversations. It is written for visitors and prospective clients. It is not a substitute for advice from your own counsel.</p>
-			<!-- TODO: Have counsel review this policy before launch, and add the real business address. -->
+			<!-- TODO: Have counsel review this policy before launch. -->
 			<h2>What we collect</h2>
 			<p>If you email {site.email} or use the contact form, we receive the name, email, company, service interest, and message you submit. Server logs may also store a technical record of the request, such as the time and the browser, for security.</p>
 			<h2>Why we use it</h2>
@@ -29,7 +30,7 @@ const crumbs = [
 			<h2>Processors</h2>
 			<p>If we connect the form to an email or CRM provider, that provider processes the submission on our instructions. The provider will be named in this policy when it is connected. Until then, the form validates your note and asks you to email us directly.</p>
 			<h2>Contact</h2>
-			<p>Questions about this policy go to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+			<p>Questions about this policy go to <a href={`mailto:${site.email}`}>{site.email}</a> or {address}.</p>
 		</div>
 	</section>
 </BaseLayout>

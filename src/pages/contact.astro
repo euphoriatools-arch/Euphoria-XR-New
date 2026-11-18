@@ -1,9 +1,15 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
 import ContactForm from '../components/forms/ContactForm.astro';
-import { site } from '../config/site';
+import CaseCard from '../components/portfolio/CaseCard.astro';
+import { formatAddress, site } from '../config/site';
+import { photos } from '../data/images';
 import { breadcrumbSchema } from '../lib/schema';
+import { loadProjects } from '../lib/portfolio';
+import '../styles/case.css';
+import '../styles/contact.css';
 
 const title = 'Contact EuphoriaXR | Start an Immersive Project Today';
 const description =
@@ -12,21 +18,118 @@ const crumbs = [
 	{ name: 'Home', href: '/' },
 	{ name: 'Contact', href: '/contact/' },
 ];
+const address = formatAddress();
+const phoneHref = `tel:${site.phone.replace(/\s/g, '')}`;
+
+const featured = (await loadProjects())
+	.slice()
+	.sort((a, b) => b.data.year - a.data.year || a.data.title.localeCompare(b.data.title))
+	.slice(0, 8);
 ---
 
-<BaseLayout title={title} description={description} jsonLd={[breadcrumbSchema(crumbs)]}>
-	<section class="section">
-		<div class="section-inner form-panel">
-			<div>
-				<Breadcrumbs items={crumbs} />
-				<p class="section-label">Contact</p>
-				<h1>Start a conversation with EuphoriaXR.</h1>
-				<p class="lede">
-					Tell us what the experience has to do. If you already know the service, pick it. If you do not, choose “Not sure yet.”
-				</p>
-				<p class="lede">Email <a href={`mailto:${site.email}`}>{site.email}</a>{site.phone ? ` or call ${site.phone}` : ''}.</p>
+<BaseLayout title={title} description={description} overlayHeader jsonLd={[breadcrumbSchema(crumbs)]}>
+	<div class="cx">
+		<section class="cx-hero" aria-labelledby="contact-title">
+			<div class="cx-hero-row">
+				<div class="cx-intro">
+					<Breadcrumbs items={crumbs} />
+					<h1 id="contact-title">Start a conversation with EuphoriaXR.</h1>
+					<p class="cx-lead" data-reveal>
+						Tell us what the experience has to do. Share the audience, the constraint, and the date, and we will reply with a way to begin. Pick the service if you already know it, or choose Not sure yet. We design and build AR, VR, AI, and 3D experiences for training, brands, products, and public teams.
+					</p>
+					<ul class="cx-contact-list" data-reveal>
+						<li>Phone <a href={phoneHref}>{site.phone}</a></li>
+						<li>Email <a href={`mailto:${site.email}`}>{site.email}</a></li>
+						<li><address>{address}</address></li>
+					</ul>
+				</div>
+				<div class="cx-panel">
+					<ContactForm layout="panel" />
+				</div>
 			</div>
-			<ContactForm />
-		</div>
-	</section>
+		</section>
+
+		<section class="cx-statement" aria-labelledby="contact-statement">
+			<h2 id="contact-statement" data-reveal>
+				Work you can step into.
+				<br />
+				Made for teams anywhere.
+			</h2>
+		</section>
+
+		<section class="cx-about" aria-label="About the studio">
+			<Image
+				src={photos.lab}
+				alt="Engineer working on a laptop inside a technical assembly bay"
+				widths={[640, 900]}
+				sizes="(min-width: 1024px) 441px, 100vw"
+				loading="lazy"
+				data-reveal
+			/>
+			<div class="cx-copy">
+				<p data-reveal>EuphoriaXR is a creative technology studio. We bring together immersive design, engineering, and storytelling to turn ideas into interactive experiences.</p>
+				<p data-reveal>From the first concept through development and deployment, the work covers AR, VR, AI, WebXR, and 3D: training simulations, campaign WebAR, product configurators, and tools that sit inside a product you already run.</p>
+				<p data-reveal>We write the user, the job, and the constraint before we pick a tool. A prototype you can hold, wear, or click is reviewed against the real context, then taken through to a production release.</p>
+				<p data-reveal>Tell us what the experience has to do.</p>
+			</div>
+		</section>
+
+		{
+			featured.length > 0 && (
+				<section class="cs-related cx-work" aria-roledescription="carousel" aria-labelledby="featured-work-title">
+					<div class="cs-related-head">
+						<h2 id="featured-work-title">Featured Case Studies</h2>
+						{featured.length >= 3 && (
+							<button class="cs-related-next" type="button" data-cx-next aria-label="Next case study">
+								›
+							</button>
+						)}
+					</div>
+					<div class={featured.length >= 3 ? 'swiper' : 'cs-grid cs-wrap'} data-cx-featured={featured.length >= 3 ? 'swiper' : 'static'}>
+						<div class={featured.length >= 3 ? 'swiper-wrapper' : undefined}>
+							{featured.map((project) => (
+								<div class={featured.length >= 3 ? 'swiper-slide' : undefined}>
+									<CaseCard project={project} />
+								</div>
+							))}
+						</div>
+					</div>
+				</section>
+			)
+		}
+	</div>
+	<script>
+		import Swiper from 'swiper';
+		import { Autoplay, Navigation } from 'swiper/modules';
+
+		let featuredSwiper: Swiper | undefined;
+
+		function bindFeatured() {
+			featuredSwiper?.destroy(true, true);
+			featuredSwiper = undefined;
+			const root = document.querySelector<HTMLElement>('[data-cx-featured="swiper"]');
+			if (!root) return;
+			const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			featuredSwiper = new Swiper(root, {
+				modules: [Autoplay, Navigation],
+				slidesPerView: 1.2,
+				spaceBetween: 16,
+				speed: 300,
+				loop: !reduce,
+				autoplay: reduce ? false : { delay: 4000, disableOnInteraction: false, pauseOnMouseEnter: true },
+				navigation: { nextEl: '[data-cx-next]' },
+				breakpoints: {
+					768: { slidesPerView: 2.2, spaceBetween: 24 },
+					1024: { slidesPerView: 2.5, spaceBetween: 30 },
+				},
+			});
+		}
+
+		bindFeatured();
+		document.addEventListener('astro:page-load', () => bindFeatured());
+		document.addEventListener('astro:before-swap', () => {
+			featuredSwiper?.destroy(true, true);
+			featuredSwiper = undefined;
+		});
+	</script>
 </BaseLayout>

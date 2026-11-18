@@ -1,0 +1,657 @@
+{
+ "source": "https://euphoriaxr.com/exr-blogs/ (WP page id 2200, Elementor)",
+ "generated": "2026-11-06",
+ "total_published_posts": 301,
+ "page": {
+  "url": "https://euphoriaxr.com/exr-blogs/",
+  "h1": "EXR Blogs",
+  "seo_title": "EXR Blogs - AR, VR & AI Insights",
+  "meta_description": "Euphoria XR Blogs is a place where you can deep-dive latest AR/VR/AI & TECH Trends, News, interesting Blog Posts & expert opinions. Check it out!",
+  "focus_keywords": [
+   "blogs",
+   "EXR BLOGS"
+  ],
+  "tabs": [
+   {
+    "label": "Trending Post",
+    "heading": "Latest Blog Post",
+    "query": "all posts, newest first",
+    "per_page": 18,
+    "pagination": "load more on click"
+   },
+   {
+    "label": "Augmented Reality (AR)",
+    "heading": "Augmented Reality (AR) Blog Post",
+    "category_id": 183,
+    "per_page": 21
+   },
+   {
+    "label": "Virtual Reality (VR)",
+    "heading": "Virtual Reality (VR) Blog Post",
+    "category_id": 184,
+    "per_page": 21
+   },
+   {
+    "label": "Artificial Intelligence (AI)",
+    "heading": "Artificial intelligence (AI) Blog Post",
+    "category_id": 157,
+    "per_page": 21
+   }
+  ],
+  "card_fields": [
+   "featured image (links to post)",
+   "categories (comma separated, all categories)",
+   "title",
+   "date \"F j, Y\""
+  ],
+  "closing_block": {
+   "heading": "Get in touch",
+   "stats": [
+    {
+     "value": "300+",
+     "label": "Successful Projects"
+    },
+    {
+     "value": "98%",
+     "label": "Success Rate"
+    },
+    {
+     "value": "90+",
+     "label": "Pro Team Members"
+    },
+    {
+     "value": "10+",
+     "label": "Years of Experience"
+    }
+   ],
+   "cta_title": "Let's talk about your project",
+   "cta_text": "We are here to turn your ideas into reality"
+  }
+ },
+ "author": {
+  "name": "Amelia Rose",
+  "role": "Content Strategist & Copywriter",
+  "avatar": "https://euphoriaxr.com/wp-content/uploads/2026/06/cropped-image-1-96x96.webp"
+ },
+ "categories": [
+  {
+   "id": 186,
+   "name": "360 Video Studio",
+   "slug": "360-video-studio",
+   "count": 16
+  },
+  {
+   "id": 157,
+   "name": "Artificial Intelligence",
+   "slug": "artificial-intelligence",
+   "count": 73
+  },
+  {
+   "id": 183,
+   "name": "Augmented Reality",
+   "slug": "augmented-reality",
+   "count": 141
+  },
+  {
+   "id": 189,
+   "name": "Blockchain",
+   "slug": "blockchain",
+   "count": 16
+  },
+  {
+   "id": 190,
+   "name": "Game Development",
+   "slug": "game-development",
+   "count": 20
+  },
+  {
+   "id": 187,
+   "name": "Metaverse Development",
+   "slug": "metaverse-development",
+   "count": 23
+  },
+  {
+   "id": 94,
+   "name": "MVP Builder",
+   "slug": "mvp-builder",
+   "count": 13
+  },
+  {
+   "id": 188,
+   "name": "NFT Creation",
+   "slug": "nft-creation",
+   "count": 13
+  },
+  {
+   "id": 191,
+   "name": "Software Development",
+   "slug": "software-development",
+   "count": 21
+  },
+  {
+   "id": 192,
+   "name": "Technology",
+   "slug": "technology",
+   "count": 54
+  },
+  {
+   "id": 184,
+   "name": "Virtual Reality",
+   "slug": "virtual-reality",
+   "count": 141
+  },
+  {
+   "id": 185,
+   "name": "WebAR & WebVR",
+   "slug": "webar-webvr",
+   "count": 19
+  },
+  {
+   "id": 1,
+   "name": "Latest Blogs",
+   "slug": "latest-blogs",
+   "count": 1,
+   "note": "1 post only; hide this category in the UI"
+  }
+ ],
+ "tab_latest": [
+  "halloween-filter-ideas",
+  "xreal-aura-vs-meta-vr-glasses",
+  "augmented-reality-book",
+  "meta-virtual-reality-vr-glasses",
+  "t-shirt-augmented-reality",
+  "augmented-reality-mall",
+  "augmented-reality-cards",
+  "augmented-reality-emoji",
+  "augmented-reality-art",
+  "augmented-reality-pizza",
+  "augmented-reality-cake",
+  "augmented-reality-hamburg",
+  "chalk-augmented-reality",
+  "spatial-computing-real-world-examples",
+  "ar-vr-applications-in-warehouse-management",
+  "b2b-vending-company-augmented-reality-try-on-experience",
+  "product-configurator-development",
+  "augmented-reality-ar-doodle-app"
+ ],
+ "tab_ar": [
+  "halloween-filter-ideas",
+  "augmented-reality-book",
+  "t-shirt-augmented-reality",
+  "augmented-reality-mall",
+  "augmented-reality-cards",
+  "augmented-reality-emoji",
+  "augmented-reality-art",
+  "augmented-reality-pizza",
+  "augmented-reality-cake",
+  "augmented-reality-hamburg",
+  "chalk-augmented-reality",
+  "ar-vr-applications-in-warehouse-management"
+ ],
+ "tab_vr": [
+  "xreal-aura-vs-meta-vr-glasses",
+  "meta-virtual-reality-vr-glasses",
+  "ar-vr-applications-in-warehouse-management",
+  "meta-lab-ai-vr-experiences",
+  "vr-headset-for-phone-android-vs-apple",
+  "virtual-reality-vr-shooters",
+  "3d-cad-virtual-reality-training",
+  "virtual-reality-vr-employee-training",
+  "vr-career-exploration-k12-education",
+  "future-of-virtual-reality-next-5-years",
+  "360-vr-training-experience-stanford-ksu",
+  "vr-medical-training-and-heart-simulations"
+ ],
+ "tab_ai": [
+  "meta-lab-ai-vr-experiences",
+  "the-ai-adoption-gap-is-way-more-real-than-people-think",
+  "how-are-us-companies-reducing-operating-costs-using-ai",
+  "ai-app-development-company",
+  "top-experiential-agency-in-texas-usa",
+  "ai-power-smart-glasses",
+  "verify-any-face-in-seconds-with-reversely-ai-face-search",
+  "samsung-galaxy-xr-ai-driven-work-productivity",
+  "spatial-computing-ai-real-world",
+  "reality-ai-lab-vr-ar-ai-innovation",
+  "generative-ai-for-workforce-training",
+  "metahuman-creator-epic-games-realistic-digital-humans"
+ ],
+ "posts": {
+  "halloween-filter-ideas": {
+   "id": 30526,
+   "slug": "halloween-filter-ideas",
+   "url": "https://euphoriaxr.com/halloween-filter-ideas/",
+   "title": "Halloween Filter Ideas 2026: Creative AR Filters & Experiences",
+   "date": "2026-10-16",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/10/Halloween-Filter-Ideas-2026-Creative-AR-Filters-Experiences-Euphoria-XR.webp"
+  },
+  "xreal-aura-vs-meta-vr-glasses": {
+   "id": 30458,
+   "slug": "xreal-aura-vs-meta-vr-glasses",
+   "url": "https://euphoriaxr.com/xreal-aura-vs-meta-vr-glasses/",
+   "title": "XREAL Aura Vs. Meta VR Glasses: Is the $20 Price Difference Worth It?",
+   "date": "2026-10-14",
+   "categories": [
+    "Latest Blogs",
+    "Technology",
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/10/Meta-VR-vs-Xreal-Aura-Comparison-Euphoria-XR.webp"
+  },
+  "augmented-reality-book": {
+   "id": 30363,
+   "slug": "augmented-reality-book",
+   "url": "https://euphoriaxr.com/augmented-reality-book/",
+   "title": "Augmented Reality Book: How AR is Changing the Reading Experience",
+   "date": "2026-09-28",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/09/Augmented-Reality-Book-How-AR-Is-Changing-the-Reading-Experience-Euphoria-XR.webp"
+  },
+  "meta-virtual-reality-vr-glasses": {
+   "id": 30349,
+   "slug": "meta-virtual-reality-vr-glasses",
+   "url": "https://euphoriaxr.com/meta-virtual-reality-vr-glasses/",
+   "title": "Discover Meta’s 100g VR Glasses: How Lightweight Virtual Reality Is Shaping the Future of XR",
+   "date": "2026-09-25",
+   "categories": [
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/09/Discover-Meta-100g-VR-Glasses-How-Lightweight-Virtual-Reality-Is-Shaping-the-Future-of-XR-Euphoria-XR.webp"
+  },
+  "t-shirt-augmented-reality": {
+   "id": 30080,
+   "slug": "t-shirt-augmented-reality",
+   "url": "https://euphoriaxr.com/t-shirt-augmented-reality/",
+   "title": "T-Shirt Augmented Reality: How Interactive Apparel Works for Brands",
+   "date": "2026-09-18",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/09/T-Shirt-Augmented-Reality-How-Interactive-Apparel-Works-for-Brands-Euphoria-XR.webp"
+  },
+  "augmented-reality-mall": {
+   "id": 29989,
+   "slug": "augmented-reality-mall",
+   "url": "https://euphoriaxr.com/augmented-reality-mall/",
+   "title": "Augmented Reality Mall: How AR Is Changing the Shopping Mall Experience",
+   "date": "2026-09-16",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/09/Augmented-Reality-Mall-How-AR-Is-Changing-the-Shopping-Mall-Experience-Euphoria-XR.webp"
+  },
+  "augmented-reality-cards": {
+   "id": 29342,
+   "slug": "augmented-reality-cards",
+   "url": "https://euphoriaxr.com/augmented-reality-cards/",
+   "title": "Augmented Reality Cards: How They Work, Use Cases & How to Create Them",
+   "date": "2026-09-11",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/09/Augmented-Reality-AR-Business-Cards-Euphoria-XR.webp"
+  },
+  "augmented-reality-emoji": {
+   "id": 29216,
+   "slug": "augmented-reality-emoji",
+   "url": "https://euphoriaxr.com/augmented-reality-emoji/",
+   "title": "Augmented Reality Emoji: What AR Emojis Are and How They Work",
+   "date": "2026-09-09",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/09/Augmented-Reality-Emoji-What-AR-Emojis-Are-and-How-They-Work-Euphoria-XR.webp"
+  },
+  "augmented-reality-art": {
+   "id": 29080,
+   "slug": "augmented-reality-art",
+   "url": "https://euphoriaxr.com/augmented-reality-art/",
+   "title": "Augmented Reality Art: Examples, Tools & How to Create AR Art",
+   "date": "2026-09-07",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/09/Augmented-Reality-Art-Examples-Tools-How-to-Create-AR-Art-Euphoria-XR.webp"
+  },
+  "augmented-reality-pizza": {
+   "id": 29016,
+   "slug": "augmented-reality-pizza",
+   "url": "https://euphoriaxr.com/augmented-reality-pizza/",
+   "title": "Augmented Reality Pizza: How Pizza Brands Use AR to Sell, Engage, and Entertain",
+   "date": "2026-09-04",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/09/Augmented-Reality-Pizza-How-Pizza-Brands-Use-AR-to-Sell-Engage-and-Entertain-Euphoria-XR.webp"
+  },
+  "augmented-reality-cake": {
+   "id": 28672,
+   "slug": "augmented-reality-cake",
+   "url": "https://euphoriaxr.com/augmented-reality-cake/",
+   "title": "Augmented Reality Cake: Creating Magical AR Experiences for Events & Celebrations",
+   "date": "2026-08-28",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/08/Augmented-Reality-Cake-Creating-Magical-Experiences-for-Events-Celebrations-Euphoria-XR.webp"
+  },
+  "augmented-reality-hamburg": {
+   "id": 28497,
+   "slug": "augmented-reality-hamburg",
+   "url": "https://euphoriaxr.com/augmented-reality-hamburg/",
+   "title": "Hire an Augmented Reality Company in Hamburg For Custom AR Development",
+   "date": "2026-08-24",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/08/Hire-an-Augmented-Reality-Company-in-Hamburg-For-Custom-AR-Development-Euphoria-XR.webp"
+  },
+  "chalk-augmented-reality": {
+   "id": 28154,
+   "slug": "chalk-augmented-reality",
+   "url": "https://euphoriaxr.com/chalk-augmented-reality/",
+   "title": "Chalk Augmented Reality: How Vuforia Chalk Worked and What Replaced It",
+   "date": "2026-08-21",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/08/Chalk-Augmented-Reality-How-Vuforia-Chalk-Worked-and-What-Replaced-It-Euphoria-XR.webp"
+  },
+  "spatial-computing-real-world-examples": {
+   "id": 28092,
+   "slug": "spatial-computing-real-world-examples",
+   "url": "https://euphoriaxr.com/spatial-computing-real-world-examples/",
+   "title": "10 Real-World Examples of Spatial Computing",
+   "date": "2026-08-19",
+   "categories": [
+    "Technology"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/08/10-Real-World-Examples-of-Spatial-Computing-Euphoria-XR.webp"
+  },
+  "ar-vr-applications-in-warehouse-management": {
+   "id": 27824,
+   "slug": "ar-vr-applications-in-warehouse-management",
+   "url": "https://euphoriaxr.com/ar-vr-applications-in-warehouse-management/",
+   "title": "Augmented Reality Virtual Reality Applications in Warehouse Management",
+   "date": "2026-08-12",
+   "categories": [
+    "Augmented Reality",
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/08/Augmented-Reality-Virtual-Reality-Applications-in-Warehouse-Management-Euphoria-XR.webp"
+  },
+  "b2b-vending-company-augmented-reality-try-on-experience": {
+   "id": 27656,
+   "slug": "b2b-vending-company-augmented-reality-try-on-experience",
+   "url": "https://euphoriaxr.com/b2b-vending-company-augmented-reality-try-on-experience/",
+   "title": "B2B Vending Company Augmented Reality Try-on Experience for Retailers",
+   "date": "2026-08-10",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/08/B2B-Vending-Company-Augmented-Reality-Try-on-Experience-for-Retailers-Euphoria-XR.webp"
+  },
+  "product-configurator-development": {
+   "id": 27582,
+   "slug": "product-configurator-development",
+   "url": "https://euphoriaxr.com/product-configurator-development/",
+   "title": "How to Build a Product Configurator for Your Project in 2026?",
+   "date": "2026-08-07",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/08/How-to-Build-a-Product-Configurator-for-Your-Project-in-2026-Euphoria-XR.webp"
+  },
+  "augmented-reality-ar-doodle-app": {
+   "id": 27446,
+   "slug": "augmented-reality-ar-doodle-app",
+   "url": "https://euphoriaxr.com/augmented-reality-ar-doodle-app/",
+   "title": "What Is the AR Doodle App? How It Works and How It Is Different From AR Zone",
+   "date": "2026-08-05",
+   "categories": [
+    "Augmented Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/08/What-Is-the-AR-Doodle-App-How-It-Works-and-How-It-Is-Different-From-AR-Zone-Euphoria-XR.webp"
+  },
+  "meta-lab-ai-vr-experiences": {
+   "id": 27332,
+   "slug": "meta-lab-ai-vr-experiences",
+   "url": "https://euphoriaxr.com/meta-lab-ai-vr-experiences/",
+   "title": "Meta Lab Brings Hands-On AI and VR Experiences to Best Buy Stores Nationwide",
+   "date": "2026-07-29",
+   "categories": [
+    "Artificial Intelligence",
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/07/Meta-Lab-Brings-Hands-On-AI-and-VR-Experiences-to-Best-Buy-Stores-Nationwide-Euphoria-XR.webp"
+  },
+  "vr-headset-for-phone-android-vs-apple": {
+   "id": 27273,
+   "slug": "vr-headset-for-phone-android-vs-apple",
+   "url": "https://euphoriaxr.com/vr-headset-for-phone-android-vs-apple/",
+   "title": "VR Headset for Phone: Android Vs Apple",
+   "date": "2026-07-27",
+   "categories": [
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/07/VR-Headset-for-Phone-Android-Vs-Apple-Euphoria-XR.webp"
+  },
+  "virtual-reality-vr-shooters": {
+   "id": 27232,
+   "slug": "virtual-reality-vr-shooters",
+   "url": "https://euphoriaxr.com/virtual-reality-vr-shooters/",
+   "title": "Top VR Shooters: 10 Best VR Shooting Games to Play",
+   "date": "2026-07-22",
+   "categories": [
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/07/Top-VR-Shooters-10-Best-VR-Shooting-Games-to-Play-Euphoria-XR.webp"
+  },
+  "3d-cad-virtual-reality-training": {
+   "id": 27221,
+   "slug": "3d-cad-virtual-reality-training",
+   "url": "https://euphoriaxr.com/3d-cad-virtual-reality-training/",
+   "title": "Euphoria XR Sets a New Standard for Industrial Training with Advanced 3D CAD in VR",
+   "date": "2026-07-20",
+   "categories": [
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/07/Euphoria-XR-Sets-a-New-Standard-for-Industrial-Training-with-Advanced-3D-CAD-in-VR-Euphoria-XR.webp"
+  },
+  "virtual-reality-vr-employee-training": {
+   "id": 27204,
+   "slug": "virtual-reality-vr-employee-training",
+   "url": "https://euphoriaxr.com/virtual-reality-vr-employee-training/",
+   "title": "Are You Spending Too Much Time Training Employees? Here’s What You’re Missing",
+   "date": "2026-07-17",
+   "categories": [
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/07/Are-You-Spending-Too-Much-Time-Training-Employees-Heres-What-Youre-Missing-Euphoria-XR.webp"
+  },
+  "the-ai-adoption-gap-is-way-more-real-than-people-think": {
+   "id": 27154,
+   "slug": "the-ai-adoption-gap-is-way-more-real-than-people-think",
+   "url": "https://euphoriaxr.com/the-ai-adoption-gap-is-way-more-real-than-people-think/",
+   "title": "The AI Adoption Gap is Way More Real than People Think",
+   "date": "2026-07-13",
+   "categories": [
+    "Artificial Intelligence"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/07/The-AI-Adoption-Gap-is-Way-More-Real-than-People-Think-Euphoria-XR.webp"
+  },
+  "vr-career-exploration-k12-education": {
+   "id": 27110,
+   "slug": "vr-career-exploration-k12-education",
+   "url": "https://euphoriaxr.com/vr-career-exploration-k12-education/",
+   "title": "How Does VR Career Exploration and Skills Training Enhance K–12 Education?",
+   "date": "2026-07-10",
+   "categories": [
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/07/How-Does-VR-Career-Exploration-and-Skills-Training-Enhance-K12-Education-Euphoria-XR.webp"
+  },
+  "future-of-virtual-reality-next-5-years": {
+   "id": 27071,
+   "slug": "future-of-virtual-reality-next-5-years",
+   "url": "https://euphoriaxr.com/future-of-virtual-reality-next-5-years/",
+   "title": "What do you think about the Future of Virtual Reality in the next 5 years?",
+   "date": "2026-07-08",
+   "categories": [
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/07/What-Do-You-think-About-the-Future-of-Virtual-Reality-in-the-next-5-Years-Euphoeia-XR.webp"
+  },
+  "360-vr-training-experience-stanford-ksu": {
+   "id": 26822,
+   "slug": "360-vr-training-experience-stanford-ksu",
+   "url": "https://euphoriaxr.com/360-vr-training-experience-stanford-ksu/",
+   "title": "How EuphoriaXR Built a 360° VR Training Experience for Stanford GSB & KSU",
+   "date": "2026-06-29",
+   "categories": [
+    "360 Video Studio",
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/06/How-EuphoriaXR-Built-a-360°-VR-Training-Experience-for-Stanford-GSB-KSU-Euphoria-XR.webp"
+  },
+  "vr-medical-training-and-heart-simulations": {
+   "id": 26735,
+   "slug": "vr-medical-training-and-heart-simulations",
+   "url": "https://euphoriaxr.com/vr-medical-training-and-heart-simulations/",
+   "title": "How Heart Simulations in VR Medical Training Are Reshaping Healthcare Education",
+   "date": "2026-06-24",
+   "categories": [
+    "Technology",
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/06/How-Heart-Simulations-in-VR-Medical-Training-Are-Reshaping-Healthcare-Education-Euphoria-XR.webp"
+  },
+  "how-are-us-companies-reducing-operating-costs-using-ai": {
+   "id": 26493,
+   "slug": "how-are-us-companies-reducing-operating-costs-using-ai",
+   "url": "https://euphoriaxr.com/how-are-us-companies-reducing-operating-costs-using-ai/",
+   "title": "How Are US Companies Using AI to Reduce Operating Costs in 2026?",
+   "date": "2026-06-22",
+   "categories": [
+    "Artificial Intelligence",
+    "Technology"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/06/How-Are-US-Companies-Using-AI-to-Reduce-Operating-Costs-Euphoria-XR.webp"
+  },
+  "ai-app-development-company": {
+   "id": 26409,
+   "slug": "ai-app-development-company",
+   "url": "https://euphoriaxr.com/ai-app-development-company/",
+   "title": "How an AI App Development Company Boosts Your Business?",
+   "date": "2026-06-19",
+   "categories": [
+    "Artificial Intelligence",
+    "Game Development"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/06/How-an-AI-App-Development-Company-Boosts-Your-Business-Euphoria-XR.webp"
+  },
+  "top-experiential-agency-in-texas-usa": {
+   "id": 26180,
+   "slug": "top-experiential-agency-in-texas-usa",
+   "url": "https://euphoriaxr.com/top-experiential-agency-in-texas-usa/",
+   "title": "Top Experiential Agencies in Texas, USA",
+   "date": "2026-05-25",
+   "categories": [
+    "Artificial Intelligence",
+    "Augmented Reality",
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/05/Top-Experiential-Agencies-in-Texas-USA-Euphoria-XR.webp"
+  },
+  "ai-power-smart-glasses": {
+   "id": 26109,
+   "slug": "ai-power-smart-glasses",
+   "url": "https://euphoriaxr.com/ai-power-smart-glasses/",
+   "title": "AI-Powered Smart Glasses: What They Are, How They Work, and Why They Matter",
+   "date": "2026-05-18",
+   "categories": [
+    "Artificial Intelligence"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/05/AI-Powered-Smart-Glasses-What-They-Are-How-They-Work-and-Why-They-Matter-Euphoria-XR.webp"
+  },
+  "verify-any-face-in-seconds-with-reversely-ai-face-search": {
+   "id": 26004,
+   "slug": "verify-any-face-in-seconds-with-reversely-ai-face-search",
+   "url": "https://euphoriaxr.com/verify-any-face-in-seconds-with-reversely-ai-face-search/",
+   "title": "Verify Any Face in Seconds with Reversely.ai Face Search",
+   "date": "2026-05-06",
+   "categories": [
+    "Artificial Intelligence",
+    "Technology"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/05/Here-is-how-it-works.webp"
+  },
+  "samsung-galaxy-xr-ai-driven-work-productivity": {
+   "id": 25984,
+   "slug": "samsung-galaxy-xr-ai-driven-work-productivity",
+   "url": "https://euphoriaxr.com/samsung-galaxy-xr-ai-driven-work-productivity/",
+   "title": "Samsung Galaxy XR Ushers in a New Era of AI-Driven Work and Everyday Productivity",
+   "date": "2026-05-04",
+   "categories": [
+    "Artificial Intelligence",
+    "Augmented Reality",
+    "Technology",
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/05/Samsung-Galaxy-XR-Ushers-in-a-New-Era-of-AI-Driven-Work-Euphoria-XR.webp"
+  },
+  "spatial-computing-ai-real-world": {
+   "id": 25887,
+   "slug": "spatial-computing-ai-real-world",
+   "url": "https://euphoriaxr.com/spatial-computing-ai-real-world/",
+   "title": "How Spatial Computing Is Helping Bring AI Into the Real World?",
+   "date": "2026-04-22",
+   "categories": [
+    "Artificial Intelligence"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/04/How-Spatial-Computing-Is-Helping-Bring-AI-Into-the-Real-World-Euphoria-XR-1.webp"
+  },
+  "reality-ai-lab-vr-ar-ai-innovation": {
+   "id": 24763,
+   "slug": "reality-ai-lab-vr-ar-ai-innovation",
+   "url": "https://euphoriaxr.com/reality-ai-lab-vr-ar-ai-innovation/",
+   "title": "What Is Reality AI Lab? Exploring VR, AR & AI Innovation",
+   "date": "2026-03-02",
+   "categories": [
+    "Artificial Intelligence",
+    "Augmented Reality",
+    "Technology",
+    "Virtual Reality"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/03/What-Is-Reality-AI-Lab-Exploring-VR-AR-AI-Innovation-Euphoria-XR.webp"
+  },
+  "generative-ai-for-workforce-training": {
+   "id": 24613,
+   "slug": "generative-ai-for-workforce-training",
+   "url": "https://euphoriaxr.com/generative-ai-for-workforce-training/",
+   "title": "Generative AI for Workforce Training: A Startup’s Guide to Smarter Learning",
+   "date": "2026-02-16",
+   "categories": [
+    "Artificial Intelligence"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/02/Generative-AI-for-Workforce-Training-A-Startups-Guide-Euphoria-XR.webp"
+  },
+  "metahuman-creator-epic-games-realistic-digital-humans": {
+   "id": 24590,
+   "slug": "metahuman-creator-epic-games-realistic-digital-humans",
+   "url": "https://euphoriaxr.com/metahuman-creator-epic-games-realistic-digital-humans/",
+   "title": "MetaHuman Creator | Epic Games’ Tool for Realistic Digital Humans",
+   "date": "2026-02-10",
+   "categories": [
+    "Artificial Intelligence",
+    "Technology"
+   ],
+   "featured_image": "https://euphoriaxr.com/wp-content/uploads/2026/02/MetaHuman-Creator-Epic-Games-Tool-for-Realistic-Digital-Humans-Euphoria-XR.webp"
+  }
+ }
+}

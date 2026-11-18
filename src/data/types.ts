@@ -2,7 +2,7 @@ export type Block = { title: string; body: string };
 
 export type Faq = { question: string; answer: string };
 
-export type ImageKey = 'vr' | 'ai' | 'ar' | 'city' | 'lab' | 'cosmos' | 'abstract';
+export type ImageKey = 'vr' | 'ai' | 'ar' | 'city' | 'lab' | 'cosmos' | 'abstract' | 'ridge';
 
 export type MarketingPage = {
 	slug: string;

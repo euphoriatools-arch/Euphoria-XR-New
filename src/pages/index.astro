@@ -2,17 +2,26 @@
 import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactBand from '../components/studio/ContactBand.astro';
+import FeedCard from '../components/studio/FeedCard.astro';
+import AwardsSlider from '../components/studio/AwardsSlider.astro';
+import FixedStage from '../components/studio/FixedStage.astro';
+import ProcessScroll from '../components/studio/ProcessScroll.astro';
+import HomeFAQ from '../components/studio/HomeFAQ.astro';
+import ReviewsSlider from '../components/studio/ReviewsSlider.astro';
 import WorkCard from '../components/studio/WorkCard.astro';
 import { categories } from '../content/categories';
 import { heroSlides } from '../data/home';
 import { photos } from '../data/images';
-import { studioGroups, type StudioLink } from '../data/studio-links';
+import { loadPosts } from '../lib/blog';
 import { loadProjects } from '../lib/portfolio';
 
 const projects = await loadProjects();
 const featured = projects.slice(0, 16);
 const latest = projects.filter((project) => !project.data.featured).slice(0, 12);
 const filters = categories.filter((category) => latest.some((project) => project.data.category === category.slug));
+const posts = loadPosts();
+const sandboxPosts = posts.slice(0, 8);
+const newsPosts = posts.length > 8 ? posts.slice(2, 10) : [...posts].reverse();
 
 const heroFrames = [photos.vr, photos.city, photos.abstract, photos.cosmos];
 const heroVideo = 'https://euphoriaxr.com/wp-content/uploads/2026/03/Euphoria-XR-Landing-Page-Video-Euphoria-XR.mp4';
@@ -39,7 +48,7 @@ const slides = [
 		heading: false,
 	},
 	{
-		lines: [[{ text: "Have a project? We'd love to help." }]],
+		lines: [[{ text: 'Have a project?' }], [{ text: "We'd love to help." }]],
 		href: '#contact',
 		cta: 'Get in touch',
 		image: heroFrames[3],
@@ -47,16 +56,15 @@ const slides = [
 	},
 ];
 
-const solutionRows: StudioLink[] = [
-	{ href: '/services/augmented-reality-development-company/', label: 'Augmented reality development company' },
-	{ href: '/services/virtual-reality-development-company/', label: 'Virtual reality development company' },
-	{ href: '/ai-chatbot-development-services/', label: 'AI chatbot development services' },
-	{ href: '/webar-development/', label: 'WebAR development' },
-	{ href: '/product-configurator/', label: '3D product configurator' },
-	{ href: '/ar-vr-training-education/', label: 'VR for education / AR & VR training' },
-	{ href: '/services/branded-ar-filters/', label: 'Branded AR filters' },
+const solutions = [
+	{ href: '/services/augmented-reality-development-company/', label: 'Augmented Reality', image: photos.ar },
+	{ href: '/services/virtual-reality-development-company/', label: 'Virtual Reality', image: photos.vr },
+	{ href: '/ai-development-company/', label: 'AI', image: photos.ai },
+	{ href: '/webar-development/', label: 'WebAR', image: photos.city },
+	{ href: '/product-configurator/', label: '3D Configurator', image: photos.abstract },
+	{ href: '/ar-vr-training-education/', label: 'Training & Simulation', image: photos.lab },
+	{ href: '/services/branded-ar-filters/', label: 'Branded AR Filters', image: photos.cosmos },
 ];
-const solutionHrefs = new Set(solutionRows.map((row) => row.href));
 ---
 
 <BaseLayout overlayHeader>
@@ -121,10 +129,10 @@ const solutionHrefs = new Set(solutionRows.map((row) => row.href));
 		<section class="hx-section hx-featured" id="work" aria-labelledby="work-title">
 			<div class="hx-wrap">
 				<div class="hx-head">
-					<div class="hx-title-row">
-						<h2 id="work-title">Featured case studies</h2>
-						<button class="hx-icon-btn" type="button" data-featured-next aria-label="Next featured case study">›</button>
-					</div>
+					<h2 id="work-title">Featured Case Studies</h2>
+					<button class="hx-featured-next" type="button" data-featured-next aria-label="Next featured case study">
+						<span aria-hidden="true">›</span>
+					</button>
 				</div>
 				<div class="swiper" data-featured-swiper>
 					<div class="swiper-wrapper">
@@ -137,14 +145,19 @@ const solutionHrefs = new Set(solutionRows.map((row) => row.href));
 		<section class="hx-section" aria-labelledby="latest-title">
 			<div class="hx-wrap">
 				<div class="hx-head">
-					<h2 id="latest-title">Latest work</h2>
+					<h2 id="latest-title">Latest Work</h2>
 					<div class="hx-tools">
-						<label class:list={['hx-search']}>
-							<button class="hx-icon-btn" type="button" data-search-toggle aria-expanded="false" aria-controls="work-search">Search</button>
+						<label class="hx-search" for="work-search">
 							<span class="sr-only">Search work</span>
 							<input id="work-search" type="search" placeholder="Search" data-work-search autocomplete="off" />
+							<button class="hx-search-btn" type="button" data-search-toggle aria-label="Focus search">
+								<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+									<circle cx="11" cy="11" r="6.5" />
+									<path d="m16.2 16.2 3.3 3.3" stroke-linecap="round" />
+								</svg>
+							</button>
 						</label>
-						<a class="hx-text-link" href="/portfolio/">View all</a>
+						<a class="hx-view-all" href="/portfolio/">View All</a>
 					</div>
 				</div>
 				<div class="hx-filters" role="toolbar" aria-label="Filter work">
@@ -162,24 +175,31 @@ const solutionHrefs = new Set(solutionRows.map((row) => row.href));
 			</div>
 		</section>
 
+		<AwardsSlider />
+
 		<section class="hx-section hx-solutions" id="capabilities" aria-labelledby="solutions-title">
 			<div class="hx-wrap">
-				<h2 id="solutions-title">Solutions and capabilities</h2>
-				<div class="hx-stage">
+				<h2 id="solutions-title">Solutions &amp; Capabilities</h2>
+				<div class="hx-solutions-banner">
 					<Image
-						src={photos.vr}
+						src={photos.abstract}
 						alt=""
 						widths={[800, 1280, 1800]}
 						sizes="100vw"
 						loading="lazy"
 					/>
-					<p>We develop across the latest platforms.</p>
+					<p>We turn ideas into immersive experiences.</p>
 				</div>
 				<div class="swiper" data-solution-swiper>
 					<div class="swiper-wrapper">
 						{
-							solutionRows.map((row) => (
-								<a class="swiper-slide hx-solution" href={row.href}>{row.label}</a>
+							solutions.map((item) => (
+								<a class="swiper-slide hx-solution" href={item.href}>
+									<span class="hx-solution-media">
+										<Image src={item.image} alt="" widths={[320, 480]} sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" loading="lazy" />
+									</span>
+									<span class="hx-solution-label">{item.label}</span>
+								</a>
 							))
 						}
 					</div>
@@ -191,28 +211,51 @@ const solutionHrefs = new Set(solutionRows.map((row) => row.href));
 						<button class="hx-icon-btn" type="button" data-solution-next aria-label="Next solution">›</button>
 					</div>
 				</div>
-				<div class="hx-catalog">
-					{
-						studioGroups.map((group) => {
-							const links = group.links.filter((link) => !solutionHrefs.has(link.href));
-							if (links.length === 0) return null;
-							return (
-								<div>
-									<h3>{group.title}</h3>
-									<ul>
-										{links.map((link) => (
-											<li>
-												<a href={link.href}>{link.label}</a>
-											</li>
-										))}
-									</ul>
-								</div>
-							);
-						})
-					}
-				</div>
 			</div>
 		</section>
+
+		<ProcessScroll />
+
+		<FixedStage />
+
+		{
+			sandboxPosts.length > 0 && (
+				<section class="hx-section hx-feed" id="sandbox" aria-labelledby="sandbox-title">
+					<div class="hx-wrap">
+						<div class="hx-head">
+							<h2 id="sandbox-title">Sandbox: Tech &amp; Trends</h2>
+							<a class="hx-view-all" href="/exr-blogs/">View All</a>
+						</div>
+						<div class="swiper" data-sandbox-swiper>
+							<div class="swiper-wrapper">
+								{sandboxPosts.map((post) => <FeedCard post={post} slide />)}
+							</div>
+						</div>
+					</div>
+				</section>
+			)
+		}
+
+		{
+			newsPosts.length > 0 && (
+				<section class="hx-section hx-feed" id="news" aria-labelledby="news-title">
+					<div class="hx-wrap">
+						<div class="hx-head">
+							<h2 id="news-title">Latest News &amp; Awards</h2>
+							<a class="hx-view-all" href="/exr-blogs/">View All</a>
+						</div>
+						<div class="swiper" data-news-swiper>
+							<div class="swiper-wrapper">
+								{newsPosts.map((post) => <FeedCard post={post} slide />)}
+							</div>
+						</div>
+					</div>
+				</section>
+			)
+		}
+
+		<ReviewsSlider />
+		<HomeFAQ />
 	</div>
 	<ContactBand />
 </BaseLayout>
@@ -228,14 +271,20 @@ const solutionHrefs = new Set(solutionRows.map((row) => row.href));
 	let hero: Swiper | undefined;
 	let featuredSwiper: Swiper | undefined;
 	let solutionSwiper: Swiper | undefined;
+	let sandboxSwiper: Swiper | undefined;
+	let newsSwiper: Swiper | undefined;
 
 	function destroySwipers() {
 		hero?.destroy(true, true);
 		featuredSwiper?.destroy(true, true);
 		solutionSwiper?.destroy(true, true);
+		sandboxSwiper?.destroy(true, true);
+		newsSwiper?.destroy(true, true);
 		hero = undefined;
 		featuredSwiper = undefined;
 		solutionSwiper = undefined;
+		sandboxSwiper = undefined;
+		newsSwiper = undefined;
 	}
 
 	function mountHero() {
@@ -321,22 +370,41 @@ const solutionHrefs = new Set(solutionRows.map((row) => row.href));
 		if (!root || root.classList.contains('swiper-initialized')) return;
 		solutionSwiper = new Swiper(root, {
 			modules: [Autoplay, Navigation],
-			slidesPerView: 1.15,
-			spaceBetween: 30,
-			centeredSlides: true,
+			slidesPerView: 1.2,
+			spaceBetween: 16,
 			loop: true,
 			speed: motion.matches ? 0 : 300,
-			autoplay: autoplay ? false : { delay: 2000, disableOnInteraction: false },
+			autoplay: autoplay ? false : { delay: 2800, disableOnInteraction: false, pauseOnMouseEnter: true },
 			navigation: {
 				prevEl: '[data-solution-prev]',
 				nextEl: '[data-solution-next]',
 			},
 			keyboard: { enabled: true, onlyInViewport: true },
 			breakpoints: {
-				768: { slidesPerView: 2 },
-				1024: { slidesPerView: 3 },
+				640: { slidesPerView: 2, spaceBetween: 20 },
+				1024: { slidesPerView: 3, spaceBetween: 24 },
 			},
 		});
+	}
+
+	function mountFeed(selector: string, assign: (swiper: Swiper) => void) {
+		const root = document.querySelector<HTMLElement>(selector);
+		if (!root || root.classList.contains('swiper-initialized')) return;
+		assign(
+			new Swiper(root, {
+				modules: [Autoplay],
+				slidesPerView: 1.15,
+				spaceBetween: 16,
+				loop: !motion.matches && (root.querySelectorAll('.swiper-slide').length >= 4),
+				speed: motion.matches ? 0 : 300,
+				autoplay: autoplay ? false : { delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true },
+				keyboard: { enabled: true, onlyInViewport: true },
+				breakpoints: {
+					640: { slidesPerView: 2, spaceBetween: 20 },
+					1024: { slidesPerView: 3, spaceBetween: 24 },
+				},
+			}),
+		);
 	}
 
 	function mountFilters() {
@@ -347,7 +415,6 @@ const solutionHrefs = new Set(solutionRows.map((row) => row.href));
 		const search = root.querySelector<HTMLInputElement>('[data-work-search]');
 		const empty = root.querySelector<HTMLElement>('[data-work-empty]');
 		const toggle = root.querySelector<HTMLButtonElement>('[data-search-toggle]');
-		const searchWrap = root.querySelector<HTMLElement>('.hx-search');
 		if (!cards.length) return;
 		root.dataset.workBound = 'true';
 		let active = 'all';
@@ -378,9 +445,7 @@ const solutionHrefs = new Set(solutionRows.map((row) => row.href));
 		});
 		search?.addEventListener('input', apply);
 		toggle?.addEventListener('click', () => {
-			const open = searchWrap?.classList.toggle('is-open') ?? false;
-			toggle.setAttribute('aria-expanded', String(open));
-			if (open) search?.focus();
+			search?.focus();
 		});
 	}
 
@@ -388,6 +453,12 @@ const solutionHrefs = new Set(solutionRows.map((row) => row.href));
 		mountHero();
 		mountFeatured();
 		mountSolutions();
+		mountFeed('[data-sandbox-swiper]', (swiper) => {
+			sandboxSwiper = swiper;
+		});
+		mountFeed('[data-news-swiper]', (swiper) => {
+			newsSwiper = swiper;
+		});
 		mountFilters();
 	}
 

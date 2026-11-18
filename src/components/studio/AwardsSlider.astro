@@ -1,0 +1,32 @@
+---
+import { awardLogos } from '../../data/awardLogos';
+
+const track = [...awardLogos, ...awardLogos];
+---
+
+<section class="hx-awards" id="awards" aria-labelledby="awards-title">
+	<div class="hx-awards-inner">
+		<h2 id="awards-title" class="hx-awards-title">Awards</h2>
+
+		<div class="hx-awards-viewport" aria-hidden="true">
+			<div class="hx-awards-track">
+				{
+					track.map((logo, index) => (
+						<figure class="hx-awards-item">
+							<img
+								src={logo.src}
+								alt=""
+								loading={index < awardLogos.length ? 'eager' : 'lazy'}
+								decoding="async"
+							/>
+						</figure>
+					))
+				}
+			</div>
+		</div>
+
+		<ul class="sr-only">
+			{awardLogos.map((logo) => <li>{logo.alt}</li>)}
+		</ul>
+	</div>
+</section>

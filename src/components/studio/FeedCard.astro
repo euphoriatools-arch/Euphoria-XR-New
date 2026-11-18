@@ -1,0 +1,25 @@
+---
+import { formatBlogDate, type BlogPost } from '../../lib/blog';
+
+interface Props {
+	post: BlogPost;
+	slide?: boolean;
+}
+
+const { post, slide = false } = Astro.props;
+---
+
+<a class:list={['hx-feed-card', slide && 'swiper-slide']} href={`/${post.slug}/`}>
+	<img
+		src={post.image}
+		alt={`Cover image for ${post.title}`}
+		width="640"
+		height="360"
+		loading="lazy"
+		decoding="async"
+	/>
+	<span class="hx-feed-copy">
+		<span class="hx-feed-title">{post.title}</span>
+		<time datetime={post.date.slice(0, 10)}>{formatBlogDate(post.date)}</time>
+	</span>
+</a>

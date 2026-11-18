@@ -3,31 +3,21 @@ import { Image } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Breadcrumbs from '../components/ui/Breadcrumbs.astro';
 import ContactBand from '../components/studio/ContactBand.astro';
-import { photos, photoFor } from '../data/images';
-import { servicePages } from '../data/services';
-import { studioGroups, platformSlugs } from '../data/studio-links';
+import aboutHero from '../assets/photos/about-hero.jpg';
+import { aboutCounters, aboutIntro, aboutServices } from '../data/about';
+import { awards } from '../data/awards';
+import { leaders } from '../data/leadership';
+import { trustedLogos } from '../data/clients';
 import { breadcrumbSchema } from '../lib/schema';
+import '../styles/service.css';
+import '../styles/about.css';
 
-const title = 'About EuphoriaXR | Creative Technology Studio Team';
+const title = 'AR/VR Development Studio Since 2016 | EuphoriaXR';
 const description =
-	'EuphoriaXR is a creative technology studio. Meet the practice behind our AR, VR, AI, and 3D work, from the first prototype through launch day.';
+	'EuphoriaXR is an award-winning AR/VR and AI development studio creating immersive experiences for global brands. Explore our work and expertise.';
 const crumbs = [
 	{ name: 'Home', href: '/' },
 	{ name: 'About', href: '/about/' },
-];
-
-const platforms = platformSlugs.map((slug) => {
-	const page = servicePages.find((item) => item.slug === slug);
-	const label = studioGroups.flatMap((group) => group.links).find((link) => link.href === `/${slug}/`)?.label;
-	if (!page || !label) throw new Error(`Missing platform page: ${slug}`);
-	return { page, label };
-});
-
-const shots = [
-	{ src: photos.lab, alt: 'Engineer working on a laptop inside a technical assembly bay' },
-	{ src: photos.vr, alt: 'Person wearing a virtual reality headset with both arms raised' },
-	{ src: photos.abstract, alt: '' },
-	{ src: photos.city, alt: 'A city street at night' },
 ];
 ---
 
@@ -40,91 +30,253 @@ const shots = [
 		<section class="hx-about-hero" aria-labelledby="about-title">
 			<div class="hx-about-frame">
 				<Image
-					src={photos.vr}
-					alt=""
-					widths={[800, 1280, 1800]}
+					src={aboutHero}
+					alt="Person with short light hair wearing a glowing virtual reality headset on a neon city street"
+					widths={[800, 1024]}
 					sizes="100vw"
 					loading="eager"
 					fetchpriority="high"
 				/>
 				<div class="hx-about-top" aria-hidden="true"></div>
 				<div class="hx-about-copy">
-					<h1 id="about-title">A creative technology studio for immersive experiences.</h1>
-					<p class="hx-about-lede">We design, build and deliver AR, VR, mixed reality and interactive experiences that connect people, brands and ideas in the real world.</p>
+					<h1 id="about-title">Who Is EuphoriaXR? Where Creativity Meets Technology.</h1>
+					<p class="hx-about-lede">
+						EuphoriaXR creates immersive AR, VR, and AI experiences for global brands and enterprises, backed by 10+ years of expertise and 300+ projects delivered.
+					</p>
+				</div>
+			</div>
+		</section>
+	</div>
+
+	<div class="svc ab">
+		<section class="svc-band svc-band-light" aria-labelledby="ab-intro-title">
+			<div class="svc-wrap svc-split">
+				<p class="svc-eyebrow">{aboutIntro.eyebrow}</p>
+				<div>
+					<h2 id="ab-intro-title" data-reveal>
+						{aboutIntro.headlineBefore}<span class="svc-accent">{aboutIntro.headlineAccent}</span>{aboutIntro.headlineAfter}
+					</h2>
+					<p data-reveal>{aboutIntro.body}</p>
 				</div>
 			</div>
 		</section>
 
-		<div class="hx-about-col">
-			<h2 data-reveal>We are a creative technology studio.</h2>
-			<p data-reveal>EuphoriaXR brings together immersive design, engineering and storytelling to transform ideas into interactive experiences. We believe technology is most powerful when it helps people learn, explore and connect.</p>
-			<figure class="hx-about-shot" data-reveal>
-				<Image src={shots[0].src} alt={shots[0].alt} widths={[640, 1024]} sizes="(min-width: 1024px) 1024px, 100vw" loading="lazy" />
-			</figure>
-			<p data-reveal>From the first creative concept through development and deployment, our multidisciplinary approach blends imagination with technical craft.</p>
-			<figure class="hx-about-shot" data-reveal>
-				<Image src={shots[1].src} alt={shots[1].alt} widths={[640, 1024]} sizes="(min-width: 1024px) 1024px, 100vw" loading="lazy" />
-			</figure>
-			<p data-reveal>AR, VR, AI, WebXR, and 3D experiences. Typical work includes training simulations, campaign WebAR, product configurators, chatbots, and agents that sit inside a product you already run.</p>
-			<figure class="hx-about-shot" data-reveal>
-				<Image src={shots[2].src} alt={shots[2].alt} widths={[640, 1024]} sizes="(min-width: 1024px) 1024px, 100vw" loading="lazy" />
-			</figure>
-
-			<h2 id="approach-title" data-reveal>Why we prototype before we produce.</h2>
-			<p data-reveal>We write the user, the job, and the constraint before we pick a tool. A prototype you can hold, wear, or click is reviewed against the real context.</p>
-			<p data-reveal>When an experience has to answer, adapt, or score. A training sim can record a procedure. A WebAR scene can explain a product from approved sources. We do not add a model unless it has a job.</p>
-			<p class="hx-about-more" data-reveal>Learn more about <a href="/ai-development-company/">AI development company</a></p>
-			<p class="hx-about-sub" data-reveal>A prototype scoped to answer one question, then a production release.</p>
-			<figure class="hx-about-shot" data-reveal>
-				<Image src={shots[3].src} alt={shots[3].alt} widths={[640, 1024]} sizes="(min-width: 1024px) 1024px, 100vw" loading="lazy" />
-			</figure>
-
-			<p data-reveal>Experiences people can use, from a phone scan to a headset rehearsal.</p>
-			<h2 class="is-sub" id="platforms-title" data-reveal>Platforms we already ship.</h2>
-			<ul class="hx-about-cards">
-				{
-					platforms.map(({ page, label }) => (
-						<li data-reveal>
-							<a href={`/${page.slug}/`}>
-								<Image
-									src={photoFor(page.image)}
-									alt=""
-									widths={[480, 800]}
-									sizes="(min-width: 1024px) 488px, 100vw"
-									loading="lazy"
-								/>
-								<p>{page.serviceType}</p>
-								<h3>{label}</h3>
-								<span>{page.summary}</span>
-							</a>
-						</li>
-					))
-				}
-			</ul>
-
-			<section class="hx-about-services" aria-labelledby="services-title">
-				<h3 id="services-title" data-reveal>Our Services</h3>
-				<p data-reveal>The work we take on spans conversation, spatial computing, training, and the campaigns that have to open on a phone.</p>
-				<div class="hx-about-groups">
+		<section class="svc-counters" aria-label="Studio metrics">
+			<div class="svc-wrap">
+				<ul class="svc-counter-grid">
 					{
-						studioGroups.map((group, index) => (
-							<section data-reveal aria-labelledby={`service-group-${index}`}>
-								<h4 id={`service-group-${index}`}>
-									<a href={group.links[0].href}>{group.title}</a>
-								</h4>
-								<ul>
-									{group.links.map((link) => (
-										<li>
-											<a href={link.href}>{link.label}</a>
-										</li>
-									))}
-								</ul>
-							</section>
+						aboutCounters.map((item) => (
+							<li class="svc-counter" data-reveal>
+								<strong>{item.value}</strong>
+								<span>{item.label}</span>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</section>
+
+		<section class="svc-trusted" aria-labelledby="ab-trusted-title">
+			<div class="svc-wrap">
+				<p class="svc-use-label" id="ab-trusted-title">
+					<span class="svc-use-arrow" aria-hidden="true">→</span>
+					Trusted by
+				</p>
+				<ul class="svc-trusted-grid">
+					{
+						trustedLogos.map((logo) => (
+							<li data-reveal>
+								<img src={logo.src} alt={logo.name} width={logo.width} height={logo.height} loading="lazy" decoding="async" />
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</section>
+
+		<section class="svc-band svc-band-dark svc-services" aria-labelledby="ab-services-title">
+			<div class="svc-wrap">
+				<div class="svc-services-head">
+					<p class="svc-eyebrow">What we do</p>
+					<h2 id="ab-services-title" class="svc-giant" data-reveal>Services.</h2>
+				</div>
+				<div class="svc-acc">
+					{
+						aboutServices.map((item, index) => (
+							<details name="ab-services">
+								<summary>
+									<span class="svc-num">{String(index + 1).padStart(2, '0')}</span>
+									<span class="svc-acc-title">{item.label}</span>
+									<span class="svc-toggle" aria-hidden="true"></span>
+								</summary>
+								<div class="svc-acc-body">
+									<p>{item.summary}</p>
+									{item.href && (
+										<p>
+											<a href={item.href}>View service</a>
+										</p>
+									)}
+								</div>
+							</details>
 						))
 					}
 				</div>
-			</section>
-		</div>
+			</div>
+		</section>
+
+		<section class="ab-band-light ab-awards" aria-labelledby="ab-awards-title">
+			<div class="ab-wrap">
+				<div class="ab-awards-head">
+					<p class="ab-label">
+						<span class="ab-arrow" aria-hidden="true">→</span>
+						Team Achievements
+					</p>
+					<h2 id="ab-awards-title" data-reveal>Awards.</h2>
+				</div>
+
+				<table class="ab-awards-table">
+					<colgroup>
+						<col class="ab-col-award" />
+						<col class="ab-col-nom" />
+						<col class="ab-col-year" />
+					</colgroup>
+					<thead>
+						<tr>
+							<th scope="col">Award</th>
+							<th scope="col">Nomination</th>
+							<th scope="col">Year</th>
+						</tr>
+					</thead>
+					<tbody>
+						{
+							awards.map((award) => (
+								<tr data-reveal>
+									<td data-label="Award">
+										<div class="ab-award-name">
+											<span class="ab-award-icon" aria-hidden="true">
+												{award.logoSrc ? (
+													<img src={award.logoSrc} alt="" width="40" height="40" loading="lazy" decoding="async" />
+												) : award.icon === 'telly' ? (
+													<svg viewBox="0 0 24 24" fill="none">
+														<rect x="7" y="3" width="10" height="14" rx="2" stroke="currentColor" stroke-width="1.6" />
+														<path d="M9 19h6M12 17v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+														<path d="M10 8h4M10 11h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+													</svg>
+												) : (
+													<svg viewBox="0 0 24 24" fill="none">
+														<path d="M6 8.5h12v7H6z" stroke="currentColor" stroke-width="1.6" />
+														<path d="M9 8.5V7a3 3 0 0 1 6 0v1.5" stroke="currentColor" stroke-width="1.6" />
+														<circle cx="12" cy="12" r="1.6" fill="currentColor" />
+													</svg>
+												)}
+											</span>
+											<span>{award.name}</span>
+										</div>
+									</td>
+									<td class="ab-award-nomination" data-label="Nomination">
+										{award.nomination}
+									</td>
+									<td data-label="Year">{award.year}</td>
+								</tr>
+							))
+						}
+					</tbody>
+				</table>
+
+				<p class="ab-awards-cta">
+					<a class="ab-pill" href="/exr-blogs/">
+						See all EuphoriaXR news
+						<span class="ab-pill-dot" aria-hidden="true"></span>
+					</a>
+				</p>
+			</div>
+		</section>
+
+		<section class="ab-band-light ab-leaders" aria-labelledby="ab-leaders-title">
+			<div class="ab-wrap">
+				<div class="ab-leaders-head">
+					<p class="ab-label">
+						<span class="ab-arrow" aria-hidden="true">→</span>
+						Leadership
+					</p>
+					<h2 id="ab-leaders-title" data-reveal>Our Leadership</h2>
+				</div>
+				<ul class="ab-leaders-grid">
+					{
+						leaders.map((leader) => (
+							<li>
+								<article class="ab-leader" data-leader-card tabindex="0" aria-expanded="false">
+									<img
+										src={leader.image}
+										alt={`${leader.name}, ${leader.title}`}
+										width={leader.imageWidth}
+										height={leader.imageHeight}
+										loading="lazy"
+										decoding="async"
+									/>
+									<div class="ab-leader-panel">
+										<h3>{leader.name}</h3>
+										<p class="ab-leader-role">{leader.title}</p>
+										<p class="ab-leader-bio">{leader.bio}</p>
+										{leader.linkedin && (
+											<div class="ab-leader-social">
+												<a href={leader.linkedin} target="_blank" rel="noopener noreferrer" aria-label={`${leader.name} on LinkedIn`}>
+													<svg viewBox="0 0 24 24" aria-hidden="true">
+														<path d="M4.98 3.5C4.98 4.88 3.86 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8.5h4V23h-4V8.5zM8.5 8.5h3.8v2h.05c.53-1 1.84-2.05 3.79-2.05 4.05 0 4.8 2.67 4.8 6.14V23h-4v-6.6c0-1.57-.03-3.6-2.2-3.6-2.2 0-2.54 1.72-2.54 3.5V23h-4V8.5z" />
+													</svg>
+												</a>
+											</div>
+										)}
+									</div>
+								</article>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+		</section>
 	</div>
-	<ContactBand id="about-contact-title" compact />
+
+	<script>
+		const cards = document.querySelectorAll<HTMLElement>('[data-leader-card]');
+		const fineHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+		const closeAll = (except?: HTMLElement) => {
+			cards.forEach((card) => {
+				if (card === except) return;
+				card.classList.remove('is-open');
+				card.setAttribute('aria-expanded', 'false');
+			});
+		};
+
+		cards.forEach((card) => {
+			const toggle = () => {
+				const open = !card.classList.contains('is-open');
+				closeAll(open ? card : undefined);
+				card.classList.toggle('is-open', open);
+				card.setAttribute('aria-expanded', open ? 'true' : 'false');
+			};
+
+			card.addEventListener('click', (event) => {
+				const target = event.target as HTMLElement | null;
+				if (target?.closest('a')) return;
+				if (fineHover) return;
+				toggle();
+			});
+
+			card.addEventListener('keydown', (event) => {
+				if (event.key === 'Enter' || event.key === ' ') {
+					event.preventDefault();
+					toggle();
+				}
+				if (event.key === 'Escape') closeAll();
+			});
+		});
+	</script>
+
+	<ContactBand
+		id="about-contact-title"
+		compact
+		lede="Have an idea for an AR, VR, AI, or interactive experience? Tell us what you want to build together."
+	/>
 </BaseLayout>

@@ -131,10 +131,29 @@ function syncOverlay() {
 	header.classList.toggle('overlay', main.dataset.header === 'overlay');
 }
 
+let lastScrollY = 0;
+
 function syncScroll() {
 	const header = headerEl();
 	if (!header) return;
-	header.classList.toggle('is-scrolled', window.scrollY > 40);
+
+	const y = window.scrollY;
+	const past = y > 50;
+	const goingDown = y > lastScrollY + 2;
+	const goingUp = y < lastScrollY - 2;
+
+	header.classList.toggle('is-scrolled', past);
+
+	if (document.body.classList.contains('menu-open') || !past) {
+		header.classList.remove('is-hidden');
+	} else if (goingDown) {
+		header.classList.add('is-hidden');
+		closeMenus();
+	} else if (goingUp) {
+		header.classList.remove('is-hidden');
+	}
+
+	lastScrollY = y;
 }
 
 function onKeydown(event: KeyboardEvent) {

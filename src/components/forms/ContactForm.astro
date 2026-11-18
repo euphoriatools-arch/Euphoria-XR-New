@@ -1,45 +1,112 @@
 ---
 import { site } from '../../config/site';
 import { serviceInterestOptions } from '../../lib/contact';
+
+interface Props {
+	layout?: 'stack' | 'panel';
+}
+
+const { layout = 'stack' } = Astro.props;
+const panel = layout === 'panel';
 ---
 
-<form id="contact-form" class="form-grid" action={site.form.endpoint} method="post" novalidate data-astro-reload>
-	<div class="field">
-		<label for="name">Name</label>
-		<input id="name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="80" />
-		<p class="error" data-error-for="name" hidden></p>
-	</div>
-	<div class="field">
-		<label for="email">Email</label>
-		<input id="email" name="email" type="email" autocomplete="email" required maxlength="120" />
-		<p class="error" data-error-for="email" hidden></p>
-	</div>
-	<div class="field">
-		<label for="company">Company</label>
-		<input id="company" name="company" type="text" autocomplete="organization" maxlength="120" />
-		<p class="error" data-error-for="company" hidden></p>
-	</div>
-	<div class="field">
-		<label for="service">Service interest</label>
-		<select id="service" name="service" required>
-			<option value="">Select a service</option>
-			{serviceInterestOptions.map((option) => <option value={option.value}>{option.label}</option>)}
-		</select>
-		<p class="error" data-error-for="service" hidden></p>
-	</div>
-	<div class="field">
-		<label for="message">Message</label>
-		<textarea id="message" name="message" required minlength="20" maxlength="5000"></textarea>
-		<p class="error" data-error-for="message" hidden></p>
-	</div>
+<form
+	id="contact-form"
+	class:list={['form-grid', panel && 'cx-form']}
+	action={site.form.endpoint}
+	method="post"
+	novalidate
+	data-astro-reload
+>
+	{
+		panel ? (
+			<>
+				<fieldset class="cx-interest">
+					<legend>I'm interested in...</legend>
+					<div class="cx-chips">
+						{serviceInterestOptions.map((option) => (
+							<label class="cx-chip">
+								<input type="radio" name="service" value={option.value} required />
+								<span>{option.label}</span>
+							</label>
+						))}
+					</div>
+					<p class="error" data-error-for="service" hidden />
+				</fieldset>
+				<div class="cx-fields">
+					<div class="cx-split">
+						<div class="field">
+							<label for="name">Name</label>
+							<input id="name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="80" />
+							<p class="error" data-error-for="name" hidden />
+						</div>
+						<div class="field">
+							<label for="company">Company</label>
+							<input id="company" name="company" type="text" autocomplete="organization" maxlength="120" />
+							<p class="error" data-error-for="company" hidden />
+						</div>
+					</div>
+					<div class="field">
+						<label for="email">Email</label>
+						<input id="email" name="email" type="email" autocomplete="email" required maxlength="120" />
+						<p class="error" data-error-for="email" hidden />
+					</div>
+					<div class="field">
+						<label for="message">Message</label>
+						<textarea id="message" name="message" required minlength="20" maxlength="5000" />
+						<p class="error" data-error-for="message" hidden />
+					</div>
+				</div>
+			</>
+		) : (
+			<>
+				<div class="field">
+					<label for="name">Name</label>
+					<input id="name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="80" />
+					<p class="error" data-error-for="name" hidden />
+				</div>
+				<div class="field">
+					<label for="email">Email</label>
+					<input id="email" name="email" type="email" autocomplete="email" required maxlength="120" />
+					<p class="error" data-error-for="email" hidden />
+				</div>
+				<div class="field">
+					<label for="company">Company</label>
+					<input id="company" name="company" type="text" autocomplete="organization" maxlength="120" />
+					<p class="error" data-error-for="company" hidden />
+				</div>
+				<div class="field">
+					<label for="service">Service interest</label>
+					<select id="service" name="service" required>
+						<option value="">Select a service</option>
+						{serviceInterestOptions.map((option) => (
+							<option value={option.value}>{option.label}</option>
+						))}
+					</select>
+					<p class="error" data-error-for="service" hidden />
+				</div>
+				<div class="field">
+					<label for="message">Message</label>
+					<textarea id="message" name="message" required minlength="20" maxlength="5000" />
+					<p class="error" data-error-for="message" hidden />
+				</div>
+			</>
+		)
+	}
 	<div class="hp" aria-hidden="true">
 		<label for="company_website">Website</label>
 		<input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
 	</div>
-	<button class="outline-btn" type="submit">Send message <span class="arrow" aria-hidden="true">↗</span></button>
+	<button class="outline-btn" type="submit">Send message{panel ? '' : <span class="arrow" aria-hidden="true"> ↗</span>}</button>
 	<p class="form-status" role="status" aria-live="polite"></p>
 	<p class="note">
 		Prefer email? Write to <a href={`mailto:${site.email}`}>{site.email}</a>.
+		{panel && (
+			<>
+				{' '}
+				Read the <a href="/privacy-policy/">privacy policy</a>.
+			</>
+		)}
 	</p>
 </form>
 
@@ -53,16 +120,24 @@ import { serviceInterestOptions } from '../../lib/contact';
 		const status = form.querySelector<HTMLElement>('.form-status');
 		const fields = ['name', 'email', 'company', 'service', 'message'] as const;
 
+		const controls = (field: string) => {
+			const item = form.elements.namedItem(field);
+			if (item instanceof RadioNodeList) return [...item].filter((el): el is HTMLInputElement => el instanceof HTMLInputElement);
+			return item instanceof HTMLElement ? [item] : [];
+		};
+
 		const showErrors = (errors: Partial<Record<(typeof fields)[number], string>>) => {
 			for (const field of fields) {
 				const slot = form.querySelector<HTMLElement>(`[data-error-for="${field}"]`);
-				const input = form.elements.namedItem(field);
-				if (!slot || !(input instanceof HTMLElement)) continue;
+				const inputs = controls(field);
+				if (!slot) continue;
 				const message = errors[field];
 				slot.hidden = !message;
 				slot.textContent = message ?? '';
-				if (message) input.setAttribute('aria-invalid', 'true');
-				else input.removeAttribute('aria-invalid');
+				for (const input of inputs) {
+					if (message) input.setAttribute('aria-invalid', 'true');
+					else input.removeAttribute('aria-invalid');
+				}
 			}
 		};
 
@@ -79,8 +154,12 @@ import { serviceInterestOptions } from '../../lib/contact';
 			showErrors(errors);
 			if (Object.keys(errors).length > 0) {
 				if (status) status.textContent = 'Check the highlighted fields and try again.';
+				const firstInvalid = form.querySelector<HTMLElement>('[aria-invalid="true"]');
+				firstInvalid?.focus();
 				return;
 			}
+			const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+			if (button) button.disabled = true;
 			if (status) status.textContent = 'Sending…';
 			try {
 				const response = await fetch(form.action, {
@@ -94,6 +173,8 @@ import { serviceInterestOptions } from '../../lib/contact';
 				if (body.ok) form.reset();
 			} catch {
 				if (status) status.textContent = 'The form could not be sent. Please email the studio directly.';
+			} finally {
+				if (button) button.disabled = false;
 			}
 		});
 	}

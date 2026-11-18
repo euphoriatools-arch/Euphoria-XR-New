@@ -5,9 +5,10 @@ import { navigation } from '../../config/navigation';
 
 interface Props {
 	overlay?: boolean;
+	tone?: 'light' | 'dark';
 }
 
-const { overlay = false } = Astro.props;
+const { overlay = false, tone = 'dark' } = Astro.props;
 const pathname = Astro.url.pathname;
 
 const menus = [
@@ -26,9 +27,9 @@ const menus = [
 ];
 ---
 
-<header id="top" class:list={['topbar', { overlay }]} data-header transition:persist="site-header">
+<header id="top" class:list={['topbar', { overlay, 'is-light': tone === 'light' }]} data-header transition:persist="site-header">
 	<a class="logo" href="/">
-		<img src="/brand/logo-dark.svg" alt="EuphoriaXR logo" width="168" height="28" />
+		<img src={tone === 'light' ? '/brand/logo.svg' : '/brand/logo-dark.webp'} alt="EuphoriaXR logo" width={tone === 'light' ? 168 : 210} height="28" />
 	</a>
 	<nav class="nav" aria-label="Main">
 		<div class="nav-desktop">
@@ -86,7 +87,7 @@ const menus = [
 					</ul>
 				</div>
 			</div>
-			<a class="nav-link" href={navigation.blog.href} aria-current={pathname === navigation.blog.href ? 'page' : undefined}>
+			<a class="nav-link" href={navigation.blog.href} aria-current={pathname === navigation.blog.href || pathname.startsWith('/exr-blogs/') ? 'page' : undefined}>
 				{navigation.blog.label}
 			</a>
 		</div>

@@ -12,6 +12,12 @@ export default defineConfig({
 		prefetchAll: true,
 		defaultStrategy: 'hover',
 	},
+	// Live EuphoriaXR service URLs not yet ported into this Astro scratch.
+	// Keep the real paths in the footer and land on the closest existing page.
+	redirects: {
+		'/services/blockchain-development-company': '/services/nft-makers-metaverse-development-company/',
+		'/ar-vr-rental-services-and-solutions-for-events': '/contact/',
+	},
 	integrations: [
 		mdx(),
 		sitemap({

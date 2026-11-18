@@ -1,0 +1,346 @@
+#eup-scroll-process {
+	--bg: #000;
+	--text: #f6f6f6;
+	--muted: #777;
+	--line: #272727;
+	--accent: #ffffff;
+	--title: #ff253d;
+	background: var(--bg);
+	color: var(--text);
+	width: 100%;
+}
+
+#eup-scroll-process * {
+	box-sizing: border-box;
+}
+
+#eup-scroll-process .eup-wrap {
+	width: min(1250px, calc(100% - 40px));
+	margin: 0 auto;
+	padding: 50px 0 80px;
+}
+
+#eup-scroll-process .eup-intro {
+	max-width: 720px;
+	margin: 0 0 40px;
+}
+
+#eup-scroll-process .eup-intro h2 {
+	margin: 0 0 16px;
+	color: var(--text);
+	font-size: clamp(1.75rem, 4vw, 2.35rem);
+	font-weight: 700;
+	line-height: 1.11;
+	letter-spacing: -0.04em;
+}
+
+#eup-scroll-process .eup-intro p {
+	margin: 0;
+	max-width: 560px;
+	color: #d4d4e8;
+	font-size: clamp(16px, 1.2vw, 18px);
+	line-height: 1.6;
+}
+
+#eup-scroll-process .eup-grid {
+	position: relative;
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(360px, 0.88fr);
+	gap: clamp(50px, 5vw, 130px);
+	align-items: start;
+}
+
+#eup-scroll-process .eup-left {
+	position: relative;
+	padding-left: 74px;
+}
+
+#eup-scroll-process .eup-progress {
+	position: absolute;
+	left: 18px;
+	top: 18px;
+	bottom: 18px;
+	width: 2px;
+	background: var(--line);
+	overflow: hidden;
+}
+
+#eup-scroll-process .eup-progress-fill {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 0%;
+	background: var(--accent);
+	transition: height 0.12s linear;
+}
+
+#eup-scroll-process .eup-process-step {
+	min-height: 82vh;
+	display: flex;
+	align-items: center;
+	gap: 34px;
+	opacity: 0.26;
+	transform: translateY(16px);
+	transition:
+		opacity 0.4s ease,
+		transform 0.4s ease;
+	position: relative;
+}
+
+#eup-scroll-process .eup-process-step.is-active {
+	opacity: 1;
+	transform: none;
+}
+
+#eup-scroll-process .eup-step-index {
+	min-width: 50px;
+	font-size: 13px;
+	letter-spacing: 0.08em;
+	color: #9b9b9b;
+	position: relative;
+}
+
+#eup-scroll-process .eup-step-index:before {
+	content: "";
+	position: absolute;
+	left: -61px;
+	top: 50%;
+	width: 12px;
+	height: 12px;
+	border: 2px solid #777;
+	border-radius: 50%;
+	background: var(--bg);
+	transform: translateY(-50%);
+	transition: 0.35s ease;
+}
+
+#eup-scroll-process .eup-process-step.is-active .eup-step-index:before {
+	width: 16px;
+	height: 16px;
+	left: -63px;
+	border-color: #fff;
+	background: #fff;
+	box-shadow: 0 0 0 7px rgba(255, 255, 255, 0.08);
+}
+
+#eup-scroll-process .eup-step-copy h3 {
+	margin: 0 0 18px;
+	color: var(--title);
+	font-size: clamp(34px, 2.5vw, 72px);
+	line-height: 0.95;
+	letter-spacing: -0.045em;
+	font-weight: 500;
+}
+
+#eup-scroll-process .eup-step-copy p {
+	margin: 0;
+	max-width: 560px;
+	color: #d4d4e8;
+	font-size: clamp(16px, 1.2vw, 18px);
+	line-height: 1.6;
+}
+
+#eup-scroll-process .eup-mobile-visual {
+	display: none;
+}
+
+#eup-scroll-process .eup-visual-stage {
+	position: sticky;
+	top: 50%;
+	translate: 0 -50%;
+	width: min(72%, 420px);
+	height: 60vh;
+	min-height: 560px;
+	max-height: min(760px, 70vh);
+	overflow: hidden;
+	border-radius: 200px;
+	background: #111;
+	box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
+	isolation: isolate;
+	justify-self: center;
+	align-self: start;
+	margin-inline: auto;
+}
+
+#eup-scroll-process .eup-visual-stage:after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	border: 1px solid rgba(255, 255, 255, 0.13);
+	border-radius: inherit;
+	z-index: 10;
+	pointer-events: none;
+}
+
+#eup-scroll-process .eup-visual {
+	margin: 0;
+	position: absolute;
+	inset: 0;
+	opacity: 0;
+	transform: scale(0.965) translateY(28px);
+	transition:
+		opacity 0.65s cubic-bezier(0.2, 0.8, 0.2, 1),
+		transform 0.65s cubic-bezier(0.2, 0.8, 0.2, 1);
+	z-index: 1;
+}
+
+#eup-scroll-process .eup-visual.is-active {
+	opacity: 1;
+	transform: scale(1) translateY(0);
+	z-index: 2;
+}
+
+#eup-scroll-process .eup-visual img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center center;
+	display: block;
+}
+
+@media (max-width: 1024px) {
+	#eup-scroll-process .eup-wrap {
+		padding-top: 80px;
+	}
+
+	#eup-scroll-process .eup-grid {
+		grid-template-columns: minmax(0, 1fr) minmax(200px, 0.8fr);
+		gap: 44px;
+	}
+
+	#eup-scroll-process .eup-left {
+		padding-left: 56px;
+	}
+
+	#eup-scroll-process .eup-progress {
+		left: 11px;
+	}
+
+	#eup-scroll-process .eup-step-index:before {
+		left: -52px;
+	}
+
+	#eup-scroll-process .eup-process-step.is-active .eup-step-index:before {
+		left: -54px;
+	}
+
+	#eup-scroll-process .eup-visual-stage {
+		min-height: 480px;
+		border-radius: 999px;
+		width: 100%;
+	}
+}
+
+@media (max-width: 767px) {
+	#eup-scroll-process {
+		overflow: visible;
+	}
+
+	#eup-scroll-process .eup-wrap {
+		width: min(100%, calc(100% - 32px));
+		padding: 30px 0;
+	}
+
+	#eup-scroll-process .eup-intro {
+		margin: 0 0 40px;
+	}
+
+	#eup-scroll-process .eup-intro h2 {
+		font-size: clamp(1.5rem, 7vw, 2rem);
+	}
+
+	#eup-scroll-process .eup-intro p {
+		max-width: none;
+		color: #e7e7ea;
+		font-size: 16px;
+		line-height: 1.52;
+	}
+
+	#eup-scroll-process .eup-grid {
+		display: block;
+	}
+
+	#eup-scroll-process .eup-visual-stage {
+		display: none !important;
+	}
+
+	#eup-scroll-process .eup-left {
+		width: 100%;
+		padding: 0;
+	}
+
+	#eup-scroll-process .eup-progress {
+		display: none;
+	}
+
+	#eup-scroll-process .eup-process-step {
+		display: block;
+		min-height: auto;
+		margin: 0 0 82px;
+		opacity: 1;
+		transform: none;
+	}
+
+	#eup-scroll-process .eup-step-index {
+		min-width: 0;
+		margin: 0 0 12px;
+		color: #f3f3f3;
+		font-size: 13px;
+		line-height: 1;
+		letter-spacing: 0.08em;
+		font-weight: 600;
+	}
+
+	#eup-scroll-process .eup-step-index:before {
+		display: none;
+	}
+
+	#eup-scroll-process .eup-step-copy h3 {
+		margin: 0 0 18px;
+		color: var(--title);
+		font-size: clamp(25px, 7.2vw, 34px);
+		line-height: 1.08;
+		letter-spacing: -0.025em;
+		font-weight: 500;
+	}
+
+	#eup-scroll-process .eup-mobile-visual {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 0.78;
+		margin: 0 0 22px;
+		overflow: hidden;
+		border-radius: 250px;
+		background: #111;
+		border: 1px solid rgba(255, 37, 61, 0.72);
+	}
+
+	#eup-scroll-process .eup-mobile-visual img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	#eup-scroll-process .eup-step-copy p {
+		margin: 0;
+		max-width: none;
+		color: #e7e7ea;
+		font-size: 16px;
+		line-height: 1.52;
+	}
+
+	#eup-scroll-process .eup-process-step:last-child {
+		margin-bottom: 28px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	#eup-scroll-process .eup-process-step,
+	#eup-scroll-process .eup-visual {
+		transition: none !important;
+	}
+}

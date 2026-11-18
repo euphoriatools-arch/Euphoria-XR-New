@@ -1,0 +1,21 @@
+---
+import BlogListing from '../../../components/blog/BlogListing.astro';
+import { blogTabs, type BlogTabId } from '../../../lib/blog';
+
+export function getStaticPaths() {
+	return blogTabs
+		.filter((tab) => tab.id !== 'all')
+		.map((tab) => ({
+			params: { category: tab.id },
+			props: { tab: tab.id },
+		}));
+}
+
+interface Props {
+	tab: BlogTabId;
+}
+
+const { tab } = Astro.props;
+---
+
+<BlogListing tab={tab} />

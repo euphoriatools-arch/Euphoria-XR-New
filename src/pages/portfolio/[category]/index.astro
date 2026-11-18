@@ -1,12 +1,13 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Breadcrumbs from '../../../components/ui/Breadcrumbs.astro';
+import ContactBand from '../../../components/studio/ContactBand.astro';
+import CaseCard from '../../../components/portfolio/CaseCard.astro';
 import PortfolioImage from '../../../components/portfolio/PortfolioImage.astro';
-import ProjectGrid from '../../../components/portfolio/ProjectGrid.astro';
 import { categories, categoryBySlug } from '../../../content/categories';
 import { photoFor } from '../../../data/images';
 import { loadProjects, projectsInCategory } from '../../../lib/portfolio';
 import { breadcrumbSchema } from '../../../lib/schema';
+import '../../../styles/case.css';
 
 export function getStaticPaths() {
 	return categories.map((category) => ({
@@ -25,91 +26,55 @@ const crumbs = [
 ];
 ---
 
-<BaseLayout title={category.seo.title} description={category.seo.description} jsonLd={[breadcrumbSchema(crumbs)]}>
-	<article class="portfolio-category" style={`--accent: ${category.accent}`}>
-		<header class="portfolio-hero">
+<BaseLayout title={category.seo.title} description={category.seo.description} overlayHeader jsonLd={[breadcrumbSchema(crumbs)]}>
+	<div class="cs-category">
+		<section class="cs-hero-frame" aria-labelledby="category-title">
 			<PortfolioImage
 				src={hero}
 				alt={category.heroAlt}
 				width={hero.width}
 				height={hero.height}
+				widths={[800, 1400]}
+				sizes="100vw"
 				loading="eager"
 				fetchpriority="high"
-				widths={[800, 1200, 1400]}
-				sizes="100vw"
-				class="hero-media"
 			/>
-			<div class="section-inner">
-				<Breadcrumbs items={crumbs} />
-				<p class="eyebrow">Portfolio</p>
-				<h1>{category.name}</h1>
-				<p class="lede">{category.intro}</p>
-			</div>
-		</header>
-
-		<section class="section">
-			<div class="section-inner">
-				<h2>Why teams ask for this</h2>
-				<ul class="benefit-grid">
-					{
-						category.benefits.map((benefit) => (
-							<li>
-								<h3>{benefit.title}</h3>
-								<p>{benefit.body}</p>
-							</li>
-						))
-					}
-				</ul>
+			<div class="cs-hero-copy">
+				<h1 id="category-title">{category.name}</h1>
 			</div>
 		</section>
-
-		<section class="section">
-			<div class="section-inner">
-				<h2>Projects</h2>
-				<ProjectGrid projects={projects} />
+		<section class="cs-work" aria-labelledby="category-work-title">
+			<div class="cs-work-head">
+				<h2 id="category-work-title">Latest Work</h2>
+			</div>
+			<nav class="cs-filters" aria-label="Case study categories">
+				<a href="/portfolio/">All</a>
+				{
+					categories.map((item) => (
+						<a href={`/portfolio/${item.slug}/`} aria-current={item.slug === category.slug ? 'page' : undefined}>
+							{item.tab}
+						</a>
+					))
+				}
+			</nav>
+			<div class="cs-grid">
+				{projects.map((project, index) => <CaseCard project={project} eager={index < 3} />)}
 			</div>
 		</section>
-
-		<section class="section">
-			<div class="section-inner quote-award">
-				<div>
-					<h2>Client note</h2>
-					<figure class="quote-block">
-						<blockquote>
-							<p>{category.testimonial.quote}</p>
-						</blockquote>
-						<figcaption>
-							<strong>{category.testimonial.name}</strong>
-							{category.testimonial.role}, {category.testimonial.company}
-						</figcaption>
-					</figure>
-				</div>
-				<div>
-					<h2>Awards</h2>
-					<ul class="award-list">
-						{
-							category.awards.map((award) => (
-								<li>
-									<p>
-										<strong>{award.name}</strong> <span>{award.year}</span>
-									</p>
-									<p>{award.detail}</p>
-								</li>
-							))
-						}
-					</ul>
-				</div>
-			</div>
+		<section class="cs-benefits" aria-labelledby="category-why-title">
+			<h2 id="category-why-title">Why teams ask for this</h2>
+			<p class="cs-benefits-lead">{category.intro}</p>
+			<ul>
+				{
+					category.benefits.map((benefit) => (
+						<li>
+							<h3>{benefit.title}</h3>
+							<p>{benefit.body}</p>
+						</li>
+					))
+				}
+			</ul>
 		</section>
-
-		<section class="section portfolio-end">
-			<div class="section-inner">
-				<h2>Start a project in {category.name}</h2>
-				<p>Tell us the audience, the constraint, and the date. We will reply with the lightest credible way to begin.</p>
-				<a class="outline-btn portfolio-cta" href="/contact/">
-					Start a project in {category.name} <span class="arrow" aria-hidden="true">↗</span>
-				</a>
-			</div>
-		</section>
-	</article>
+	</div>
+	<ContactBand />
 </BaseLayout>

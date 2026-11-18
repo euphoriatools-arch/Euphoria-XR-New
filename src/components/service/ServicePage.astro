@@ -1,0 +1,669 @@
+---
+import { Image } from 'astro:assets';
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import ContactForm from '../forms/ContactForm.astro';
+import HowIcon from './HowIcon.astro';
+import WorkCard from '../studio/WorkCard.astro';
+import { industryPages } from '../../data/industries';
+import { photoFor } from '../../data/images';
+import { serviceInsightFor } from '../../data/serviceInsights';
+import { showVrHeadsetsFor, vrHeadsets, vrHeadsetsIntro, vrHeadsetsTitle } from '../../data/vrHeadsets';
+import { vrPageExtras, vrServiceSlug } from '../../data/vrPage';
+import { clientLogos, clientNames, trustedLogos } from '../../data/clients';
+import { howWeWorkCards } from '../../data/howWeWork';
+import { loadProjects } from '../../lib/portfolio';
+import { caseStudiesForPage } from '../../lib/servicePortfolio';
+import type { MarketingPage } from '../../data/types';
+import '../../styles/service.css';
+
+interface Props {
+	page: MarketingPage;
+}
+
+const { page } = Astro.props;
+const isVrPage = page.slug === vrServiceSlug;
+const crumbs = [
+	{ name: 'Home', href: '/' },
+	{ name: page.navLabel, href: `/${page.slug}/` },
+];
+const heroPhoto = photoFor(page.image);
+const keyword = page.keywords.primary;
+
+function firstSentence(text: string) {
+	const match = text.match(/^[\s\S]*?[.!?](?:\s|$)/);
+	return (match?.[0] ?? text).trim();
+}
+
+function heroLines(h1: string) {
+	const words = h1.trim().split(/\s+/);
+	if (words.length < 2) return [h1];
+	const mid = Math.ceil(words.length / 2);
+	return [words.slice(0, mid).join(' '), words.slice(mid).join(' ')];
+}
+
+function accent(text: string, word: string) {
+	const index = text.toLowerCase().indexOf(word.toLowerCase());
+	if (index < 0) return { before: text, accent: '', after: '' };
+	return {
+		before: text.slice(0, index),
+		accent: text.slice(index, index + word.length),
+		after: text.slice(index + word.length),
+	};
+}
+
+const lines = heroLines(page.h1);
+const sentence = firstSentence(page.intro[0] ?? page.summary);
+const introRest = (page.intro[0] ?? '').slice(sentence.length).trim();
+const sentenceHasKeyword = sentence.toLowerCase().includes(keyword.toLowerCase());
+const accentWord = sentenceHasKeyword ? keyword.split(' ').find((part) => part.length > 4) ?? '' : '';
+const statement = accentWord ? accent(sentence, accentWord) : { before: sentence, accent: '', after: '' };
+const defaultIndustries = page.kind === 'service' ? industryPages.filter((item) => item.slug !== page.slug) : [];
+const talkBenefits = page.benefits.slice(0, 6);
+const insight = serviceInsightFor(page);
+const caseStudies = isVrPage ? [] : caseStudiesForPage(page, await loadProjects());
+const showHeadsets = showVrHeadsetsFor(page.slug);
+const servicesLead = isVrPage ? vrPageExtras.servicesLead : page.intro[0];
+const servicesTitle = isVrPage ? vrPageExtras.servicesTitle : 'Services.';
+const clientsLead = isVrPage
+	? vrPageExtras.clientsLead
+	: 'EuphoriaXR builds production-ready AR, VR, and AI experiences for enterprise teams that need the work shipped—not a demo that dies after the pitch.';
+const talkSub = isVrPage ? vrPageExtras.talkSub : `Partner with EuphoriaXR on ${page.serviceType}.`;
+const counters = [
+	{ value: '10+', label: 'Years in the Virtual Reality industry' },
+	{ value: '300+', label: 'Successful projects launched' },
+	{ value: '50+', label: 'Headsets, devices and platforms supported' },
+	{ value: '100%', label: 'Client satisfaction rate' },
+];
+---
+
+<div class="svc">
+	<div class="svc-progress" data-svc-progress aria-hidden="true"></div>
+
+	<div class="svc-crumbs">
+		<Breadcrumbs items={crumbs} />
+	</div>
+
+	<section class="svc-hero" aria-labelledby="svc-title">
+		<div class="svc-hero-frame">
+			<Image
+				src={heroPhoto}
+				alt={`${page.serviceType}. ${keyword}.`}
+				widths={[800, 1280, 1800]}
+				sizes="100vw"
+				loading="eager"
+				fetchpriority="high"
+			/>
+			<div class="svc-hero-copy">
+				<h1 id="svc-title">
+					{lines[0]}
+					{lines[1] ? <span>{lines[1]}</span> : null}
+				</h1>
+				<div class="svc-hero-foot">
+					<p>{page.summary}</p>
+					<p class="svc-mark" aria-hidden="true">Euphoria<span>XR</span></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="svc-band svc-band-light" aria-labelledby="svc-intro-title">
+		<div class="svc-wrap svc-split">
+			<p class="svc-eyebrow">{page.eyebrow}</p>
+			<div>
+				<h2 id="svc-intro-title" data-reveal>
+					{statement.before}<span class="svc-accent">{statement.accent}</span>{statement.after}
+				</h2>
+				{introRest ? <p data-reveal>{introRest}</p> : null}
+				{page.intro[1] ? <p data-reveal>{page.intro[1]}</p> : null}
+			</div>
+		</div>
+	</section>
+
+	<section class="svc-counters" aria-label="Studio metrics">
+		<div class="svc-wrap">
+			<ul class="svc-counter-grid">
+				{
+					counters.map((item) => (
+						<li class="svc-counter" data-reveal>
+							<strong>{item.value}</strong>
+							<span>{item.label}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<section class="svc-trusted" aria-labelledby="svc-trusted-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label" id="svc-trusted-title">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				Trusted by
+			</p>
+			<ul class="svc-trusted-grid">
+				{
+					trustedLogos.map((logo) => (
+						<li data-reveal>
+							<img src={logo.src} alt={logo.name} width={logo.width} height={logo.height} loading="lazy" decoding="async" />
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{
+		page.process.length > 0 && (
+			<section class="svc-band svc-band-dark svc-services" aria-labelledby="svc-services-title">
+				<div class="svc-wrap">
+					<div class="svc-services-head">
+						<p class="svc-eyebrow">What we do</p>
+						<h2 id="svc-services-title" class="svc-giant" data-reveal>{servicesTitle}</h2>
+					</div>
+					<p class="svc-lead" data-reveal>{servicesLead}</p>
+					<div class="svc-acc">
+						{page.process.map((step, index) => (
+							<details name="svc-process" open={index === 0}>
+								<summary>
+									<span class="svc-num">{String(index + 1).padStart(2, '0')}</span>
+									<span class="svc-acc-title">{step.title}</span>
+									<span class="svc-toggle" aria-hidden="true"></span>
+								</summary>
+								<div class="svc-acc-body">
+									<p>{step.body}</p>
+								</div>
+							</details>
+						))}
+					</div>
+					<p class="svc-cta-row">
+						<a class="svc-pill svc-pill-light" href="/contact/">Submit a Project Inquiry</a>
+					</p>
+				</div>
+			</section>
+		)
+	}
+
+	{
+		insight && (
+			<section class="svc-band svc-band-light svc-insight" aria-labelledby="svc-insight-title">
+				<div class="svc-wrap">
+					<div class="svc-insight-head" data-reveal>
+						<p class="svc-use-label">
+							<span class="svc-use-arrow" aria-hidden="true">→</span>
+							{insight.label}
+						</p>
+						<h2 id="svc-insight-title">{insight.headline}</h2>
+						<p class="svc-insight-body">{insight.body}</p>
+					</div>
+					{insight.items ? (
+						<div class="svc-insight-grid" data-insight-zigzag>
+							{insight.items.map((item, index) => {
+								const headingFirst = index % 2 === 0;
+								const heading = (
+									<article class="svc-insight-card is-stat" data-reveal>
+										<span class="svc-insight-index">{item.index}</span>
+										<h3>{item.title}</h3>
+									</article>
+								);
+								const copy = (
+									<article class="svc-insight-card is-copy" data-reveal>
+										<p>{item.body}</p>
+										<p class="svc-insight-source">{item.source}</p>
+									</article>
+								);
+								return (
+									<div class:list={['svc-insight-col', headingFirst ? 'is-heading-top' : 'is-heading-bottom']}>
+										{headingFirst ? (
+											<>
+												{heading}
+												{copy}
+											</>
+										) : (
+											<>
+												{copy}
+												{heading}
+											</>
+										)}
+									</div>
+								);
+							})}
+						</div>
+					) : insight.columns ? (
+						<div class="svc-insight-grid">
+							{insight.columns.map((column) => (
+								<div class="svc-insight-col">
+									{column.map((card) => (
+										<article class:list={['svc-insight-card', `is-${card.kind}`]} data-reveal>
+											{card.index ? <span class="svc-insight-index">{card.index}</span> : null}
+											<p>{card.text}</p>
+										</article>
+									))}
+								</div>
+							))}
+						</div>
+					) : null}
+				</div>
+			</section>
+		)
+	}
+
+	{
+		isVrPage ? (
+			<section class="svc-band svc-band-light" aria-labelledby="svc-industry-title">
+				<div class="svc-wrap">
+					<h2 id="svc-industry-title" class="svc-section-title" data-reveal>VR Industry Applications</h2>
+					<p class="svc-lead" data-reveal>{vrPageExtras.industriesLead}</p>
+					<div class="svc-industry-grid svc-industry-grid-text">
+						{vrPageExtras.industries.map((industry, index) => (
+							<article class="svc-industry-card is-text" data-reveal>
+								<span class="svc-industry-num">{String(index + 1).padStart(2, '0')}</span>
+								<h3>{industry.title}</h3>
+								<p>{industry.body}</p>
+								{industry.href ? (
+									<a class="svc-industry-link" href={industry.href}>
+										Learn more
+									</a>
+								) : null}
+							</article>
+						))}
+					</div>
+				</div>
+			</section>
+		) : (
+			defaultIndustries.length > 0 && (
+				<section class="svc-band svc-band-light" aria-labelledby="svc-industry-title">
+					<div class="svc-wrap">
+						<h2 id="svc-industry-title" class="svc-section-title" data-reveal>Industry Applications</h2>
+						<p class="svc-lead" data-reveal>
+							Immersive work shows up where a team has to practice a space, a procedure, or a product before they meet it for real.
+						</p>
+						<div class="svc-industry-grid">
+							{defaultIndustries.map((industry, index) => (
+								<article class="svc-industry-card" data-reveal>
+									<span class="svc-industry-num">{String(index + 1).padStart(2, '0')}</span>
+									<h3>{industry.h1}</h3>
+									<p>{industry.summary}</p>
+									<a class="svc-industry-link" href={`/${industry.slug}/`}>{industry.navLabel}</a>
+									<div class="svc-industry-media">
+										<Image
+											src={photoFor(industry.image)}
+											alt=""
+											widths={[480, 800]}
+											sizes="(min-width: 1100px) 280px, (min-width: 720px) 46vw, 100vw"
+											loading="lazy"
+										/>
+									</div>
+								</article>
+							))}
+						</div>
+					</div>
+				</section>
+			)
+		)
+	}
+
+	{
+		isVrPage ? (
+			<section class="svc-cases hx-featured" aria-labelledby="svc-cases-title">
+				<div class="svc-wrap">
+					<div class="hx-head">
+						<h2 id="svc-cases-title">{vrPageExtras.useCases.headline}</h2>
+						{vrPageExtras.useCases.items.length >= 3 && (
+							<button class="hx-featured-next" type="button" data-svc-cases-next aria-label="Next VR development use case">
+								<span aria-hidden="true">›</span>
+							</button>
+						)}
+					</div>
+					<div class="swiper" data-svc-cases-swiper>
+						<div class="swiper-wrapper">
+							{vrPageExtras.useCases.items.map((item) => {
+								const photo = photoFor(item.image);
+								const external = item.href.startsWith('http');
+								return (
+									<a
+										class="hx-card swiper-slide"
+										href={item.href}
+										data-text={item.title.toLowerCase()}
+										target={external ? '_blank' : undefined}
+										rel={external ? 'noopener noreferrer' : undefined}
+									>
+										<Image
+											src={photo}
+											alt={item.imageAlt}
+											widths={[400, 800, 1200]}
+											sizes="(min-width: 1024px) 28vw, 80vw"
+											loading="lazy"
+										/>
+										<span class="hx-card-shade" aria-hidden="true"></span>
+										<span class="hx-card-hover" aria-hidden="true"></span>
+										<span class="hx-card-copy">
+											<h3>{item.title}</h3>
+											<span class="hx-card-meta">
+												<span>{item.meta}</span>
+												<span aria-hidden="true">→</span>
+											</span>
+										</span>
+									</a>
+								);
+							})}
+						</div>
+					</div>
+				</div>
+			</section>
+		) : (
+			caseStudies.length > 0 && (
+				<section class="svc-cases hx-featured" aria-labelledby="svc-cases-title">
+					<div class="svc-wrap">
+						<div class="hx-head">
+							<h2 id="svc-cases-title">Featured Case Studies</h2>
+							{caseStudies.length >= 3 && (
+								<button class="hx-featured-next" type="button" data-svc-cases-next aria-label="Next featured case study">
+									<span aria-hidden="true">›</span>
+								</button>
+							)}
+						</div>
+						<div class="swiper" data-svc-cases-swiper>
+							<div class="swiper-wrapper">
+								{caseStudies.map((project) => (
+									<WorkCard project={project} slide />
+								))}
+							</div>
+						</div>
+					</div>
+				</section>
+			)
+		)
+	}
+
+	{
+		showHeadsets && (
+			<section class="svc-band svc-band-light svc-headsets" aria-labelledby="svc-headsets-title">
+				<div class="svc-wrap">
+					<div class="svc-headsets-head">
+						<h2 id="svc-headsets-title" data-reveal>{vrHeadsetsTitle}</h2>
+						<p data-reveal>{vrHeadsetsIntro}</p>
+					</div>
+					<ul class="svc-headsets-grid">
+						{vrHeadsets.map((headset) => (
+							<li>
+								<article class="svc-headset" data-headset-card tabindex="0">
+									<span class="svc-headset-plus" aria-hidden="true">+</span>
+									<img
+										class="svc-headset-media"
+										src={headset.image}
+										alt={headset.imageAlt}
+										width="640"
+										height="800"
+										loading="lazy"
+										decoding="async"
+									/>
+									<span class="svc-headset-brand" aria-hidden="true">{headset.logoLabel}</span>
+									<div class="svc-headset-panel">
+										<h3>{headset.name}</h3>
+										<p>{headset.body}</p>
+									</div>
+								</article>
+							</li>
+						))}
+					</ul>
+				</div>
+			</section>
+		)
+	}
+
+	{
+		isVrPage ? (
+			<section class="svc-band svc-band-dark svc-how" aria-labelledby="svc-how-title">
+				<div class="svc-wrap">
+					<h2 id="svc-how-title" class="svc-giant" data-reveal>{vrPageExtras.processTitle}</h2>
+					<p class="svc-lead" data-reveal>{vrPageExtras.processLead}</p>
+					<ul class="svc-how-grid">
+						{vrPageExtras.process.map((step, index) => (
+							<li class="svc-how-card" data-reveal>
+								<HowIcon name={(['trophy', 'speed', 'delivery', 'code', 'partnership'] as const)[index] ?? 'delivery'} />
+								<h3>{step.title}</h3>
+								<p>{step.body}</p>
+							</li>
+						))}
+					</ul>
+					<p class="svc-cta-row">
+						<a class="svc-pill svc-pill-light" href={vrPageExtras.processCta.href}>{vrPageExtras.processCta.label}</a>
+					</p>
+				</div>
+			</section>
+		) : (
+			<section class="svc-band svc-band-dark svc-how" aria-labelledby="svc-how-title">
+				<div class="svc-wrap">
+					<h2 id="svc-how-title" class="svc-giant" data-reveal>How we work.</h2>
+					<p class="svc-lead" data-reveal>The points below are the ones this engagement is built to keep.</p>
+					<ul class="svc-how-grid">
+						{howWeWorkCards.map((item) => (
+							<li class="svc-how-card" data-reveal>
+								<HowIcon name={item.icon} />
+								<h3>{item.title}</h3>
+								<p>{item.body}</p>
+							</li>
+						))}
+					</ul>
+					<p class="svc-cta-row">
+						<a class="svc-pill svc-pill-light" href="/about/">Learn more about EuphoriaXR</a>
+					</p>
+				</div>
+			</section>
+		)
+	}
+
+	{
+		page.faqs.length > 0 && (
+			<section class="svc-band svc-band-light svc-faq-band" aria-labelledby="svc-faq-title">
+				<div class="svc-wrap">
+					<h2 id="svc-faq-title" class="svc-giant svc-giant-dark" data-reveal>Frequently Asked Questions</h2>
+					<p class="svc-faq-lead">Questions we answer before a first call about {page.serviceType}.</p>
+					<div class="svc-faq">
+						{page.faqs.map((faq) => (
+							<details>
+								<summary>
+									<span>{faq.question}</span>
+									<span class="svc-faq-toggle" aria-hidden="true"></span>
+								</summary>
+								<p>{faq.answer}</p>
+							</details>
+						))}
+					</div>
+				</div>
+			</section>
+		)
+	}
+
+	<section class="svc-clients" aria-labelledby="svc-clients-title">
+		<div class="svc-wrap">
+			<div class="svc-clients-head" data-reveal>
+				<p class="svc-use-label">
+					<span class="svc-use-arrow" aria-hidden="true">→</span>
+					Selected clients
+				</p>
+				<div>
+					<h2 id="svc-clients-title" class="svc-clients-copy">
+						{clientsLead}
+					</h2>
+					<p class="svc-clients-names">
+						Teams we have worked with include{' '}
+						{clientNames.map((name, index) => (
+							<>
+								<strong>{name}</strong>
+								{index < clientNames.length - 2 ? ', ' : index === clientNames.length - 2 ? ' and ' : '.'}
+							</>
+						))}
+					</p>
+				</div>
+			</div>
+			<ul class="svc-logo-grid">
+				{
+					clientLogos.map((logo) => (
+						<li>
+							<img src={logo.src} alt={logo.name} width={logo.width} height={logo.height} loading="lazy" decoding="async" />
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<section class="svc-band svc-band-dark svc-talk" aria-labelledby="svc-talk-title">
+		<div class="svc-wrap svc-talk-grid">
+			<div class="svc-form-card">
+				<p class="svc-form-title">Ready to <span>build?</span></p>
+				<ContactForm />
+			</div>
+			<div>
+				<h2 id="svc-talk-title" class="svc-giant">Let's talk.</h2>
+				<p class="svc-talk-sub">{talkSub.includes('Partner with EuphoriaXR') ? (
+					<>
+						<span>Partner with EuphoriaXR</span>
+						{talkSub.replace('Partner with EuphoriaXR', '')}
+					</>
+				) : (
+					talkSub
+				)}</p>
+				<ul class="svc-perks">
+					{talkBenefits.map((item) => (
+						<li>{item.title}</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<div class="svc-edge-blur" data-svc-edge-blur aria-hidden="true">
+		{
+			Array.from({ length: 4 }, (_, i) => (
+				<div class="svc-edge-blur__layer" style={`--i:${i};--n:4`} />
+			))
+		}
+	</div>
+</div>
+
+<script>
+	import Swiper from 'swiper';
+	import { Autoplay } from 'swiper/modules';
+
+	let casesSwiper: Swiper | undefined;
+
+	function bindProgress() {
+		const bar = document.querySelector<HTMLElement>('[data-svc-progress]');
+		if (!bar || bar.dataset.bound === 'true') return;
+		bar.dataset.bound = 'true';
+		const paint = () => {
+			const height = document.documentElement.scrollHeight - window.innerHeight;
+			const progress = height > 0 ? window.scrollY / height : 0;
+			bar.style.transform = `scaleX(${progress})`;
+		};
+		paint();
+		window.addEventListener('scroll', paint, { passive: true });
+	}
+
+	function pinEdgeBlur() {
+		const blur = document.querySelector<HTMLElement>('[data-svc-edge-blur]');
+		if (!blur) return;
+		if (blur.dataset.pinned !== 'true') {
+			document.body.appendChild(blur);
+			blur.dataset.pinned = 'true';
+		}
+		if (blur.dataset.toneBound === 'true') return;
+		blur.dataset.toneBound = 'true';
+
+		const paintTone = () => {
+			const sampleY = Math.max(0, window.innerHeight - 28);
+			const sampleX = Math.round(window.innerWidth / 2);
+			const stack = document.elementsFromPoint(sampleX, sampleY);
+			let light = false;
+			for (const node of stack) {
+				if (!(node instanceof HTMLElement)) continue;
+				if (node === blur || blur.contains(node)) continue;
+				if (node.closest('.svc-band-light, .svc-counters, .svc-use, .svc-trusted, .svc-insight, .svc-headsets')) {
+					light = true;
+					break;
+				}
+				if (node.closest('.svc-band-dark, .svc-hero, .svc-talk, .svc-clients, .svc-cases, footer, .go-offices')) {
+					light = false;
+					break;
+				}
+			}
+			blur.classList.toggle('is-light', light);
+		};
+
+		paintTone();
+		window.addEventListener('scroll', paintTone, { passive: true });
+		window.addEventListener('resize', paintTone);
+	}
+
+	function mountCases() {
+		casesSwiper?.destroy(true, true);
+		casesSwiper = undefined;
+		const root = document.querySelector<HTMLElement>('[data-svc-cases-swiper]');
+		if (!root || root.classList.contains('swiper-initialized')) return;
+		const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+		const autoplay = motion.matches || saveData;
+		casesSwiper = new Swiper(root, {
+			modules: [Autoplay],
+			slidesPerView: 1.2,
+			spaceBetween: 30,
+			loop: true,
+			speed: motion.matches ? 0 : 300,
+			autoplay: autoplay ? false : { delay: 4000, disableOnInteraction: false },
+			keyboard: { enabled: true, onlyInViewport: true },
+			breakpoints: {
+				640: { slidesPerView: 2 },
+				1024: { slidesPerView: 2.5 },
+			},
+		});
+		document.querySelector('[data-svc-cases-next]')?.addEventListener('click', () => casesSwiper?.slideNext());
+	}
+
+	function bindHeadsets() {
+		const cards = document.querySelectorAll<HTMLElement>('[data-headset-card]');
+		if (!cards.length) return;
+		const fineHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+		const closeAll = (except?: HTMLElement) => {
+			cards.forEach((card) => {
+				if (card === except) return;
+				card.classList.remove('is-open');
+			});
+		};
+		cards.forEach((card) => {
+			if (card.dataset.bound === 'true') return;
+			card.dataset.bound = 'true';
+			card.addEventListener('click', () => {
+				if (fineHover) return;
+				const open = !card.classList.contains('is-open');
+				closeAll(open ? card : undefined);
+				card.classList.toggle('is-open', open);
+			});
+			card.addEventListener('keydown', (event) => {
+				if (event.key === 'Enter' || event.key === ' ') {
+					event.preventDefault();
+					const open = !card.classList.contains('is-open');
+					closeAll(open ? card : undefined);
+					card.classList.toggle('is-open', open);
+				}
+				if (event.key === 'Escape') closeAll();
+			});
+		});
+	}
+
+	bindProgress();
+	pinEdgeBlur();
+	mountCases();
+	bindHeadsets();
+	document.addEventListener('astro:page-load', () => {
+		bindProgress();
+		pinEdgeBlur();
+		mountCases();
+		bindHeadsets();
+	});
+	document.addEventListener('astro:before-swap', () => {
+		casesSwiper?.destroy(true, true);
+		casesSwiper = undefined;
+	});
+</script>

@@ -1,0 +1,94 @@
+---
+import { clientReviews, clientReviewsIntro } from '../../data/home';
+---
+
+<section class="hx-section hx-reviews" id="reviews" aria-labelledby="reviews-title" data-reviews-scale>
+	<div class="hx-wrap">
+		<div class="hx-reviews-head">
+			<h2 id="reviews-title">What Our Clients Say?</h2>
+			<p>{clientReviewsIntro}</p>
+		</div>
+
+		<div class="hx-reviews-list">
+			{
+				clientReviews.map((review) => (
+					<figure class="hx-review-card">
+						<blockquote>
+							<p>“{review.quote}”</p>
+						</blockquote>
+						<figcaption class="hx-review-meta">
+							<div class="hx-review-person">
+								<img src={review.photo} alt={review.photoAlt} width="72" height="72" loading="lazy" decoding="async" />
+								<div>
+									<p class="hx-review-name">
+										{review.name} – {review.role}
+									</p>
+									<p class="hx-review-stars" aria-label="5 out of 5 stars">
+										{Array.from({ length: 5 }).map(() => (
+											<span aria-hidden="true">★</span>
+										))}
+									</p>
+								</div>
+							</div>
+							<img class="hx-review-logo" src={review.logo} alt={review.logoAlt} loading="lazy" decoding="async" />
+						</figcaption>
+					</figure>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<script>
+	const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+	const desktop = window.matchMedia('(min-width: 640px)');
+	const MIN_SCALE = 0.78;
+	const RANGE = 0.9;
+
+	let cards: HTMLElement[] = [];
+	let raf = 0;
+	let bound = false;
+
+	function update() {
+		raf = 0;
+		if (motion.matches || !desktop.matches || cards.length === 0) {
+			cards.forEach((card) => {
+				card.style.transform = '';
+			});
+			return;
+		}
+
+		const midY = window.innerHeight * 0.5;
+		const maxDist = window.innerHeight * RANGE;
+
+		cards.forEach((card) => {
+			const rect = card.getBoundingClientRect();
+			const cardMid = rect.top + rect.height * 0.5;
+			const dist = Math.min(Math.abs(cardMid - midY), maxDist);
+			const t = dist / maxDist;
+			const scale = 1 - (1 - MIN_SCALE) * t;
+			card.style.transform = `scale(${scale.toFixed(4)})`;
+		});
+	}
+
+	function requestUpdate() {
+		if (raf) return;
+		raf = requestAnimationFrame(update);
+	}
+
+	function bind() {
+		const root = document.querySelector<HTMLElement>('[data-reviews-scale]');
+		cards = root ? [...root.querySelectorAll<HTMLElement>('.hx-review-card')] : [];
+		if (!bound) {
+			window.addEventListener('scroll', requestUpdate, { passive: true });
+			window.addEventListener('resize', requestUpdate);
+			motion.addEventListener('change', requestUpdate);
+			desktop.addEventListener('change', requestUpdate);
+			bound = true;
+		}
+		requestUpdate();
+	}
+
+	bind();
+	document.addEventListener('astro:page-load', bind);
+</script>

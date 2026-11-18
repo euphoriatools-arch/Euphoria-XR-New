@@ -1,42 +1,89 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import DetailPage from '../components/templates/DetailPage.astro';
+import ServicePage from '../components/service/ServicePage.astro';
+import BlogArticle from '../components/blog/BlogArticle.astro';
 import { marketingPages } from '../data/pages';
+import { loadPosts } from '../lib/blog';
 import { absoluteUrl } from '../lib/urls';
-import { breadcrumbSchema, faqSchema, serviceSchema } from '../lib/schema';
+import { blogPostingSchema, breadcrumbSchema, serviceSchema } from '../lib/schema';
 import type { MarketingPage } from '../data/types';
 
 export function getStaticPaths() {
-	return marketingPages.map((page) => ({
-		params: { slug: page.slug },
-		props: { page },
-	}));
+	const posts = loadPosts();
+	const blogSlugs = new Set(posts.map((post) => post.slug));
+	for (const page of marketingPages) {
+		if (blogSlugs.has(page.slug)) throw new Error(`Blog slug collides with a page: ${page.slug}`);
+	}
+	return [
+		...marketingPages.map((page) => ({
+			params: { slug: page.slug },
+			props: { page },
+		})),
+		...posts.map((post) => ({
+			params: { slug: post.slug },
+			props: { postSlug: post.slug },
+		})),
+	];
 }
 
 interface Props {
-	page: MarketingPage;
+	page?: MarketingPage;
+	postSlug?: string;
 }
 
-const { page } = Astro.props;
-const crumbs = [
-	{ name: 'Home', href: '/' },
-	{ name: page.navLabel, href: `/${page.slug}/` },
-];
+const { page, postSlug } = Astro.props;
+const post = postSlug ? loadPosts().find((item) => item.slug === postSlug) : undefined;
+if (postSlug && !post) throw new Error(`Missing blog post ${postSlug}`);
+const crumbs = post
+	? [
+			{ name: 'Home', href: '/' },
+			{ name: 'EXR Blogs', href: '/exr-blogs/' },
+			{ name: post.title, href: `/${post.slug}/` },
+		]
+	: [
+			{ name: 'Home', href: '/' },
+			{ name: page!.navLabel, href: `/${page!.slug}/` },
+		];
 ---
 
-<BaseLayout
-	title={page.title}
-	description={page.description}
-	jsonLd={[
-		breadcrumbSchema(crumbs),
-		serviceSchema({
-			name: page.h1,
-			description: page.description,
-			serviceType: page.serviceType,
-			url: absoluteUrl(`/${page.slug}/`),
-		}),
-		faqSchema(page.faqs),
-	]}
->
-	<DetailPage page={page} />
-</BaseLayout>
+{
+	post ? (
+		<BaseLayout
+			title={post.seoTitle}
+			description={post.description}
+			image={post.image}
+			type="article"
+			overlayHeader
+			jsonLd={[
+				breadcrumbSchema(crumbs),
+				blogPostingSchema({
+					headline: post.title,
+					description: post.description,
+					url: absoluteUrl(`/${post.slug}/`),
+					image: post.image,
+					datePublished: post.date,
+					dateModified: post.modified,
+					author: post.author,
+				}),
+			]}
+		>
+			<BlogArticle post={post} />
+		</BaseLayout>
+	) : (
+		<BaseLayout
+			title={page!.title}
+			description={page!.description}
+			jsonLd={[
+				breadcrumbSchema(crumbs),
+				serviceSchema({
+					name: page!.h1,
+					description: page!.description,
+					serviceType: page!.serviceType,
+					url: absoluteUrl(`/${page!.slug}/`),
+				}),
+			]}
+		>
+			<ServicePage page={page!} />
+		</BaseLayout>
+	)
+}

@@ -2,15 +2,15 @@
 import { getImage } from 'astro:assets';
 import { render } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import Breadcrumbs from '../../../components/ui/Breadcrumbs.astro';
-import Gallery from '../../../components/portfolio/Gallery.astro';
+import ContactBand from '../../../components/studio/ContactBand.astro';
+import CaseCard from '../../../components/portfolio/CaseCard.astro';
 import PortfolioImage from '../../../components/portfolio/PortfolioImage.astro';
-import ProjectGrid from '../../../components/portfolio/ProjectGrid.astro';
 import VideoPlayer from '../../../components/portfolio/VideoPlayer.astro';
 import { categoryBySlug } from '../../../content/categories';
-import { clientLabel, loadProjects, projectNeighbors, projectPath, relatedProjects } from '../../../lib/portfolio';
+import { loadProjects, projectNeighbors, projectPath, relatedProjects, sortProjects } from '../../../lib/portfolio';
 import { absoluteUrl } from '../../../lib/urls';
 import { breadcrumbSchema, creativeWorkSchema } from '../../../lib/schema';
+import '../../../styles/case.css';
 
 export async function getStaticPaths() {
 	const projects = await loadProjects();
@@ -38,21 +38,45 @@ if (!category) throw new Error(`Missing category ${project.data.category}`);
 const { Content } = await render(project);
 const hero = await getImage({ src: project.data.heroImage.image, width: 1400, format: 'webp' });
 const path = projectPath(project.data.category, project.data.slug);
+const pageUrl = absoluteUrl(path);
 const crumbs = [
 	{ name: 'Home', href: '/' },
 	{ name: 'Case studies', href: '/portfolio/' },
 	{ name: category.name, href: `/portfolio/${category.slug}/` },
 	{ name: project.data.title, href: path },
 ];
-const related = relatedProjects(projects, project);
-const { previous, next } = projectNeighbors(projects, project);
-const client = clientLabel(project.data.client);
-const facts = [
-	{ label: 'Client', value: client },
-	{ label: 'Industry', value: project.data.client.industry },
-	{ label: 'Duration', value: project.data.duration },
-	{ label: 'Year', value: String(project.data.year) },
-	...(project.data.teamSize ? [{ label: 'Team size', value: project.data.teamSize }] : []),
+const related = relatedProjects(projects, project, 6);
+const ordered = sortProjects(projects);
+const { next: neighbor } = projectNeighbors(projects, project);
+const next = neighbor ?? ordered.find((entry) => entry.id !== project.id);
+const shots = project.data.gallery;
+const further: Record<string, { href: string; label: string }> = {
+	'augmented-reality': {
+		href: '/services/augmented-reality-development-company/',
+		label: 'augmented reality development',
+	},
+	'virtual-reality': {
+		href: '/services/virtual-reality-development-company/',
+		label: 'virtual reality development',
+	},
+	'artificial-intelligence': { href: '/ai-development-company/', label: 'AI development' },
+	blockchain: {
+		href: '/services/nft-makers-metaverse-development-company/',
+		label: 'NFT and metaverse development',
+	},
+	'360-videography': { href: '/portfolio/360-videography/', label: '360 videography projects' },
+};
+const more = further[project.data.category];
+const shareText = encodeURIComponent('Check out this case study.');
+const shareLinks = [
+	{
+		label: 'Share on X',
+		href: `https://twitter.com/intent/tweet?url=${encodeURIComponent(pageUrl)}&text=${shareText}`,
+	},
+	{
+		label: 'Share on Facebook',
+		href: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`,
+	},
 ];
 ---
 
@@ -60,189 +84,189 @@ const facts = [
 	title={project.data.seo.title}
 	description={project.data.seo.description}
 	image={hero.src}
+	type="article"
+	overlayHeader
 	jsonLd={[
 		breadcrumbSchema(crumbs),
 		creativeWorkSchema({
 			name: project.data.title,
 			description: project.data.seo.description,
-			url: absoluteUrl(path),
+			url: pageUrl,
 			image: absoluteUrl(hero.src),
 			dateCreated: String(project.data.year),
 			about: category.name,
 		}),
 	]}
 >
-	<article class="portfolio-project" style={`--accent: ${category.accent}`}>
-		<header class="portfolio-hero">
-			<PortfolioImage
-				src={project.data.heroImage.image}
-				alt={project.data.heroImage.alt}
-				width={project.data.heroImage.image.width}
-				height={project.data.heroImage.image.height}
-				loading="eager"
-				fetchpriority="high"
-				widths={[800, 1200, 1400]}
-				sizes="100vw"
-				class="hero-media"
-			/>
-			<div class="section-inner">
-				<Breadcrumbs items={crumbs} />
-				<p class="project-tag hero-tag">{category.name}</p>
-				<h1>{project.data.title}</h1>
-				<p class="lede">
-					{client}
-					{project.data.client.permissionGranted && project.data.client.logo && project.data.client.logoAlt && (
-						<PortfolioImage
-							src={project.data.client.logo}
-							alt={project.data.client.logoAlt}
-							width={project.data.client.logo.width}
-							height={project.data.client.logo.height}
-							class="client-logo"
-						/>
-					)}
-					<span class="hero-year">{project.data.year}</span>
-				</p>
+	<article class="cs-detail">
+		<div class="cs-hero-card">
+			<div class="cs-hero-main">
+				<div>
+					<h1>{project.data.title}</h1>
+					<div class="cs-share">
+						{
+							shareLinks.map((link) => (
+								<a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
+									{link.label === 'Share on X' ? (
+										<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+											<path d="M14.7 10.3 22 2h-2.2l-6.1 7-4.9-7H2.2l7.7 11.1L2 22h2.2l6.7-7.7 5.3 7.7h6.6l-8.1-11.7Zm-2.4 2.7-.8-1.1L5.2 3.6h2.7l5 7.1.8 1.1 6.5 9.2h-2.7l-5.2-7z" />
+										</svg>
+									) : (
+										<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+											<path d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h2.6l.4-3H13v-2c0-.6.4-1 1-1Z" />
+										</svg>
+									)}
+								</a>
+							))
+						}
+					</div>
+				</div>
+				<PortfolioImage
+					class="cs-cover"
+					src={project.data.heroImage.image}
+					alt={project.data.heroImage.alt}
+					width={project.data.heroImage.image.width}
+					height={project.data.heroImage.image.height}
+					widths={[480, 800]}
+					sizes="(min-width: 1024px) 370px, 100vw"
+					loading="eager"
+					fetchpriority="high"
+				/>
 			</div>
-		</header>
-
-		<section class="section" aria-label="Quick facts">
-			<div class="section-inner">
-				<dl class="fact-bar">
-					{
-						facts.map((fact) => (
-							<div>
-								<dt>{fact.label}</dt>
-								<dd>{fact.value}</dd>
-							</div>
-						))
-					}
-				</dl>
+			<div class="cs-meta">
+				<div>
+					<p class="cs-date">{project.data.year}</p>
+					{related.length > 0 && <a class="cs-related-jump" href="#related">Related Work ⌄</a>}
+				</div>
+				{
+					next && (
+						<a class="cs-next" href={projectPath(next.data.category, next.data.slug)}>
+							<span>
+								<small>View Next Project:</small>
+								<strong>{next.data.title}</strong>
+							</span>
+							<span class="cs-next-btn" aria-hidden="true">›</span>
+						</a>
+					)
+				}
 			</div>
-		</section>
+		</div>
 
-		<section class="section">
-			<div class="section-inner prose">
-				<h2>The project</h2>
+		<div class="cs-article">
+			<p class="cs-intro">{project.data.summary}</p>
+			<div class="cs-prose">
 				<Content />
 			</div>
-		</section>
-
-		<section class="section">
-			<div class="section-inner">
-				<h2>Outcome</h2>
-				<ul class="metric-grid">
-					{
-						project.data.outcome.metrics.map((item) => (
-							<li class="metric-card" data-reveal>
-								<p class="metric-value">{item.value}</p>
-								<p>{item.metric}</p>
-							</li>
-						))
-					}
-				</ul>
-				<p class="metric-copy">{project.data.outcome.paragraph}</p>
+			{
+				shots.map((item, index) => (
+					<figure class="cs-shot cs-wide">
+						<PortfolioImage
+							src={item.image}
+							alt={item.alt}
+							width={item.image.width}
+							height={item.image.height}
+							widths={[800, 1400]}
+							sizes="(min-width: 1100px) 1100px, 100vw"
+							loading={index === 0 ? 'eager' : 'lazy'}
+						/>
+					</figure>
+				))
+			}
+			<h2>How it was made</h2>
+			<ol class="cs-steps">
+				{
+					project.data.methodology.map((step) => (
+						<li>
+							<strong>{step.title}.</strong> {step.description}
+						</li>
+					))
+				}
+			</ol>
+			<h2>The film</h2>
+			<div class="cs-film">
+				<VideoPlayer video={project.data.video} />
 			</div>
-		</section>
-
-		<section class="section">
-			<div class="section-inner">
-				<h2>Watch</h2>
-				<VideoPlayer video={project.data.video} spherical={project.data.category === '360-videography'} />
-			</div>
-		</section>
-
-		<section class="section">
-			<div class="section-inner">
-				<h2>Gallery</h2>
-				<Gallery images={project.data.gallery} label={project.data.title} />
-			</div>
-		</section>
-
-		<section class="section">
-			<div class="section-inner">
-				<h2>How it was made</h2>
-				<ol class="method-list">
-					{
-						project.data.methodology.map((step) => (
-							<li>
-								<span>{String(step.step).padStart(2, '0')}</span>
-								<div>
-									<h3>{step.title}</h3>
-									<p>{step.description}</p>
-								</div>
-							</li>
-						))
-					}
-				</ol>
-			</div>
-		</section>
-
-		{
-			project.data.testimonial && (
-				<section class="section">
-					<div class="section-inner">
-						<h2>Client note</h2>
-						<figure class="quote-block">
-							<blockquote>
-								<p>{project.data.testimonial.quote}</p>
-							</blockquote>
-							<figcaption>
-								{project.data.testimonial.photo && project.data.testimonial.photoAlt && (
-									<PortfolioImage
-										src={project.data.testimonial.photo}
-										alt={project.data.testimonial.photoAlt}
-										width={project.data.testimonial.photo.width}
-										height={project.data.testimonial.photo.height}
-										widths={[96]}
-										sizes="48px"
-										class="quote-photo"
-									/>
-								)}
-								<span>
-									<strong>{project.data.testimonial.name}</strong>
-									{project.data.testimonial.role}, {project.data.testimonial.company}
-								</span>
-							</figcaption>
-						</figure>
-					</div>
-				</section>
-			)
-		}
-
-		{
-			related.length > 0 && (
-				<section class="section">
-					<div class="section-inner">
-						<h2>Related projects</h2>
-						<ProjectGrid projects={related} />
-					</div>
-				</section>
-			)
-		}
-
-		<section class="section portfolio-end">
-			<div class="section-inner">
-				<h2>A project like this</h2>
-				<p>Tell us the audience, the constraint, and the date. We will reply with the lightest credible way to begin.</p>
-				<a class="outline-btn portfolio-cta" href="/contact/">Book a similar project <span class="arrow" aria-hidden="true">↗</span></a>
-			</div>
-		</section>
-
-		<nav class="section project-pager" aria-label="More projects">
-			<div class="section-inner">
-				{previous && (
-					<a href={projectPath(previous.data.category, previous.data.slug)}>
-						<span>Previous project</span>
-						<strong>{previous.data.title}</strong>
-					</a>
-				)}
-				{next && (
-					<a class="pager-next" href={projectPath(next.data.category, next.data.slug)}>
-						<span>Next project</span>
-						<strong>{next.data.title}</strong>
-					</a>
-				)}
-			</div>
-		</nav>
+			<h2>What is {category.name}?</h2>
+			<p class="cs-copy">{category.intro}</p>
+			<h3>In practice</h3>
+			<ul class="cs-bullets">
+				{
+					category.benefits.map((item) => (
+						<li>
+							<strong>{item.title}.</strong> {item.body}
+						</li>
+					))
+				}
+			</ul>
+			{
+				more && (
+					<>
+						<h2>Learn more about {category.name}</h2>
+						<p class="cs-copy">
+							<a href={more.href}>{more.label}</a>
+						</p>
+					</>
+				)
+			}
+		</div>
 	</article>
+
+	{
+		related.length > 0 && (
+			<section class="cs-related" id="related" aria-roledescription="carousel" aria-labelledby="related-work-title">
+				<div class="cs-related-head">
+					<h2 id="related-work-title">Related Work</h2>
+					{related.length >= 3 && (
+						<button class="cs-related-next" type="button" data-cs-next aria-label="Next related project">
+							›
+						</button>
+					)}
+				</div>
+				<div class={related.length >= 3 ? 'swiper' : 'cs-grid cs-wrap'} data-cs-related={related.length >= 3 ? 'swiper' : 'static'}>
+					<div class={related.length >= 3 ? 'swiper-wrapper' : undefined}>
+						{related.map((item) => (
+							<div class={related.length >= 3 ? 'swiper-slide' : undefined}>
+								<CaseCard project={item} />
+							</div>
+						))}
+					</div>
+				</div>
+			</section>
+		)
+	}
+	<ContactBand id="case-contact-title" />
+	<script>
+		import Swiper from 'swiper';
+		import { Autoplay, Navigation } from 'swiper/modules';
+
+		let relatedSwiper: Swiper | undefined;
+
+		function bindRelated() {
+			relatedSwiper?.destroy(true, true);
+			relatedSwiper = undefined;
+			const root = document.querySelector<HTMLElement>('[data-cs-related="swiper"]');
+			if (!root) return;
+			const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+			relatedSwiper = new Swiper(root, {
+				modules: [Autoplay, Navigation],
+				slidesPerView: 1.2,
+				spaceBetween: 16,
+				speed: 300,
+				loop: !reduce,
+				autoplay: reduce ? false : { delay: 3500, disableOnInteraction: true, pauseOnMouseEnter: true },
+				navigation: { nextEl: '[data-cs-next]' },
+				breakpoints: {
+					768: { slidesPerView: 2.2, spaceBetween: 24 },
+					1024: { slidesPerView: 2.5, spaceBetween: 30 },
+				},
+			});
+		}
+
+		bindRelated();
+		document.addEventListener('astro:page-load', () => bindRelated());
+		document.addEventListener('astro:before-swap', () => {
+			relatedSwiper?.destroy(true, true);
+			relatedSwiper = undefined;
+		});
+	</script>
 </BaseLayout>

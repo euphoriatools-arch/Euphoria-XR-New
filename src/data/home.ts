@@ -3,21 +3,34 @@ import type { Faq } from './types';
 export const heroSlides = [
 	{
 		eyebrow: 'AR / VR / AI / WebXR / 3D',
-		lines: [[{ text: 'We turn' }], [{ text: 'ideas into' }], [{ text: 'immersive', accent: true }], [{ text: 'experiences.', accent: true }]],
+		lines: [
+			[{ text: 'We turn ideas into' }],
+			[
+				{ text: 'immersive', accent: true },
+				{ text: ' ' },
+				{ text: 'experiences.', accent: true },
+			],
+		],
 		body: 'EuphoriaXR is a creative technology studio, building immersive experiences that blur the line between the physical and digital worlds.',
 		cta: 'Explore our work',
 		href: '#work',
 	},
 	{
 		eyebrow: 'Virtual reality / Training / Simulation',
-		lines: [[{ text: 'Make learning' }], [{ text: 'feel ' }, { text: 'real.', accent: true }]],
+		lines: [
+			[{ text: 'Make learning' }],
+			[{ text: 'feel ' }, { text: 'real.', accent: true }],
+		],
 		body: 'From immersive training to interactive simulations, we turn complex ideas into experiences people can explore, remember, and use.',
 		cta: 'Explore our capabilities',
 		href: '#capabilities',
 	},
 	{
 		eyebrow: 'Spatial computing / AI / Digital worlds',
-		lines: [[{ text: 'Beyond the' }], [{ text: 'screen. Into' }], [{ text: 'possibility.', accent: true }]],
+		lines: [
+			[{ text: 'Beyond the screen.' }],
+			[{ text: 'Into possibility.', accent: true }],
+		],
 		body: 'We combine creative thinking and emerging technology to help ambitious teams build the next generation of digital experiences.',
 		cta: 'Build with us',
 		href: '/contact/',
@@ -87,6 +100,52 @@ export const testimonials = [
 	},
 ];
 
+export const clientReviewsIntro =
+	'We collaborate with industry leaders across the world and provide immersive AR VR solutions that are fueling innovation, engagement, and quantifiable business impact.';
+
+export const clientReviews = [
+	{
+		quote:
+			'We had a hard time with conventional forms of training that could not appeal to our workforce. They followed this up with a call to EuphoriaXR, in which they developed a tailored VR education program that changed the model of our team learning. The immersive approach enabled better retention levels, fewer errors, and lessened the logistical growth of training among varied sites with quantifiable results.',
+		name: 'Anthony Phills',
+		role: 'CEO of Unbreakable',
+		photo: '/reviews/anthony-phills.webp',
+		photoAlt: 'Anthony Phills',
+		logo: '/reviews/unbreakable.webp',
+		logoAlt: 'Unbreakable',
+	},
+	{
+		quote:
+			'It was not very easy to describe our product using static images, and our customers used to be disoriented. We collaborated with EuphoriaXR to develop an interactive AR experience, as it enabled people to learn about the features in real time, which greatly enhanced engagement and conversions, and positively influenced product demonstrations.',
+		name: 'Don Reyke',
+		role: 'Founder & CEO, Dexio Protocol',
+		photo: '/reviews/don-reyke.webp',
+		photoAlt: 'Don Reyke',
+		logo: '/reviews/dexi-logo.webp',
+		logoAlt: 'Dexio Protocol',
+	},
+	{
+		quote:
+			'We had to have a safer method of educating employees to work in multifaceted operational systems, without jeopardizing the real world errors. EuphoriaXR created a simulation platform that was very immersive and enabled our teams to train in a simulated environment, thereby enhancing confidence, cutting down on the costs of training, and guaranteeing superior performance results across units and geographical locations around the world.',
+		name: 'Sierra Cook',
+		role: 'Marketing Director, Harbinger',
+		photo: '/reviews/sierra-cook.webp',
+		photoAlt: 'Sierra Cook',
+		logo: '/reviews/harbinger-logo.webp',
+		logoAlt: 'Harbinger',
+	},
+	{
+		quote:
+			'Before we collaborated with EuphoriaXR, digital experiences were disengaging and uninnovative. Their team showed us the immersive XR solutions, which enhanced our interactions with customers. The overall solution was thoughtful, scaled, and effective, and it enabled us to provide an experience that was memorable, as well as build our brand presence in competitive markets.',
+		name: 'Trevor Simms',
+		role: 'Poke CEO',
+		photo: '/reviews/trevor-simms.webp',
+		photoAlt: 'Trevor Simms',
+		logo: '/reviews/poke-logo.webp',
+		logoAlt: 'Poke',
+	},
+];
+
 export const homeFaqs: Faq[] = [
 	{
 		question: 'What does EuphoriaXR build?',
@@ -107,5 +166,25 @@ export const homeFaqs: Faq[] = [
 	{
 		question: 'How do we start?',
 		answer: 'Use the contact form and name the service you have in mind. If you are unsure, say so. We will reply with the lightest credible way to begin.',
+	},
+	{
+		question: 'What does a typical engagement look like?',
+		answer: 'Discover, design, build, then launch. We write the user, the job, and the constraint first, ship a prototype you can hold or click, then take the production path through the devices and channels you will actually use.',
+	},
+	{
+		question: 'Which devices and platforms do you ship on?',
+		answer: 'Phones, browsers, headsets, and the channels your audience already opens. WebAR and WebXR when a link is enough. Native headset builds when the job needs a rehearsed space or a score an instructor can trust.',
+	},
+	{
+		question: 'Do you keep working after launch?',
+		answer: 'Yes. Launch includes measurement, a handover, and the first revision while the work is live. Maintenance and support keep the experience stable as devices and content change.',
+	},
+	{
+		question: 'Can our team own the work after you leave?',
+		answer: 'That is the goal. We hand over the build, the sources, and a clear path for your team to run the next revision. Access and IP follow the contract you sign.',
+	},
+	{
+		question: 'Where are you based?',
+		answer: 'We work from studios in the US, Saudi Arabia, and the UK. Projects run remotely or on-site when the brief needs people in the room.',
 	},
 ];

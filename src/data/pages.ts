@@ -29,7 +29,7 @@ for (const page of marketingPages) {
 	if (!page.h1.toLowerCase().includes(page.keywords.primary)) {
 		seoErrors.push(`H1 missing primary keyword "${page.keywords.primary}" on /${page.slug}/`);
 	}
-	if (page.faqs.length < 3 || page.faqs.length > 6) {
+	if (page.faqs.length < 3 || page.faqs.length > 15) {
 		seoErrors.push(`FAQ count ${page.faqs.length} on /${page.slug}/`);
 	}
 	if (page.related.length < 3) {

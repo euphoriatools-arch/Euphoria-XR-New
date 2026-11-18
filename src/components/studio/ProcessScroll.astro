@@ -1,0 +1,109 @@
+---
+import { processIntro, processSteps } from '../../data/process';
+import '../../styles/process.css';
+
+const total = String(processSteps.length).padStart(2, '0');
+---
+
+<section id="eup-scroll-process" aria-labelledby="eup-process-title">
+	<div class="eup-wrap">
+		<header class="eup-intro">
+			<h2 id="eup-process-title">{processIntro.title}</h2>
+			<p>{processIntro.body}</p>
+		</header>
+		<div class="eup-grid">
+			<div class="eup-left">
+				<div class="eup-progress" aria-hidden="true">
+					<span class="eup-progress-fill"></span>
+				</div>
+				{
+					processSteps.map((step, index) => (
+						<article class="eup-process-step" data-index={index}>
+							<div class="eup-step-index">
+								{String(index + 1).padStart(2, '0')}/{total}
+							</div>
+							<div class="eup-step-copy">
+								<h3>{step.title}</h3>
+								<figure class="eup-mobile-visual">
+									<img src={step.image} alt={step.alt} loading="lazy" decoding="async" />
+								</figure>
+								<p>{step.body}</p>
+							</div>
+						</article>
+					))
+				}
+			</div>
+
+			<aside class="eup-visual-stage" aria-hidden="true">
+				{
+					processSteps.map((step, index) => (
+						<figure class:list={['eup-visual', { 'is-active': index === 0 }]} data-visual={index}>
+							<img src={step.image} alt="" loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+						</figure>
+					))
+				}
+			</aside>
+		</div>
+	</div>
+</section>
+
+<script>
+	const root = document.querySelector<HTMLElement>('#eup-scroll-process');
+	if (root && root.dataset.ready !== '1') {
+		root.dataset.ready = '1';
+
+		const steps = Array.from(root.querySelectorAll<HTMLElement>('.eup-process-step'));
+		const visuals = Array.from(root.querySelectorAll<HTMLElement>('.eup-visual'));
+		const fill = root.querySelector<HTMLElement>('.eup-progress-fill');
+		let active = -1;
+		let ticking = false;
+
+		const setActive = (index: number) => {
+			if (index === active || index < 0 || index >= steps.length) return;
+			active = index;
+			steps.forEach((el, i) => el.classList.toggle('is-active', i === index));
+			visuals.forEach((el, i) => el.classList.toggle('is-active', i === index));
+		};
+
+		const update = () => {
+			ticking = false;
+			const vh = window.innerHeight || document.documentElement.clientHeight;
+			const targetY = vh * 0.52;
+			let nearest = 0;
+			let nearestDist = Infinity;
+
+			steps.forEach((step, i) => {
+				const r = step.getBoundingClientRect();
+				const center = r.top + r.height * 0.5;
+				const dist = Math.abs(center - targetY);
+				if (dist < nearestDist) {
+					nearestDist = dist;
+					nearest = i;
+				}
+			});
+
+			setActive(nearest);
+
+			if (!fill || steps.length === 0) return;
+			const first = steps[0].getBoundingClientRect();
+			const last = steps[steps.length - 1].getBoundingClientRect();
+			const start = first.top + window.scrollY;
+			const end = last.top + window.scrollY + last.height;
+			const y = window.scrollY + vh * 0.52;
+			const progress = Math.max(0, Math.min(1, (y - start) / Math.max(1, end - start)));
+			fill.style.height = `${(progress * 100).toFixed(2)}%`;
+		};
+
+		const requestUpdate = () => {
+			if (!ticking) {
+				ticking = true;
+				requestAnimationFrame(update);
+			}
+		};
+
+		window.addEventListener('scroll', requestUpdate, { passive: true });
+		window.addEventListener('resize', requestUpdate);
+		setActive(0);
+		update();
+	}
+</script>

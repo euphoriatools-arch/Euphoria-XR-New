@@ -1,0 +1,32 @@
+---
+import PortfolioImage from './PortfolioImage.astro';
+import { projectPath, type ProjectEntry } from '../../lib/portfolio';
+
+interface Props {
+	project: ProjectEntry;
+	eager?: boolean;
+}
+
+const { project, eager = false } = Astro.props;
+const href = projectPath(project.data.category, project.data.slug);
+---
+
+<a class="cs-card" href={href} data-cs-card data-title={project.data.title} data-category={project.data.category}>
+	<PortfolioImage
+		src={project.data.heroImage.image}
+		alt={`Cover image for ${project.data.title}`}
+		width={project.data.heroImage.image.width}
+		height={project.data.heroImage.image.height}
+		widths={[480, 800]}
+		sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+		loading={eager ? 'eager' : 'lazy'}
+		fetchpriority={eager ? 'high' : undefined}
+	/>
+	<span class="cs-card-overlay">
+		<h3>{project.data.title}</h3>
+		<span class="cs-card-foot">
+			<span>{project.data.year}</span>
+			<span class="cs-arrow" aria-hidden="true">↗</span>
+		</span>
+	</span>
+</a>

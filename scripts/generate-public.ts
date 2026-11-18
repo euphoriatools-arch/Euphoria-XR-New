@@ -95,7 +95,7 @@ ${portfolioSection()}
 
 - [About](${absoluteUrl('/about/')}): Who the studio is and how an engagement runs.
 - [Contact](${absoluteUrl('/contact/')}): Start a project conversation.
-- [Blog](${absoluteUrl('/blog/')}): Studio notes. Essays are not published yet.
+- [EXR Blogs](${absoluteUrl('/exr-blogs/')}): AR, VR, and AI articles from EuphoriaXR.
 
 ## Optional
 

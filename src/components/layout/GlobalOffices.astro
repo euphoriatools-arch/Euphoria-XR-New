@@ -1,0 +1,61 @@
+---
+import { Image } from 'astro:assets';
+import { site } from '../../config/site';
+import { photos } from '../../data/images';
+
+const offices = site.offices;
+---
+
+<section class="go-offices" aria-labelledby="go-offices-title">
+	<div class="go-wrap">
+		<header class="go-head">
+			<p class="go-eyebrow">Presence</p>
+			<div class="go-title-row">
+				<h2 id="go-offices-title">Our Global Offices</h2>
+				<p class="go-lede">Three studios. One VR team serving across the US, KSA, and the UK.</p>
+			</div>
+		</header>
+
+		<ul class="go-strip">
+			{
+				offices.map((office, index) => {
+					const mapHref = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(office.mapQuery)}`;
+					const phoneHref = `tel:${office.phone.replace(/\s/g, '')}`;
+					const n = String(index + 1).padStart(2, '0');
+					return (
+						<li class:list={['go-panel', { 'is-hq': office.hq }]}>
+							<div class="go-media" aria-hidden="true">
+								<Image
+									src={photos[office.image]}
+									alt=""
+									widths={[640, 960, 1280]}
+									sizes="(max-width: 900px) 100vw, 33vw"
+									class="go-photo"
+									loading="lazy"
+									decoding="async"
+								/>
+							</div>
+							<div class="go-shade" aria-hidden="true"></div>
+							<div class="go-content">
+								<div class="go-meta">
+									<span class="go-index">{n}</span>
+									{office.hq ? <span class="go-hq">Headquarters</span> : <span class="go-region">{office.region}</span>}
+								</div>
+								<h3>{office.title}</h3>
+								<p class="go-address">{office.address}</p>
+								<div class="go-actions">
+									<a class="go-phone" href={phoneHref}>{office.phone}</a>
+									<a class="go-map" href={mapHref} target="_blank" rel="noopener noreferrer">
+										View on map
+										<span class="sr-only"> for {office.title} (opens in a new tab)</span>
+										<span aria-hidden="true">↗</span>
+									</a>
+								</div>
+							</div>
+						</li>
+					);
+				})
+			}
+		</ul>
+	</div>
+</section>

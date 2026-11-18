@@ -1,0 +1,64 @@
+---
+interface Props {
+	image?: string;
+	visor?: string;
+	titleLead?: string;
+	titleBrand?: string;
+	titleTail?: string;
+	body?: string;
+}
+
+const {
+	image = '/home/stadium-vr.webp',
+	visor = '/home/apple-vision.webp',
+	titleLead = 'Why Choose',
+	titleBrand = 'EUPHORIA',
+	titleTail = 'for XR Development?',
+	body = 'EuphoriaXR is a development studio specializing in AR and VR and is trusted by Fortune 500 companies to create immersive digital experiences. Our team provides XR transformative training, engagement, and enterprise innovation experiences, which are scalable.',
+} = Astro.props;
+---
+
+<section class="hx-fixed-stage" aria-labelledby="hx-fixed-stage-title">
+	<div class="hx-fixed-stage-media" aria-hidden="true" data-fixed-stage-bg>
+		<img src={image} alt="" loading="lazy" decoding="async" />
+		<span class="hx-fixed-stage-scrim"></span>
+	</div>
+
+	<div class="hx-fixed-stage-front">
+		<div class="hx-fixed-stage-visor">
+			<img class="hx-fixed-stage-visor-img" src={visor} alt="" loading="lazy" decoding="async" />
+			<div class="hx-fixed-stage-visor-copy">
+				<h2 id="hx-fixed-stage-title">
+					{titleLead}
+					{' '}
+					<span class="hx-fixed-stage-brand">
+						<span class="hx-fixed-stage-brand-name">{titleBrand}</span>
+						{' '}
+						<span class="hx-fixed-stage-brand-xr">XR</span>
+					</span>
+					{' '}
+					{titleTail}
+				</h2>
+				<p>{body}</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<script>
+	const stage = document.querySelector<HTMLElement>('.hx-fixed-stage');
+	const media = document.querySelector<HTMLElement>('[data-fixed-stage-bg]');
+	if (stage && media) {
+		const sync = (active: boolean) => {
+			media.classList.toggle('is-stuck', active);
+			stage.classList.toggle('is-bg-stuck', active);
+		};
+
+		const io = new IntersectionObserver(
+			([entry]) => sync(entry.isIntersecting),
+			{ root: null, threshold: 0, rootMargin: '0px' },
+		);
+		io.observe(stage);
+		sync(stage.getBoundingClientRect().bottom > 0 && stage.getBoundingClientRect().top < window.innerHeight);
+	}
+</script>

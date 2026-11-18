@@ -19,7 +19,7 @@ const {
 } = Astro.props;
 
 const canonical = absoluteUrl(Astro.url.pathname);
-const ogImage = absoluteUrl(image);
+const ogImage = image.startsWith('http') ? image : absoluteUrl(image);
 const robots = noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large';
 ---
 

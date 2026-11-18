@@ -11,6 +11,7 @@ interface Props {
 	fetchpriority?: 'high' | 'low' | 'auto';
 	sizes?: string;
 	widths?: number[];
+	decoding?: 'async' | 'auto' | 'sync';
 	class?: string;
 }
 
@@ -23,6 +24,7 @@ const {
 	fetchpriority,
 	sizes,
 	widths,
+	decoding = 'async',
 	class: className,
 } = Astro.props;
 ---
@@ -37,5 +39,6 @@ const {
 	fetchpriority={fetchpriority}
 	sizes={sizes}
 	widths={widths}
+	decoding={decoding}
 	class={className}
 />

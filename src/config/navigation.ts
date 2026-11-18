@@ -105,7 +105,7 @@ export const navigation = {
 		},
 	] satisfies NavLink[],
 	blog: {
-		href: '/blog/',
+		href: '/exr-blogs/',
 		label: 'Blog',
 	},
 	cta: {

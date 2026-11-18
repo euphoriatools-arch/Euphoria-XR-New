@@ -99,6 +99,45 @@ export function serviceSchema(input: {
 	};
 }
 
+export function collectionSchema(input: { name: string; description: string; url: string }): JsonLd {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'CollectionPage',
+		name: input.name,
+		description: input.description,
+		url: input.url,
+		isPartOf: { '@id': absoluteUrl('/#website') },
+	};
+}
+
+export function blogPostingSchema(input: {
+	headline: string;
+	description: string;
+	url: string;
+	image: string;
+	datePublished: string;
+	dateModified: string;
+	author: string;
+}): JsonLd {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: input.headline,
+		description: input.description,
+		url: input.url,
+		image: input.image,
+		datePublished: input.datePublished,
+		dateModified: input.dateModified,
+		author: { '@type': 'Person', name: input.author },
+		publisher: {
+			'@type': 'Organization',
+			name: site.siteName,
+			logo: { '@type': 'ImageObject', url: absoluteUrl('/brand/logo.png') },
+		},
+		mainEntityOfPage: input.url,
+	};
+}
+
 export function creativeWorkSchema(input: {
 	name: string;
 	description: string;

@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from './BlogCard.astro';
+import { blogPage, blogTabs, postsForTab, type BlogTabId } from '../../lib/blog';
+import { breadcrumbSchema, collectionSchema } from '../../lib/schema';
+import { absoluteUrl } from '../../lib/urls';
+import '../../styles/blog.css';
+
+interface Props {
+	tab: BlogTabId;
+}
+
+const { tab } = Astro.props;
+const current = blogTabs.find((item) => item.id === tab);
+if (!current) throw new Error(`Unknown blog tab ${tab}`);
+const posts = postsForTab(tab);
+const crumbs = [
+	{ name: 'Home', href: '/' },
+	{ name: 'EXR Blogs', href: '/exr-blogs/' },
+];
+if (tab !== 'all') crumbs.push({ name: current.label, href: current.href });
+---
+
+<BaseLayout
+	title={tab === 'all' ? blogPage.title : `${current.heading} | EuphoriaXR`}
+	description={blogPage.description}
+	overlayHeader
+	headerTone="light"
+	jsonLd={[
+		breadcrumbSchema(crumbs),
+		collectionSchema({ name: blogPage.h1, description: blogPage.description, url: absoluteUrl(current.href) }),
+	]}
+>
+	<div class="bl-list">
+		<section class="bl-hero" aria-labelledby="blog-title">
+			<p class="bl-watermark" aria-hidden="true">EuphoriaXR</p>
+			<div class="bl-hero-copy">
+				<h1 id="blog-title">{blogPage.h1}</h1>
+				{tab === 'all' && <p class="bl-lede">{blogPage.description}</p>}
+			</div>
+		</section>
+
+		<nav class="bl-tabs" aria-label="Blog topics">
+			{
+				blogTabs.map((item) => (
+					<a href={item.href} aria-current={item.id === tab ? 'page' : undefined}>
+						{item.label}
+					</a>
+				))
+			}
+		</nav>
+
+		<section class="bl-grid-wrap" aria-labelledby="blog-grid-title">
+			<h2 id="blog-grid-title">{current.heading}</h2>
+			{
+				posts.length > 0 ? (
+					<div class="bl-grid">
+						{posts.map((post, index) => (
+							<BlogCard post={post} eager={index < 3} />
+						))}
+					</div>
+				) : (
+					<p class="bl-empty">No articles in this topic are in the current set yet.</p>
+				)
+			}
+		</section>
+
+		<section class="bl-close" aria-labelledby="blog-close-title">
+			<h2 id="blog-close-title">Let's talk about your project</h2>
+			<p>We are here to turn your ideas into reality</p>
+			<a class="bl-close-cta" href="/contact/">Contact us</a>
+		</section>
+	</div>
+</BaseLayout>
