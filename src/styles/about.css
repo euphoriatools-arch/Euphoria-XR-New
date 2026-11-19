@@ -12,7 +12,7 @@
 	--ab-muted: #6b6b6b;
 	--ab-muted-dark: #a8a8a8;
 	--ab-red: #ff253d;
-	font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: var(--ab-black);
 	background: var(--ab-paper);
 }

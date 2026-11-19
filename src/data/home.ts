@@ -4,10 +4,8 @@ export const heroSlides = [
 	{
 		eyebrow: 'AR / VR / AI / WebXR / 3D',
 		lines: [
-			[{ text: 'Where Creative,' }],
-			[{ text: 'Innovative Ideas' }],
-			[{ text: 'Inspire Real and' }],
-			[{ text: 'Virtual Worlds' }],
+			[{ text: 'Where Creative, Innovative Ideas' }],
+			[{ text: 'Inspire Real and Virtual Worlds' }],
 		],
 		body: 'EuphoriaXR combines creative design, 3D production, and advanced technology to build custom AR, VR, and AI experiences for global brands and enterprises.',
 		cta: 'Talk to an XR Expert',

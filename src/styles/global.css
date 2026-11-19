@@ -1,12 +1,12 @@
 @import "tailwindcss";
-@import "@fontsource/roboto/latin-300.css";
-@import "@fontsource/roboto/latin-400.css";
-@import "@fontsource/roboto/latin-500.css";
-@import "@fontsource/roboto/latin-700.css";
-@import "@fontsource/poppins/latin-700.css";
+@import "@fontsource/archivo/latin-400.css";
+@import "@fontsource/archivo/latin-500.css";
+@import "@fontsource/archivo/latin-600.css";
+@import "@fontsource/archivo/latin-700.css";
+@import "@fontsource/archivo/latin-800.css";
 
 @theme {
-	--font-sans: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--font-sans: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	--color-paper: #f7f7f4;
 	--color-ink: #101923;
 	--color-muted: #5c6670;
@@ -27,7 +27,7 @@
 	--night-2: #111923;
 	--cap: #f0f1ee;
 	--contact: #e8ecec;
-	--font: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	--font: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	--header: 76px;
 }
 
@@ -619,7 +619,7 @@ main[data-header="overlay"] .hero {
 	flex: 0 0 auto;
 }
 
-h1, .hero-title {
+h1:not(.hx-display), .hero-title {
 	font-family: var(--font);
 	font-size: clamp(48px, 7.15vw, 100px);
 	font-weight: 300;
@@ -1326,7 +1326,7 @@ h2.section-label {
 	.work-grid, .card-grid, .related-grid, .industry-grid, .process-list, .cap-list { grid-template-columns: 1fr; }
 	.hero { height: 92svh; }
 	main[data-header="overlay"] .hero { height: calc(92svh - var(--header)); }
-	h1, .hero-title { font-size: clamp(46px, 14vw, 72px); }
+	h1:not(.hx-display), .hero-title { font-size: clamp(46px, 14vw, 72px); }
 	.footer-grid { grid-template-columns: 1fr; }
 	.project-image { height: 240px; }
 }

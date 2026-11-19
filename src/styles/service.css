@@ -21,7 +21,7 @@ body:has(.svc) {
 	--svc-red-hot: #ff5166;
 	background: var(--svc-black);
 	color: var(--svc-white);
-	font-family: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	padding-bottom: 0;
 	overflow-x: clip;
 }

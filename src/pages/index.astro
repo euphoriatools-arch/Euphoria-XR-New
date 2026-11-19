@@ -101,21 +101,21 @@ const solutions = [
 								/>
 								<div class="hx-slide-copy">
 									{slide.heading ? (
-										<h1 id="home-title" class="hx-display">
+										<h1 id="home-title" class="hx-display" style="font-family: Archivo, sans-serif; font-weight: 800">
 											{slide.lines.map((line) => (
-												<span class="line">
+												<span class="line" style="font-family: Archivo, sans-serif; font-weight: 800">
 													{line.map((part) => (
-														<span class:list={[{ accent: part.accent }]}>{part.text}</span>
+														<span class:list={[{ accent: part.accent }]} style="font-family: Archivo, sans-serif; font-weight: 800">{part.text}</span>
 													))}
 												</span>
 											))}
 										</h1>
 									) : (
-										<p class="hx-display">
+										<p class="hx-display" style="font-family: Archivo, sans-serif; font-weight: 800">
 											{slide.lines.map((line) => (
-												<span class="line">
+												<span class="line" style="font-family: Archivo, sans-serif; font-weight: 800">
 													{line.map((part) => (
-														<span class:list={[{ accent: part.accent }]}>{part.text}</span>
+														<span class:list={[{ accent: part.accent }]} style="font-family: Archivo, sans-serif; font-weight: 800">{part.text}</span>
 													))}
 												</span>
 											))}
@@ -194,7 +194,7 @@ const solutions = [
 						sizes="100vw"
 						loading="lazy"
 					/>
-					<p>EuphoriaXR combines creative design, 3D production, and advanced technology to build custom AR, VR, and AI experiences for global brands and enterprises.</p>
+					<p style="font-size: clamp(1.15rem, 2.2vw, 2.05rem)">EuphoriaXR combines creative design, 3D production, and advanced technology to build custom AR, VR, and AI experiences for global brands and enterprises.</p>
 				</div>
 				<div class="swiper" data-solution-swiper>
 					<div class="swiper-wrapper">

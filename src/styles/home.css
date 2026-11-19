@@ -180,8 +180,20 @@
 .hx-slide-copy {
 	position: relative;
 	z-index: 1;
-	max-width: 800px;
+	max-width: min(1080px, 92vw);
 	padding: 88px 16px 72px;
+	font-family: Archivo, Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.hx-hero-frame .hx-display,
+.hx-hero-frame .hx-display .line,
+.hx-hero-frame .hx-display .line span {
+	font-family: Archivo, sans-serif !important;
+	font-weight: 800 !important;
+}
+
+.hx-hero-frame .hx-hero-lede {
+	font-family: Archivo, sans-serif !important;
 }
 
 .hx-display {
@@ -189,11 +201,19 @@
 	flex-direction: column;
 	gap: 0.06em;
 	margin: 0 0 24px;
-	max-width: 100%;
+	max-width: none;
 	color: var(--white);
-	font-size: clamp(2rem, 4.8vw, 4rem);
+	font-family: Archivo, sans-serif;
+	font-size: clamp(2rem, 4.4vw, 3.75rem);
 	font-weight: 800;
 	line-height: 1.05;
+	letter-spacing: -0.04em;
+}
+
+h1.hx-display {
+	font-family: Archivo, sans-serif !important;
+	font-weight: 800 !important;
+	max-width: none;
 	letter-spacing: -0.04em;
 }
 
@@ -555,7 +575,7 @@
 	left: 50%;
 	top: 47%;
 	z-index: 2;
-	width: min(52%, 480px);
+	width: min(72%, 660px);
 	transform: translate(-50%, -50%);
 	text-align: center;
 }
@@ -563,9 +583,9 @@
 .hx-fixed-stage-visor-copy h2 {
 	margin: 0 0 14px;
 	color: #fff;
-	font-size: clamp(1.05rem, 2.2vw, 1.75rem);
+	font-size: clamp(1.35rem, 2.9vw, 2.35rem);
 	font-weight: 700;
-	line-height: 1.22;
+	line-height: 1.18;
 	letter-spacing: -0.03em;
 }
 
@@ -576,21 +596,23 @@
 	white-space: nowrap;
 }
 
-.hx-fixed-stage-brand-name {
-	letter-spacing: 0.04em;
+.hx-fixed-stage-brand-name,
+.hx-fixed-stage-brand-xr {
+	font-family: inherit;
+	font-weight: inherit;
+	letter-spacing: inherit;
 }
 
 .hx-fixed-stage-brand-xr {
 	color: var(--red-500, #ff253d);
-	font-weight: 800;
 }
 
 .hx-fixed-stage-visor-copy p {
 	margin: 0 auto;
-	max-width: 42ch;
+	max-width: none;
 	color: rgba(255, 255, 255, 0.9);
-	font-size: clamp(11px, 1.05vw, 14px);
-	line-height: 1.5;
+	font-size: clamp(13px, 1.25vw, 17px);
+	line-height: 1.45;
 }
 
 @media (max-width: 767px) {
@@ -823,7 +845,7 @@
 	margin: 0;
 	padding: 24px;
 	color: var(--white);
-	font-size: clamp(1.5rem, 4.5vw, 3.5rem);
+	font-size: clamp(1.15rem, 2.2vw, 2.05rem) !important;
 	font-weight: 600;
 	line-height: 1.15;
 	letter-spacing: -0.04em;
@@ -1802,7 +1824,7 @@
 	padding: 0;
 	overflow: visible;
 	text-align: center;
-	font-family: Poppins, "Arial Black", sans-serif;
+	font-family: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 48px;
 	font-weight: 900;
 	line-height: 1;
@@ -1922,7 +1944,7 @@
 	}
 
 	.hx-display {
-		font-size: 64px;
+		font-size: clamp(2.4rem, 3.6vw, 3.25rem);
 	}
 }
 
@@ -1965,4 +1987,10 @@
 	.hx-card:focus-visible .hx-card-hover {
 		opacity: 0;
 	}
+}
+
+html,
+body,
+body * {
+	font-family: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 }
