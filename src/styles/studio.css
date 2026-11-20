@@ -340,7 +340,7 @@ main {
 
 html:has(main[data-header="overlay"]),
 body:has(main[data-header="overlay"]) {
-	background: var(--ink-950);
+	background: #000;
 	color: var(--white);
 }
 

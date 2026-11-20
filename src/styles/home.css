@@ -15,12 +15,27 @@
 	font-family: Archivo, Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
+html:has(.hx-home),
+body:has(.hx-home),
+body:has(.hx-home) main {
+	background: #000;
+}
+
 .hx-home {
 	--hx-heading-gap: var(--section-head-gap);
 	display: flow-root;
-	background: var(--ink-950);
+	background: #000;
 	color: var(--white);
 	padding-bottom: var(--section-y);
+}
+
+.hx-home .hx-section,
+.hx-home .hx-fixed-stage,
+.hx-home .hx-awards,
+.hx-home .hx-reviews,
+.hx-home .hx-faq,
+.hx-home #eup-scroll-process {
+	background: #000;
 }
 
 .hx-wrap {
@@ -1267,12 +1282,23 @@ h1.hx-display {
 }
 
 .contact-band {
-	background: var(--ink-950);
+	background: #000;
 	color: var(--white);
 }
 
 .contact-band .hx-contact-kicker {
 	color: var(--white);
+}
+
+/* Home page: keep Contact + Offices fully black (no paper / gradient wash) */
+body:has(.hx-home) .contact-band,
+body:has(.hx-home) .go-offices {
+	background: #000 !important;
+	background-image: none !important;
+}
+
+body:has(.hx-home) .go-offices::before {
+	opacity: 0;
 }
 
 .hx-about {
