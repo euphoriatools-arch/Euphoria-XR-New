@@ -776,7 +776,7 @@ main[data-header="overlay"] {
 .contact-band {
 	background: var(--paper);
 	color: var(--black);
-	padding-block: var(--studio-pad);
+	padding-block: var(--section-y, clamp(72px, 10vw, 120px));
 }
 
 .contact-band-grid {

@@ -58,13 +58,13 @@
 .ab-band-light {
 	background: var(--ab-paper);
 	color: var(--ab-black);
-	padding: clamp(64px, 9vw, 120px) 0;
+	padding: calc(var(--section-y, clamp(72px, 10vw, 120px)) / 2) 0;
 }
 
 .ab-band-dark {
 	background: var(--ab-black);
 	color: var(--ab-white);
-	padding: clamp(64px, 9vw, 120px) 0;
+	padding: calc(var(--section-y, clamp(72px, 10vw, 120px)) / 2) 0;
 }
 
 .ab-intro-grid {
@@ -341,10 +341,10 @@
 
 .ab-leaders-head h2 {
 	margin: 12px 0 0;
-	font-size: clamp(40px, 6vw, 72px);
+	font-size: var(--section-title-size, clamp(28px, 4vw, 48px));
 	font-weight: 700;
-	letter-spacing: -0.045em;
-	line-height: 0.95;
+	letter-spacing: var(--section-title-tracking, -0.045em);
+	line-height: 1.12;
 }
 
 .ab-leaders-grid {

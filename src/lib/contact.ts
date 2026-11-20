@@ -1,17 +1,37 @@
 import { servicePages } from '../data/services';
 
+export const panelInterestOptions = [
+	{ value: 'production', label: 'Discussing a Production' },
+	{ value: 'careers', label: 'Joining the Team' },
+	{ value: 'other', label: 'Other' },
+] as const;
+
 export const serviceInterestOptions = [
 	...servicePages.map((page) => ({ value: page.slug, label: page.navLabel })),
 	{ value: 'unsure', label: 'Not sure yet' },
 ] as const;
 
-const allowedInterests = new Set(serviceInterestOptions.map((option) => option.value));
+export const hearAboutOptions = [
+	{ value: 'google', label: 'Google / Search' },
+	{ value: 'referral', label: 'Referral' },
+	{ value: 'linkedin', label: 'LinkedIn' },
+	{ value: 'social', label: 'Social media' },
+	{ value: 'event', label: 'Event / Conference' },
+	{ value: 'other', label: 'Other' },
+] as const;
+
+const allowedInterests = new Set<string>([
+	...panelInterestOptions.map((option) => option.value),
+	...serviceInterestOptions.map((option) => option.value),
+]);
 
 export type ContactPayload = {
 	name: string;
 	email: string;
 	company: string;
+	phone: string;
 	service: string;
+	hear_about: string;
 	message: string;
 	company_website: string;
 };
@@ -26,7 +46,9 @@ export function readContactPayload(input: Record<string, unknown>): ContactPaylo
 		name: value('name'),
 		email: value('email'),
 		company: value('company'),
+		phone: value('phone'),
 		service: value('service'),
+		hear_about: value('hear_about'),
 		message: value('message'),
 		company_website: value('company_website'),
 	};
@@ -43,8 +65,14 @@ export function validateContact(payload: ContactPayload): ContactErrors {
 	if (payload.company.length > 120) {
 		errors.company = 'Company names must be 120 characters or fewer.';
 	}
-	if (!allowedInterests.has(payload.service as (typeof serviceInterestOptions)[number]['value'])) {
-		errors.service = 'Choose a service from the list.';
+	if (payload.phone.length > 40) {
+		errors.phone = 'Phone numbers must be 40 characters or fewer.';
+	}
+	if (!allowedInterests.has(payload.service)) {
+		errors.service = 'Choose an option from the list.';
+	}
+	if (payload.hear_about.length > 80) {
+		errors.hear_about = 'Choose how you heard about us.';
 	}
 	if (payload.message.length < 20 || payload.message.length > 5000) {
 		errors.message = 'Tell us a little more (20–5000 characters).';

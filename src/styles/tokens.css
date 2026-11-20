@@ -22,6 +22,10 @@
 
 	--studio-max: 1360px;
 	--studio-pad: clamp(4rem, 10vw, 9rem);
+	--section-y: clamp(72px, 10vw, 120px);
+	--section-head-gap: 40px;
+	--section-title-size: clamp(28px, 4vw, 48px);
+	--section-title-tracking: -0.045em;
 	--font-display: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	--font-body: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
 }

@@ -1,113 +1,87 @@
 ---
 import { site } from '../../config/site';
-import { serviceInterestOptions } from '../../lib/contact';
+import { hearAboutOptions, panelInterestOptions } from '../../lib/contact';
 
 interface Props {
+	/** @deprecated Panel is the only layout now. Kept so existing callers keep working. */
 	layout?: 'stack' | 'panel';
 }
 
-const { layout = 'stack' } = Astro.props;
-const panel = layout === 'panel';
+const { layout: _layout = 'panel' } = Astro.props;
+void _layout;
 ---
 
 <form
 	id="contact-form"
-	class:list={['form-grid', panel && 'cx-form']}
+	class="form-grid cx-form"
 	action={site.form.endpoint}
 	method="post"
 	novalidate
 	data-astro-reload
 >
-	{
-		panel ? (
-			<>
-				<fieldset class="cx-interest">
-					<legend>I'm interested in...</legend>
-					<div class="cx-chips">
-						{serviceInterestOptions.map((option) => (
-							<label class="cx-chip">
-								<input type="radio" name="service" value={option.value} required />
-								<span>{option.label}</span>
-							</label>
-						))}
-					</div>
-					<p class="error" data-error-for="service" hidden />
-				</fieldset>
-				<div class="cx-fields">
-					<div class="cx-split">
-						<div class="field">
-							<label for="name">Name</label>
-							<input id="name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="80" />
-							<p class="error" data-error-for="name" hidden />
-						</div>
-						<div class="field">
-							<label for="company">Company</label>
-							<input id="company" name="company" type="text" autocomplete="organization" maxlength="120" />
-							<p class="error" data-error-for="company" hidden />
-						</div>
-					</div>
-					<div class="field">
-						<label for="email">Email</label>
-						<input id="email" name="email" type="email" autocomplete="email" required maxlength="120" />
-						<p class="error" data-error-for="email" hidden />
-					</div>
-					<div class="field">
-						<label for="message">Message</label>
-						<textarea id="message" name="message" required minlength="20" maxlength="5000" />
-						<p class="error" data-error-for="message" hidden />
-					</div>
-				</div>
-			</>
-		) : (
-			<>
-				<div class="field">
-					<label for="name">Name</label>
-					<input id="name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="80" />
-					<p class="error" data-error-for="name" hidden />
-				</div>
-				<div class="field">
-					<label for="email">Email</label>
-					<input id="email" name="email" type="email" autocomplete="email" required maxlength="120" />
-					<p class="error" data-error-for="email" hidden />
-				</div>
-				<div class="field">
-					<label for="company">Company</label>
-					<input id="company" name="company" type="text" autocomplete="organization" maxlength="120" />
-					<p class="error" data-error-for="company" hidden />
-				</div>
-				<div class="field">
-					<label for="service">Service interest</label>
-					<select id="service" name="service" required>
-						<option value="">Select a service</option>
-						{serviceInterestOptions.map((option) => (
-							<option value={option.value}>{option.label}</option>
-						))}
-					</select>
-					<p class="error" data-error-for="service" hidden />
-				</div>
-				<div class="field">
-					<label for="message">Message</label>
-					<textarea id="message" name="message" required minlength="20" maxlength="5000" />
-					<p class="error" data-error-for="message" hidden />
-				</div>
-			</>
-		)
-	}
+	<fieldset class="cx-interest">
+		<legend>I'm interested in...</legend>
+		<div class="cx-chips">
+			{
+				panelInterestOptions.map((option) => (
+					<label class="cx-chip">
+						<input type="radio" name="service" value={option.value} required />
+						<span>{option.label}</span>
+					</label>
+				))
+			}
+		</div>
+		<p class="error" data-error-for="service" hidden />
+	</fieldset>
+	<div class="cx-fields">
+		<div class="cx-split">
+			<div class="field">
+				<label for="name">Name</label>
+				<input id="name" name="name" type="text" autocomplete="name" required minlength="2" maxlength="80" />
+				<p class="error" data-error-for="name" hidden />
+			</div>
+			<div class="field">
+				<label for="company">Company</label>
+				<input id="company" name="company" type="text" autocomplete="organization" maxlength="120" />
+				<p class="error" data-error-for="company" hidden />
+			</div>
+		</div>
+		<div class="cx-split">
+			<div class="field">
+				<label for="email">Email</label>
+				<input id="email" name="email" type="email" autocomplete="email" required maxlength="120" />
+				<p class="error" data-error-for="email" hidden />
+			</div>
+			<div class="field">
+				<label for="phone">Phone Number</label>
+				<input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="40" />
+				<p class="error" data-error-for="phone" hidden />
+			</div>
+		</div>
+		<div class="field">
+			<label for="hear_about">How did you hear about us?</label>
+			<select id="hear_about" name="hear_about">
+				<option value="">Select an option</option>
+				{
+					hearAboutOptions.map((option) => (
+						<option value={option.value}>{option.label}</option>
+					))
+				}
+			</select>
+			<p class="error" data-error-for="hear_about" hidden />
+		</div>
+		<div class="field">
+			<label for="message">Message</label>
+			<textarea id="message" name="message" required minlength="20" maxlength="5000" />
+			<p class="error" data-error-for="message" hidden />
+		</div>
+	</div>
 	<div class="hp" aria-hidden="true">
 		<label for="company_website">Website</label>
 		<input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off" />
 	</div>
-	<button class="outline-btn" type="submit">Send message{panel ? '' : <span class="arrow" aria-hidden="true"> ↗</span>}</button>
+	<button class="outline-btn" type="submit">Submit</button>
 	<p class="form-status" role="status" aria-live="polite"></p>
-	<p class="note">
-		Prefer email? Write to <a href={`mailto:${site.email}`}>{site.email}</a>.
-		{panel && (
-			<>
-				{' '}
-				Read the <a href="/privacy-policy/">privacy policy</a>.
-			</>
-		)}
-	</p>
 </form>
 
 <script>
@@ -118,7 +92,7 @@ const panel = layout === 'panel';
 		if (!form || form.dataset.bound === 'true') return;
 		form.dataset.bound = 'true';
 		const status = form.querySelector<HTMLElement>('.form-status');
-		const fields = ['name', 'email', 'company', 'service', 'message'] as const;
+		const fields = ['name', 'email', 'company', 'phone', 'service', 'hear_about', 'message'] as const;
 
 		const controls = (field: string) => {
 			const item = form.elements.namedItem(field);

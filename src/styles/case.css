@@ -74,10 +74,10 @@
 .cs-related h2 {
 	margin: 0;
 	color: #fff;
-	font-size: 30px;
-	font-weight: 600;
-	line-height: 40px;
-	letter-spacing: -1.44px;
+	font-size: var(--section-title-size, clamp(28px, 4vw, 48px));
+	font-weight: 700;
+	line-height: 1.12;
+	letter-spacing: var(--section-title-tracking, -0.045em);
 }
 
 .cs-search {
@@ -554,7 +554,7 @@ html:has(.topbar.is-scrolled) .cs-hero-card {
 
 .cs-related {
 	background: #09090b;
-	padding: 96px 0 48px;
+	padding: var(--section-y, clamp(72px, 10vw, 120px)) 0;
 }
 
 .cs-related-head {
@@ -562,7 +562,7 @@ html:has(.topbar.is-scrolled) .cs-hero-card {
 	align-items: center;
 	justify-content: space-between;
 	width: min(1536px, calc(100% - 48px));
-	margin: 0 auto 48px;
+	margin: 0 auto var(--section-head-gap, 40px);
 }
 
 .cs-related-next {
@@ -651,10 +651,6 @@ html:has(.topbar.is-scrolled) .cs-hero-card {
 		font-size: 48px;
 	}
 
-	.cs-work h2,
-	.cs-related h2 {
-		font-size: 36px;
-	}
 
 	.cs-grid {
 		gap: 32px;
@@ -760,11 +756,6 @@ html:has(.topbar.is-scrolled) .cs-hero-card {
 	.cs-hero-copy {
 		left: 20px;
 		right: 20px;
-	}
-
-	.cs-work h2,
-	.cs-related h2 {
-		font-size: 24px;
 	}
 
 	.cs-search,
