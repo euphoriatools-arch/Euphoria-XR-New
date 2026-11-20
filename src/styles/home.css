@@ -964,6 +964,36 @@ h1.hx-display {
 	margin-top: 28px;
 }
 
+.hx-solution-nav > div {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+/* Only Solutions slider arrows — do not reuse for View All / other CTAs */
+.hx-solution-nav .hx-icon-btn {
+	width: 44px;
+	height: 44px;
+	min-width: 44px;
+	min-height: 44px;
+	border-radius: 999px;
+	background: #ff253d;
+	color: #fff;
+	font-size: 1.55rem;
+	font-weight: 700;
+	transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.hx-solution-nav .hx-icon-btn:hover,
+.hx-solution-nav .hx-icon-btn:focus-visible {
+	background: #ff5166;
+}
+
+.hx-solution-nav .hx-icon-btn:disabled {
+	opacity: 0.4;
+	cursor: default;
+}
+
 @media (min-width: 640px) {
 	.hx-solutions-banner {
 		aspect-ratio: 2.2 / 1;
@@ -1221,6 +1251,15 @@ h1.hx-display {
 
 .hx-feed {
 	overflow: hidden;
+	padding-top: 50px;
+	padding-bottom: 50px;
+	margin-bottom: 0;
+}
+
+@media (min-width: 640px) {
+	.hx-section.hx-feed {
+		margin-bottom: 0;
+	}
 }
 
 .hx-feed .swiper {
