@@ -9,6 +9,10 @@ body:has(.svc) {
 }
 
 .svc {
+	/* VR/service pages only — previous section rhythm */
+	--section-y: clamp(72px, 10vw, 120px);
+	--section-y-half: calc(var(--section-y) / 2);
+	--section-title-size: clamp(28px, 4vw, 48px);
 	--svc-black: #000;
 	--svc-white: #fff;
 	--svc-paper: #f5f5f5;
@@ -52,13 +56,13 @@ body:has(.svc) {
 }
 
 .svc-wrap {
-	width: min(1330px, calc(100% - (2 * var(--page-x))));
+	width: min(1330px, calc(100% - 40px));
 	margin-inline: auto;
 }
 
 .svc-crumbs {
-	width: min(1330px, calc(100% - (2 * var(--page-x))));
-	margin: 20px auto 0;
+	width: auto;
+	margin: 0 50px 0 50px;
 }
 
 .svc .breadcrumbs,
@@ -155,7 +159,7 @@ body:has(.svc) {
 }
 
 .svc-hero h1 {
-	max-width: 10ch;
+	max-width: min(22ch, 94vw);
 	margin: 0;
 	color: #fff;
 	font-size: clamp(48px, 9vw, 120px);
@@ -201,7 +205,7 @@ body:has(.svc) {
 
 .svc-band {
 	/* Half top + half bottom = one home-style section gap between bands */
-	padding: var(--section-y-half) 0;
+	padding: calc(var(--section-y) / 2) 0;
 }
 
 .svc-band-light {
@@ -574,7 +578,7 @@ body:has(.svc) {
 
 .svc-insight.svc-band-light {
 	background: var(--svc-paper);
-	padding: var(--section-y-half) 0;
+	padding: calc(var(--section-y) / 2) 0;
 }
 
 .svc-insight-head {
@@ -797,7 +801,7 @@ body:has(.svc) {
 .svc-cases {
 	background: var(--svc-black);
 	color: var(--svc-white);
-	padding: var(--section-y-half) 0;
+	padding: var(--section-y) 0;
 	overflow-x: clip;
 }
 
@@ -820,7 +824,7 @@ body:has(.svc) {
 
 .svc-headsets.svc-band-light {
 	background: var(--svc-paper);
-	padding: var(--section-y-half) 0;
+	padding: calc(var(--section-y) / 2) 0;
 }
 
 .svc-headsets-head {
@@ -979,7 +983,7 @@ body:has(.svc) {
 .svc-use {
 	background: var(--svc-paper);
 	color: var(--svc-black);
-	padding: var(--section-y-half) 0;
+	padding: calc(var(--section-y) / 2) 0;
 }
 
 .svc-use-head {
@@ -1145,7 +1149,7 @@ body:has(.svc) {
 .svc-clients {
 	background: var(--svc-black);
 	color: var(--svc-white);
-	padding: var(--section-y-half) 0;
+	padding: calc(var(--section-y) / 2) 0;
 }
 
 .svc-clients .svc-use-label {

@@ -6,6 +6,7 @@ import HowIcon from './HowIcon.astro';
 import WorkCard from '../studio/WorkCard.astro';
 import { industryPages } from '../../data/industries';
 import { photoFor } from '../../data/images';
+import { arPageExtras, arServiceSlug, showArHeadsetsFor } from '../../data/arPage';
 import { serviceInsightFor } from '../../data/serviceInsights';
 import { showVrHeadsetsFor, vrHeadsets, vrHeadsetsIntro, vrHeadsetsTitle } from '../../data/vrHeadsets';
 import { vrPageExtras, vrServiceSlug } from '../../data/vrPage';
@@ -22,6 +23,7 @@ interface Props {
 
 const { page } = Astro.props;
 const isVrPage = page.slug === vrServiceSlug;
+const isArPage = page.slug === arServiceSlug;
 const crumbs = [
 	{ name: 'Home', href: '/' },
 	{ name: page.navLabel, href: `/${page.slug}/` },
@@ -51,7 +53,7 @@ function accent(text: string, word: string) {
 	};
 }
 
-const lines = heroLines(page.h1);
+const lines = isArPage ? [...arPageExtras.heroLines] : heroLines(page.h1);
 const sentence = firstSentence(page.intro[0] ?? page.summary);
 const introRest = (page.intro[0] ?? '').slice(sentence.length).trim();
 const sentenceHasKeyword = sentence.toLowerCase().includes(keyword.toLowerCase());
@@ -61,9 +63,26 @@ const defaultIndustries = page.kind === 'service' ? industryPages.filter((item) 
 const talkBenefits = page.benefits.slice(0, 6);
 const insight = serviceInsightFor(page);
 const caseStudies = isVrPage ? [] : caseStudiesForPage(page, await loadProjects());
-const showHeadsets = showVrHeadsetsFor(page.slug);
-const servicesLead = isVrPage ? vrPageExtras.servicesLead : page.intro[0];
-const servicesTitle = isVrPage ? vrPageExtras.servicesTitle : 'Services.';
+const showVrHeadsets = showVrHeadsetsFor(page.slug);
+const showArHeadsets = showArHeadsetsFor(page.slug);
+const headsetItems = showArHeadsets
+	? arPageExtras.headsets
+	: showVrHeadsets
+		? vrHeadsets
+		: [];
+const headsetsTitle = showArHeadsets ? arPageExtras.headsetsTitle : vrHeadsetsTitle;
+const headsetsIntro = showArHeadsets ? arPageExtras.headsetsIntro : vrHeadsetsIntro;
+const showHeadsets = headsetItems.length > 0;
+const servicesLead = isVrPage
+	? vrPageExtras.servicesLead
+	: isArPage
+		? arPageExtras.servicesLead
+		: page.intro[0];
+const servicesTitle = isVrPage
+	? vrPageExtras.servicesTitle
+	: isArPage
+		? arPageExtras.servicesTitle
+		: 'Services.';
 const clientsLead = isVrPage
 	? vrPageExtras.clientsLead
 	: 'EuphoriaXR builds production-ready AR, VR, and AI experiences for enterprise teams that need the work shipped—not a demo that dies after the pitch.';
@@ -380,11 +399,11 @@ const counters = [
 			<section class="svc-band svc-band-light svc-headsets" aria-labelledby="svc-headsets-title">
 				<div class="svc-wrap">
 					<div class="svc-headsets-head">
-						<h2 id="svc-headsets-title" data-reveal>{vrHeadsetsTitle}</h2>
-						<p data-reveal>{vrHeadsetsIntro}</p>
+						<h2 id="svc-headsets-title" data-reveal>{headsetsTitle}</h2>
+						<p data-reveal>{headsetsIntro}</p>
 					</div>
 					<ul class="svc-headsets-grid">
-						{vrHeadsets.map((headset) => (
+						{headsetItems.map((headset) => (
 							<li>
 								<article class="svc-headset" data-headset-card tabindex="0">
 									<span class="svc-headset-plus" aria-hidden="true">+</span>

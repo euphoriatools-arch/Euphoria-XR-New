@@ -22,11 +22,15 @@ body:has(.hx-home) main {
 }
 
 .hx-home {
-	--hx-heading-gap: var(--section-head-gap);
+	/* Home keeps the previous section rhythm */
+	--section-y: clamp(72px, 10vw, 120px);
+	--section-title-size: clamp(28px, 4vw, 48px);
+	--section-head-gap: 40px;
+	--hx-heading-gap: 40px;
 	display: flow-root;
 	background: #000;
 	color: var(--white);
-	padding-bottom: var(--section-y);
+	padding-bottom: 48px;
 }
 
 .hx-home .hx-section,
@@ -40,11 +44,11 @@ body:has(.hx-home) main {
 
 .hx-wrap {
 	width: 100%;
-	padding-inline: var(--page-x);
+	padding-inline: 24px;
 }
 
 .hx-section {
-	margin-bottom: var(--section-y);
+	margin-bottom: 48px;
 }
 
 .hx-home h2 {
@@ -1286,8 +1290,46 @@ h1.hx-display {
 	color: var(--white);
 }
 
-.contact-band .hx-contact-kicker {
+/* Home Contact Us: previous headline scale + spacing */
+body:has(.hx-home) .contact-band {
+	--section-y: clamp(72px, 10vw, 120px);
+	padding-block: var(--section-y);
+}
+
+body:has(.hx-home) .contact-band h2 {
+	font-family: Archivo, Inter, sans-serif;
+	font-size: clamp(calc(2.5rem + 2px), 6vw, calc(4.5rem + 2px));
+	font-weight: 700;
+	line-height: 1.05;
+	letter-spacing: -0.04em;
+	max-width: 16ch;
+	margin: 0.3em 0 0.45em;
+}
+
+body:has(.hx-home) .contact-band .hx-contact-kicker {
+	margin: 0 0 16px;
+	max-width: none;
 	color: var(--white);
+	font-size: 22px;
+	font-weight: 700;
+	line-height: 1.2;
+	letter-spacing: -0.04em;
+}
+
+@media (min-width: 640px) {
+	body:has(.hx-home) .contact-band .hx-contact-kicker { font-size: 26px; }
+}
+
+@media (min-width: 768px) {
+	body:has(.hx-home) .contact-band .hx-contact-kicker { font-size: 32px; }
+}
+
+@media (min-width: 1024px) {
+	body:has(.hx-home) .contact-band .hx-contact-kicker { font-size: 38px; }
+}
+
+body:has(.hx-home) .contact-band.is-compact h2:not(.hx-contact-kicker) {
+	font-size: clamp(1.5rem, 4vw, 3rem);
 }
 
 /* Home page: keep Contact + Offices fully black (no paper / gradient wash) */
@@ -1846,6 +1888,10 @@ body:has(.hx-home) .go-offices::before {
 }
 
 @media (min-width: 640px) {
+	.hx-wrap {
+		padding-inline: 48px;
+	}
+
 	.hx-section,
 	.hx-home {
 		margin-bottom: 0;
@@ -1866,7 +1912,7 @@ body:has(.hx-home) .go-offices::before {
 	}
 
 	.hx-slide-copy {
-		padding-inline: var(--page-x);
+		padding-inline: 48px;
 	}
 
 	.hx-grid {
@@ -1890,7 +1936,7 @@ body:has(.hx-home) .go-offices::before {
 	}
 
 	.hx-slide-copy {
-		padding-inline: 5.5rem;
+		padding-inline: 96px;
 	}
 
 	.site-footer .footer-inner {
@@ -1930,11 +1976,11 @@ body:has(.hx-home) .go-offices::before {
 	}
 
 	.hx-slide-copy {
-		padding-inline: 5.5rem;
+		padding-inline: 144px;
 	}
 
 	.hx-display {
-		font-size: 3rem;
+		font-size: clamp(2.4rem, 3.6vw, 3.25rem);
 	}
 }
 
