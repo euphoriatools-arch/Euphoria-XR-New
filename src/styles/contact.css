@@ -8,7 +8,7 @@
 .cx-mapband {
 	display: grid;
 	grid-template-columns: 1fr;
-	width: min(1536px, calc(100% - 32px));
+	width: min(1536px, calc(100% - (2 * var(--page-x))));
 	min-height: 420px;
 	margin: 0 auto 48px;
 	overflow: hidden;
@@ -142,14 +142,14 @@
 }
 
 .cx-clients-wrap {
-	width: min(1200px, calc(100% - 48px));
+	width: min(1200px, calc(100% - (2 * var(--page-x))));
 	margin: 0 auto;
 }
 
 .cx-clients h2 {
 	margin: 0 0 var(--section-head-gap, 40px);
 	color: #fff;
-	font-size: var(--section-title-size, clamp(28px, 4vw, 48px));
+	font-size: var(--section-title-size);
 	font-weight: 700;
 	line-height: 1.12;
 	letter-spacing: var(--section-title-tracking, -0.045em);
@@ -249,7 +249,7 @@
 }
 
 .cx-statement {
-	width: min(1100px, calc(100% - 48px));
+	width: min(1100px, calc(100% - (2 * var(--page-x))));
 	margin: 130px auto 0;
 	text-align: center;
 }
@@ -267,7 +267,7 @@
 .cx-about {
 	display: grid;
 	gap: 32px;
-	width: min(913px, calc(100% - 48px));
+	width: min(913px, calc(100% - (2 * var(--page-x))));
 	margin: 100px auto 0;
 }
 
@@ -305,7 +305,7 @@
 
 .cx-work h2,
 .cx .cs-related h2 {
-	font-size: var(--section-title-size, clamp(28px, 4vw, 48px));
+	font-size: var(--section-title-size);
 	font-weight: 700;
 	line-height: 1.12;
 	letter-spacing: var(--section-title-tracking, -0.045em);
@@ -313,16 +313,16 @@
 
 @media (min-width: 640px) {
 	.cx-hero-row {
-		padding-inline: 48px;
+		padding-inline: var(--page-x);
 	}
 
 	.cx-mapband,
 	.cx-clients {
-		margin-bottom: var(--section-y, clamp(72px, 10vw, 120px));
+		margin-bottom: var(--section-y);
 	}
 
 	.cx .cs-related.cx-work {
-		padding-bottom: var(--section-y, clamp(72px, 10vw, 120px));
+		padding-bottom: var(--section-y);
 	}
 
 	.cx-logo-grid {

@@ -12,7 +12,7 @@
 }
 
 .cs-wrap {
-	width: min(1536px, calc(100% - 48px));
+	width: min(1536px, calc(100% - (2 * var(--page-x))));
 	margin-inline: auto;
 }
 
@@ -58,7 +58,7 @@
 }
 
 .cs-work {
-	width: min(1536px, calc(100% - 48px));
+	width: min(1536px, calc(100% - (2 * var(--page-x))));
 	margin: 88px auto 128px;
 }
 
@@ -74,7 +74,7 @@
 .cs-related h2 {
 	margin: 0;
 	color: #fff;
-	font-size: var(--section-title-size, clamp(28px, 4vw, 48px));
+	font-size: var(--section-title-size);
 	font-weight: 700;
 	line-height: 1.12;
 	letter-spacing: var(--section-title-tracking, -0.045em);
@@ -279,7 +279,7 @@ html:has(.cs-detail) .topbar.is-scrolled {
 	flex-direction: column;
 	justify-content: flex-start;
 	gap: 40px;
-	width: min(1536px, calc(100% - 48px));
+	width: min(1536px, calc(100% - (2 * var(--page-x))));
 	margin: calc(var(--header) + 24px) auto 0;
 	padding: 32px 16px 28px;
 	border: 0;
@@ -412,7 +412,7 @@ html:has(.topbar.is-scrolled) .cs-hero-card {
 }
 
 .cs-article {
-	width: min(1100px, calc(100% - 48px));
+	width: min(1100px, calc(100% - (2 * var(--page-x))));
 	margin: 0 auto;
 	padding: 48px 0 96px;
 	color: #4b5563;
@@ -554,14 +554,14 @@ html:has(.topbar.is-scrolled) .cs-hero-card {
 
 .cs-related {
 	background: #09090b;
-	padding: var(--section-y, clamp(72px, 10vw, 120px)) 0;
+	padding: var(--section-y) 0;
 }
 
 .cs-related-head {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	width: min(1536px, calc(100% - 48px));
+	width: min(1536px, calc(100% - (2 * var(--page-x))));
 	margin: 0 auto var(--section-head-gap, 40px);
 }
 
@@ -583,7 +583,7 @@ html:has(.topbar.is-scrolled) .cs-hero-card {
 
 .cs-related .swiper {
 	overflow: visible;
-	width: min(1536px, calc(100% - 48px));
+	width: min(1536px, calc(100% - (2 * var(--page-x))));
 	margin: 0 auto 48px;
 }
 
@@ -592,7 +592,7 @@ html:has(.topbar.is-scrolled) .cs-hero-card {
 }
 
 .cs-benefits {
-	width: min(1100px, calc(100% - 48px));
+	width: min(1100px, calc(100% - (2 * var(--page-x))));
 	margin: 0 auto 96px;
 }
 
@@ -657,7 +657,7 @@ html:has(.topbar.is-scrolled) .cs-hero-card {
 	}
 
 	.cs-hero-card {
-		width: min(1536px, calc(100% - 96px));
+		width: min(1536px, calc(100% - (2 * var(--page-x))));
 		margin-top: calc(var(--header) + 32px);
 		padding: 56px 48px 36px;
 	}

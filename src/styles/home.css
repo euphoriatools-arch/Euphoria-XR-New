@@ -16,26 +16,26 @@
 }
 
 .hx-home {
-	--hx-heading-gap: 40px;
+	--hx-heading-gap: var(--section-head-gap);
 	display: flow-root;
 	background: var(--ink-950);
 	color: var(--white);
-	padding-bottom: 48px;
+	padding-bottom: var(--section-y);
 }
 
 .hx-wrap {
 	width: 100%;
-	padding-inline: 24px;
+	padding-inline: var(--page-x);
 }
 
 .hx-section {
-	margin-bottom: 48px;
+	margin-bottom: var(--section-y);
 }
 
 .hx-home h2 {
 	margin: 0;
 	color: var(--white);
-	font-size: var(--section-title-size, clamp(28px, 4vw, 48px));
+	font-size: var(--section-title-size);
 	font-weight: 700;
 	line-height: 1.12;
 	letter-spacing: var(--section-title-tracking, -0.045em);
@@ -1271,37 +1271,8 @@ h1.hx-display {
 	color: var(--white);
 }
 
-.contact-band h2 {
-	font-family: Archivo, Inter, sans-serif;
-	font-size: clamp(calc(2.5rem + 2px), 6vw, calc(4.5rem + 2px));
-	font-weight: 700;
-	line-height: 1.05;
-	letter-spacing: -0.04em;
-}
-
-.hx-contact-kicker {
-	margin: 0 0 16px;
+.contact-band .hx-contact-kicker {
 	color: var(--white);
-	font-size: 22px;
-	font-weight: 700;
-	line-height: 1.2;
-	letter-spacing: -0.04em;
-}
-
-@media (min-width: 640px) {
-	.hx-contact-kicker { font-size: 26px; }
-}
-
-@media (min-width: 768px) {
-	.hx-contact-kicker { font-size: 32px; }
-}
-
-@media (min-width: 1024px) {
-	.hx-contact-kicker { font-size: 38px; }
-}
-
-.contact-band.is-compact h2:not(.hx-contact-kicker) {
-	font-size: clamp(1.5rem, 4vw, 3rem);
 }
 
 .hx-about {
@@ -1310,7 +1281,7 @@ h1.hx-display {
 }
 
 .hx-about-crumbs {
-	width: min(1024px, calc(100% - 48px));
+	width: min(1024px, calc(100% - (2 * var(--page-x))));
 	margin: 16px auto 0;
 }
 
@@ -1681,32 +1652,29 @@ h1.hx-display {
 
 .site-footer .footer-logo {
 	display: inline-flex;
-	align-items: baseline;
-	color: #fff;
-	font-family: Archivo, Inter, sans-serif;
-	font-size: clamp(1.35rem, 2.4vw, 1.7rem);
-	font-weight: 800;
-	letter-spacing: -0.03em;
-	line-height: 1;
+	align-items: center;
+	line-height: 0;
 	text-decoration: none;
 }
 
-.site-footer .footer-logo-xr {
-	color: var(--red-500);
+.site-footer .footer-logo img {
+	display: block;
+	width: 210px;
+	height: auto;
 }
 
 .site-footer .footer-blurb {
-	max-width: 34ch;
-	margin: 18px 0 0;
+	max-width: 36ch;
+	margin: 20px 0 0;
 	color: rgba(255, 255, 255, 0.88);
-	font-size: 15px;
+	font-size: 17px;
 	line-height: 1.6;
 }
 
 .site-footer .footer-follow {
 	margin: 28px 0 12px;
 	color: #fff;
-	font-size: 15px;
+	font-size: 17px;
 	font-weight: 600;
 }
 
@@ -1744,7 +1712,7 @@ h1.hx-display {
 	max-width: none;
 	color: #fff;
 	font-family: Archivo, Inter, sans-serif;
-	font-size: 1.05rem;
+	font-size: 1.2rem;
 	font-weight: 700;
 	letter-spacing: -0.02em;
 	text-transform: none;
@@ -1760,8 +1728,8 @@ h1.hx-display {
 
 .site-footer .footer-grid a {
 	color: #fff;
-	font-size: 15px;
-	line-height: 1.4;
+	font-size: 17px;
+	line-height: 1.45;
 	text-decoration: none;
 }
 
@@ -1787,13 +1755,13 @@ h1.hx-display {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	min-height: 44px;
+	min-height: 46px;
 	margin-top: 22px;
-	padding: 0 22px;
+	padding: 0 24px;
 	border-radius: 999px;
 	background: #b3142a;
 	color: #fff !important;
-	font-size: 14px;
+	font-size: 16px;
 	font-weight: 700;
 	letter-spacing: 0.01em;
 	text-decoration: none;
@@ -1843,7 +1811,7 @@ h1.hx-display {
 	padding: 15px 16px;
 	border-top: 1px solid rgba(255, 255, 255, 0.64);
 	background: #1b1b1b;
-	font-size: 16px;
+	font-size: 17px;
 	font-weight: 400;
 	line-height: 1.4;
 	letter-spacing: 0.5px;
@@ -1852,21 +1820,17 @@ h1.hx-display {
 }
 
 @media (min-width: 640px) {
-	.hx-wrap {
-		padding-inline: 48px;
-	}
-
 	.hx-section,
 	.hx-home {
 		margin-bottom: 0;
 	}
 
 	.hx-section {
-		margin-bottom: var(--section-y, clamp(72px, 10vw, 120px));
+		margin-bottom: var(--section-y);
 	}
 
 	.hx-home {
-		padding-bottom: var(--section-y, clamp(72px, 10vw, 120px));
+		padding-bottom: var(--section-y);
 	}
 
 	.hx-hero-frame {
@@ -1876,7 +1840,7 @@ h1.hx-display {
 	}
 
 	.hx-slide-copy {
-		padding-inline: 48px;
+		padding-inline: var(--page-x);
 	}
 
 	.hx-grid {
@@ -1900,7 +1864,7 @@ h1.hx-display {
 	}
 
 	.hx-slide-copy {
-		padding-inline: 96px;
+		padding-inline: 5.5rem;
 	}
 
 	.site-footer .footer-inner {
@@ -1940,11 +1904,11 @@ h1.hx-display {
 	}
 
 	.hx-slide-copy {
-		padding-inline: 144px;
+		padding-inline: 5.5rem;
 	}
 
 	.hx-display {
-		font-size: clamp(2.4rem, 3.6vw, 3.25rem);
+		font-size: 3rem;
 	}
 }
 

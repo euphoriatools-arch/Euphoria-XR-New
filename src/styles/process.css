@@ -1,11 +1,11 @@
 #eup-scroll-process {
-	--bg: #000;
+	--bg: #000000;
 	--text: #f6f6f6;
 	--muted: #777;
 	--line: #272727;
 	--accent: #ffffff;
 	--title: #ff253d;
-	background: var(--bg);
+	background: #000000;
 	color: var(--text);
 	width: 100%;
 }
@@ -15,9 +15,9 @@
 }
 
 #eup-scroll-process .eup-wrap {
-	width: min(1250px, calc(100% - 40px));
+	width: min(1250px, calc(100% - (2 * var(--page-x))));
 	margin: 0 auto;
-	padding: 50px 0 80px;
+	padding: var(--section-y) 0;
 }
 
 #eup-scroll-process .eup-intro {
@@ -28,7 +28,7 @@
 #eup-scroll-process .eup-intro h2 {
 	margin: 0 0 16px;
 	color: var(--text);
-	font-size: clamp(1.75rem, 4vw, 2.35rem);
+	font-size: var(--section-title-size);
 	font-weight: 700;
 	line-height: 1.11;
 	letter-spacing: -0.04em;
@@ -46,7 +46,7 @@
 	position: relative;
 	display: grid;
 	grid-template-columns: minmax(0, 1fr) minmax(360px, 0.88fr);
-	gap: clamp(50px, 5vw, 130px);
+	gap: 3.5rem;
 	align-items: start;
 }
 
@@ -147,20 +147,21 @@
 
 #eup-scroll-process .eup-visual-stage {
 	position: sticky;
-	top: 50%;
-	translate: 0 -50%;
+	top: calc(50% + 56px);
+	translate: 0 -42%;
 	width: min(72%, 420px);
 	height: 60vh;
 	min-height: 560px;
 	max-height: min(760px, 70vh);
 	overflow: hidden;
 	border-radius: 200px;
-	background: #111;
+	background: #000000;
 	box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
 	isolation: isolate;
 	justify-self: center;
 	align-self: start;
 	margin-inline: auto;
+	margin-top: 48px;
 }
 
 #eup-scroll-process .eup-visual-stage:after {
@@ -199,14 +200,21 @@
 	display: block;
 }
 
-@media (max-width: 1024px) {
-	#eup-scroll-process .eup-wrap {
-		padding-top: 80px;
+@media (max-width: 1440px) and (min-width: 768px) {
+	#eup-scroll-process .eup-visual-stage {
+		width: min(64%, 340px);
+		height: 52vh;
+		min-height: 440px;
+		max-height: min(620px, 60vh);
+		top: calc(50% + 40px);
+		margin-top: 36px;
 	}
+}
 
+@media (max-width: 1024px) {
 	#eup-scroll-process .eup-grid {
-		grid-template-columns: minmax(0, 1fr) minmax(200px, 0.8fr);
-		gap: 44px;
+		grid-template-columns: minmax(0, 1fr) minmax(180px, 0.72fr);
+		gap: 2.25rem;
 	}
 
 	#eup-scroll-process .eup-left {
@@ -226,9 +234,12 @@
 	}
 
 	#eup-scroll-process .eup-visual-stage {
-		min-height: 480px;
+		min-height: 400px;
+		max-height: min(540px, 56vh);
 		border-radius: 999px;
-		width: 100%;
+		width: min(100%, 300px);
+		top: calc(50% + 32px);
+		margin-top: 28px;
 	}
 }
 
@@ -238,8 +249,8 @@
 	}
 
 	#eup-scroll-process .eup-wrap {
-		width: min(100%, calc(100% - 32px));
-		padding: 30px 0;
+		width: min(100%, calc(100% - (2 * var(--page-x))));
+		padding: var(--section-y) 0;
 	}
 
 	#eup-scroll-process .eup-intro {
@@ -313,7 +324,7 @@
 		margin: 0 0 22px;
 		overflow: hidden;
 		border-radius: 250px;
-		background: #111;
+		background: #000000;
 		border: 1px solid rgba(255, 37, 61, 0.72);
 	}
 

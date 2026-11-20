@@ -52,12 +52,12 @@ body:has(.svc) {
 }
 
 .svc-wrap {
-	width: min(1330px, calc(100% - 40px));
+	width: min(1330px, calc(100% - (2 * var(--page-x))));
 	margin-inline: auto;
 }
 
 .svc-crumbs {
-	width: min(1330px, calc(100% - 40px));
+	width: min(1330px, calc(100% - (2 * var(--page-x))));
 	margin: 20px auto 0;
 }
 
@@ -201,7 +201,7 @@ body:has(.svc) {
 
 .svc-band {
 	/* Half top + half bottom = one home-style section gap between bands */
-	padding: calc(var(--section-y, clamp(72px, 10vw, 120px)) / 2) 0;
+	padding: var(--section-y-half) 0;
 }
 
 .svc-band-light {
@@ -574,7 +574,7 @@ body:has(.svc) {
 
 .svc-insight.svc-band-light {
 	background: var(--svc-paper);
-	padding: calc(var(--section-y, clamp(72px, 10vw, 120px)) / 2) 0;
+	padding: var(--section-y-half) 0;
 }
 
 .svc-insight-head {
@@ -585,7 +585,7 @@ body:has(.svc) {
 .svc-insight-head h2 {
 	margin: 0;
 	color: var(--svc-black);
-	font-size: var(--section-title-size, clamp(28px, 4vw, 48px));
+	font-size: var(--section-title-size);
 	font-weight: 700;
 	letter-spacing: var(--section-title-tracking, -0.045em);
 	line-height: 1.12;
@@ -797,7 +797,7 @@ body:has(.svc) {
 .svc-cases {
 	background: var(--svc-black);
 	color: var(--svc-white);
-	padding: calc(var(--section-y, clamp(72px, 10vw, 120px)) / 2) 0;
+	padding: var(--section-y-half) 0;
 	overflow-x: clip;
 }
 
@@ -808,7 +808,7 @@ body:has(.svc) {
 .svc-cases .hx-head h2 {
 	margin: 0;
 	color: var(--svc-white);
-	font-size: var(--section-title-size, clamp(28px, 4vw, 48px));
+	font-size: var(--section-title-size);
 	font-weight: 700;
 	letter-spacing: var(--section-title-tracking, -0.045em);
 	line-height: 1.12;
@@ -820,7 +820,7 @@ body:has(.svc) {
 
 .svc-headsets.svc-band-light {
 	background: var(--svc-paper);
-	padding: calc(var(--section-y, clamp(72px, 10vw, 120px)) / 2) 0;
+	padding: var(--section-y-half) 0;
 }
 
 .svc-headsets-head {
@@ -832,7 +832,7 @@ body:has(.svc) {
 .svc-headsets-head h2 {
 	margin: 0;
 	color: var(--svc-black);
-	font-size: var(--section-title-size, clamp(28px, 4vw, 48px));
+	font-size: var(--section-title-size);
 	font-weight: 700;
 	letter-spacing: var(--section-title-tracking, -0.045em);
 	line-height: 1.12;
@@ -979,7 +979,7 @@ body:has(.svc) {
 .svc-use {
 	background: var(--svc-paper);
 	color: var(--svc-black);
-	padding: calc(var(--section-y, clamp(72px, 10vw, 120px)) / 2) 0;
+	padding: var(--section-y-half) 0;
 }
 
 .svc-use-head {
@@ -1013,7 +1013,7 @@ body:has(.svc) {
 .svc-use-head h2 {
 	margin: 0;
 	color: var(--svc-black);
-	font-size: var(--section-title-size, clamp(28px, 4vw, 48px));
+	font-size: var(--section-title-size);
 	font-weight: 700;
 	letter-spacing: var(--section-title-tracking, -0.045em);
 	line-height: 1.12;
@@ -1145,7 +1145,7 @@ body:has(.svc) {
 .svc-clients {
 	background: var(--svc-black);
 	color: var(--svc-white);
-	padding: calc(var(--section-y, clamp(72px, 10vw, 120px)) / 2) 0;
+	padding: var(--section-y-half) 0;
 }
 
 .svc-clients .svc-use-label {

@@ -91,7 +91,7 @@ html:has(.bl-list) .topbar.is-light.is-scrolled::before {
 .bl-tabs {
 	display: flex;
 	gap: 12px;
-	width: min(1536px, calc(100% - 32px));
+	width: min(1536px, calc(100% - (2 * var(--page-x))));
 	margin: 48px auto 0;
 	overflow-x: auto;
 	scroll-snap-type: x mandatory;
@@ -127,7 +127,7 @@ html:has(.bl-list) .topbar.is-light.is-scrolled::before {
 
 .bl-grid-wrap,
 .bl-close {
-	width: min(1536px, calc(100% - 32px));
+	width: min(1536px, calc(100% - (2 * var(--page-x))));
 	margin: 72px auto 0;
 }
 
@@ -343,7 +343,7 @@ html:has(.topbar.is-scrolled) .bl-post .bl-hero-card {
 .bl-post .bl-hero-card {
 	gap: 0;
 	min-height: 0;
-	width: min(1536px, calc(100% - 40px));
+	width: min(1536px, calc(100% - (2 * var(--page-x))));
 	margin-top: calc(var(--header) + 12px);
 	padding: 28px 0 24px;
 }
@@ -514,7 +514,7 @@ html:has(.topbar.is-scrolled) .bl-post .bl-hero-card {
 @media (min-width: 1024px) {
 	.bl-post .bl-hero-card {
 		min-height: 760px;
-		width: min(1536px, calc(100% - 96px));
+		width: min(1536px, calc(100% - (2 * var(--page-x))));
 		justify-content: space-between;
 		margin-top: calc(var(--header) + 20px);
 		padding: 40px 0 36px;
@@ -797,7 +797,7 @@ html:has(.topbar.is-scrolled) .bl-post .bl-hero-card {
 }
 
 .bl-related-grid {
-	width: min(1536px, calc(100% - 48px));
+	width: min(1536px, calc(100% - (2 * var(--page-x))));
 	margin: 0 auto 48px;
 }
 
@@ -816,7 +816,7 @@ html:has(.topbar.is-scrolled) .bl-post .bl-hero-card {
 	.bl-tabs,
 	.bl-grid-wrap,
 	.bl-close {
-		width: min(1536px, calc(100% - 96px));
+		width: min(1536px, calc(100% - (2 * var(--page-x))));
 	}
 
 	.bl-grid,

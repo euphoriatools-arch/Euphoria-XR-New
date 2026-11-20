@@ -59,7 +59,7 @@ const social = [
 		<div class="footer-grid">
 			<div class="footer-brand">
 				<a class="footer-logo" href="/" aria-label="EuphoriaXR home">
-					<span>EUPHORIA</span><span class="footer-logo-xr"> XR</span>
+					<img src="/brand/logo-dark.webp" alt="EuphoriaXR logo" width="210" height="28" />
 				</a>
 				<p class="footer-blurb">
 					EuphoriaXR builds immersive VR, AR, AI, and 3D experiences for teams who need real work shipped.
@@ -69,7 +69,7 @@ const social = [
 					{
 						social.map((link) => (
 							<a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label}>
-								<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" width="18" height="18">
+								<svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" width="20" height="20">
 									<path d={link.path} />
 								</svg>
 								<span class="sr-only">{link.label} (opens in a new tab)</span>

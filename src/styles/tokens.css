@@ -20,12 +20,40 @@
 	--white: #ffffff;
 	--paper: #f6f6f8;
 
+	/*
+	 * Layout rhythm (GrooveJones-style): rem + stepped breakpoints.
+	 * No vw for section gaps — stays stable on zoom and matching
+	 * from laptop (~1024–1440) through large desktop.
+	 */
 	--studio-max: 1360px;
-	--studio-pad: clamp(4rem, 10vw, 9rem);
-	--section-y: clamp(72px, 10vw, 120px);
-	--section-head-gap: 40px;
-	--section-title-size: clamp(28px, 4vw, 48px);
+	--page-x: 1.5rem; /* 24px */
+	--section-y: 3.5rem; /* 56px */
+	--section-y-half: 1.75rem;
+	--section-head-gap: 2.5rem; /* 40px */
+	--studio-pad: 3.5rem;
+	--section-title-size: 1.75rem; /* 28px */
 	--section-title-tracking: -0.045em;
 	--font-display: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	--font-body: Archivo, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@media (min-width: 640px) {
+	:root {
+		--page-x: 3rem; /* 48px */
+		--section-y: 4.5rem; /* 72px */
+		--section-y-half: 2.25rem;
+		--studio-pad: 4.5rem;
+		--section-title-size: 2rem; /* 32px */
+	}
+}
+
+@media (min-width: 1024px) {
+	:root {
+		/* Locked from laptop through large desktop — no further growth */
+		--page-x: 3rem;
+		--section-y: 5rem; /* 80px */
+		--section-y-half: 2.5rem;
+		--studio-pad: 5rem;
+		--section-title-size: 2.75rem; /* 44px */
+	}
 }
