@@ -1,4 +1,5 @@
 import { arPageExtras, arServiceSlug } from './arPage';
+import { mrPageExtras, mrServiceSlug } from './mrPage';
 import type { MarketingPage } from './types';
 import { vrPageExtras, vrServiceSlug } from './vrPage';
 
@@ -37,6 +38,12 @@ const insightsBySlug: Record<string, ServiceInsight> = {
 		headline: arPageExtras.insights.headline,
 		body: arPageExtras.insights.body,
 		items: arPageExtras.insights.items,
+	},
+	[mrServiceSlug]: {
+		label: mrPageExtras.insights.label,
+		headline: mrPageExtras.insights.headline,
+		body: mrPageExtras.insights.body,
+		items: mrPageExtras.insights.items,
 	},
 };
 

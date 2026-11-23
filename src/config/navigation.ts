@@ -35,6 +35,7 @@ const serviceGroupDefs: GroupDef[] = [
 			'vr-simulators',
 			'services/augmented-reality-development-company',
 			'services/virtual-reality-development-company',
+			'services/mixed-reality-development-company',
 		],
 	},
 	{

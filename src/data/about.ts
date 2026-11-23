@@ -32,6 +32,7 @@ export const aboutServices: AboutService[] = [
 			'Our team builds enterprise AR experiences for visualization, guided workflows, product interaction, and contextual digital information.',
 	},
 	{
+		href: '/services/mixed-reality-development-company/',
 		label: 'Mixed Reality (MR) Development',
 		summary:
 			'We develop mixed reality experiences connecting interactive digital content with physical spaces, using appropriate tracking and spatial interfaces.',

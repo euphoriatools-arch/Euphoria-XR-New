@@ -538,27 +538,73 @@ export const servicePages: MarketingPage[] = [
 		h1: 'Augmented Reality Development Company',
 		title: 'Augmented Reality Development Company | EuphoriaXR',
 		description:
-			'EuphoriaXR is an augmented reality development company for AR apps, WebAR, and campaign filters, from the first prototype through a store release.',
-		summary: 'AR apps, WebAR, and filters from prototype to release.',
+			'EuphoriaXR creates custom augmented reality apps, WebAR experiences, and product visualizations that make real-world interactions more engaging.',
+		summary: 'Bring products, stories, and digital experiences into the real world with custom augmented reality solutions.',
 		navLabel: 'Augmented reality development',
 		eyebrow: 'AR / Apps / WebAR',
 		serviceType: 'Augmented reality development',
 		image: 'ar',
 		intro: [
-			'EuphoriaXR is an augmented reality development company for brands and product teams that need an AR app, a WebAR scene, or a filter people will actually open. We prototype on device before we promise a store release.',
-			'As an AR app development company and an augmented reality app development company, we also work as an AR development company for teams that already know the use case and need a studio that can ship it.',
+			'EuphoriaXR is an augmented reality development company connecting digital and physical worlds through interactive AR applications. We develop AR experiences that people can access, explore, and interact with in their everyday surroundings.',
+			'As an AR app development company and an augmented reality app development company, we also work as an AR development company for teams that need mobile apps, WebAR, virtual try-ons, and interactive brand campaigns. Our team handles experience design, 3D production, development, and deployment around your audience, business objectives, and technical requirements.',
 		],
 		benefits: [
-			{ title: 'Prototype on a real phone', body: 'Tracking, light, and the first interaction are proven before production art.' },
-			{ title: 'App or browser, chosen on purpose', body: 'We recommend WebAR or a native app from the job, not from a habit.' },
-			{ title: 'Brand in the scene', body: 'The experience follows your design system, including type, materials, and motion.' },
-			{ title: 'A release you can run', body: 'Store listings, links, and analytics are part of the handover, not an afterthought.' },
+			{ title: 'Prototype on real devices', body: 'Tracking, lighting, and interactions are proven on target phones, browsers, and glasses before production.' },
+			{ title: 'App or WebAR, chosen on purpose', body: 'We recommend WebAR or a native app from the job, audience, and distribution path—not from habit.' },
+			{ title: 'Brand in the scene', body: 'The experience follows your design system, including type, materials, motion, and campaign voice.' },
+			{ title: 'A release you can run', body: 'Store listings, QR links, analytics, and handover docs are part of delivery—not an afterthought.' },
+			{ title: 'Commerce-ready AR', body: 'Product configurators, try-on, and visualization flows that support discovery and conversion.' },
+			{ title: 'Ongoing support', body: 'Post-launch updates for content, compatibility, and campaign refreshes when you need them.' },
 		],
 		process: [
-			{ title: 'Write the moment', body: 'Where the person is, what they point at, and what they should do next.' },
-			{ title: 'Prove tracking', body: 'A rough build on the target devices, in the real place if we can get there.' },
-			{ title: 'Produce the experience', body: 'Art, interaction, and the page or app around it.' },
-			{ title: 'Release', body: 'Store or web launch, with a plan for the first update.' },
+			{
+				title: 'AR Product Configurator',
+				body: 'We create interactive AR configurators that let customers customize product colors, materials, and features while viewing their selections in real-world surroundings.',
+			},
+			{
+				title: 'AR Product Visualization',
+				body: 'We develop AR visualization solutions that allow customers to examine realistic 3D products, understand their dimensions, and preview them in physical spaces.',
+			},
+			{
+				title: 'Branded AR Filters',
+				body: 'We design custom AR filters and camera effects for branded campaigns, allowing audiences to interact with digital characters, animations, and promotional content.',
+			},
+			{
+				title: 'AR Glasses Development',
+				body: 'We develop applications for compatible AR glasses and spatial devices, bringing contextual information, interactive 3D content, and hands-free visual guidance into view.',
+			},
+			{
+				title: 'Custom AR App Development',
+				body: 'We build augmented reality applications for iOS and Android, incorporating spatial tracking, interactive 3D models, and features tailored to specific business requirements.',
+			},
+			{
+				title: 'WebAR Development',
+				body: 'We create browser-based augmented reality experiences that users can access through links or QR codes without downloading a separate mobile application.',
+			},
+			{
+				title: 'WebAR Business Cards',
+				body: 'We transform traditional business cards into interactive digital introductions featuring 3D content, company information, videos, and clickable contact options.',
+			},
+			{
+				title: 'AR Virtual Try-On',
+				body: 'We develop virtual try-on experiences that let shoppers preview eyewear, accessories, cosmetics, and other products using compatible smartphone cameras.',
+			},
+			{
+				title: 'Interactive AR Packaging',
+				body: 'We turn physical packaging into interactive experiences where customers can discover product information, watch animations, explore instructions, and access branded content.',
+			},
+			{
+				title: 'Location-Based AR Experiences',
+				body: 'We create AR applications that reveal digital stories, interactive objects, and contextual information when users explore designated physical locations.',
+			},
+			{
+				title: 'AR Navigation & Wayfinding',
+				body: 'We develop AR navigation experiences that display directional guidance and location information within supported environments, helping visitors find destinations more intuitively.',
+			},
+			{
+				title: 'AR Event Activations',
+				body: 'We create interactive AR experiences for exhibitions, trade shows, and promotional events, allowing visitors to engage with products, digital characters, and branded activities.',
+			},
 		],
 		useCases: [
 			{ title: 'Product visualization', body: 'See a product in the room, at the right scale, before a purchase.' },
@@ -572,15 +618,238 @@ export const servicePages: MarketingPage[] = [
 			{ title: 'Launch pack', body: 'Store assets or links, analytics, and update notes.' },
 		],
 		faqs: [
-			{ question: 'What does an augmented reality development company do?', answer: 'We design and build AR: native apps, WebAR, and branded filters. The work includes the prototype on device, the production build, and the release.' },
-			{ question: 'How do we choose an AR app development company?', answer: 'Ask to see a build on the phone you care about, not only a reel. EuphoriaXR prototypes on device before a long production commitment.' },
-			{ question: 'Are you an augmented reality app development company and a WebAR studio?', answer: 'Yes. We are an AR development company for both. WebAR is right when a scan must work without an install. An app is right when you need the camera, account, or depth a browser will not give you.' },
-			{ question: 'Can you work with our creative agency?', answer: 'Often. We partner as the build studio while your agency keeps the campaign. See our immersive agency page for how that engagement is shaped.' },
+			{
+				question: 'How much does it cost to develop a custom augmented reality application?',
+				answer:
+					'AR development costs depend on project complexity, 3D assets, tracking features, supported devices, and integrations. EuphoriaXR provides custom estimates based on your requirements and project scope.',
+			},
+			{
+				question: 'Should my business choose WebAR or a native AR application?',
+				answer:
+					'Choose WebAR for quick browser access without downloads. Native AR applications are better for advanced interactions, deeper device integration, and offline functionality. The right choice depends on your audience and technical requirements.',
+			},
+			{
+				question: 'How long does it take to launch a branded WebAR campaign?',
+				answer:
+					'A straightforward WebAR campaign may take several weeks. Projects requiring custom 3D assets, advanced tracking, multiple interactions, or integrations can take longer.',
+			},
+			{
+				question: 'Can customers view our products in their actual size using AR?',
+				answer:
+					'Yes. AR product visualization can display accurately scaled 3D products in physical spaces. Placement accuracy depends on model dimensions, device tracking, and environmental conditions.',
+			},
+			{
+				question: 'Can an AR product configurator connect with our existing product catalog?',
+				answer:
+					'Yes. AR configurators can integrate with compatible product databases and e-commerce systems through APIs, allowing customers to explore available colors, materials, configurations, and product information.',
+			},
+			{
+				question: 'Can we add AR product previews to our existing Shopify or e-commerce website?',
+				answer:
+					'Yes. AR product previews can be integrated into Shopify and other compatible e-commerce platforms using optimized 3D models and supported technologies. Advanced configurations may require custom development.',
+			},
+			{
+				question: 'How accurate are AR virtual try-on experiences?',
+				answer:
+					'Accuracy depends on tracking technology, product dimensions, 3D model quality, and device capabilities. Virtual try-on can provide realistic previews, but it may not guarantee exact physical fit.',
+			},
+			{
+				question: 'Can users access our AR experience by scanning a QR code?',
+				answer:
+					'Yes. QR codes can open WebAR experiences directly in compatible mobile browsers, making them suitable for packaging, advertisements, retail displays, and events without requiring app downloads.',
+			},
+			{
+				question: 'Can augmented reality work on both iPhones and Android devices?',
+				answer:
+					'Yes. EuphoriaXR develops AR experiences for compatible iOS and Android devices. Available features and performance depend on device capabilities, operating systems, and browser support.',
+			},
+			{
+				question: 'Can our AR application work without an internet connection?',
+				answer:
+					'Yes. Native AR applications can support offline functionality when essential assets are stored locally. WebAR typically requires internet access for initial loading, while cloud-connected features need connectivity.',
+			},
+			{
+				question: 'Can AR applications recognize our existing product packaging or printed materials?',
+				answer:
+					'Yes. Image-tracking AR can recognize suitable packaging, posters, brochures, and printed graphics to display linked 3D content, animations, or product information. Recognition quality depends on image features and environmental conditions.',
+			},
+			{
+				question: 'Can we use our existing CAD files and 3D product models for AR development?',
+				answer:
+					'Yes. Existing CAD files and 3D models can often be reused after format conversion, geometry optimization, and material adjustments to meet AR performance and compatibility requirements.',
+			},
+			{
+				question: 'Can AR applications show step-by-step instructions on physical equipment?',
+				answer:
+					'Yes. AR can overlay instructions, labels, and animated guidance onto equipment using appropriate tracking methods. Applications can support assembly, maintenance, inspections, and operational guidance.',
+			},
+			{
+				question: 'Will our company own the AR application, 3D assets, and source code after development?',
+				answer:
+					'Ownership depends on the project agreement. Custom code, 3D assets, and deliverables can be addressed in the contract, while third-party tools and licensed components remain subject to their terms.',
+			},
+			{
+				question: 'Does EuphoriaXR provide maintenance and support after an AR application launches?',
+				answer:
+					'Yes. EuphoriaXR offers post-launch support based on project requirements, including bug fixes, performance improvements, content updates, device compatibility, and technical maintenance.',
+			},
 		],
 		related: ['webar-development', 'services/branded-ar-filters', 'ar-vr-media-and-marketing'],
 		keywords: {
 			primary: 'augmented reality development company',
 			secondary: ['ar app development company', 'augmented reality app development company', 'ar development company'],
+		},
+	},
+	{
+		slug: 'services/mixed-reality-development-company',
+		kind: 'service',
+		h1: 'Mixed Reality Development Company',
+		title: 'Top Mixed Reality Development Company | EuphoriaXR',
+		description:
+			'EuphoriaXR builds enterprise mixed reality apps for training, digital twins, guided work, and spatial collaboration across leading MR headsets.',
+		summary: 'Building world-class enterprise mixed reality applications for real workflows and devices.',
+		navLabel: 'Mixed reality development',
+		eyebrow: 'MR / Spatial / Enterprise',
+		serviceType: 'Mixed reality development',
+		image: 'vr',
+		intro: [
+			'EuphoriaXR is a mixed reality development company that designs and builds immersive applications for enterprises operating across complex physical environments. We connect digital systems with real spaces through anchoring, occlusion, and environment-aware interaction.',
+			'As an MR development company and mixed reality app development studio, we handle strategy, spatial design, 3D content, software engineering, and deployment across optical see-through and passthrough headsets.',
+		],
+		benefits: [
+			{ title: 'Use-case first', body: 'We define the physical environment, device class, and workflow before production art or engineering scales up.' },
+			{ title: 'Spatial UX that holds up', body: 'Interfaces stay readable under motion, with stable anchors and comfortable interaction patterns.' },
+			{ title: 'Enterprise integrations', body: 'MR apps can connect to ERP, PLM, CRM, LMS, and analytics systems when the workflow needs them.' },
+			{ title: 'Headset fleets that fit', body: 'We validate on the devices your teams will wear—Quest, Vision Pro, HoloLens, Magic Leap, Varjo, and more.' },
+			{ title: 'Full IP path', body: 'Custom code and assets are structured for client ownership and internal scale.' },
+			{ title: 'Support after launch', body: 'Platform updates, compatibility, and performance work continue as SDKs and fleets evolve.' },
+		],
+		process: [
+			{
+				title: 'Strategy & Planning',
+				body: 'We define the mixed reality use case, physical environment constraints, device class, and system architecture before committing to production—including feasibility across optical see-through devices, passthrough MR headsets, and hybrid XR strategies.',
+			},
+			{
+				title: 'Product Design',
+				body: 'Product design defines how the mixed reality system fits into real workflows and how digital content behaves inside physical space—accounting for movement, safety, field of view, and environmental variability.',
+			},
+			{
+				title: 'UX/UI Design',
+				body: 'Mixed reality UX focuses on spatial legibility, persistent anchoring, comfortable interaction patterns, and interface stability under motion so MR interfaces stay usable during real-world tasks.',
+			},
+			{
+				title: 'Content Creation',
+				body: 'We create optimized 3D assets, spatial UI elements, animations, and digital twins engineered for real-time rendering inside mixed reality environments.',
+			},
+			{
+				title: 'Software Engineering',
+				body: 'Our mixed reality software development uses Unity, Unreal Engine where required, and native SDKs to build high-performance MR systems with stable tracking, reliable spatial anchors, and enterprise integrations.',
+			},
+			{
+				title: 'Deployment',
+				body: 'We support enterprise distribution, managed device fleets, headset configuration, security compliance, and rollout across operational environments.',
+			},
+			{
+				title: 'Support & Maintenance',
+				body: 'Post-launch support includes platform updates, device compatibility, SDK changes, performance optimization, and long-term mixed reality system evolution.',
+			},
+		],
+		useCases: [
+			{ title: 'Spatial design reviews', body: 'Walk around 1:1 digital twins anchored in real rooms.' },
+			{ title: 'Guided assembly', body: 'Occlusion-aware instructions that match real part geometry.' },
+			{ title: 'Remote assistance', body: 'Annotations locked to physical objects for field teams.' },
+		],
+		deliverables: [
+			{ title: 'MR experience brief', body: 'Devices, environment, workflow, and success metrics.' },
+			{ title: 'Spatial prototype', body: 'A build that proves tracking, anchors, and core interaction.' },
+			{ title: 'Production MR app', body: 'The released experience on agreed headsets.' },
+			{ title: 'Launch & support pack', body: 'Deployment notes, fleet guidance, and update plan.' },
+		],
+		faqs: [
+			{
+				question: 'What is mixed reality?',
+				answer:
+					'Mixed reality blends digital content with the physical world so virtual objects can anchor to and interact with real environments using depth, surfaces, and room geometry.',
+			},
+			{
+				question: 'What does a mixed reality development company do?',
+				answer:
+					'A mixed reality development company designs and builds custom spatial computing applications—from strategy and spatial UX to 3D optimization, engineering, headset deployment, and support.',
+			},
+			{
+				question: 'What is the difference between AR and mixed reality?',
+				answer:
+					'AR overlays digital content onto the real world. Mixed reality goes further with anchoring, occlusion, and environment-aware interaction so digital objects behave inside physical space.',
+			},
+			{
+				question: 'Which headsets do you support?',
+				answer:
+					'We build for leading optical and passthrough platforms including Apple Vision Pro, Meta Quest, Samsung Galaxy XR, Microsoft HoloLens 2, Magic Leap 2, Varjo XR-4, XREAL, and Pico XR.',
+			},
+			{
+				question: 'How long does mixed reality app development take?',
+				answer:
+					'Pilots often take about three months. Standard applications may take three to six months. Enterprise deployments with integrations can take six to twelve months in phases.',
+			},
+			{
+				question: 'Can MR apps integrate with enterprise systems?',
+				answer:
+					'Yes. Mixed reality applications can integrate with ERP, PLM, CRM, LMS, and analytics systems so spatial computing fits existing workflows.',
+			},
+			{
+				question: 'Do we own the IP?',
+				answer:
+					'Ownership depends on the agreement. EuphoriaXR structures enterprise projects so clients can retain ownership of custom code, assets, and systems.',
+			},
+			{
+				question: 'What industries use mixed reality?',
+				answer:
+					'Manufacturing, automotive, aerospace, healthcare, construction, energy, education, logistics, defense, retail, and events—anywhere spatial clarity improves safety or performance.',
+			},
+			{
+				question: 'What tools do you use for mixed reality development?',
+				answer:
+					'Typically Unity, Unreal Engine where required, native SDKs, and 3D tooling such as Blender, with C# or C++ depending on the platform.',
+			},
+			{
+				question: 'Do you provide post-launch support?',
+				answer:
+					'Yes. Support can include platform updates, device compatibility, SDK changes, performance work, and content improvements as fleets evolve.',
+			},
+			{
+				question: 'What is industrial mixed reality?',
+				answer:
+					'Industrial mixed reality deploys MR in manufacturing and operations to guide workflows, reduce errors, and improve safety with spatially anchored digital instructions.',
+			},
+			{
+				question: 'How is mixed reality used in healthcare?',
+				answer:
+					'Healthcare MR supports surgical planning, anatomical visualization, medical education, and clinical simulation with spatially aligned 3D models.',
+			},
+			{
+				question: 'Can mixed reality work outdoors?',
+				answer:
+					'It depends on the headset and environment. Devices like Magic Leap 2 are stronger for outdoor brightness, while passthrough headsets need careful lighting and tracking validation on site.',
+			},
+			{
+				question: 'What is mixed reality training?',
+				answer:
+					'Mixed reality training blends real-world context with digital simulation to improve retention, reduce risk, and accelerate skill acquisition versus classroom-only methods.',
+			},
+			{
+				question: 'How do we start an MR project with EuphoriaXR?',
+				answer:
+					'Start with a discovery call. We map the workflow, environment, devices, and success metrics, then recommend a pilot scope before full production.',
+			},
+		],
+		related: [
+			'services/augmented-reality-development-company',
+			'services/virtual-reality-development-company',
+			'ar-vr-training-education',
+		],
+		keywords: {
+			primary: 'mixed reality development company',
+			secondary: ['mr development company', 'mixed reality app development', 'mixed reality development'],
 		},
 	},
 	{
