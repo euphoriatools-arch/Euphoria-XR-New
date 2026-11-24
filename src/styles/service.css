@@ -1075,27 +1075,34 @@ body:has(.svc) {
 	letter-spacing: -0.02em;
 }
 
-.svc-use-arrow {
+/*
+	Highlight badge is locked site-wide:
+	dark circle + white arrow — never invert per section.
+*/
+.svc-use-arrow,
+.svc-band-light .svc-use-arrow,
+.svc-band-dark .svc-use-arrow,
+.svc-cases .svc-use-arrow,
+.svc-clients .svc-use-arrow,
+.svc-counters .svc-use-arrow,
+.svc-trusted .svc-use-arrow {
 	display: grid;
 	place-items: center;
 	width: 28px;
 	height: 28px;
 	border-radius: 50%;
-	background: var(--svc-black);
-	color: var(--svc-white);
+	border: 1px solid rgba(255, 255, 255, 0.28);
+	background: #111 !important;
+	color: #fff !important;
 	font-size: 14px;
 	line-height: 1;
+	flex-shrink: 0;
 }
 
 .svc-band-dark .svc-use-label,
-.svc-cases .svc-use-label {
+.svc-cases .svc-use-label,
+.svc-clients .svc-use-label {
 	color: var(--svc-white);
-}
-
-.svc-band-dark .svc-use-arrow,
-.svc-cases .svc-use-arrow {
-	background: var(--svc-white);
-	color: var(--svc-black);
 }
 
 .svc-split > .svc-use-label {
@@ -1185,19 +1192,27 @@ body:has(.svc) {
 .vp-process-card {
 	display: flex;
 	flex-direction: column;
-	gap: 14px;
+	align-items: flex-start;
+	gap: 18px;
 	min-height: 100%;
-	padding: clamp(28px, 3vw, 36px);
+	padding: 32px;
 	border-radius: 20px;
 	background: #171717;
 	color: var(--svc-white);
+	text-align: left;
 }
 
-.vp-process-num {
-	color: var(--svc-red);
-	font-size: 13px;
-	font-weight: 700;
-	letter-spacing: 0.08em;
+.vp-process-icon {
+	display: block;
+	width: 48px;
+	height: 48px;
+	object-fit: contain;
+	flex-shrink: 0;
+}
+
+.vp-process-copy {
+	display: grid;
+	gap: 10px;
 }
 
 .vp-process-card h3 {
@@ -1282,15 +1297,6 @@ body:has(.svc) {
 	background: var(--svc-black);
 	color: var(--svc-white);
 	padding: calc(var(--section-y) / 2) 0;
-}
-
-.svc-clients .svc-use-label {
-	color: var(--svc-white);
-}
-
-.svc-clients .svc-use-arrow {
-	background: var(--svc-white);
-	color: var(--svc-black);
 }
 
 .svc-clients-head {

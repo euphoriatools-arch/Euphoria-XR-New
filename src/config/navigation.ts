@@ -36,7 +36,7 @@ const serviceGroupDefs: GroupDef[] = [
 			'services/augmented-reality-development-company',
 			'services/virtual-reality-development-company',
 			'services/mixed-reality-development-company',
-			'apple-vision-pro-development',
+			'services/apple-vision-pro-development',
 		],
 	},
 

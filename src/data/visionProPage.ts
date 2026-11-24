@@ -1,4 +1,4 @@
-export const visionProServiceSlug = 'apple-vision-pro-development';
+export const visionProServiceSlug = 'services/apple-vision-pro-development';
 
 export const visionProPage = {
 	heroLines: ['Apple Vision Pro', 'Development Company'] as const,
@@ -202,30 +202,37 @@ export const visionProPage = {
 			{
 				title: 'Discovery & Consultation',
 				body: 'Define the users, problem, success criteria and platform fit.',
+				icon: '/stack/vision-pro/process/01-discovery.png',
 			},
 			{
 				title: 'Strategy & Technical Planning',
 				body: 'Prioritize features, choose architecture and define scope.',
+				icon: '/stack/vision-pro/process/02-strategy.png',
 			},
 			{
 				title: 'Spatial UI/UX Design',
 				body: 'Prototype layouts, interactions and comfort considerations.',
+				icon: '/stack/vision-pro/process/03-spatial-ux.png',
 			},
 			{
 				title: 'Prototyping & Development',
 				body: 'Validate core concepts, build features and integrate systems.',
+				icon: '/stack/vision-pro/process/04-prototyping.png',
 			},
 			{
 				title: 'Testing & Optimization',
 				body: 'Evaluate device performance, accessibility, privacy and usability.',
+				icon: '/stack/vision-pro/process/05-testing.png',
 			},
 			{
 				title: 'Deployment & Launch',
 				body: 'Prepare App Store submission or appropriate enterprise distribution.',
+				icon: '/stack/vision-pro/process/06-deployment.png',
 			},
 			{
 				title: 'Maintenance & Support',
 				body: 'Plan updates, compatibility checks and ongoing improvements.',
+				icon: '/stack/vision-pro/process/07-maintenance.png',
 			},
 		],
 		cta: { href: '/about/', label: 'Learn More About EuphoriaXR' },

@@ -1103,7 +1103,7 @@ export const servicePages: MarketingPage[] = [
 		keywords: { primary: 'branded ar filters', secondary: [] },
 	},
 	{
-		slug: 'apple-vision-pro-development',
+		slug: 'services/apple-vision-pro-development',
 		kind: 'service',
 		h1: 'Apple Vision Pro Development Company',
 		title: 'Top Apple Vision Pro Development Company | EuphoriaXR',

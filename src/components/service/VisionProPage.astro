@@ -318,17 +318,19 @@ const talkBenefits = page.benefits.slice(0, 6);
 			</p>
 			<h2 id="vp-process-title" class="svc-giant" data-reveal>{vp.process.title}</h2>
 			<p class="svc-lead" data-reveal>{vp.process.lead}</p>
-			<ol class="vp-process-grid">
+			<ul class="vp-process-grid">
 				{
-					vp.process.steps.map((step, index) => (
+					vp.process.steps.map((step) => (
 						<li class="vp-process-card" data-reveal>
-							<span class="vp-process-num">{String(index + 1).padStart(2, '0')}</span>
-							<h3>{step.title}</h3>
-							<p>{step.body}</p>
+							<img class="vp-process-icon" src={step.icon} alt="" width="56" height="56" loading="lazy" decoding="async" />
+							<div class="vp-process-copy">
+								<h3>{step.title}</h3>
+								<p>{step.body}</p>
+							</div>
 						</li>
 					))
 				}
-			</ol>
+			</ul>
 			<p class="svc-cta-row">
 				<a class="svc-pill svc-pill-light" href={vp.process.cta.href}>{vp.process.cta.label}</a>
 			</p>

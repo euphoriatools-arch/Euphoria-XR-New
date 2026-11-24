@@ -27,7 +27,7 @@ export const studioGroups: StudioGroup[] = [
 			{ href: '/services/augmented-reality-development-company/', label: 'Augmented reality development company' },
 			{ href: '/services/virtual-reality-development-company/', label: 'Virtual reality development company' },
 			{ href: '/services/mixed-reality-development-company/', label: 'Mixed reality development company' },
-			{ href: '/apple-vision-pro-development/', label: 'Apple Vision Pro development company' },
+			{ href: '/services/apple-vision-pro-development/', label: 'Apple Vision Pro development company' },
 			{ href: '/services/nft-makers-metaverse-development-company/', label: 'NFT marketplace & metaverse development' },
 		],
 	},
