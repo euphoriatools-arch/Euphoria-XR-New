@@ -1,8 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServicePage from '../components/service/ServicePage.astro';
+import VisionProPage from '../components/service/VisionProPage.astro';
 import BlogArticle from '../components/blog/BlogArticle.astro';
 import { marketingPages } from '../data/pages';
+import { isVisionProPage } from '../data/visionProPage';
 import { loadPosts } from '../lib/blog';
 import { absoluteUrl } from '../lib/urls';
 import { blogPostingSchema, breadcrumbSchema, serviceSchema } from '../lib/schema';
@@ -83,7 +85,7 @@ const crumbs = post
 				}),
 			]}
 		>
-			<ServicePage page={page!} />
+			{isVisionProPage(page!.slug) ? <VisionProPage page={page!} /> : <ServicePage page={page!} />}
 		</BaseLayout>
 	)
 }

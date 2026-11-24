@@ -1102,4 +1102,133 @@ export const servicePages: MarketingPage[] = [
 		related: ['webar-development', 'ar-vr-media-and-marketing', 'ar-vr-fashion-retail'],
 		keywords: { primary: 'branded ar filters', secondary: [] },
 	},
+	{
+		slug: 'apple-vision-pro-development',
+		kind: 'service',
+		h1: 'Apple Vision Pro Development Company',
+		title: 'Top Apple Vision Pro Development Company | EuphoriaXR',
+		description:
+			'EuphoriaXR builds Apple Vision Pro apps with visionOS, RealityKit, and SwiftUI for spatial productivity, training, visualization, and enterprise collaboration.',
+		summary: 'Native visionOS apps for spatial productivity, training, visualization, and enterprise collaboration.',
+		navLabel: 'Apple Vision Pro development',
+		eyebrow: 'visionOS / Spatial / Enterprise',
+		serviceType: 'Apple Vision Pro development',
+		image: 'vr',
+		intro: [
+			'EuphoriaXR is an Apple Vision Pro development company that designs and builds native visionOS applications for spatial productivity, training, visualization, and enterprise collaboration.',
+			'Our visionOS app development and Apple Vision Pro app development practice covers strategy, spatial UX, RealityKit content, SwiftUI engineering, integrations, and App Store or MDM deployment—plus spatial computing development when programs span Vision Pro and other XR platforms.',
+		],
+		benefits: [
+			{ title: 'Native visionOS first', body: 'We build for eyes, hands, and voice with RealityKit and SwiftUI—not flat ports of phone layouts.' },
+			{ title: 'Hardware-validated pilots', body: 'Prototypes run on real Apple Vision Pro devices before large content and integration budgets commit.' },
+			{ title: 'Enterprise integrations', body: 'ERP, PLM, CRM, EHR/DICOM, and analytics connections when the workflow needs them.' },
+			{ title: 'SharePlay when it matters', body: 'Shared spatial sessions for co-review, training, and distributed collaboration.' },
+			{ title: 'Client IP ownership', body: 'Custom code, scenes, and assets structured for your ownership and internal scale.' },
+			{ title: 'Support after launch', body: 'SDK updates, performance work, and roadmap evolution as visionOS grows.' },
+		],
+		process: [
+			{
+				title: 'Discovery & Opportunity',
+				body: 'Align on goals, users, immersion model, systems, and success metrics before production begins.',
+			},
+			{
+				title: 'Spatial Design & Prototype',
+				body: 'Define visionOS product and UX, then validate interaction and performance on real hardware.',
+			},
+			{
+				title: 'Build & Integrate',
+				body: 'SwiftUI and RealityKit engineering, content production, enterprise integrations, and on-device QA.',
+			},
+			{
+				title: 'Launch & Scale',
+				body: 'TestFlight, App Store or MDM deployment, fleet configuration, documentation, and handover.',
+			},
+			{
+				title: 'Support & Evolve',
+				body: 'SDK updates, performance tuning, new capabilities, and multi-year partnership as visionOS evolves.',
+			},
+		],
+		useCases: [
+			{ title: 'Product visualization', body: 'Life-size review with accurate materials, scale, and room-aware placement.' },
+			{ title: 'Spatial training', body: 'Step-by-step instruction layered into real or simulated workspaces.' },
+			{ title: 'Collaborative design review', body: 'SharePlay sessions for distributed teams reviewing models together.' },
+		],
+		deliverables: [
+			{ title: 'Spatial experience brief', body: 'Immersion model, devices, systems, and success metrics.' },
+			{ title: 'Hardware prototype', body: 'A visionOS build that proves interaction and performance on device.' },
+			{ title: 'Production application', body: 'The released Apple Vision Pro experience on App Store or MDM.' },
+			{ title: 'Launch & support pack', body: 'Deployment notes, fleet guidance, and update plan.' },
+		],
+		faqs: [
+			{
+				question: 'What does an Apple Vision Pro development company do?',
+				answer:
+					'We design and build custom visionOS applications—from spatial productivity and training to immersive visualization—covering discovery, spatial UX, 3D content, RealityKit/SwiftUI engineering, integrations, and deployment.',
+			},
+			{
+				question: 'What is visionOS app development?',
+				answer:
+					'visionOS app development means building native spatial applications for Apple Vision Pro using SwiftUI, RealityKit, ARKit, and related Apple frameworks—designed for eyes, hands, and voice in shared or immersive space.',
+			},
+			{
+				question: 'Do you offer Apple Vision Pro app development for enterprise?',
+				answer:
+					'Yes. We build enterprise-ready Vision Pro apps with integrations, MDM paths, and managed fleet deployment alongside App Store distribution when needed.',
+			},
+			{
+				question: 'What is spatial computing development?',
+				answer:
+					'Spatial computing development places digital content in physical space with depth, anchors, and spatial interaction. On Vision Pro that typically means native visionOS experiences; we also connect programs to AR, VR, and MR when scale requires it.',
+			},
+			{
+				question: 'Which frameworks do you use?',
+				answer:
+					'SwiftUI, RealityKit, ARKit, Reality Composer Pro, Metal when needed, and Unity PolySpatial for existing Unity content.',
+			},
+			{
+				question: 'How long does Apple Vision Pro development take?',
+				answer:
+					'Hardware prototypes often take several weeks. Production applications typically span months depending on content and integrations. Enterprise programs are often phased.',
+			},
+			{
+				question: 'How much does Apple Vision Pro development cost?',
+				answer:
+					'Cost varies by immersion depth, 3D content, integrations, and deployment model. EuphoriaXR provides a custom estimate after discovery.',
+			},
+			{
+				question: 'Can existing iOS apps run on Vision Pro?',
+				answer:
+					'Compatible iOS/iPadOS apps can run in a 2D compatibility window, but they do not use spatial interaction. We help decide between compatibility, spatial adaptation, or a native visionOS build.',
+			},
+			{
+				question: 'Do you support MDM and enterprise fleets?',
+				answer:
+					'Yes. We plan for Apple Business Manager and major MDM platforms so pilots and rollouts work on managed Vision Pro devices.',
+			},
+			{
+				question: 'Can you build Unity apps for Apple Vision Pro?',
+				answer:
+					'Yes. Unity PolySpatial enables visionOS deployment from Unity projects. We manage the port, shared-space constraints, and visionOS interaction design.',
+			},
+			{
+				question: 'Who owns the IP?',
+				answer:
+					'Ownership is defined in the contract. We structure enterprise work so clients can retain ownership of custom code, scenes, and assets.',
+			},
+			{
+				question: 'How do we start?',
+				answer:
+					'Book a discovery call. We map the use case, immersion model, systems, and success metrics, then recommend a pilot scope.',
+			},
+		],
+		related: [
+			'services/augmented-reality-development-company',
+			'services/virtual-reality-development-company',
+			'services/mixed-reality-development-company',
+		],
+		keywords: {
+			primary: 'apple vision pro development company',
+			secondary: ['visionos app development', 'apple vision pro app development', 'spatial computing development'],
+		},
+	},
 ];

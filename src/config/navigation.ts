@@ -36,8 +36,10 @@ const serviceGroupDefs: GroupDef[] = [
 			'services/augmented-reality-development-company',
 			'services/virtual-reality-development-company',
 			'services/mixed-reality-development-company',
+			'apple-vision-pro-development',
 		],
 	},
+
 	{
 		title: 'Metaverse and NFT',
 		slugs: ['services/nft-makers-metaverse-development-company'],
