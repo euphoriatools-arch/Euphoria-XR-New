@@ -1,0 +1,669 @@
+---
+import { Image } from 'astro:assets';
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import ContactForm from '../forms/ContactForm.astro';
+import HowIcon from './HowIcon.astro';
+import { photoFor } from '../../data/images';
+import { clientLogos, clientNames, trustedLogos } from '../../data/clients';
+import { samsungGalaxyXrPage } from '../../data/samsungGalaxyXrPage';
+import type { MarketingPage } from '../../data/types';
+import '../../styles/service.css';
+
+interface Props {
+	page: MarketingPage;
+}
+
+const { page } = Astro.props;
+const gx = samsungGalaxyXrPage;
+const crumbs = [
+	{ name: 'Home', href: '/' },
+	{ name: page.navLabel, href: `/${page.slug}/` },
+];
+const heroPhoto = photoFor(page.image);
+const talkBenefits = page.benefits.slice(0, 6);
+---
+
+<div class="svc">
+	<div class="svc-progress" data-svc-progress aria-hidden="true"></div>
+
+	<div class="svc-crumbs">
+		<Breadcrumbs items={crumbs} />
+	</div>
+
+	{/* 01 — Hero */}
+	<section class="svc-hero" aria-labelledby="svc-title">
+		<div class="svc-hero-frame">
+			<Image
+				src={heroPhoto}
+				alt={`${page.serviceType}. ${page.keywords.primary}.`}
+				widths={[800, 1280, 1800]}
+				sizes="100vw"
+				loading="eager"
+				fetchpriority="high"
+			/>
+			<div class="svc-hero-copy">
+				<h1 id="svc-title">
+					{gx.heroLines[0]}
+					<span>{gx.heroLines[1]}</span>
+				</h1>
+				<div class="svc-hero-foot">
+					<p>{gx.summary}</p>
+					<p class="svc-mark" aria-hidden="true">Euphoria<span>XR</span></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	{/* 02 — XR Expertise & Business Credibility */}
+	<section class="svc-band svc-band-light" aria-labelledby="gx-cred-title">
+		<div class="svc-wrap svc-split">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{gx.credibility.eyebrow}
+			</p>
+			<div>
+				<h2 id="gx-cred-title" data-reveal>{gx.credibility.headline}</h2>
+				<p data-reveal>{gx.credibility.body}</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="svc-counters" aria-label="Studio metrics">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				By the numbers
+			</p>
+			<ul class="svc-counter-grid">
+				{
+					gx.credibility.counters.map((item) => (
+						<li class="svc-counter" data-reveal>
+							<strong>{item.value}</strong>
+							<span>{item.label}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<section class="svc-trusted" aria-labelledby="svc-trusted-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label" id="svc-trusted-title">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				Trusted by
+			</p>
+			<ul class="svc-trusted-grid">
+				{
+					trustedLogos.map((logo) => (
+						<li data-reveal>
+							<img src={logo.src} alt={logo.name} width={logo.width} height={logo.height} loading="lazy" decoding="async" />
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 03 — Services accordion */}
+	<section class="svc-band svc-band-dark svc-services" aria-labelledby="gx-services-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				Services
+			</p>
+			<div class="svc-services-head">
+				<h2 id="gx-services-title" class="svc-giant" data-reveal>{gx.services.title}</h2>
+			</div>
+			<p class="svc-lead" data-reveal>{gx.services.lead}</p>
+			<div class="svc-acc">
+				{
+					gx.services.items.map((step, index) => (
+						<details name="gx-process" open={index === 0}>
+							<summary>
+								<span class="svc-num">{String(index + 1).padStart(2, '0')}</span>
+								<span class="svc-acc-title">{step.title}</span>
+								<span class="svc-toggle" aria-hidden="true"></span>
+							</summary>
+							<div class="svc-acc-body">
+								<p>{step.body}</p>
+							</div>
+						</details>
+					))
+				}
+			</div>
+			<p class="svc-cta-row">
+				<a class="svc-pill svc-pill-light" href="/contact/">Submit a Project Inquiry</a>
+			</p>
+		</div>
+	</section>
+
+	{/* 05 — Immersive work */}
+	<section class="svc-cases hx-featured" aria-labelledby="gx-work-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label" data-reveal>
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{gx.work.eyebrow}
+			</p>
+			<div class="hx-head">
+				<h2 id="gx-work-title">{gx.work.title}</h2>
+				{
+					gx.work.items.length >= 3 && (
+						<button class="hx-featured-next" type="button" data-svc-cases-next aria-label="Next project">
+							<span aria-hidden="true">›</span>
+						</button>
+					)
+				}
+			</div>
+			<p class="svc-lead svc-cases-lead" data-reveal>{gx.work.lead}</p>
+			<div class="swiper" data-svc-cases-swiper>
+				<div class="swiper-wrapper">
+					{
+						gx.work.items.map((item) => {
+							const photo = photoFor(item.image);
+							return (
+								<a class="hx-card swiper-slide" href={item.href} data-text={item.title.toLowerCase()}>
+									<Image
+										src={photo}
+										alt={item.title}
+										widths={[400, 800, 1200]}
+										sizes="(min-width: 1024px) 28vw, 80vw"
+										loading="lazy"
+									/>
+									<span class="hx-card-shade" aria-hidden="true"></span>
+									<span class="hx-card-hover" aria-hidden="true"></span>
+									<span class="hx-card-copy">
+										<h3>{item.title}</h3>
+										<span class="hx-card-meta">
+											<span>{item.body}</span>
+											<span aria-hidden="true">→</span>
+										</span>
+									</span>
+								</a>
+							);
+						})
+					}
+				</div>
+			</div>
+			<p class="svc-cases-cta">
+				<a class="svc-pill svc-pill-light" href="/portfolio/">View Verified XR Portfolio</a>
+			</p>
+		</div>
+	</section>
+
+	{/* 06 — Galaxy XR device & ecosystem */}
+	<section class="svc-band svc-band-light svc-headsets" aria-labelledby="gx-platform-title">
+		<div class="svc-wrap">
+			<div class="svc-split svc-platform-head">
+				<p class="svc-use-label">
+					<span class="svc-use-arrow" aria-hidden="true">→</span>
+					{gx.platform.eyebrow}
+				</p>
+				<div>
+					<h2 id="gx-platform-title" data-reveal>{gx.platform.title}</h2>
+					<p data-reveal>{gx.platform.lead}</p>
+				</div>
+			</div>
+			<ul class="svc-headsets-grid">
+				{
+					gx.platform.items.map((item, index) => (
+						<li>
+							<article class="svc-headset" data-headset-card tabindex="0">
+								<span class="svc-headset-plus" aria-hidden="true">+</span>
+								<img
+									class="svc-headset-media"
+									src={item.image}
+									alt={item.imageAlt}
+									width="640"
+									height="800"
+									loading="lazy"
+									decoding="async"
+								/>
+								<span class="svc-headset-brand" aria-hidden="true">{String(index + 1).padStart(2, '0')}. {item.name}</span>
+								<div class="svc-headset-panel">
+									<h3>{item.name}</h3>
+									<p>{item.body}</p>
+								</div>
+							</article>
+						</li>
+					))
+				}
+			</ul>
+			{gx.platform.note && <p class="svc-platform-note" data-reveal>{gx.platform.note}</p>}
+		</div>
+	</section>
+
+	{/* 07 — Galaxy XR platform capabilities */}
+	<section class="svc-band svc-band-dark svc-how" aria-labelledby="gx-cap-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{gx.advancedFeatures.eyebrow}
+			</p>
+			<h2 id="gx-cap-title" class="svc-giant" data-reveal>{gx.advancedFeatures.title}</h2>
+			<p class="svc-lead" data-reveal>{gx.advancedFeatures.lead}</p>
+			<ul class="mq-concept-grid">
+				{
+					gx.advancedFeatures.concepts.map((item) => (
+						<li>
+							<article class="mq-concept-card" data-reveal>
+								<img
+									class="mq-concept-media"
+									src={item.image}
+									alt={item.imageAlt}
+									width="640"
+									height="400"
+									loading="lazy"
+									decoding="async"
+								/>
+								<div class="mq-concept-copy">
+									<h3>{item.title}</h3>
+									<p>{item.body}</p>
+								</div>
+							</article>
+						</li>
+					))
+				}
+			</ul>
+			<ul class="svc-how-grid mq-cap-features">
+				{
+					gx.advancedFeatures.items.map((item, index) => (
+						<li class="svc-how-card" data-reveal>
+							<HowIcon name={(['trophy', 'speed', 'delivery'] as const)[index] ?? 'delivery'} />
+							<h3>{item.title}</h3>
+							<p>{item.body}</p>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 08 — Industries */}
+	<section class="svc-band svc-band-light" aria-labelledby="gx-ind-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{gx.industries.eyebrow}
+			</p>
+			<h2 id="gx-ind-title" class="svc-section-title" data-reveal>{gx.industries.title}</h2>
+			<p class="svc-lead" data-reveal>{gx.industries.lead}</p>
+			<div class="svc-industry-grid svc-industry-grid-text gx-industry-grid">
+				{
+					gx.industries.items.map((industry, index) => (
+						<article class="svc-industry-card is-text" data-reveal>
+							<span class="svc-industry-num">{String(index + 1).padStart(2, '0')}</span>
+							<h3>{industry.title}</h3>
+							<p>{industry.body}</p>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	{/* 09 — Tech stack */}
+	<section class="svc-band svc-band-light" aria-labelledby="gx-stack-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				Technology
+			</p>
+			<h2 id="gx-stack-title" class="svc-section-title" data-reveal>{gx.stack.title}</h2>
+			<p class="svc-lead" data-reveal>{gx.stack.lead}</p>
+			<ul class="vp-stack-grid">
+				{
+					gx.stack.items.map((item) => {
+						const icons = 'icons' in item && item.icons ? item.icons : [item.icon];
+						return (
+							<li>
+								<article class="vp-stack-card" data-reveal>
+									<span class="vp-stack-icons">
+										{icons.map((src) => (
+											<img class="vp-stack-icon" src={src} alt="" width="72" height="72" loading="lazy" decoding="async" />
+										))}
+									</span>
+									<h3>{item.name}</h3>
+									<p>{item.body}</p>
+								</article>
+							</li>
+						);
+					})
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 10 — Process */}
+	<section class="svc-band svc-band-dark svc-how" aria-labelledby="gx-process-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{gx.process.eyebrow}
+			</p>
+			<h2 id="gx-process-title" class="svc-giant" data-reveal>{gx.process.title}</h2>
+			<p class="svc-lead" data-reveal>{gx.process.lead}</p>
+			<ul class="vp-process-grid">
+				{
+					gx.process.steps.map((step) => (
+						<li class="vp-process-card" data-reveal>
+							<img class="vp-process-icon" src={step.icon} alt="" width="56" height="56" loading="lazy" decoding="async" />
+							<div class="vp-process-copy">
+								<h3>{step.title}</h3>
+								<p>{step.body}</p>
+							</div>
+						</li>
+					))
+				}
+			</ul>
+			<p class="svc-cta-row">
+				<a class="svc-pill svc-pill-light" href={gx.process.cta.href}>{gx.process.cta.label}</a>
+			</p>
+		</div>
+	</section>
+
+	{/* 11 — Cost */}
+	<section class="svc-band svc-band-light" aria-labelledby="gx-cost-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{gx.cost.eyebrow}
+			</p>
+			<h2 id="gx-cost-title" class="svc-section-title" data-reveal>{gx.cost.title}</h2>
+			<p class="svc-lead" data-reveal>{gx.cost.lead}</p>
+			<ul class="mq-cost-grid">
+				{
+					gx.cost.tiers.map((tier) => (
+						<li>
+							<article class="mq-cost-card" data-reveal>
+								<span class="mq-cost-label">{tier.label}</span>
+								<h3>{tier.title}</h3>
+								<p>{tier.body}</p>
+							</article>
+						</li>
+					))
+				}
+			</ul>
+			<div class="mq-cost-timeline" data-reveal>
+				<h3>{gx.cost.timeline.title}</h3>
+				<p>{gx.cost.timeline.body}</p>
+			</div>
+			<p class="svc-cta-row">
+				<a class="svc-pill svc-pill-light" href={gx.cost.cta.href}>{gx.cost.cta.label}</a>
+			</p>
+		</div>
+	</section>
+
+	{/* 12 — Why choose */}
+	<section class="svc-band svc-band-light" aria-labelledby="gx-why-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{gx.why.eyebrow}
+			</p>
+			<h2 id="gx-why-title" class="svc-section-title" data-reveal>{gx.why.title}</h2>
+			<p class="svc-lead" data-reveal>{gx.why.lead}</p>
+			<ul class="mq-why-grid">
+				{
+					gx.why.items.map((item) => (
+						<li>
+							<article class="mq-cost-card" data-reveal>
+								<span class="mq-cost-label">{item.label}</span>
+								<h3>{item.title}</h3>
+								<p>{item.body}</p>
+							</article>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 13 — Related services */}
+	<section class="svc-band svc-band-dark" aria-labelledby="gx-related-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				Related services
+			</p>
+			<h2 id="gx-related-title" class="svc-section-title" data-reveal>{gx.related.title}</h2>
+			<ul class="vp-related-grid mq-related-grid">
+				{
+					gx.related.items.map((item) => (
+						<li>
+							<a class="vp-related-card" href={item.href} data-reveal>
+								<span class="vp-related-plus" aria-hidden="true">+</span>
+								<span class="vp-related-copy">
+									<strong>{item.label}</strong>
+									<em>{item.body}</em>
+								</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 14 — Insights */}
+	<section class="svc-band svc-band-light svc-insight" aria-labelledby="gx-insight-title">
+		<div class="svc-wrap">
+			<div class="svc-insight-head" data-reveal>
+				<p class="svc-use-label">
+					<span class="svc-use-arrow" aria-hidden="true">→</span>
+					Industry Insights
+				</p>
+				<h2 id="gx-insight-title">{gx.insights.title}</h2>
+				<p class="svc-insight-body">{gx.insights.lead}</p>
+			</div>
+			<div class="svc-insight-grid" data-insight-zigzag>
+				{
+					gx.insights.items.map((item, index) => {
+						const headingFirst = index % 2 === 0;
+						const heading = (
+							<article class="svc-insight-card is-stat" data-reveal>
+								<span class="svc-insight-index">{item.index}</span>
+								<h3>{item.title}</h3>
+							</article>
+						);
+						const copy = (
+							<article class="svc-insight-card is-copy" data-reveal>
+								<p>{item.body}</p>
+								<p class="svc-insight-source">{item.source}</p>
+							</article>
+						);
+						return (
+							<div class:list={['svc-insight-col', headingFirst ? 'is-heading-top' : 'is-heading-bottom']}>
+								{headingFirst ? (
+									<>
+										{heading}
+										{copy}
+									</>
+								) : (
+									<>
+										{copy}
+										{heading}
+									</>
+								)}
+							</div>
+						);
+					})
+				}
+			</div>
+		</div>
+	</section>
+
+	{/* 15 — FAQs */}
+	<section class="svc-band svc-band-light svc-faq-band" aria-labelledby="gx-faq-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{gx.faqs.eyebrow}
+			</p>
+			<h2 id="gx-faq-title" class="svc-giant svc-giant-dark" data-reveal>{gx.faqs.title}</h2>
+			<p class="svc-faq-lead">{gx.faqs.lead}</p>
+			<div class="svc-faq">
+				{
+					gx.faqs.items.map((faq) => (
+						<details>
+							<summary>
+								<span>{faq.question}</span>
+								<span class="svc-faq-toggle" aria-hidden="true"></span>
+							</summary>
+							<p>{faq.answer}</p>
+						</details>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="svc-clients" aria-labelledby="gx-clients-title">
+		<div class="svc-wrap">
+			<div class="svc-clients-head" data-reveal>
+				<p class="svc-use-label">
+					<span class="svc-use-arrow" aria-hidden="true">→</span>
+					Selected clients
+				</p>
+				<div>
+					<h2 id="gx-clients-title" class="svc-clients-copy">
+						From design studios to enterprise fleets, EuphoriaXR builds Galaxy XR experiences that hold up on real Android XR hardware.
+					</h2>
+					<p class="svc-clients-names">
+						Teams we have worked with include{' '}
+						{clientNames.map((name, index) => (
+							<>
+								<strong>{name}</strong>
+								{index < clientNames.length - 2 ? ', ' : index === clientNames.length - 2 ? ' and ' : '.'}
+							</>
+						))}
+					</p>
+				</div>
+			</div>
+			<ul class="svc-logo-grid">
+				{
+					clientLogos.map((logo) => (
+						<li>
+							<img src={logo.src} alt={logo.name} width={logo.width} height={logo.height} loading="lazy" decoding="async" />
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 16 — CTA */}
+	<section class="svc-band svc-band-dark svc-talk" aria-labelledby="gx-talk-title">
+		<div class="svc-wrap svc-talk-grid">
+			<div class="cx-panel">
+				<p class="svc-form-title">Ready to <span>build?</span></p>
+				<ContactForm layout="panel" />
+			</div>
+			<div>
+				<p class="svc-use-label">
+					<span class="svc-use-arrow" aria-hidden="true">→</span>
+					Start a project
+				</p>
+				<h2 id="gx-talk-title" class="svc-talk-heading">{gx.talk.title}</h2>
+				<p class="svc-talk-sub">{gx.talk.sub}</p>
+				<ul class="svc-perks">
+					{talkBenefits.map((item) => (
+						<li>{item.title}</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<div class="svc-edge-blur" data-svc-edge-blur aria-hidden="true">
+		{
+			Array.from({ length: 4 }, (_, i) => (
+				<div class="svc-edge-blur__layer" style={`--i:${i};--n:4`} />
+			))
+		}
+	</div>
+</div>
+
+<script>
+	import Swiper from 'swiper';
+	import { Autoplay } from 'swiper/modules';
+
+	let casesSwiper: Swiper | undefined;
+
+	function bindProgress() {
+		const bar = document.querySelector<HTMLElement>('[data-svc-progress]');
+		if (!bar || bar.dataset.bound === 'true') return;
+		bar.dataset.bound = 'true';
+		const paint = () => {
+			const height = document.documentElement.scrollHeight - window.innerHeight;
+			const progress = height > 0 ? window.scrollY / height : 0;
+			bar.style.transform = `scaleX(${progress})`;
+		};
+		paint();
+		window.addEventListener('scroll', paint, { passive: true });
+	}
+
+	function pinEdgeBlur() {
+		const blur = document.querySelector<HTMLElement>('[data-svc-edge-blur]');
+		if (!blur) return;
+		if (blur.dataset.pinned !== 'true') {
+			document.body.appendChild(blur);
+			blur.dataset.pinned = 'true';
+		}
+	}
+
+	function mountCases() {
+		casesSwiper?.destroy(true, true);
+		casesSwiper = undefined;
+		const root = document.querySelector<HTMLElement>('[data-svc-cases-swiper]');
+		if (!root || root.classList.contains('swiper-initialized')) return;
+		const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+		casesSwiper = new Swiper(root, {
+			modules: [Autoplay],
+			slidesPerView: 1.2,
+			spaceBetween: 30,
+			loop: true,
+			speed: motion.matches ? 0 : 300,
+			autoplay: motion.matches || saveData ? false : { delay: 4000, disableOnInteraction: false },
+			breakpoints: {
+				640: { slidesPerView: 2 },
+				1024: { slidesPerView: 2.5 },
+			},
+		});
+		document.querySelector('[data-svc-cases-next]')?.addEventListener('click', () => casesSwiper?.slideNext());
+	}
+
+	function bindHeadsets() {
+		const cards = document.querySelectorAll<HTMLElement>('[data-headset-card]');
+		if (!cards.length) return;
+		const fineHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+		const closeAll = (except?: HTMLElement) => {
+			cards.forEach((card) => {
+				if (card === except) return;
+				card.classList.remove('is-open');
+			});
+		};
+		cards.forEach((card) => {
+			if (card.dataset.bound === 'true') return;
+			card.dataset.bound = 'true';
+			card.addEventListener('click', () => {
+				if (fineHover) return;
+				const open = !card.classList.contains('is-open');
+				closeAll(open ? card : undefined);
+				card.classList.toggle('is-open', open);
+			});
+		});
+	}
+
+	bindProgress();
+	pinEdgeBlur();
+	mountCases();
+	bindHeadsets();
+	document.addEventListener('astro:page-load', () => {
+		bindProgress();
+		pinEdgeBlur();
+		mountCases();
+		bindHeadsets();
+	});
+</script>

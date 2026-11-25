@@ -2,9 +2,13 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ServicePage from '../components/service/ServicePage.astro';
 import VisionProPage from '../components/service/VisionProPage.astro';
+import MetaQuestPage from '../components/service/MetaQuestPage.astro';
+import GalaxyXrPage from '../components/service/GalaxyXrPage.astro';
 import BlogArticle from '../components/blog/BlogArticle.astro';
 import { marketingPages } from '../data/pages';
 import { isVisionProPage } from '../data/visionProPage';
+import { isMetaQuestPage } from '../data/metaQuestPage';
+import { isSamsungGalaxyXrPage } from '../data/samsungGalaxyXrPage';
 import { loadPosts } from '../lib/blog';
 import { absoluteUrl } from '../lib/urls';
 import { blogPostingSchema, breadcrumbSchema, serviceSchema } from '../lib/schema';
@@ -85,7 +89,15 @@ const crumbs = post
 				}),
 			]}
 		>
-			{isVisionProPage(page!.slug) ? <VisionProPage page={page!} /> : <ServicePage page={page!} />}
+			{isVisionProPage(page!.slug) ? (
+				<VisionProPage page={page!} />
+			) : isMetaQuestPage(page!.slug) ? (
+				<MetaQuestPage page={page!} />
+			) : isSamsungGalaxyXrPage(page!.slug) ? (
+				<GalaxyXrPage page={page!} />
+			) : (
+				<ServicePage page={page!} />
+			)}
 		</BaseLayout>
 	)
 }

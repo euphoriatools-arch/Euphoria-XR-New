@@ -932,6 +932,153 @@ body:has(.svc) {
 	gap: 16px;
 }
 
+.svc-platform-note {
+	margin: 20px 0 0;
+	max-width: 72ch;
+	color: #555;
+	font-size: 14px;
+	line-height: 1.55;
+}
+
+.mq-devices-split {
+	display: grid;
+	gap: 28px;
+	align-items: start;
+}
+
+.mq-devices-copy h2 {
+	margin: 16px 0 0;
+	color: var(--svc-black);
+	font-size: clamp(32px, 4.2vw, 52px);
+	letter-spacing: -0.04em;
+	line-height: 1.05;
+}
+
+.mq-devices-lead {
+	margin: 16px 0 0;
+	max-width: 42ch;
+	color: #555;
+	font-size: 17px;
+	line-height: 1.5;
+}
+
+.mq-devices-copy .svc-platform-note {
+	margin-top: 18px;
+}
+
+.mq-cost-grid {
+	list-style: none;
+	margin: 36px 0 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 12px;
+}
+
+.mq-cost-card {
+	display: grid;
+	align-content: start;
+	gap: 12px;
+	min-height: 100%;
+	padding: 28px 24px;
+	border-radius: 20px;
+	background: #fff;
+	color: #111;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.mq-cost-label {
+	color: #111;
+	font-size: 12px;
+	font-weight: 700;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	opacity: 0.45;
+}
+
+.mq-cost-card h3 {
+	margin: 0;
+	font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	line-height: 1.2;
+}
+
+.mq-cost-card p {
+	margin: 0;
+	color: #555;
+	font-size: 15px;
+	line-height: 1.55;
+}
+
+.mq-why-grid {
+	list-style: none;
+	margin: 36px 0 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 12px;
+}
+
+.mq-cost-timeline {
+	margin: 16px 0 0;
+	padding: 28px 32px;
+	border-radius: 20px;
+	background: #fff;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.mq-cost-timeline h3 {
+	margin: 0;
+	color: #111;
+	font-size: clamp(1.15rem, 1.5vw, 1.35rem);
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	line-height: 1.2;
+}
+
+.mq-cost-timeline p {
+	margin: 12px 0 0;
+	max-width: 72ch;
+	color: #555;
+	font-size: 15px;
+	line-height: 1.55;
+}
+
+.mq-devices-boxes {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 12px;
+	width: 100%;
+}
+
+.mq-device-hover {
+	aspect-ratio: 3 / 4;
+	border-radius: 16px;
+	opacity: 1 !important;
+	transform: none !important;
+}
+
+.mq-device-hover .svc-headset-brand {
+	font-size: clamp(15px, 1.3vw, 18px);
+}
+
+.mq-device-hover .svc-headset-panel {
+	padding: 22px 18px;
+}
+
+.mq-device-hover .svc-headset-panel h3 {
+	font-size: 1.1rem;
+}
+
+.mq-device-hover .svc-headset-panel p {
+	font-size: 13px;
+	line-height: 1.45;
+}
+
 .svc-headset {
 	position: relative;
 	display: block;
@@ -1252,6 +1399,58 @@ body:has(.svc) {
 	color: var(--svc-white);
 }
 
+.mq-concept-grid {
+	list-style: none;
+	margin: 36px 0 0;
+	padding: 0;
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 16px;
+}
+
+.mq-concept-card {
+	display: grid;
+	gap: 16px;
+	min-height: 100%;
+	padding: 16px;
+	border-radius: 20px;
+	background: #171717;
+	color: var(--svc-white);
+}
+
+.mq-concept-media {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 10;
+	object-fit: cover;
+	border-radius: 14px;
+}
+
+.mq-concept-copy {
+	display: grid;
+	gap: 8px;
+	padding: 4px 8px 8px;
+}
+
+.mq-concept-copy h3 {
+	margin: 0;
+	font-size: clamp(1.1rem, 1.4vw, 1.3rem);
+	font-weight: 700;
+	letter-spacing: -0.03em;
+	line-height: 1.2;
+}
+
+.mq-concept-copy p {
+	margin: 0;
+	color: rgba(255, 255, 255, 0.72);
+	font-size: 15px;
+	line-height: 1.55;
+}
+
+.mq-cap-features {
+	margin-top: 16px;
+}
+
 .svc-how-icon {
 	width: 28px;
 	height: 28px;
@@ -1555,6 +1754,15 @@ body:has(.svc) {
 	opacity: 1;
 }
 
+.svc-talk-heading {
+	margin: 0;
+	color: var(--svc-white);
+	font-size: clamp(28px, 4vw, 48px);
+	font-weight: 700;
+	letter-spacing: -0.04em;
+	line-height: 1.1;
+}
+
 .svc-talk-sub {
 	margin: 18px 0 0;
 	max-width: 28ch;
@@ -1718,6 +1926,11 @@ body:has(.svc) {
 		gap: 18px;
 	}
 
+	.mq-concept-grid {
+		grid-template-columns: 1fr 1fr 1fr;
+		gap: 12px;
+	}
+
 	.svc-faq {
 		grid-template-columns: 1fr 1fr;
 		gap: 14px 16px;
@@ -1790,6 +2003,10 @@ body:has(.svc) {
 		gap: 12px;
 	}
 
+	.mq-related-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
 	.vp-related-card,
 	.svc-band-dark a.vp-related-card:not(.svc-pill) {
 		min-height: 300px;
@@ -1798,6 +2015,42 @@ body:has(.svc) {
 	.svc-headsets-grid {
 		grid-template-columns: repeat(4, minmax(0, 1fr));
 		gap: 20px;
+	}
+
+	.mq-devices-split {
+		grid-template-columns: 1.05fr 0.95fr;
+		gap: 40px;
+		align-items: center;
+	}
+
+	.mq-devices-boxes {
+		grid-template-columns: 1fr 1fr;
+		gap: 12px;
+		max-width: 520px;
+		justify-self: start;
+	}
+
+	.gx-devices-boxes {
+		max-width: 560px;
+	}
+
+	.gx-devices-boxes .mq-device-hover {
+		aspect-ratio: 1 / 1;
+	}
+
+	.mq-device-hover {
+		aspect-ratio: 4 / 5;
+		border-radius: 14px;
+	}
+
+	.mq-cost-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 12px;
+	}
+
+	.mq-why-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 12px;
 	}
 
 	.svc-use-grid {
@@ -1821,6 +2074,14 @@ body:has(.svc) {
 
 	.svc-how-card:nth-child(n + 4) {
 		grid-column: span 3;
+	}
+
+	.mq-cap-features.svc-how-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.mq-cap-features .svc-how-card {
+		grid-column: auto;
 	}
 
 	.svc-talk-grid {

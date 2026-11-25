@@ -1231,4 +1231,242 @@ export const servicePages: MarketingPage[] = [
 			secondary: ['visionos app development', 'apple vision pro app development', 'spatial computing development'],
 		},
 	},
+	{
+		slug: 'services/meta-quest-development',
+		kind: 'service',
+		h1: 'Meta Quest Development Company',
+		title: 'Top Meta Quest App Development Company | EuphoriaXR',
+		description:
+			'EuphoriaXR builds Meta Quest apps for VR training, mixed reality, immersive games, and enterprise fleets with Unity, Unreal, and Meta XR SDKs.',
+		summary: 'Custom Meta Quest apps for VR training, mixed reality workflows, immersive games, and scalable enterprise deployment.',
+		navLabel: 'Meta Quest development',
+		eyebrow: 'Quest / VR / Mixed Reality',
+		serviceType: 'Meta Quest development',
+		image: 'vr',
+		intro: [
+			'EuphoriaXR is a Meta Quest development company that designs and builds custom Quest applications for VR training, mixed reality workflows, immersive games, and enterprise deployment.',
+			'Our Meta Quest app development and Quest VR development practice covers strategy, VR/MR UX, 3D content, Unity and Unreal engineering, integrations, and Meta Horizon Store or MDM distribution—plus Meta Quest mixed reality development when programs need color passthrough.',
+		],
+		benefits: [
+			{ title: 'Quest-first delivery', body: 'We design for Quest performance, comfort, and interaction—not desktop ports squeezed onto a headset.' },
+			{ title: 'Hardware-validated pilots', body: 'Prototypes run on real Meta Quest devices before large content and integration budgets commit.' },
+			{ title: 'Enterprise integrations', body: 'LMS, ERP, CRM, analytics, and internal API connections when the workflow needs them.' },
+			{ title: 'VR and mixed reality', body: 'Full immersion or color passthrough—chosen to match the task and the room.' },
+			{ title: 'Client IP ownership', body: 'Custom code, scenes, and assets structured for your ownership and internal scale.' },
+			{ title: 'Support after launch', body: 'OS and SDK updates, performance work, and roadmap evolution as your Quest program grows.' },
+		],
+		process: [
+			{
+				title: 'Discovery & Opportunity',
+				body: 'Align on goals, users, device choice, systems, and success metrics before production begins.',
+			},
+			{
+				title: 'UX Design & Prototype',
+				body: 'Define the VR/MR product and validate interaction and performance on real Quest hardware.',
+			},
+			{
+				title: 'Build & Integrate',
+				body: 'Unity or Unreal engineering, content production, enterprise integrations, and on-device QA.',
+			},
+			{
+				title: 'Launch & Scale',
+				body: 'Horizon Store or MDM deployment, fleet guidance, documentation, and handover.',
+			},
+			{
+				title: 'Support & Evolve',
+				body: 'Platform updates, performance tuning, new capabilities, and partnership as your program grows.',
+			},
+		],
+		useCases: [
+			{ title: 'Workforce training', body: 'Practice procedures and soft skills in safe, repeatable Quest modules.' },
+			{ title: 'Safety simulation', body: 'Rehearse high-risk scenarios without putting people or equipment at risk.' },
+			{ title: 'Product visualization', body: 'Explore products and spaces at scale with controllers or hand tracking.' },
+		],
+		deliverables: [
+			{ title: 'Experience brief', body: 'Device choice, immersion model, systems, and success metrics.' },
+			{ title: 'Hardware prototype', body: 'A Quest build that proves interaction and performance on device.' },
+			{ title: 'Production application', body: 'The released Meta Quest experience on store or MDM.' },
+			{ title: 'Launch & support pack', body: 'Deployment notes, fleet guidance, and update plan.' },
+		],
+		faqs: [
+			{
+				question: 'What does a Meta Quest development company do?',
+				answer:
+					'We design and build custom Meta Quest applications—from VR training and mixed reality workflows to immersive games—covering discovery, UX, 3D content, Unity/Unreal engineering, integrations, and deployment.',
+			},
+			{
+				question: 'Which Quest devices do you support?',
+				answer:
+					'Meta Quest 3, Quest 3S, and Quest Pro, with interaction design for controllers and hand tracking as required.',
+			},
+			{
+				question: 'Do you offer Meta Quest app development for enterprise?',
+				answer:
+					'Yes. We build enterprise-ready Quest apps with integrations, MDM paths, and managed fleet deployment alongside Horizon Store distribution when needed.',
+			},
+			{
+				question: 'Which engines do you use?',
+				answer: 'Unity and Unreal with Meta XR SDK / OpenXR, plus optimized 3D pipelines for Quest performance budgets.',
+			},
+			{
+				question: 'How long does Meta Quest development take?',
+				answer:
+					'Hardware prototypes often take several weeks. Production applications typically span months depending on content and integrations. Enterprise programs are often phased.',
+			},
+			{
+				question: 'How much does Meta Quest development cost?',
+				answer:
+					'Cost varies by immersion depth, 3D content, integrations, and deployment model. EuphoriaXR provides a custom estimate after discovery.',
+			},
+			{
+				question: 'Can you build mixed reality apps on Quest?',
+				answer:
+					'Yes. We build color passthrough experiences that place digital content in the physical room for training, demos, and spatial workflows.',
+			},
+			{
+				question: 'Do you publish to the Meta Horizon Store?',
+				answer:
+					'Yes. We plan platform requirements, testing, and submission for store distribution—or MDM/enterprise distribution when fleets need managed installs.',
+			},
+			{
+				question: 'Who owns the IP?',
+				answer:
+					'Ownership is defined in the contract. We structure enterprise work so clients can retain ownership of custom code, scenes, and assets.',
+			},
+			{
+				question: 'How do we start?',
+				answer:
+					'Book a discovery call. We map the use case, device choice, systems, and success metrics, then recommend a pilot scope.',
+			},
+		],
+		related: [
+			'services/virtual-reality-development-company',
+			'services/mixed-reality-development-company',
+			'services/apple-vision-pro-development',
+		],
+		keywords: {
+			primary: 'meta quest development company',
+			secondary: ['meta quest app development', 'quest vr development', 'meta quest mixed reality development'],
+		},
+	},
+	{
+		slug: 'services/samsung-galaxy-xr-development',
+		kind: 'service',
+		h1: 'Samsung Galaxy XR Development Company',
+		title: 'Samsung Galaxy XR Development Company | EuphoriaXR',
+		description:
+			'Build custom Samsung Galaxy XR apps, immersive 3D experiences and enterprise mixed reality solutions with EuphoriaXR Android XR development.',
+		summary:
+			'Build spatial applications, immersive 3D experiences and mixed reality solutions for Samsung Galaxy XR.',
+		navLabel: 'Samsung Galaxy XR development',
+		eyebrow: 'Android XR / Spatial / Enterprise',
+		serviceType: 'Samsung Galaxy XR development',
+		image: 'vr',
+		intro: [
+			'EuphoriaXR is a Samsung Galaxy XR development company that builds spatial applications, immersive 3D experiences and mixed reality solutions for Android XR.',
+			'Our Android XR development and Galaxy XR app development practice covers Jetpack XR SDK, spatial UI, Unity and Unreal engineering, integrations and Google Play or enterprise distribution.',
+		],
+		benefits: [
+			{ title: 'Android XR first', body: 'Native Jetpack XR paths and immersive 3D engines chosen to fit the product—not forced into one stack.' },
+			{ title: 'Hardware-validated pilots', body: 'Prototypes run on real Galaxy XR hardware before large content and integration budgets commit.' },
+			{ title: 'Spatialize existing Android', body: 'Evaluate compatible apps and adapt layouts, input and content for headset use.' },
+			{ title: 'Enterprise workflows', body: 'Training, collaboration, visualization and productivity designed around real team needs.' },
+			{ title: 'Client IP ownership', body: 'Custom code, scenes and assets structured for your ownership and internal scale.' },
+			{ title: 'Support after launch', body: 'SDK updates, performance work and roadmap evolution as Android XR grows.' },
+		],
+		process: [
+			{
+				title: 'Discovery & Opportunity',
+				body: 'Align on goals, users, device access, systems and success metrics before production begins.',
+			},
+			{
+				title: 'Spatial Design & Prototype',
+				body: 'Define Android XR product and UX, then validate interaction and performance on device.',
+			},
+			{
+				title: 'Build & Integrate',
+				body: 'Jetpack XR, Unity or Unreal engineering, content production, integrations and on-device QA.',
+			},
+			{
+				title: 'Launch & Scale',
+				body: 'Google Play or enterprise distribution, documentation and handover.',
+			},
+			{
+				title: 'Support & Evolve',
+				body: 'SDK updates, performance tuning and partnership as Android XR evolves.',
+			},
+		],
+		useCases: [
+			{ title: 'Spatial productivity', body: 'Adapt Android workflows into larger spatial panel layouts.' },
+			{ title: 'Training & simulation', body: 'Repeatable learning scenarios with guided interactions.' },
+			{ title: '3D visualization', body: 'Explore products, spaces and data as interactive spatial content.' },
+		],
+		deliverables: [
+			{ title: 'Experience brief', body: 'Device access, immersion model, systems and success metrics.' },
+			{ title: 'Hardware prototype', body: 'A Galaxy XR build that proves interaction and performance on device.' },
+			{ title: 'Production application', body: 'The released Samsung Galaxy XR experience on the agreed channel.' },
+			{ title: 'Launch & support pack', body: 'Deployment notes, device guidance and update plan.' },
+		],
+		faqs: [
+			{
+				question: 'What is Samsung Galaxy XR development?',
+				answer:
+					'It is the process of creating spatial applications, interactive 3D experiences and immersive software for Samsung Galaxy XR, which runs Android XR.',
+			},
+			{
+				question: 'What is Android XR development?',
+				answer:
+					'Android XR development builds spatial and immersive applications for headsets running Google’s Android XR platform, including Galaxy XR.',
+			},
+			{
+				question: 'Do you offer Galaxy XR app development for enterprise?',
+				answer:
+					'Yes. We build enterprise-ready Galaxy XR apps with integrations, testing plans and distribution options suited to managed fleets.',
+			},
+			{
+				question: 'What is the Jetpack XR SDK?',
+				answer:
+					'Jetpack XR SDK is a set of Android libraries for spatial interfaces, 3D content and supported perception features.',
+			},
+			{
+				question: 'How long does Samsung Galaxy XR development take?',
+				answer:
+					'Timelines vary by complexity, asset readiness, integrations and testing. A focused prototype usually requires less work than a complete enterprise application.',
+			},
+			{
+				question: 'How much does Samsung Galaxy XR development cost?',
+				answer:
+					'Cost depends on functionality, 3D content, spatial interaction design, integrations, testing and distribution. EuphoriaXR provides a scoped estimate after discovery.',
+			},
+			{
+				question: 'Can existing Android apps run on Galaxy XR?',
+				answer:
+					'Many compatible Android apps can run as panels on Android XR. Spatial features typically need additional development and device testing.',
+			},
+			{
+				question: 'Should I use Jetpack XR, Unity or Unreal?',
+				answer:
+					'Jetpack XR fits native Android interfaces. Unity or Unreal often suit real-time 3D games and immersive environments. We choose based on requirements and team context.',
+			},
+			{
+				question: 'Who owns the IP?',
+				answer:
+					'Ownership is defined in the contract. We structure enterprise work so clients can retain ownership of custom code, scenes and assets.',
+			},
+			{
+				question: 'How do we start?',
+				answer:
+					'Book a discovery call. We map the use case, device access, systems and success metrics, then recommend a pilot scope.',
+			},
+		],
+		related: [
+			'services/apple-vision-pro-development',
+			'services/meta-quest-development',
+			'services/augmented-reality-development-company',
+		],
+		keywords: {
+			primary: 'samsung galaxy xr development company',
+			secondary: ['android xr development', 'galaxy xr app development', 'jetpack xr sdk'],
+		},
+	},
 ];
