@@ -353,6 +353,17 @@ button, input, select, textarea { font: inherit; color: inherit; }
 	gap: 28px 22px;
 }
 
+/* Headset Platforms group wraps to the next row under Services */
+.mega-columns .mega-col:nth-child(5) {
+	grid-column: 1 / -1;
+}
+
+.mega-columns .mega-col:nth-child(5) ul {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 8px 22px;
+}
+
 .mega-col, .menu-pop li, .drawer-group {
 	min-width: 0;
 }

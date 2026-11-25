@@ -36,12 +36,8 @@ const serviceGroupDefs: GroupDef[] = [
 			'services/augmented-reality-development-company',
 			'services/virtual-reality-development-company',
 			'services/mixed-reality-development-company',
-			'services/apple-vision-pro-development',
-			'services/meta-quest-development',
-			'services/samsung-galaxy-xr-development',
 		],
 	},
-
 	{
 		title: 'Metaverse and NFT',
 		slugs: ['services/nft-makers-metaverse-development-company'],
@@ -49,6 +45,14 @@ const serviceGroupDefs: GroupDef[] = [
 	{
 		title: 'Branded Experiences',
 		slugs: ['webar-business-card', 'product-configurator', 'services/branded-ar-filters'],
+	},
+	{
+		title: 'Headset Platforms',
+		slugs: [
+			'services/apple-vision-pro-development',
+			'services/meta-quest-development',
+			'services/samsung-galaxy-xr-development',
+		],
 	},
 ];
 
