@@ -189,6 +189,18 @@ body:has(.svc) {
 	line-height: 1.15;
 }
 
+.svc-hero-cta-row {
+	max-width: none !important;
+	margin-top: 4px !important;
+}
+
+.svc-hero-cta-row .svc-pill {
+	font-size: 14px;
+	font-weight: 700;
+	letter-spacing: 0;
+	line-height: 1;
+}
+
 .svc-mark {
 	flex: none;
 	margin: 0;

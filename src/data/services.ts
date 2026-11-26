@@ -1108,15 +1108,16 @@ export const servicePages: MarketingPage[] = [
 		h1: 'Apple Vision Pro Development Company',
 		title: 'Top Apple Vision Pro Development Company | EuphoriaXR',
 		description:
-			'EuphoriaXR builds Apple Vision Pro apps with visionOS, RealityKit, and SwiftUI for spatial productivity, training, visualization, and enterprise collaboration.',
-		summary: 'Native visionOS apps for spatial productivity, training, visualization, and enterprise collaboration.',
+			'EuphoriaXR offers custom Apple Vision Pro development, from visionOS solutions and spatial computing to enterprise training and 3D visualization.',
+		summary:
+			'Custom visionOS applications for enterprise training, product visualization, spatial collaboration, and immersive digital experiences.',
 		navLabel: 'Apple Vision Pro development',
 		eyebrow: 'visionOS / Spatial / Enterprise',
 		serviceType: 'Apple Vision Pro development',
 		image: 'vr',
 		intro: [
-			'EuphoriaXR is an Apple Vision Pro development company that designs and builds native visionOS applications for spatial productivity, training, visualization, and enterprise collaboration.',
-			'Our visionOS app development and Apple Vision Pro app development practice covers strategy, spatial UX, RealityKit content, SwiftUI engineering, integrations, and App Store or MDM deployment—plus spatial computing development when programs span Vision Pro and other XR platforms.',
+			'EuphoriaXR is an Apple Vision Pro development company that designs and builds native visionOS applications for enterprise training, product visualization, and spatial collaboration.',
+			'Our visionOS app development and Apple Vision Pro app development practice covers spatial computing development, RealityKit content, SwiftUI engineering, integrations, and App Store or MDM deployment.',
 		],
 		benefits: [
 			{ title: 'Native visionOS first', body: 'We build for eyes, hands, and voice with RealityKit and SwiftUI—not flat ports of phone layouts.' },

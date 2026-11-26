@@ -48,6 +48,9 @@ const talkBenefits = page.benefits.slice(0, 6);
 				</h1>
 				<div class="svc-hero-foot">
 					<p>{vp.summary}</p>
+					<p class="svc-hero-cta-row">
+						<a class="svc-pill svc-pill-light" href={vp.heroCta.href}>{vp.heroCta.label}</a>
+					</p>
 					<p class="svc-mark" aria-hidden="true">Euphoria<span>XR</span></p>
 				</div>
 			</div>
@@ -64,6 +67,7 @@ const talkBenefits = page.benefits.slice(0, 6);
 			<div>
 				<h2 id="vp-cred-title" data-reveal>{vp.credibility.headline}</h2>
 				<p data-reveal>{vp.credibility.body}</p>
+				<p data-reveal>{vp.credibility.bodyExact}</p>
 			</div>
 		</div>
 	</section>
@@ -133,7 +137,7 @@ const talkBenefits = page.benefits.slice(0, 6);
 				}
 			</div>
 			<p class="svc-cta-row">
-				<a class="svc-pill svc-pill-light" href="/contact/">Submit a Project Inquiry</a>
+				<a class="svc-pill svc-pill-light" href="/contact/">Discuss Your Project</a>
 			</p>
 		</div>
 	</section>
@@ -342,22 +346,26 @@ const talkBenefits = page.benefits.slice(0, 6);
 		<div class="svc-wrap">
 			<p class="svc-use-label">
 				<span class="svc-use-arrow" aria-hidden="true">→</span>
-				Pricing
+				{vp.cost.eyebrow}
 			</p>
 			<h2 id="vp-cost-title" class="svc-section-title" data-reveal>{vp.cost.title}</h2>
 			<p class="svc-lead" data-reveal>{vp.cost.lead}</p>
-			<div class="svc-industry-grid svc-industry-grid-text">
+			<ul class="mq-cost-grid">
 				{
-					vp.cost.tiers.map((tier, index) => (
-						<article class="svc-industry-card is-text" data-reveal>
-							<span class="svc-industry-num">{String(index + 1).padStart(2, '0')}</span>
-							<h3>{tier.title}</h3>
-							<p><strong>{tier.range}</strong></p>
-							<p>{tier.body}</p>
-						</article>
+					vp.cost.tiers.map((tier) => (
+						<li>
+							<article class="mq-cost-card" data-reveal>
+								<span class="mq-cost-label">{tier.label}</span>
+								<h3>{tier.title}</h3>
+								<p>{tier.body}</p>
+							</article>
+						</li>
 					))
 				}
-			</div>
+			</ul>
+			<p class="svc-cta-row">
+				<a class="svc-pill svc-pill-light" href={vp.cost.cta.href}>{vp.cost.cta.label}</a>
+			</p>
 		</div>
 	</section>
 
@@ -369,17 +377,19 @@ const talkBenefits = page.benefits.slice(0, 6);
 				Why EuphoriaXR
 			</p>
 			<h2 id="vp-why-title" class="svc-section-title" data-reveal>{vp.why.title}</h2>
-			<div class="svc-industry-grid svc-industry-grid-text">
+			<ul class="mq-why-grid">
 				{
 					vp.why.items.map((item, index) => (
-						<article class="svc-industry-card is-text" data-reveal>
-							<span class="svc-industry-num">{String(index + 1).padStart(2, '0')}</span>
-							<h3>{item.title}</h3>
-							<p>{item.body}</p>
-						</article>
+						<li>
+							<article class="mq-cost-card" data-reveal>
+								<span class="mq-cost-label">{String(index + 1).padStart(2, '0')}</span>
+								<h3>{item.title}</h3>
+								<p>{item.body}</p>
+							</article>
+						</li>
 					))
 				}
-			</div>
+			</ul>
 		</div>
 	</section>
 
@@ -465,7 +475,7 @@ const talkBenefits = page.benefits.slice(0, 6);
 				FAQ
 			</p>
 			<h2 id="vp-faq-title" class="svc-giant svc-giant-dark" data-reveal>Frequently Asked Questions</h2>
-			<p class="svc-faq-lead">Questions we answer before a first call about Apple Vision Pro development.</p>
+			<p class="svc-faq-lead">Practical answers about Apple Vision Pro development, visionOS, cost, timelines, and enterprise delivery.</p>
 			<div class="svc-faq">
 				{
 					vp.faqs.map((faq) => (
