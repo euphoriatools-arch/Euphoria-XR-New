@@ -69,7 +69,7 @@ export const aboutServices: AboutService[] = [
 			'We plan immersive Android XR applications for compatible Samsung devices, focusing on spatial interactions, visual performance, and practical use cases.',
 	},
 	{
-		href: '/virtual-reality-training/',
+		href: '/services/virtual-reality-training/',
 		label: 'VR Training & Simulation Development',
 		summary:
 			'We develop immersive VR training simulations for employee onboarding, workplace safety, equipment operations, and practical skills development.',
@@ -85,7 +85,7 @@ export const aboutServices: AboutService[] = [
 			'We engineer XR applications with interactions, backend connectivity, integration planning, and performance-conscious architectures.',
 	},
 	{
-		href: '/product-configurator/',
+		href: '/services/product-configurator/',
 		label: '3D Content Creation',
 		summary:
 			'Our artists create 3D models, textures, environments, and animations for applications across VR and AR platforms.',

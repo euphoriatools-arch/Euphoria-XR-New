@@ -68,9 +68,9 @@ export const capabilities = [
 	{ icon: '⌗', title: 'AR', body: 'Augmented reality experiences that bring digital content into the real world.', href: '/services/augmented-reality-development-company/' },
 	{ icon: '⌑', title: 'VR', body: 'Fully immersive worlds for training, education, and engagement.', href: '/services/virtual-reality-development-company/' },
 	{ icon: '◈', title: 'MR', body: 'Mixed reality apps that anchor digital systems inside physical spaces.', href: '/services/mixed-reality-development-company/' },
-	{ icon: '✳', title: 'AI', body: 'Intelligent experiences that adapt, respond, and stay inside a clear job.', href: '/ai-development-company/' },
-	{ icon: '◎', title: 'WebXR', body: 'Immersive experiences that run in the browser, including AR QR codes.', href: '/webar-development/' },
-	{ icon: '◇', title: '3D', body: 'Photorealistic and stylized 3D for products, brands, and environments.', href: '/product-configurator/' },
+	{ icon: '✳', title: 'AI', body: 'Intelligent experiences that adapt, respond, and stay inside a clear job.', href: '/services/ai-development-company/' },
+	{ icon: '◎', title: 'WebXR', body: 'Immersive experiences that run in the browser, including AR QR codes.', href: '/services/webar-development/' },
+	{ icon: '◇', title: '3D', body: 'Photorealistic and stylized 3D for products, brands, and environments.', href: '/services/product-configurator/' },
 ];
 
 export const homeProcess = [

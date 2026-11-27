@@ -13,19 +13,19 @@ export const studioGroups: StudioGroup[] = [
 	{
 		title: 'Artificial intelligence',
 		links: [
-			{ href: '/ai-chatbot-development-services/', label: 'AI chatbot development services' },
-			{ href: '/ai-software-development/', label: 'AI software development' },
-			{ href: '/ai-development-company/', label: 'AI development company' },
-			{ href: '/artificial-intelligence-company-and-consulting-services/', label: 'Machine learning development services' },
-			{ href: '/ai-integration-services/', label: 'AI integration services' },
-			{ href: '/ai-agent-development-company/', label: 'AI agent development' },
+			{ href: '/services/ai-chatbot-development-services/', label: 'AI chatbot development services' },
+			{ href: '/services/ai-software-development/', label: 'AI software development' },
+			{ href: '/services/ai-development-company/', label: 'AI development company' },
+			{ href: '/services/artificial-intelligence-company-and-consulting-services/', label: 'Machine learning development services' },
+			{ href: '/services/ai-integration-services/', label: 'AI integration services' },
+			{ href: '/services/ai-agent-development-company/', label: 'AI agent development' },
 		],
 	},
 	{
 		title: 'AR and VR development',
 		links: [
 			{ href: '/services/extended-reality-development/', label: 'Extended reality development company' },
-			{ href: '/digital-twin-development/', label: 'Digital twin development company' },
+			{ href: '/services/digital-twin-development/', label: 'Digital twin development company' },
 			{ href: '/services/augmented-reality-development-company/', label: 'Augmented reality development company' },
 			{ href: '/services/virtual-reality-development-company/', label: 'Virtual reality development company' },
 			{ href: '/services/mixed-reality-development-company/', label: 'Mixed reality development company' },
@@ -39,9 +39,9 @@ export const studioGroups: StudioGroup[] = [
 	{
 		title: 'WebAR and branded experiences',
 		links: [
-			{ href: '/webar-development/', label: 'WebAR development' },
-			{ href: '/webar-business-card/', label: 'AR business card' },
-			{ href: '/product-configurator/', label: '3D product configurator' },
+			{ href: '/services/webar-development/', label: 'WebAR development' },
+			{ href: '/services/webar-business-card/', label: 'AR business card' },
+			{ href: '/services/product-configurator/', label: '3D product configurator' },
 			{ href: '/services/branded-ar-filters/', label: 'Branded AR filters' },
 		],
 	},
@@ -49,8 +49,8 @@ export const studioGroups: StudioGroup[] = [
 		title: 'Training and simulation',
 		links: [
 			{ href: '/ar-vr-training-education/', label: 'VR for education / AR & VR training' },
-			{ href: '/virtual-reality-training/', label: 'VR training simulation' },
-			{ href: '/vr-simulators/', label: 'VR simulators' },
+			{ href: '/services/virtual-reality-training/', label: 'VR training simulation' },
+			{ href: '/services/vr-simulators/', label: 'VR simulators' },
 		],
 	},
 	{
@@ -71,8 +71,8 @@ export const studioGroups: StudioGroup[] = [
 ];
 
 export const platformSlugs = [
-	'webar-development',
-	'virtual-reality-training',
-	'product-configurator',
+	'services/webar-development',
+	'services/virtual-reality-training',
+	'services/product-configurator',
 	'services/branded-ar-filters',
 ] as const;

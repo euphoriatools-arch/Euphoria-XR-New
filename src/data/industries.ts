@@ -46,7 +46,7 @@ export const industryPages: MarketingPage[] = [
 			{ question: 'Where does augmented reality in education fit?', answer: 'When the learning should stay on the desk: a model on a worksheet, a lab step on a phone, a diagram that stays next to the notes. We use AR there and VR when the student needs to be inside the space.' },
 			{ question: 'Is VR for learning only for older students?', answer: 'No. Session length, comfort, and the task change with the age. We write the lesson for the period and the students you have.' },
 		],
-		related: ['virtual-reality-training', 'services/virtual-reality-development-company', 'vr-simulators'],
+		related: ['services/virtual-reality-training', 'services/virtual-reality-development-company', 'services/vr-simulators'],
 		keywords: {
 			primary: 'vr for education',
 			secondary: ['virtual reality in education', 'vr classroom', 'augmented reality in education', 'vr for learning'],
@@ -97,7 +97,7 @@ export const industryPages: MarketingPage[] = [
 			{ question: 'Where does augmented reality in medical education help?', answer: 'When the learner should look at a real device, manikin, or tray and see guidance in place. We use AR for that overlay and VR when they need to be inside a scenario.' },
 			{ question: 'Do you replace simulation center staff?', answer: 'No. We build the case your educators run. The pilot includes them, and the guide is written for them.' },
 		],
-		related: ['virtual-reality-training', 'vr-simulators', 'ai-integration-services'],
+		related: ['services/virtual-reality-training', 'services/vr-simulators', 'services/ai-integration-services'],
 		keywords: {
 			primary: 'vr medical training',
 			secondary: ['virtual reality medical training', 'vr medical simulation', 'augmented reality in medical education'],
@@ -148,7 +148,7 @@ export const industryPages: MarketingPage[] = [
 			{ question: 'Do you make the filter and the QR code?', answer: 'Yes. Branded AR filters and an augmented reality QR code are the two builds we use most for this industry. Both are linked from this page.' },
 			{ question: 'How fast can a flight go live?', answer: 'A focused WebAR scene can move from a locked idea to a tested link in a short production window. We will tell you if the placement date is already too close.' },
 		],
-		related: ['webar-development', 'services/branded-ar-filters', 'services/augmented-reality-development-company'],
+		related: ['services/webar-development', 'services/branded-ar-filters', 'services/augmented-reality-development-company'],
 		keywords: { primary: 'ar in advertising', secondary: [] },
 	},
 	{
@@ -196,7 +196,7 @@ export const industryPages: MarketingPage[] = [
 			{ question: 'Does this work on our site without an app?', answer: 'Usually. Browser try-on is the default. An app is the right call when you need an account, a consultation mode, or camera access the browser will not give you.' },
 			{ question: 'Can the same piece run as a social filter?', answer: 'Yes. Branded AR filters can reuse the asset so the campaign and the product page show the same jewelry.' },
 		],
-		related: ['product-configurator', 'services/branded-ar-filters', 'webar-development'],
+		related: ['services/product-configurator', 'services/branded-ar-filters', 'services/webar-development'],
 		keywords: { primary: 'virtual try on jewelry', secondary: [] },
 	},
 	{
@@ -244,7 +244,7 @@ export const industryPages: MarketingPage[] = [
 			{ question: 'Can civilian agencies use the same team?', answer: 'Yes. Emergency, technical, and field procedures follow the same shape: a scored rehearsal and an instructor debrief.' },
 			{ question: 'How is this different from a welding simulator?', answer: 'A VR welding simulator is one trade procedure. This page is the wider rehearsal practice for government teams. Both can be in one program if the tasks are.' },
 		],
-		related: ['virtual-reality-training', 'vr-simulators', 'services/virtual-reality-development-company'],
+		related: ['services/virtual-reality-training', 'services/vr-simulators', 'services/virtual-reality-development-company'],
 		keywords: {
 			primary: 'vr military training',
 			secondary: ['virtual reality military training'],
@@ -295,7 +295,7 @@ export const industryPages: MarketingPage[] = [
 			{ question: 'Do you join pitches?', answer: 'When it helps the room. A short prototype is usually more useful than another slide. We will say if the date is too tight to make one honestly.' },
 			{ question: 'Which services do partners use most?', answer: 'Augmented reality development, branded filters, and WebAR from a QR code. Headset pieces and NFT or membership builds happen when the idea needs them.' },
 		],
-		related: ['services/augmented-reality-development-company', 'webar-development', 'services/branded-ar-filters'],
+		related: ['services/augmented-reality-development-company', 'services/webar-development', 'services/branded-ar-filters'],
 		keywords: { primary: 'immersive agency', secondary: [] },
 	},
 ];

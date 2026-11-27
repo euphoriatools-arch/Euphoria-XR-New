@@ -21,7 +21,7 @@ export function portfolioCategoryForPage(page: MarketingPage): CategorySlug | nu
 		slug.includes('augmented-reality') ||
 		slug.includes('webar') ||
 		slug.includes('branded-ar') ||
-		slug.includes('product-configurator') ||
+		slug.includes('services/product-configurator') ||
 		slug.includes('ar-vr-fashion') ||
 		slug.includes('ar-vr-media')
 	) {
@@ -32,7 +32,7 @@ export function portfolioCategoryForPage(page: MarketingPage): CategorySlug | nu
 		slug.includes('ai-') ||
 		slug.includes('artificial-intelligence') ||
 		slug.includes('machine-learning') ||
-		slug.endsWith('ai-development-company') ||
+		slug.endsWith('services/ai-development-company') ||
 		slug.includes('ai-chatbot') ||
 		slug.includes('ai-software') ||
 		slug.includes('ai-integration') ||

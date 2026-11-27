@@ -361,15 +361,15 @@ const agencyItems: UseCaseCard[] = [
 ];
 
 function pick(slug: string, page: MarketingPage): Omit<UseCaseSection, 'label'> & { label?: string } {
-	if (slug.includes('virtual-reality-development') || slug === 'vr-simulators' || slug === 'virtual-reality-training') {
-		if (slug === 'virtual-reality-training') {
+	if (slug.includes('virtual-reality-development') || slug === 'services/vr-simulators' || slug === 'services/virtual-reality-training') {
+		if (slug === 'services/virtual-reality-training') {
 			return {
 				headline: 'VR training earns its place when practice has to be safe, repeatable, and scored.',
 				lead: 'EuphoriaXR builds the lesson, the headset session, and the way instructors review work without standing over every learner.',
 				items: trainingItems,
 			};
 		}
-		if (slug === 'vr-simulators') {
+		if (slug === 'services/vr-simulators') {
 			return {
 				headline: 'Simulators turn rare or costly procedures into sessions teams can repeat.',
 				lead: 'We design for the device you will deploy, with scoring and captures instructors can trust after the headset comes off.',
@@ -398,7 +398,7 @@ function pick(slug: string, page: MarketingPage): Omit<UseCaseSection, 'label'> 
 		};
 	}
 
-	if (slug === 'webar-development') {
+	if (slug === 'services/webar-development') {
 		return {
 			headline: 'WebAR brings the experience to a phone browser—no install between the scan and the story.',
 			lead: 'We design packaging, print, try-on, and product-in-room moments that marketing teams can ship as a link and measure after launch.',
@@ -406,7 +406,7 @@ function pick(slug: string, page: MarketingPage): Omit<UseCaseSection, 'label'> 
 		};
 	}
 
-	if (slug === 'webar-business-card') {
+	if (slug === 'services/webar-business-card') {
 		return {
 			headline: 'An AR business card should do one job well: make the next step obvious after the handshake.',
 			lead: 'EuphoriaXR designs print and WebAR layers for networking, events, and sales leave-behinds that stay useful after the meeting ends.',
@@ -414,7 +414,7 @@ function pick(slug: string, page: MarketingPage): Omit<UseCaseSection, 'label'> 
 		};
 	}
 
-	if (slug === 'product-configurator') {
+	if (slug === 'services/product-configurator') {
 		return {
 			headline: 'A 3D configurator earns its place when options are real and the result is easy to share.',
 			lead: 'We connect materials, rules, and commerce systems so shoppers and sales teams configure products that can actually be built.',
@@ -422,7 +422,7 @@ function pick(slug: string, page: MarketingPage): Omit<UseCaseSection, 'label'> 
 		};
 	}
 
-	if (slug === 'ai-chatbot-development-services') {
+	if (slug === 'services/ai-chatbot-development-services') {
 		return {
 			headline: 'Chatbots earn trust when answers come from your sources and a person is one step away.',
 			lead: 'EuphoriaXR designs grounded conversations for support, onboarding, and internal knowledge—with evaluation you can rerun after every change.',
@@ -430,7 +430,7 @@ function pick(slug: string, page: MarketingPage): Omit<UseCaseSection, 'label'> 
 		};
 	}
 
-	if (slug === 'ai-software-development' || slug === 'ai-development-company') {
+	if (slug === 'services/ai-software-development' || slug === 'services/ai-development-company') {
 		return {
 			headline: 'AI software is the workflow around the model: screens, permissions, and a release you can judge.',
 			lead: 'We build products your team can own—from internal review tools to customer-facing features—with clear data boundaries from day one.',
@@ -438,7 +438,7 @@ function pick(slug: string, page: MarketingPage): Omit<UseCaseSection, 'label'> 
 		};
 	}
 
-	if (slug === 'ai-integration-services') {
+	if (slug === 'services/ai-integration-services') {
 		return {
 			headline: 'Integration work puts AI beside the systems you already run—not in a parallel demo.',
 			lead: 'EuphoriaXR connects models to CRM, helpdesk, data, and messaging with logging, limits, and approval gates written down first.',
@@ -446,7 +446,7 @@ function pick(slug: string, page: MarketingPage): Omit<UseCaseSection, 'label'> 
 		};
 	}
 
-	if (slug === 'ai-agent-development-company') {
+	if (slug === 'services/ai-agent-development-company') {
 		return {
 			headline: 'Agents are useful when tools, memory, and stop conditions are explicit.',
 			lead: 'We design multi-step agents that can research, route, and act—then hand off with a full trail when a person must decide.',
@@ -454,7 +454,7 @@ function pick(slug: string, page: MarketingPage): Omit<UseCaseSection, 'label'> 
 		};
 	}
 
-	if (slug === 'artificial-intelligence-company-and-consulting-services') {
+	if (slug === 'services/artificial-intelligence-company-and-consulting-services') {
 		return {
 			headline: 'Machine learning work should show the score, the slice, and the person who owns the decision.',
 			lead: 'EuphoriaXR helps teams scope, evaluate, and ship models that sit inside real workflows—not slide decks of model names.',

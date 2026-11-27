@@ -1,4 +1,4 @@
-export const digitalTwinServiceSlug = 'digital-twin-development';
+export const digitalTwinServiceSlug = 'services/digital-twin-development';
 
 export const digitalTwinPage = {
 	heroEyebrow: 'Connected Assets / Simulation / Data',
@@ -375,7 +375,7 @@ export const digitalTwinPage = {
 				body: 'Spatial computing and native visionOS experiences.',
 			},
 			{
-				href: '/ai-development-company/',
+				href: '/services/ai-development-company/',
 				label: 'AI Development',
 				body: 'Intelligent systems that support analytics and adaptive experiences.',
 			},

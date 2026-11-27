@@ -330,7 +330,7 @@ export const visionProPage = {
 				body: 'We build mixed reality solutions for industrial workflows.',
 			},
 			{
-				href: '/webar-development/',
+				href: '/services/webar-development/',
 				label: 'WebAR Development',
 				body: 'We deliver interactive AR through browsers.',
 			},

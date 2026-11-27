@@ -19,22 +19,22 @@ const serviceGroupDefs: GroupDef[] = [
 	{
 		title: 'AI Solutions',
 		slugs: [
-			'ai-chatbot-development-services',
-			'ai-software-development',
-			'ai-integration-services',
-			'ai-agent-development-company',
-			'artificial-intelligence-company-and-consulting-services',
-			'ai-development-company',
+			'services/ai-chatbot-development-services',
+			'services/ai-software-development',
+			'services/ai-integration-services',
+			'services/ai-agent-development-company',
+			'services/artificial-intelligence-company-and-consulting-services',
+			'services/ai-development-company',
 		],
 	},
 	{
 		title: 'AR/VR and WebAR',
 		slugs: [
 			'services/extended-reality-development',
-			'digital-twin-development',
-			'webar-development',
-			'virtual-reality-training',
-			'vr-simulators',
+			'services/digital-twin-development',
+			'services/webar-development',
+			'services/virtual-reality-training',
+			'services/vr-simulators',
 			'services/augmented-reality-development-company',
 			'services/virtual-reality-development-company',
 			'services/mixed-reality-development-company',
@@ -46,7 +46,7 @@ const serviceGroupDefs: GroupDef[] = [
 	},
 	{
 		title: 'Branded Experiences',
-		slugs: ['webar-business-card', 'product-configurator', 'services/branded-ar-filters'],
+		slugs: ['services/webar-business-card', 'services/product-configurator', 'services/branded-ar-filters'],
 	},
 	{
 		title: 'Headset Platforms',
