@@ -1,0 +1,587 @@
+---
+import { Image } from 'astro:assets';
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import ContactForm from '../forms/ContactForm.astro';
+import XrSolutionIcon from './XrSolutionIcon.astro';
+import { photoFor } from '../../data/images';
+import { clientLogos, clientNames, trustedLogos } from '../../data/clients';
+import { extendedRealityPage } from '../../data/extendedRealityPage';
+import type { MarketingPage } from '../../data/types';
+import '../../styles/service.css';
+
+interface Props {
+	page: MarketingPage;
+}
+
+const { page } = Astro.props;
+const xr = extendedRealityPage;
+const crumbs = [
+	{ name: 'Home', href: '/' },
+	{ name: page.navLabel, href: page.slug ? `/${page.slug}/` : '#' },
+];
+const heroPhoto = photoFor(page.image);
+const talkBenefits = page.benefits.slice(0, 6);
+---
+
+<div class="svc">
+	<div class="svc-progress" data-svc-progress aria-hidden="true"></div>
+
+	<div class="svc-crumbs">
+		<Breadcrumbs items={crumbs} />
+	</div>
+
+	{/* 01 — Hero */}
+	<section class="svc-hero" aria-labelledby="svc-title">
+		<div class="svc-hero-frame">
+			<Image
+				src={heroPhoto}
+				alt={`${page.serviceType}. ${page.keywords.primary}.`}
+				widths={[800, 1280, 1800]}
+				sizes="100vw"
+				loading="eager"
+				fetchpriority="high"
+			/>
+			<div class="svc-hero-copy">
+				<p class="svc-hero-eyebrow">{xr.heroEyebrow}</p>
+				<h1 id="svc-title">
+					{xr.heroLines[0]}
+					<span>{xr.heroLines[1]}</span>
+				</h1>
+				<div class="svc-hero-foot">
+					<p>{xr.summary}</p>
+					<p class="svc-hero-cta-row">
+						{
+							xr.heroCtas.map((cta, index) => (
+								<a class:list={['svc-pill', index === 0 ? 'svc-pill-light' : 'svc-pill-ghost']} href={cta.href}>
+									{cta.label}
+								</a>
+							))
+						}
+					</p>
+					<p class="svc-mark" aria-hidden="true">Euphoria<span>XR</span></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	{/* 02 — Introduction */}
+	<section class="svc-band svc-band-light" aria-labelledby="xr-cred-title">
+		<div class="svc-wrap svc-split">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{xr.credibility.eyebrow}
+			</p>
+			<div>
+				<h2 id="xr-cred-title" data-reveal>{xr.credibility.headline}</h2>
+				<p data-reveal>{xr.credibility.body}</p>
+				<p data-reveal>{xr.credibility.bodyExact}</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="svc-counters" aria-label="Studio metrics">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				By the numbers
+			</p>
+			<ul class="svc-counter-grid">
+				{
+					xr.credibility.counters.map((item) => (
+						<li class="svc-counter" data-reveal>
+							<strong>{item.value}</strong>
+							<span>{item.label}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<section class="svc-trusted" aria-labelledby="svc-trusted-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label" id="svc-trusted-title">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				Trusted by
+			</p>
+			<ul class="svc-trusted-grid">
+				{
+					trustedLogos.map((logo) => (
+						<li data-reveal>
+							<img src={logo.src} alt={logo.name} width={logo.width} height={logo.height} loading="lazy" decoding="async" />
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 04 — Core services */}
+	<section class="svc-band svc-band-dark svc-services" aria-labelledby="xr-services-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				Services
+			</p>
+			<div class="svc-services-head">
+				<h2 id="xr-services-title" class="svc-giant" data-reveal>{xr.services.title}</h2>
+			</div>
+			<p class="svc-lead" data-reveal>{xr.services.lead}</p>
+			<div class="svc-acc">
+				{
+					xr.services.items.map((step, index) => (
+						<details name="xr-services" open={index === 0}>
+							<summary>
+								<span class="svc-num">{String(index + 1).padStart(2, '0')}</span>
+								<span class="svc-acc-title">{step.title}</span>
+								<span class="svc-toggle" aria-hidden="true"></span>
+							</summary>
+							<div class="svc-acc-body">
+								<p>{step.body}</p>
+							</div>
+						</details>
+					))
+				}
+			</div>
+			<p class="svc-cta-row">
+				<a class="svc-pill svc-pill-light" href="/contact/">Discuss Your XR Project</a>
+			</p>
+		</div>
+	</section>
+
+	{/* 05 — Business solutions */}
+	<section class="svc-band svc-band-light" aria-labelledby="xr-sol-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{xr.solutions.eyebrow}
+			</p>
+			<h2 id="xr-sol-title" class="svc-section-title" data-reveal>{xr.solutions.title}</h2>
+			<p class="svc-lead" data-reveal>{xr.solutions.lead}</p>
+			<div class="svc-industry-grid svc-industry-grid-text xr-sol-grid">
+				{
+					xr.solutions.items.map((item) => (
+						<article class="svc-industry-card is-text" data-reveal>
+							<span class="xr-sol-icon-wrap" aria-hidden="true">
+								<XrSolutionIcon name={item.icon} />
+							</span>
+							<h3>{item.title}</h3>
+							<p>{item.body}</p>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	{/* 06 — Technology comparison */}
+	<section class="svc-band svc-band-dark" aria-labelledby="xr-compare-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{xr.comparison.eyebrow}
+			</p>
+			<h2 id="xr-compare-title" class="svc-section-title" data-reveal>{xr.comparison.title}</h2>
+			<p class="svc-lead" data-reveal>{xr.comparison.lead}</p>
+			<div class="xr-compare-wrap" data-reveal>
+				<table class="xr-compare-table">
+					<thead>
+						<tr>
+							{xr.comparison.headers.map((header) => <th scope="col">{header}</th>)}
+						</tr>
+					</thead>
+					<tbody>
+						{
+							xr.comparison.rows.map((row) => (
+								<tr>
+									<th scope="row">{row.feature}</th>
+									<td>{row.ar}</td>
+									<td>{row.vr}</td>
+									<td>{row.mr}</td>
+								</tr>
+							))
+						}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+	{/* 07 — Mid-page CTA */}
+	<section class="svc-band svc-band-light xr-mid-cta" aria-labelledby="xr-mid-cta-title">
+		<div class="svc-wrap xr-mid-cta-inner" data-reveal>
+			<div>
+				<h2 id="xr-mid-cta-title">{xr.midCta.title}</h2>
+				<p>{xr.midCta.body}</p>
+			</div>
+			<p class="svc-cta-row xr-mid-cta-actions">
+				<a class="svc-pill svc-pill-light xr-mid-cta-btn" href={xr.midCta.href}>{xr.midCta.label}</a>
+			</p>
+		</div>
+	</section>
+
+	{/* 08 — Industries */}
+	<section class="svc-band svc-band-light" aria-labelledby="xr-ind-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{xr.industries.eyebrow}
+			</p>
+			<h2 id="xr-ind-title" class="svc-section-title" data-reveal>{xr.industries.title}</h2>
+			<p class="svc-lead" data-reveal>{xr.industries.lead}</p>
+			<div class="svc-industry-grid svc-industry-grid-text xr-industry-grid">
+				{
+					xr.industries.items.map((industry) => (
+						<article class="svc-industry-card is-text" data-reveal>
+							<span class="xr-sol-icon-wrap" aria-hidden="true">
+								<XrSolutionIcon name={industry.icon} />
+							</span>
+							<h3>{industry.title}</h3>
+							<p>{industry.body}</p>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	{/* 09 — Process */}
+	<section class="svc-band svc-band-dark svc-how" aria-labelledby="xr-process-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{xr.process.eyebrow}
+			</p>
+			<h2 id="xr-process-title" class="svc-giant" data-reveal>{xr.process.title}</h2>
+			<p class="svc-lead" data-reveal>{xr.process.lead}</p>
+			<ul class="vp-process-grid">
+				{
+					xr.process.steps.map((step) => (
+						<li class="vp-process-card" data-reveal>
+							<img class="vp-process-icon" src={step.icon} alt="" width="56" height="56" loading="lazy" decoding="async" />
+							<div class="vp-process-copy">
+								<h3>{step.title}</h3>
+								<p>{step.body}</p>
+							</div>
+						</li>
+					))
+				}
+			</ul>
+			<p class="svc-cta-row">
+				<a class="svc-pill svc-pill-light" href={xr.process.cta.href}>{xr.process.cta.label}</a>
+			</p>
+		</div>
+	</section>
+
+	{/* 10 — Technology stack */}
+	<section class="svc-band svc-band-light" aria-labelledby="xr-stack-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{xr.stack.eyebrow}
+			</p>
+			<h2 id="xr-stack-title" class="svc-section-title" data-reveal>{xr.stack.title}</h2>
+			<p class="svc-lead" data-reveal>{xr.stack.lead}</p>
+			<ul class="vp-stack-grid xr-stack-grid">
+				{
+					xr.stack.groups.map((item) => (
+						<li>
+							<article class="vp-stack-card" data-reveal>
+								<span class="vp-stack-icons">
+									{item.icons.map((src) => (
+										<img class="vp-stack-icon" src={src} alt="" width="72" height="72" loading="lazy" decoding="async" />
+									))}
+								</span>
+								<h3>{item.name}</h3>
+								<p>{item.body}</p>
+							</article>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 11 — Portfolio */}
+	<section class="svc-cases hx-featured" aria-labelledby="xr-work-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label" data-reveal>
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{xr.work.eyebrow}
+			</p>
+			<div class="hx-head">
+				<h2 id="xr-work-title">{xr.work.title}</h2>
+				{
+					xr.work.items.length >= 3 && (
+						<button class="hx-featured-next" type="button" data-svc-cases-next aria-label="Next project">
+							<span aria-hidden="true">›</span>
+						</button>
+					)
+				}
+			</div>
+			<p class="svc-lead svc-cases-lead" data-reveal>{xr.work.lead}</p>
+			<div class="swiper" data-svc-cases-swiper>
+				<div class="swiper-wrapper">
+					{
+						xr.work.items.map((item) => {
+							const photo = photoFor(item.image);
+							return (
+								<a class="hx-card swiper-slide" href={item.href} data-text={item.title.toLowerCase()}>
+									<Image
+										src={photo}
+										alt={item.title}
+										widths={[400, 800, 1200]}
+										sizes="(min-width: 1024px) 28vw, 80vw"
+										loading="lazy"
+									/>
+									<span class="hx-card-shade" aria-hidden="true"></span>
+									<span class="hx-card-hover" aria-hidden="true"></span>
+									<span class="hx-card-copy">
+										<h3>{item.title}</h3>
+										<span class="hx-card-meta">
+											<span>{item.meta} — {item.body}</span>
+											<span aria-hidden="true">→</span>
+										</span>
+									</span>
+								</a>
+							);
+						})
+					}
+				</div>
+			</div>
+			<p class="svc-cases-cta">
+				<a class="svc-pill svc-pill-light" href="/portfolio/">Explore our work</a>
+			</p>
+		</div>
+	</section>
+
+	{/* 12 — Why Euphoria XR */}
+	<section class="svc-band svc-band-light" aria-labelledby="xr-why-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{xr.why.eyebrow}
+			</p>
+			<h2 id="xr-why-title" class="svc-section-title" data-reveal>{xr.why.title}</h2>
+			<p class="svc-lead" data-reveal>{xr.why.lead}</p>
+			<ul class="mq-why-grid xr-why-grid">
+				{
+					xr.why.items.map((item) => (
+						<li>
+							<article class="mq-cost-card" data-reveal>
+								<span class="mq-cost-label">{item.label}</span>
+								<h3>{item.title}</h3>
+								<p>{item.body}</p>
+							</article>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 13 — Project engagement */}
+	<section class="svc-band svc-band-light" aria-labelledby="xr-engage-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{xr.engagement.eyebrow}
+			</p>
+			<h2 id="xr-engage-title" class="svc-section-title" data-reveal>{xr.engagement.title}</h2>
+			<p class="svc-lead" data-reveal>{xr.engagement.lead}</p>
+			<ul class="mq-cost-grid">
+				{
+					xr.engagement.items.map((item) => (
+						<li>
+							<article class="mq-cost-card" data-reveal>
+								<span class="mq-cost-label">{item.label}</span>
+								<h3>{item.title}</h3>
+								<p>{item.body}</p>
+							</article>
+						</li>
+					))
+				}
+			</ul>
+			<p class="svc-cta-row">
+				<a class="svc-pill svc-pill-light" href={xr.engagement.cta.href}>{xr.engagement.cta.label}</a>
+			</p>
+		</div>
+	</section>
+
+	{/* Related services */}
+	<section class="svc-band svc-band-dark" aria-labelledby="xr-related-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				Related services
+			</p>
+			<h2 id="xr-related-title" class="svc-section-title" data-reveal>{xr.related.title}</h2>
+			<ul class="vp-related-grid">
+				{
+					xr.related.items.map((item) => (
+						<li>
+							<a class="vp-related-card" href={item.href} data-reveal>
+								<span class="vp-related-plus" aria-hidden="true">+</span>
+								<span class="vp-related-copy">
+									<strong>{item.label}</strong>
+									<em>{item.body}</em>
+								</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 14 — FAQs */}
+	<section class="svc-band svc-band-light svc-faq-band" aria-labelledby="xr-faq-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{xr.faqs.eyebrow}
+			</p>
+			<h2 id="xr-faq-title" class="svc-giant svc-giant-dark" data-reveal>{xr.faqs.title}</h2>
+			<p class="svc-faq-lead">{xr.faqs.lead}</p>
+			<div class="svc-faq">
+				{
+					xr.faqs.items.map((faq) => (
+						<details>
+							<summary>
+								<span>{faq.question}</span>
+								<span class="svc-faq-toggle" aria-hidden="true"></span>
+							</summary>
+							<p>{faq.answer}</p>
+						</details>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="svc-clients" aria-labelledby="xr-clients-title">
+		<div class="svc-wrap">
+			<div class="svc-clients-head" data-reveal>
+				<p class="svc-use-label">
+					<span class="svc-use-arrow" aria-hidden="true">→</span>
+					Selected clients
+				</p>
+				<div>
+					<h2 id="xr-clients-title" class="svc-clients-copy">
+						From brand activations to enterprise training, EuphoriaXR builds extended reality experiences that hold up for real users and real workflows.
+					</h2>
+					<p class="svc-clients-names">
+						Teams we have worked with include{' '}
+						{clientNames.map((name, index) => (
+							<>
+								<strong>{name}</strong>
+								{index < clientNames.length - 2 ? ', ' : index === clientNames.length - 2 ? ' and ' : '.'}
+							</>
+						))}
+					</p>
+				</div>
+			</div>
+			<ul class="svc-logo-grid">
+				{
+					clientLogos.map((logo) => (
+						<li>
+							<img src={logo.src} alt={logo.name} width={logo.width} height={logo.height} loading="lazy" decoding="async" />
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 15 — Final CTA */}
+	<section class="svc-band svc-band-dark svc-talk" aria-labelledby="xr-talk-title">
+		<div class="svc-wrap svc-talk-grid">
+			<div class="cx-panel">
+				<p class="svc-form-title">Tell us about <span>your project</span></p>
+				<ContactForm layout="panel" />
+			</div>
+			<div>
+				<p class="svc-use-label">
+					<span class="svc-use-arrow" aria-hidden="true">→</span>
+					Start a project
+				</p>
+				<h2 id="xr-talk-title" class="svc-talk-heading">{xr.talk.title}</h2>
+				<p class="svc-talk-sub">{xr.talk.sub}</p>
+				<p class="xr-talk-note">{xr.talk.note}</p>
+				<ul class="svc-perks">
+					{talkBenefits.map((item) => (
+						<li>{item.title}</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<div class="svc-edge-blur" data-svc-edge-blur aria-hidden="true">
+		{
+			Array.from({ length: 4 }, (_, i) => (
+				<div class="svc-edge-blur__layer" style={`--i:${i};--n:4`} />
+			))
+		}
+	</div>
+</div>
+
+<script>
+	import Swiper from 'swiper';
+	import { Autoplay } from 'swiper/modules';
+
+	let casesSwiper: Swiper | undefined;
+
+	function bindProgress() {
+		const bar = document.querySelector<HTMLElement>('[data-svc-progress]');
+		if (!bar || bar.dataset.bound === 'true') return;
+		bar.dataset.bound = 'true';
+		const paint = () => {
+			const height = document.documentElement.scrollHeight - window.innerHeight;
+			const progress = height > 0 ? window.scrollY / height : 0;
+			bar.style.transform = `scaleX(${progress})`;
+		};
+		paint();
+		window.addEventListener('scroll', paint, { passive: true });
+	}
+
+	function pinEdgeBlur() {
+		const blur = document.querySelector<HTMLElement>('[data-svc-edge-blur]');
+		if (!blur) return;
+		if (blur.dataset.pinned !== 'true') {
+			document.body.appendChild(blur);
+			blur.dataset.pinned = 'true';
+		}
+	}
+
+	function mountCases() {
+		casesSwiper?.destroy(true, true);
+		casesSwiper = undefined;
+		const root = document.querySelector<HTMLElement>('[data-svc-cases-swiper]');
+		if (!root || root.classList.contains('swiper-initialized')) return;
+		const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+		casesSwiper = new Swiper(root, {
+			modules: [Autoplay],
+			slidesPerView: 1.2,
+			spaceBetween: 30,
+			loop: true,
+			speed: motion.matches ? 0 : 300,
+			autoplay: motion.matches || saveData ? false : { delay: 4000, disableOnInteraction: false },
+			breakpoints: {
+				640: { slidesPerView: 2 },
+				1024: { slidesPerView: 2.5 },
+			},
+		});
+		document.querySelector('[data-svc-cases-next]')?.addEventListener('click', () => casesSwiper?.slideNext());
+	}
+
+	bindProgress();
+	pinEdgeBlur();
+	mountCases();
+	document.addEventListener('astro:page-load', () => {
+		bindProgress();
+		pinEdgeBlur();
+		mountCases();
+	});
+</script>

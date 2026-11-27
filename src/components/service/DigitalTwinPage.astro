@@ -1,0 +1,597 @@
+---
+import { Image } from 'astro:assets';
+import Breadcrumbs from '../ui/Breadcrumbs.astro';
+import ContactForm from '../forms/ContactForm.astro';
+import { photoFor } from '../../data/images';
+import { clientLogos, clientNames, trustedLogos } from '../../data/clients';
+import { digitalTwinPage } from '../../data/digitalTwinPage';
+import type { MarketingPage } from '../../data/types';
+import '../../styles/service.css';
+
+interface Props {
+	page: MarketingPage;
+}
+
+const { page } = Astro.props;
+const dt = digitalTwinPage;
+const crumbs = [
+	{ name: 'Home', href: '/' },
+	{ name: page.navLabel, href: `/${page.slug}/` },
+];
+const talkBenefits = page.benefits.slice(0, 6);
+---
+
+<div class="svc">
+	<div class="svc-progress" data-svc-progress aria-hidden="true"></div>
+
+	<div class="svc-crumbs">
+		<Breadcrumbs items={crumbs} />
+	</div>
+
+	{/* 01 — Hero */}
+	<section class="svc-hero" aria-labelledby="svc-title">
+		<div class="svc-hero-frame dt-hero-frame">
+			<img
+				src={dt.heroImage}
+				alt={`${page.serviceType}. ${page.keywords.primary}.`}
+				width="1600"
+				height="800"
+				loading="eager"
+				fetchpriority="high"
+				decoding="async"
+			/>
+			<div class="svc-hero-copy">
+				<p class="svc-hero-eyebrow">{dt.heroEyebrow}</p>
+				<h1 id="svc-title">
+					{dt.heroLines[0]}
+					<span>{dt.heroLines[1]}</span>
+				</h1>
+				<div class="svc-hero-foot">
+					<p>{dt.summary}</p>
+					<p class="svc-hero-cta-row">
+						<a class="svc-pill svc-pill-light" href={dt.heroCta.href}>{dt.heroCta.label}</a>
+					</p>
+					<p class="svc-mark" aria-hidden="true">Euphoria<span>XR</span></p>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	{/* 02 — Capabilities */}
+	<section class="svc-band svc-band-light" aria-label="Capabilities">
+		<div class="svc-wrap">
+			<ul class="dt-cap-grid">
+				{
+					dt.capabilities.items.map((item) => (
+						<li data-reveal>
+							<img src={item.icon} alt="" width="40" height="40" loading="lazy" decoding="async" />
+							<span>{item.label}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 03 — Introduction */}
+	<section class="svc-band svc-band-light" aria-labelledby="dt-cred-title">
+		<div class="svc-wrap dt-intro-split">
+			<div class="dt-intro-copy">
+				<p class="svc-use-label">
+					<span class="svc-use-arrow" aria-hidden="true">→</span>
+					{dt.credibility.eyebrow}
+				</p>
+				<h2 id="dt-cred-title" data-reveal>{dt.credibility.headline}</h2>
+				<p data-reveal>{dt.credibility.body}</p>
+				<p data-reveal>{dt.credibility.bodyExact}</p>
+			</div>
+			<img class="dt-intro-art" src={dt.credibility.image} alt="Physical asset connected to a digital twin" width="640" height="360" loading="lazy" decoding="async" data-reveal />
+		</div>
+	</section>
+
+	<section class="svc-counters" aria-label="Studio metrics">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				By the numbers
+			</p>
+			<ul class="svc-counter-grid">
+				{
+					dt.credibility.counters.map((item) => (
+						<li class="svc-counter" data-reveal>
+							<strong>{item.value}</strong>
+							<span>{item.label}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<section class="svc-trusted" aria-labelledby="svc-trusted-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label" id="svc-trusted-title">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				Trusted by
+			</p>
+			<ul class="svc-trusted-grid">
+				{
+					trustedLogos.map((logo) => (
+						<li data-reveal>
+							<img src={logo.src} alt={logo.name} width={logo.width} height={logo.height} loading="lazy" decoding="async" />
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 04 — Services */}
+	<section class="svc-band svc-band-dark svc-services" aria-labelledby="dt-services-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				Services
+			</p>
+			<div class="svc-services-head">
+				<h2 id="dt-services-title" class="svc-giant" data-reveal>{dt.services.title}</h2>
+			</div>
+			<p class="svc-lead" data-reveal>{dt.services.lead}</p>
+			<div class="svc-acc">
+				{
+					dt.services.items.map((step, index) => (
+						<details name="dt-services" open={index === 0}>
+							<summary>
+								<span class="svc-num">{String(index + 1).padStart(2, '0')}</span>
+								<span class="svc-acc-title">{step.title}</span>
+								<span class="svc-toggle" aria-hidden="true"></span>
+							</summary>
+							<div class="svc-acc-body">
+								<p>{step.body}</p>
+							</div>
+						</details>
+					))
+				}
+			</div>
+			<p class="svc-cta-row">
+				<a class="svc-pill svc-pill-light" href="/contact/">Discuss Your Digital Twin Project</a>
+			</p>
+		</div>
+	</section>
+
+	{/* 05 — Architecture */}
+	<section class="svc-band svc-band-light" aria-labelledby="dt-arch-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{dt.architecture.eyebrow}
+			</p>
+			<h2 id="dt-arch-title" class="svc-section-title" data-reveal>{dt.architecture.title}</h2>
+			<p class="svc-lead" data-reveal>{dt.architecture.lead}</p>
+			<ol class="dt-arch-flow" data-reveal>
+				{
+					dt.architecture.steps.map((step, index) => (
+						<>
+							<li class="dt-arch-step">
+								<img class="dt-arch-icon" src={step.icon} alt="" width="48" height="48" loading="lazy" decoding="async" />
+								<strong>{step.title}</strong>
+								<span>{step.body}</span>
+							</li>
+							{index < dt.architecture.steps.length - 1 && (
+								<li class="dt-arch-arrow" aria-hidden="true">→</li>
+							)}
+						</>
+					))
+				}
+			</ol>
+			<p class="dt-arch-note" data-reveal>{dt.architecture.note}</p>
+		</div>
+	</section>
+
+	{/* 06 — Types */}
+	<section class="svc-band svc-band-dark" aria-labelledby="dt-types-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{dt.types.eyebrow}
+			</p>
+			<h2 id="dt-types-title" class="svc-section-title" data-reveal>{dt.types.title}</h2>
+			<ul class="dt-types-grid">
+				{
+					dt.types.items.map((item) => (
+						<li>
+							<article class="mq-cost-card dt-type-card" data-reveal>
+								<img class="dt-inline-icon" src={item.icon} alt="" width="40" height="40" loading="lazy" decoding="async" />
+								<h3>{item.title}</h3>
+								<p>{item.body}</p>
+							</article>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 07 — Enterprise solutions */}
+	<section class="svc-band svc-band-light" aria-labelledby="dt-sol-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{dt.solutions.eyebrow}
+			</p>
+			<h2 id="dt-sol-title" class="svc-section-title" data-reveal>{dt.solutions.title}</h2>
+			<p class="svc-lead" data-reveal>{dt.solutions.lead}</p>
+			<div class="svc-industry-grid svc-industry-grid-text dt-sol-grid">
+				{
+					dt.solutions.items.map((item) => (
+						<article class="svc-industry-card is-text" data-reveal>
+							<img class="dt-inline-icon" src={item.icon} alt="" width="36" height="36" loading="lazy" decoding="async" />
+							<h3>{item.title}</h3>
+							<p>{item.body}</p>
+						</article>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	{/* 08 — Industries */}
+	<section class="svc-band svc-band-light" aria-labelledby="dt-ind-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{dt.industries.eyebrow}
+			</p>
+			<h2 id="dt-ind-title" class="svc-section-title" data-reveal>{dt.industries.title}</h2>
+			<p class="svc-lead" data-reveal>{dt.industries.lead}</p>
+			<ul class="dt-industry-grid">
+				{
+					dt.industries.items.map((item) => (
+						<li>
+							<article class="dt-industry-card" data-reveal>
+								<img class="dt-industry-media" src={item.image} alt={item.title} width="640" height="360" loading="lazy" decoding="async" />
+								<div class="dt-industry-copy">
+									<h3>{item.title}</h3>
+									<p>{item.body}</p>
+								</div>
+							</article>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 09 — Process */}
+	<section class="svc-band svc-band-light" aria-labelledby="dt-process-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{dt.process.eyebrow}
+			</p>
+			<h2 id="dt-process-title" class="svc-section-title" data-reveal>{dt.process.title}</h2>
+			<p class="svc-lead" data-reveal>{dt.process.lead}</p>
+			<ol class="dt-process-timeline" data-reveal>
+				{
+					dt.process.steps.map((step) => (
+						<li class="dt-process-step">
+							<span class="dt-process-dot">{step.num}</span>
+							<strong>{step.title}</strong>
+							<span>{step.body}</span>
+						</li>
+					))
+				}
+			</ol>
+			<p class="svc-cta-row">
+				<a class="svc-pill svc-pill-light" href={dt.process.cta.href}>{dt.process.cta.label}</a>
+			</p>
+		</div>
+	</section>
+
+	{/* 10 — Technology */}
+	<section class="svc-band svc-band-light" aria-labelledby="dt-stack-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{dt.stack.eyebrow}
+			</p>
+			<h2 id="dt-stack-title" class="svc-section-title" data-reveal>{dt.stack.title}</h2>
+			<p class="svc-lead" data-reveal>{dt.stack.lead}</p>
+			<ul class="dt-stack-grid">
+				{
+					dt.stack.groups.map((item) => (
+						<li class="dt-stack-item" data-reveal>
+							<img class="dt-stack-icon" src={item.icon} alt="" width="40" height="40" loading="lazy" decoding="async" />
+							<div class="dt-stack-copy">
+								<strong>{item.name}</strong>
+								<span>{item.body}</span>
+							</div>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 11 — Portfolio */}
+	<section class="svc-cases hx-featured" aria-labelledby="dt-work-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label" data-reveal>
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{dt.work.eyebrow}
+			</p>
+			<div class="hx-head">
+				<h2 id="dt-work-title">{dt.work.title}</h2>
+				{
+					dt.work.items.length >= 3 && (
+						<button class="hx-featured-next" type="button" data-svc-cases-next aria-label="Next project">
+							<span aria-hidden="true">›</span>
+						</button>
+					)
+				}
+			</div>
+			<p class="svc-lead svc-cases-lead" data-reveal>{dt.work.lead}</p>
+			<div class="swiper" data-svc-cases-swiper>
+				<div class="swiper-wrapper">
+					{
+						dt.work.items.map((item) => {
+							const photo = photoFor(item.image);
+							return (
+								<a class="hx-card swiper-slide" href={item.href} data-text={item.title.toLowerCase()}>
+									<Image
+										src={photo}
+										alt={item.title}
+										widths={[400, 800, 1200]}
+										sizes="(min-width: 1024px) 28vw, 80vw"
+										loading="lazy"
+									/>
+									<span class="hx-card-shade" aria-hidden="true"></span>
+									<span class="hx-card-hover" aria-hidden="true"></span>
+									<span class="hx-card-copy">
+										<h3>{item.title}</h3>
+										<span class="hx-card-meta">
+											<span>{item.meta} — {item.body}</span>
+											<span aria-hidden="true">→</span>
+										</span>
+									</span>
+								</a>
+							);
+						})
+					}
+				</div>
+			</div>
+			<p class="svc-cases-cta">
+				<a class="svc-pill svc-pill-light" href="/portfolio/">Explore Our Work</a>
+			</p>
+		</div>
+	</section>
+
+	{/* 12 — Why */}
+	<section class="svc-band svc-band-light" aria-labelledby="dt-why-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{dt.why.eyebrow}
+			</p>
+			<h2 id="dt-why-title" class="svc-section-title" data-reveal>{dt.why.title}</h2>
+			<p class="svc-lead" data-reveal>{dt.why.lead}</p>
+			<ul class="dt-stack-grid dt-why-grid">
+				{
+					dt.why.items.map((item) => (
+						<li class="dt-stack-item" data-reveal>
+							<img class="dt-stack-icon" src={item.icon} alt="" width="40" height="40" loading="lazy" decoding="async" />
+							<div class="dt-stack-copy">
+								<strong>{item.title}</strong>
+								<span>{item.body}</span>
+							</div>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 13 — Engagement */}
+	<section class="svc-band svc-band-light" aria-labelledby="dt-engage-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{dt.engagement.eyebrow}
+			</p>
+			<h2 id="dt-engage-title" class="svc-section-title" data-reveal>{dt.engagement.title}</h2>
+			<p class="svc-lead" data-reveal>{dt.engagement.lead}</p>
+			<ul class="mq-cost-grid">
+				{
+					dt.engagement.items.map((item) => (
+						<li>
+							<article class="mq-cost-card" data-reveal>
+								<span class="mq-cost-label">{item.label}</span>
+								<h3>{item.title}</h3>
+								<p>{item.body}</p>
+							</article>
+						</li>
+					))
+				}
+			</ul>
+			<p class="svc-cta-row">
+				<a class="svc-pill svc-pill-light" href={dt.engagement.cta.href}>{dt.engagement.cta.label}</a>
+			</p>
+		</div>
+	</section>
+
+	{/* Related */}
+	<section class="svc-band svc-band-dark" aria-labelledby="dt-related-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				Related services
+			</p>
+			<h2 id="dt-related-title" class="svc-section-title" data-reveal>{dt.related.title}</h2>
+			<ul class="vp-related-grid">
+				{
+					dt.related.items.map((item) => (
+						<li>
+							<a class="vp-related-card" href={item.href} data-reveal>
+								<span class="vp-related-plus" aria-hidden="true">+</span>
+								<span class="vp-related-copy">
+									<strong>{item.label}</strong>
+									<em>{item.body}</em>
+								</span>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 14 — FAQs */}
+	<section class="svc-band svc-band-light svc-faq-band" aria-labelledby="dt-faq-title">
+		<div class="svc-wrap">
+			<p class="svc-use-label">
+				<span class="svc-use-arrow" aria-hidden="true">→</span>
+				{dt.faqs.eyebrow}
+			</p>
+			<h2 id="dt-faq-title" class="svc-giant svc-giant-dark" data-reveal>{dt.faqs.title}</h2>
+			<p class="svc-faq-lead">{dt.faqs.lead}</p>
+			<div class="svc-faq">
+				{
+					dt.faqs.items.map((faq) => (
+						<details>
+							<summary>
+								<span>{faq.question}</span>
+								<span class="svc-faq-toggle" aria-hidden="true"></span>
+							</summary>
+							<p>{faq.answer}</p>
+						</details>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<section class="svc-clients" aria-labelledby="dt-clients-title">
+		<div class="svc-wrap">
+			<div class="svc-clients-head" data-reveal>
+				<p class="svc-use-label">
+					<span class="svc-use-arrow" aria-hidden="true">→</span>
+					Selected clients
+				</p>
+				<div>
+					<h2 id="dt-clients-title" class="svc-clients-copy">
+						From industrial facilities to immersive training, EuphoriaXR builds digital experiences that help teams understand complex assets and operations.
+					</h2>
+					<p class="svc-clients-names">
+						Teams we have worked with include{' '}
+						{clientNames.map((name, index) => (
+							<>
+								<strong>{name}</strong>
+								{index < clientNames.length - 2 ? ', ' : index === clientNames.length - 2 ? ' and ' : '.'}
+							</>
+						))}
+					</p>
+				</div>
+			</div>
+			<ul class="svc-logo-grid">
+				{
+					clientLogos.map((logo) => (
+						<li>
+							<img src={logo.src} alt={logo.name} width={logo.width} height={logo.height} loading="lazy" decoding="async" />
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	{/* 15 — CTA */}
+	<section class="svc-band svc-band-dark svc-talk" aria-labelledby="dt-talk-title">
+		<div class="svc-wrap svc-talk-grid">
+			<div class="cx-panel">
+				<p class="svc-form-title">Tell us about <span>your project</span></p>
+				<ContactForm layout="panel" />
+			</div>
+			<div>
+				<p class="svc-use-label">
+					<span class="svc-use-arrow" aria-hidden="true">→</span>
+					Start a project
+				</p>
+				<h2 id="dt-talk-title" class="svc-talk-heading">{dt.talk.title}</h2>
+				<p class="svc-talk-sub">{dt.talk.sub}</p>
+				<ul class="svc-perks">
+					{talkBenefits.map((item) => (
+						<li>{item.title}</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<div class="svc-edge-blur" data-svc-edge-blur aria-hidden="true">
+		{
+			Array.from({ length: 4 }, (_, i) => (
+				<div class="svc-edge-blur__layer" style={`--i:${i};--n:4`} />
+			))
+		}
+	</div>
+</div>
+
+<script>
+	import Swiper from 'swiper';
+	import { Autoplay } from 'swiper/modules';
+
+	let casesSwiper: Swiper | undefined;
+
+	function bindProgress() {
+		const bar = document.querySelector<HTMLElement>('[data-svc-progress]');
+		if (!bar || bar.dataset.bound === 'true') return;
+		bar.dataset.bound = 'true';
+		const paint = () => {
+			const height = document.documentElement.scrollHeight - window.innerHeight;
+			const progress = height > 0 ? window.scrollY / height : 0;
+			bar.style.transform = `scaleX(${progress})`;
+		};
+		paint();
+		window.addEventListener('scroll', paint, { passive: true });
+	}
+
+	function pinEdgeBlur() {
+		const blur = document.querySelector<HTMLElement>('[data-svc-edge-blur]');
+		if (!blur) return;
+		if (blur.dataset.pinned !== 'true') {
+			document.body.appendChild(blur);
+			blur.dataset.pinned = 'true';
+		}
+	}
+
+	function mountCases() {
+		casesSwiper?.destroy(true, true);
+		casesSwiper = undefined;
+		const root = document.querySelector<HTMLElement>('[data-svc-cases-swiper]');
+		if (!root || root.classList.contains('swiper-initialized')) return;
+		const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+		const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData === true;
+		casesSwiper = new Swiper(root, {
+			modules: [Autoplay],
+			slidesPerView: 1.2,
+			spaceBetween: 30,
+			loop: true,
+			speed: motion.matches ? 0 : 300,
+			autoplay: motion.matches || saveData ? false : { delay: 4000, disableOnInteraction: false },
+			breakpoints: {
+				640: { slidesPerView: 2 },
+				1024: { slidesPerView: 2.5 },
+			},
+		});
+		document.querySelector('[data-svc-cases-next]')?.addEventListener('click', () => casesSwiper?.slideNext());
+	}
+
+	bindProgress();
+	pinEdgeBlur();
+	mountCases();
+	document.addEventListener('astro:page-load', () => {
+		bindProgress();
+		pinEdgeBlur();
+		mountCases();
+	});
+</script>

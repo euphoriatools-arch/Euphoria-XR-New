@@ -1470,4 +1470,150 @@ export const servicePages: MarketingPage[] = [
 			secondary: ['android xr development', 'galaxy xr app development', 'jetpack xr sdk'],
 		},
 	},
+	{
+		slug: 'services/extended-reality-development',
+		kind: 'service',
+		h1: 'Extended Reality (XR) Development Company',
+		title: 'Extended Reality (XR) Development Company | Euphoria XR',
+		description:
+			"Build immersive digital experiences with Euphoria XR's extended reality development services, including custom AR, VR, MR, WebXR and enterprise XR solutions.",
+		summary:
+			'Build immersive digital experiences that connect people, products and environments with custom AR, VR, MR and WebXR solutions.',
+		navLabel: 'Extended Reality development',
+		eyebrow: 'AR / VR / MR / WebXR',
+		serviceType: 'Extended Reality development',
+		image: 'vr',
+		intro: [
+			'EuphoriaXR is an Extended Reality (XR) Development Company that designs and builds custom AR, VR, MR and WebXR solutions for businesses.',
+			'Our XR development services cover immersive experience design, custom XR application development, enterprise XR solutions, 3D content and post-launch support.',
+		],
+		benefits: [
+			{ title: 'Experience-led design', body: 'We start with the audience, interaction requirements and the purpose of the immersive experience.' },
+			{ title: 'Custom technical solutions', body: 'We combine immersive design and development across relevant technologies and target platforms.' },
+			{ title: 'Practical delivery', body: 'We consider feasibility, performance, usability and deployment throughout the project.' },
+			{ title: 'Collaborative process', body: 'We work with stakeholders from concept planning to agreed launch and support activities.' },
+			{ title: 'Multi-platform XR', body: 'AR, VR, MR and WebXR selected to match users, devices and business goals.' },
+			{ title: 'Support after launch', body: 'Maintenance, updates and technical support can be included in the agreed project scope.' },
+		],
+		process: [
+			{ title: 'Discovery & XR Strategy', body: 'Define the business objective, audience, success criteria and technical feasibility.' },
+			{ title: 'Concept & Experience Design', body: 'Map user journeys, storyboards, spatial interactions and content requirements.' },
+			{ title: 'Prototyping & Validation', body: 'Build an interactive prototype to test the concept, comfort and core functionality.' },
+			{ title: 'XR Application Development', body: 'Develop the application, 3D assets, interaction logic and agreed integrations.' },
+			{ title: 'Testing, Launch & Support', body: 'Validate performance, prepare deployment and plan ongoing updates under the agreed scope.' },
+		],
+		useCases: [
+			{ title: 'XR Training & Simulation', body: 'Rehearse procedures, equipment operation and decision-making through interactive scenarios.' },
+			{ title: 'XR Product Visualization', body: 'Present products in 3D and let users explore features, configurations and scale.' },
+			{ title: 'Immersive Brand Experiences', body: 'Build interactive campaigns and experiential activations that invite audiences to participate.' },
+		],
+		deliverables: [
+			{ title: 'XR strategy brief', body: 'Business goals, audience, technology choice and success criteria.' },
+			{ title: 'Interactive prototype', body: 'A testable experience that validates comfort, interaction and core functionality.' },
+			{ title: 'Production XR application', body: 'Application builds, 3D assets, integrations and deployment materials.' },
+			{ title: 'Support plan', body: 'Updates, fixes and technical support aligned to the agreed scope.' },
+		],
+		faqs: [
+			{
+				question: 'What is extended reality (XR) development?',
+				answer:
+					'XR development is the design and engineering of immersive applications that use augmented reality, virtual reality or mixed reality to connect people with digital environments and experiences.',
+			},
+			{
+				question: 'What is the difference between AR, VR, MR and XR?',
+				answer:
+					'XR is the umbrella term. AR adds digital content to real surroundings, VR creates a fully virtual environment, and MR allows digital elements to interact with the physical environment.',
+			},
+			{
+				question: 'How much does XR development cost?',
+				answer:
+					'The cost depends on application complexity, 3D content, target devices, integrations, testing and deployment. A defined project scope is needed for a reliable estimate.',
+			},
+		],
+		related: [
+			'services/augmented-reality-development-company',
+			'services/virtual-reality-development-company',
+			'services/apple-vision-pro-development',
+		],
+		keywords: {
+			primary: 'extended reality (xr) development company',
+			secondary: ['xr development services', 'custom xr application development', 'enterprise xr solutions'],
+		},
+	},
+	{
+		slug: 'digital-twin-development',
+		kind: 'service',
+		h1: 'Digital Twin Development Company',
+		title: 'Digital Twin Development Services & Solutions | EuphoriaXR',
+		description:
+			'Build custom digital twin solutions with Euphoria XR. Explore connected 3D models, data integration, simulations and visualization for enterprise assets.',
+		summary:
+			'Connect physical assets, operational data and virtual models for simulation, monitoring and informed decisions.',
+		navLabel: 'Digital Twin development',
+		eyebrow: 'Connected Assets / Simulation / Data',
+		serviceType: 'Digital Twin development',
+		image: 'city',
+		intro: [
+			'EuphoriaXR is a Digital Twin Development Company that designs connected digital twin development services for enterprise assets, facilities and processes.',
+			'Our industrial digital twin and 3D digital twin practice covers modeling, IoT digital twin integration, simulation, analytics and XR-enabled visualization for digital twin solutions.',
+		],
+		benefits: [
+			{ title: 'Outcome-led strategy', body: 'Start with the decision or workflow that matters, then agree success criteria and minimum useful model.' },
+			{ title: 'Immersive visualization', body: 'Use established 3D, AR and VR experience to make complex asset information easier to navigate.' },
+			{ title: 'Fit-for-purpose architecture', body: 'Assess software, data quality and deployment needs before selecting technology or integrations.' },
+			{ title: 'Security & governance', body: 'Plan least-privilege access, network boundaries, data ownership and safe handling of sensitive information.' },
+			{ title: 'Validation & fidelity', body: 'Compare model behavior with observed data and clarify limitations, uncertainty and refresh frequency.' },
+			{ title: 'Lifecycle planning', body: 'Define ownership of models, assets, software and data mappings so the solution can evolve with operations.' },
+		],
+		process: [
+			{ title: 'Discovery & Feasibility', body: 'Define use case, KPIs, data access and target fidelity.' },
+			{ title: 'Model & Architecture', body: 'Map assets, relationships, data sources and interfaces.' },
+			{ title: 'Prototype', body: 'Build a visual proof of concept and review with users.' },
+			{ title: 'Integrate & Develop', body: 'Connect data and implement agreed behaviors and UI.' },
+			{ title: 'Validate, Deploy & Maintain', body: 'Test accuracy and performance, then release with ownership for updates.' },
+		],
+		useCases: [
+			{ title: 'Asset monitoring', body: 'Bring condition, state and history into a single interface for operators.' },
+			{ title: 'Operational simulation', body: 'Compare layouts, schedules or assumptions virtually before real-world change.' },
+			{ title: 'Facility visualization', body: 'Explore equipment locations and building layouts in an interactive spatial interface.' },
+		],
+		deliverables: [
+			{ title: 'Digital twin strategy brief', body: 'Use case, KPIs, data readiness and target fidelity.' },
+			{ title: 'Visual prototype', body: 'A proof of concept that validates the model and workflow with users.' },
+			{ title: 'Connected twin application', body: 'Integrations, interfaces and deployment materials for the agreed scope.' },
+			{ title: 'Lifecycle plan', body: 'Ownership, update cadence, validation and support arrangements.' },
+		],
+		faqs: [
+			{
+				question: 'What is digital twin development?',
+				answer:
+					'It is the process of designing a digital model of a real-world asset, system or process and connecting it to relevant data so its state can be maintained at a suitable refresh rate.',
+			},
+			{
+				question: 'What is the difference between a digital twin and a 3D model?',
+				answer:
+					'A 3D model primarily represents geometry. A digital twin also connects to real-world information and updates to reflect relevant changes in the represented entity.',
+			},
+			{
+				question: 'How much does digital twin development cost?',
+				answer:
+					'Cost depends on modeling detail, data access, integrations, simulation requirements, platform choices and validation. A discovery phase supports a meaningful estimate.',
+			},
+		],
+		related: [
+			'services/extended-reality-development',
+			'services/apple-vision-pro-development',
+			'ai-development-company',
+		],
+		keywords: {
+			primary: 'digital twin development company',
+			secondary: [
+				'digital twin development services',
+				'digital twin solutions',
+				'industrial digital twin',
+				'3d digital twin',
+				'iot digital twin',
+			],
+		},
+	},
 ];

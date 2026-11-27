@@ -24,6 +24,8 @@ export const studioGroups: StudioGroup[] = [
 	{
 		title: 'AR and VR development',
 		links: [
+			{ href: '/services/extended-reality-development/', label: 'Extended reality development company' },
+			{ href: '/digital-twin-development/', label: 'Digital twin development company' },
 			{ href: '/services/augmented-reality-development-company/', label: 'Augmented reality development company' },
 			{ href: '/services/virtual-reality-development-company/', label: 'Virtual reality development company' },
 			{ href: '/services/mixed-reality-development-company/', label: 'Mixed reality development company' },

@@ -30,6 +30,8 @@ const serviceGroupDefs: GroupDef[] = [
 	{
 		title: 'AR/VR and WebAR',
 		slugs: [
+			'services/extended-reality-development',
+			'digital-twin-development',
 			'webar-development',
 			'virtual-reality-training',
 			'vr-simulators',

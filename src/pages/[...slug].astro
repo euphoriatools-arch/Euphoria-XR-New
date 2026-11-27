@@ -4,11 +4,15 @@ import ServicePage from '../components/service/ServicePage.astro';
 import VisionProPage from '../components/service/VisionProPage.astro';
 import MetaQuestPage from '../components/service/MetaQuestPage.astro';
 import GalaxyXrPage from '../components/service/GalaxyXrPage.astro';
+import ExtendedRealityPage from '../components/service/ExtendedRealityPage.astro';
+import DigitalTwinPage from '../components/service/DigitalTwinPage.astro';
 import BlogArticle from '../components/blog/BlogArticle.astro';
 import { marketingPages } from '../data/pages';
 import { isVisionProPage } from '../data/visionProPage';
 import { isMetaQuestPage } from '../data/metaQuestPage';
 import { isSamsungGalaxyXrPage } from '../data/samsungGalaxyXrPage';
+import { isExtendedRealityPage } from '../data/extendedRealityPage';
+import { isDigitalTwinPage } from '../data/digitalTwinPage';
 import { loadPosts } from '../lib/blog';
 import { absoluteUrl } from '../lib/urls';
 import { blogPostingSchema, breadcrumbSchema, serviceSchema } from '../lib/schema';
@@ -95,6 +99,10 @@ const crumbs = post
 				<MetaQuestPage page={page!} />
 			) : isSamsungGalaxyXrPage(page!.slug) ? (
 				<GalaxyXrPage page={page!} />
+			) : isExtendedRealityPage(page!.slug) ? (
+				<ExtendedRealityPage page={page!} />
+			) : isDigitalTwinPage(page!.slug) ? (
+				<DigitalTwinPage page={page!} />
 			) : (
 				<ServicePage page={page!} />
 			)}
