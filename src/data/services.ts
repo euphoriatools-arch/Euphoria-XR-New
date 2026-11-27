@@ -1544,7 +1544,7 @@ export const servicePages: MarketingPage[] = [
 		slug: 'digital-twin-development',
 		kind: 'service',
 		h1: 'Digital Twin Development Company',
-		title: 'Digital Twin Development Services & Solutions | EuphoriaXR',
+		title: 'Custom Digital Twin Development Services | EuphoriaXR',
 		description:
 			'Build custom digital twin solutions with Euphoria XR. Explore connected 3D models, data integration, simulations and visualization for enterprise assets.',
 		summary:
